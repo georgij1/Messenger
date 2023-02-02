@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 .idea/vcs.xml
+.idea/inspectionProfiles/Project_Default.xml
