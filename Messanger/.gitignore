@@ -37,3 +37,4 @@ out/
 .vscode/
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
+.idea/.gitignore
