@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" th:href="@{/main_page.css}">
+</head>
+<body>
+    <div class="buttons">
+        <a th:href="registration" class="button">
+            <div class="text_button">Registration</div>
+        </a>
+
+        <a th:href="login" class="button">
+            <div class="text_button">Login</div>
+        </a>
+    </div>
+
+    <h1 class="no_auth">Вам не доступны функции мессенджера так как вы ещё не авторизованы</h1>
+</body>
+</html>
