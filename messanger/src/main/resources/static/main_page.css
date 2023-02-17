@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    font-family: system-ui;
+    background: black;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.text_button {
+    text-align: center;
+}
+
+.no_auth {
+    color: #FFF;
+    padding: 15px;
+    display: flex;
+    height: 77vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    background: blue;
+    padding: 10px;
+    color: #FFF;
+    width: 47vh;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px blue;
+}
+
+a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+a:hover {
+    box-shadow: none;
+}
