@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginConroller {
     @GetMapping("login")
     public String login() {
+        System.out.println("login");
         return "login";
     }
 }
