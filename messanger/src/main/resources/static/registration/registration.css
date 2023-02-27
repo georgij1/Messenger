@@ -1,0 +1,70 @@
+.header {
+    padding: 15px;
+    color: #FFF;
+    box-shadow: 0 0 10px;
+    position: fixed;
+    width: 100%;
+    background: black;
+}
+
+.login_div_flex, .password_div_flex, .repeatePassword_div_flex, .telephone_div_flex, .email_div_flex, .icon_upload_profile_div_flex {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.info_auth {
+    padding: 10px;
+}
+
+label {
+    color: #000;
+    padding-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    border: 2px solid bisque;
+    background: black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px navajowhite;
+    color: #FFF;
+}
+
+.registration_user {
+    background: blue;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+    border: 2px solid blue;
+    box-shadow: 0 0 10px blue;
+}
+
+.icon_profile_label {
+    background: blue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #FFF;
+    width: 141px;
+    cursor: pointer;
+    border: 2px solid blue;
+    box-shadow: 0 0 10px blue;
+}
+
+.icon_profile_label:hover {
+    box-shadow: none;
+    background: #FFF;
+    color: black;
+}
+
+.registration_user:hover {
+    background: #FFF;
+    color: #000;
+    box-shadow: none;
+}
+
+.padding {
+    padding-top: 50px;
+}

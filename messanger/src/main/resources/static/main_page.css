@@ -1,14 +1,18 @@
 body {
     margin: 0;
     font-family: system-ui;
+    background: #FFF;
+}
+
+.body_dark {
     background: black;
 }
 
 .buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
-    padding-top: 10px;
+    padding: 10px;
 }
 
 .text_button {
@@ -16,29 +20,33 @@ body {
 }
 
 .no_auth {
-    color: #FFF;
+    color: #000;
     padding: 15px;
-    display: flex;
-    height: 77vh;
-    justify-content: center;
-    align-items: center;
+}
+
+.font_size_3, .font_size_4 {
+    font-size: 28px;
 }
 
 .button {
     background: blue;
     padding: 10px;
     color: #FFF;
-    width: 47vh;
+    width: 40vh;
     margin: auto;
     border-radius: 10px;
     box-shadow: 0 0 10px blue;
 }
 
-a {
-    text-decoration: none;
-    color: #FFF;
-}
-
-a:hover {
-    box-shadow: none;
+.logo {
+    margin: auto;
+    display: block;
+    padding: 10px;
+    height: 180px;
+    width: 180px;
+    margin-top: 15px;
+    background: url('/image/icons8-m-key-100.png') no-repeat;
+    background-size: 200px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px;
 }

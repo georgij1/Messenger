@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
     @GetMapping
-    public String success_server() {
-        return "success";
+    public String start_page() {
+        return "start_page";
     }
 
     @GetMapping("main_page")

@@ -1,18 +1,14 @@
 package com.example.messanger.auth;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-@RequestMapping("/")
-public class LoginController {
+@Controller
+@RequestMapping
+public class LoginConroller {
     @GetMapping("login")
-    public String login_redirect() {
+    public String login() {
         return "login";
-    }
-
-    @GetMapping("registration")
-    public String registration_redirect() {
-        return "registration";
     }
 }
