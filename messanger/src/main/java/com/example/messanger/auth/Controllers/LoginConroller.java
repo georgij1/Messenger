@@ -54,6 +54,7 @@ public class LoginConroller {
         catch (NullPointerException exception) {
             model.addAttribute("error_login", "Ошибка в логин");
         }
+
         return "login";
     }
 
@@ -62,18 +63,13 @@ public class LoginConroller {
         var cookies = request.getCookies();
         String token = null;
 
-        System.out.println(form.getLogin());
-        System.out.println(form.getPassword());
-
         if (cookies == null) {
-            System.out.println("cookies is null");
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
 
             else {
                 try {
-                    System.out.println("try");
                     if (token != null) {
                         response.setStatus(HttpServletResponse.SC_SEE_OTHER);
                         return "redirect:/main_page";
@@ -84,10 +80,7 @@ public class LoginConroller {
 
                         try {
                             if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
-                                System.out.println("if length");
-
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
-                                    System.out.println("PASSWORD IS CORRECT");
                                     model.addAttribute("username", userRepository.select_username(registrationForm));
                                     try {
                                         Algorithm algorithm = Algorithm.HMAC512(secret);
@@ -101,12 +94,10 @@ public class LoginConroller {
                                         JWTVerifier verifier = JWT.require(Algorithm.HMAC512(secret))
                                                 .build();
                                         DecodedJWT decodedJWT = verifier.verify(jwtToken);
-                                        System.out.println(decodedJWT);
                                         Cookie cookie = new Cookie("auth_token", jwtToken);
                                         response.addCookie(cookie);
                                     } catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException |
                                              org.springframework.dao.DataIntegrityViolationException exception) {
-                                        System.out.println("Ошибка в создании JWT token");
                                     }
                                     return "redirect:/main_page";
                                 }
@@ -114,7 +105,6 @@ public class LoginConroller {
                         }
 
                         catch (org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException exception) {
-                            System.out.println("Такого пользователя не существует");
                             model.addAttribute("not_valid_user", "Такого пользователя не существует");
                             return "login";
                         }
@@ -122,7 +112,6 @@ public class LoginConroller {
                 }
 
                 catch (NullPointerException exception) {
-                    System.out.println("error_login");
                     model.addAttribute("error_login", "Ошибка в логине");
                 }
             }

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,14 +46,14 @@ public class RegistrationController {
     }
 
     @PostMapping("registration")
-    public String registration_user(RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public String registration_user(RegistrationForm registrationForm, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
         if ((Objects.equals(registrationForm.getPassword(), "😩🍆💦💦💦")) && (Objects.equals(registrationForm.getRepeatPassword(), "😩🍆💦💦💦"))) {
             response.sendError(400);
         }
 
         else if ((registrationForm.getLogin().length() > 0 && registrationForm.getPassword().length() > 0 && registrationForm.getRepeatPassword().length() > 0)) {
             if ((Objects.equals(registrationForm.getPassword(), registrationForm.getRepeatPassword()))) {
-                userRepo.create(registrationForm);
+                userRepo.create(registrationForm, model);
                 response.setStatus(HttpServletResponse.SC_SEE_OTHER);
                 return "redirect:login";
             }
