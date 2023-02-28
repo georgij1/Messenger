@@ -42,6 +42,10 @@ public class UserRepo {
         return jdbcTemplate.queryForObject("select username from users where username=?", String.class, registrationForm.getLogin());
     }
 
+    public String selectPhoneNumber(RegistrationForm registrationForm) {
+        return jdbcTemplate.queryForObject("select number_phone from public.users where username=?", String.class, registrationForm.getLogin());
+    }
+
     public boolean validPassword(String username, String password){
         var hashed = jdbcTemplate.queryForObject(
                 "select password_hash from users where username=?", String.class, username);

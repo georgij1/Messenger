@@ -1,0 +1,25 @@
+.form_logout {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.input_logout {
+    padding: 10px;
+    background: url("../image/logout.png") no-repeat;
+    background-size: 60px;
+    width: 60px;
+    border: none;
+    box-shadow: 0 0 10px red;
+    border-radius: 31px;
+    height: 60px;
+}
+
+.return_back {
+    padding: 10px;
+    background: url("../image/undo.png") no-repeat;
+    background-size: 60px;
+    width: 60px;
+    border: none;
+}
