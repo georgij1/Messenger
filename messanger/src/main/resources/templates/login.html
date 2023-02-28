@@ -10,24 +10,24 @@
 </head>
 
 <body>
-    <div class="header">Авторизация</div>
-    
-    <div class="padding"></div>
-    
-    <form method="post">
-        <div class="login_div_flex">
-            <label for="login">Логин</label>
-            <input id="login" placeholder="Введите логин" class="input_login" required>
-        </div>
-        
-        <div class="password_div_flex">
-            <label for="password">Пароль</label>
-            <input id="password" placeholder="Введите пароль" class="input_password" required>
-        </div>
-    
-        <input type="submit" placeholder="Авторизоваться" class="auth_btn">
-    </form>
+<div class="header">Авторизация</div>
 
-    <p class="info">Если у вас нет аккаунта <a th:href="registration">зарегистрируйтесь</a></p>
+<div class="padding"></div>
+
+<form method="post">
+    <div class="login_div_flex">
+        <label for="login">Логин</label>
+        <input id="login" placeholder="Введите логин" class="input_login" required>
+    </div>
+
+    <div class="password_div_flex">
+        <label for="password">Пароль</label>
+        <input id="password" placeholder="Введите пароль" class="input_password" required>
+    </div>
+
+    <input type="submit" placeholder="Авторизоваться" class="auth_btn">
+</form>
+
+<p class="info">Если у вас нет аккаунта <a th:href="registration">зарегистрируйтесь</a></p>
 </body>
 </html>
