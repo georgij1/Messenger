@@ -47,7 +47,7 @@ public class LoginConroller {
 
         try {
             if (token != null) {
-                return "redirect:/";
+                return "redirect:/main_page";
             }
         }
 
@@ -57,77 +57,79 @@ public class LoginConroller {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String login(LoginForm form, Model model, RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
         String token = null;
 
+        System.out.println(form.getLogin());
+        System.out.println(form.getPassword());
+
         if (cookies == null) {
+            System.out.println("cookies is null");
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
 
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
+            else {
+                try {
+                    System.out.println("try");
+                    if (token != null) {
+                        response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+                        return "redirect:/main_page";
+                    }
 
-        else {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("auth_token")) {
-                    token = cookie.getValue();
-                }
-            }
+                    else {
+                        String secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
 
-            try {
-                if (token != null) {
-                    response.setStatus(HttpServletResponse.SC_SEE_OTHER);
-                    return "redirect:/";
-                }
+                        try {
+                            if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
+                                System.out.println("if length");
 
-                else {
-                    String secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
-
-                    try {
-                        if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
-                            if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
-                                System.out.println("PASSWORD IS CORRECT");
-                                model.addAttribute("username", userRepository.select_username(registrationForm));
-                                try {
-                                    Algorithm algorithm = Algorithm.HMAC512(secret);
-                                    String jwtToken = JWT.create()
-                                            .withIssuer(form.getLogin())
-                                            .withClaim("userId", "1234")
-                                            .withSubject(form.getLogin())
-                                            .withIssuedAt(new Date())
-                                            .withExpiresAt(new Date(System.currentTimeMillis() + 5000L))
-                                            .sign(algorithm);
-                                    JWTVerifier verifier = JWT.require(Algorithm.HMAC512(secret))
-                                            .build();
-                                    DecodedJWT decodedJWT = verifier.verify(jwtToken);
-                                    System.out.println(decodedJWT);
-                                    Cookie cookie = new Cookie("auth_token", jwtToken);
-                                    response.addCookie(cookie);
-                                } catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException |
-                                         org.springframework.dao.DataIntegrityViolationException exception) {
-                                    System.out.println("Ошибка в создании JWT token");
+                                if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
+                                    System.out.println("PASSWORD IS CORRECT");
+                                    model.addAttribute("username", userRepository.select_username(registrationForm));
+                                    try {
+                                        Algorithm algorithm = Algorithm.HMAC512(secret);
+                                        String jwtToken = JWT.create()
+                                                .withIssuer(form.getLogin())
+                                                .withClaim("userId", "1234")
+                                                .withSubject(form.getLogin())
+                                                .withIssuedAt(new Date())
+                                                .withExpiresAt(new Date(System.currentTimeMillis() + 50000L))
+                                                .sign(algorithm);
+                                        JWTVerifier verifier = JWT.require(Algorithm.HMAC512(secret))
+                                                .build();
+                                        DecodedJWT decodedJWT = verifier.verify(jwtToken);
+                                        System.out.println(decodedJWT);
+                                        Cookie cookie = new Cookie("auth_token", jwtToken);
+                                        response.addCookie(cookie);
+                                    } catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException |
+                                             org.springframework.dao.DataIntegrityViolationException exception) {
+                                        System.out.println("Ошибка в создании JWT token");
+                                    }
+                                    return "redirect:/main_page";
                                 }
-                                return "redirect:/";
                             }
                         }
-                    }
 
-                    catch (org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException exception) {
-                        System.out.println("Такого пользователя не существует");
-                        model.addAttribute("not_valid_user", "Такого пользователя не существует");
-                        return "login";
+                        catch (org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException exception) {
+                            System.out.println("Такого пользователя не существует");
+                            model.addAttribute("not_valid_user", "Такого пользователя не существует");
+                            return "login";
+                        }
                     }
+                }
+
+                catch (NullPointerException exception) {
+                    System.out.println("error_login");
+                    model.addAttribute("error_login", "Ошибка в логине");
                 }
             }
 
-            catch (NullPointerException exception) {
-                model.addAttribute("error_login", "Ошибка в логине");
-            }
+            return "login";
         }
 
-        return "redirect:/login";
+        return "login";
     }
 }
