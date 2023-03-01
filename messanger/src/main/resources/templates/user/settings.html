@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>settings</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{main_page.css}">
+    <link rel="stylesheet" th:href="@{user/setting.css}">
+</head>
+<body>
+    <div class="form_logout">
+        <div class="return_back"></div>
+
+        <form method="get" action="/logout">
+            <input type="submit" class="input_logout" value="">
+        </form>
+    </div>
+
+    <div class="info_account">
+        <p>Аккаунт</p>
+
+        <p th:text="${username}"></p>
+    </div>
+
+    <script th:src="@{user/returnBack.js}"></script>
+</body>
+</html>

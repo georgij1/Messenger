@@ -6,13 +6,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 @AllArgsConstructor
 public class UserRepo {
     public JdbcTemplate jdbcTemplate;
 
-    public boolean create(RegistrationForm registrationForm) {
+    public boolean create(RegistrationForm registrationForm, Model model) {
         try {
             if (registrationForm.getLogin().length() > 0) {
                 jdbcTemplate.update(
@@ -26,7 +27,7 @@ public class UserRepo {
             }
 
             else {
-                System.out.println("Input is null");
+                model.addAttribute("ErrorCreateUser", "Ошибка в регистрации");
             }
         }
 
@@ -39,6 +40,10 @@ public class UserRepo {
 
     public String select_username(RegistrationForm registrationForm) {
         return jdbcTemplate.queryForObject("select username from users where username=?", String.class, registrationForm.getLogin());
+    }
+
+    public String selectPhoneNumber(RegistrationForm registrationForm) {
+        return jdbcTemplate.queryForObject("select number_phone from public.users where username=?", String.class, registrationForm.getLogin());
     }
 
     public boolean validPassword(String username, String password){

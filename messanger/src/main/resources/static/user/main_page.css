@@ -1,0 +1,13 @@
+.hello_text {
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.border_start_chating {
+    padding: 10px;
+    box-shadow: 0 0 10px blue;
+    border-radius: 10px;
+    border: 2px solid blue;
+    width: 300px;
+}
