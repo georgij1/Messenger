@@ -1,15 +1,19 @@
 package com.example.messanger.auth.User;
 
+import com.example.messanger.auth.forms.LoginForm;
 import com.example.messanger.auth.forms.RegistrationForm;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RestController;
 
 @Service
 @AllArgsConstructor
+@Repository
 public class UserRepo {
     public JdbcTemplate jdbcTemplate;
 
@@ -40,10 +44,6 @@ public class UserRepo {
 
     public String select_username(RegistrationForm registrationForm) {
         return jdbcTemplate.queryForObject("select username from users where username=?", String.class, registrationForm.getLogin());
-    }
-
-    public String selectPhoneNumber(RegistrationForm registrationForm) {
-        return jdbcTemplate.queryForObject("select number_phone from public.users where username=?", String.class, registrationForm.getLogin());
     }
 
     public boolean validPassword(String username, String password){

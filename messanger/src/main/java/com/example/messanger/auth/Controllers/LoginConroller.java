@@ -82,8 +82,8 @@ public class LoginConroller {
                             if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
                                     model.addAttribute("username", userRepository.select_username(registrationForm));
-                                    model.addAttribute("PhoneNumber", userRepository.selectPhoneNumber(registrationForm));
-                                    System.out.println(userRepository.selectPhoneNumber(registrationForm));
+//                                    model.addAttribute("PhoneNumber", userRepository.selectPhoneNumber(registrationForm));
+//                                    System.out.println(userRepository.selectPhoneNumber());
                                     try {
                                         Algorithm algorithm = Algorithm.HMAC512(secret);
                                         String jwtToken = JWT.create()

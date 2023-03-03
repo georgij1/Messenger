@@ -23,6 +23,14 @@ public class MainController {
     @GetMapping
     public String start_page() {return "start_page";}
 
+    @GetMapping("settings")
+    public String settings(Model model, RegistrationForm registrationForm) {
+        //model.addAttribute("PhoneNumber", userRepository.selectPhoneNumber(registrationForm));
+        System.out.println(registrationForm.getLogin());
+        //System.out.println(userRepository.select_username(registrationForm));
+        return "user/settings";
+    }
+
     @GetMapping("main_page")
     public String main_page(LoginForm loginForm, RegistrationForm registrationForm, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         var cookies = request.getCookies();

@@ -1,7 +1,7 @@
 create table public.users
 (
     id            serial,
-    username      text not null,
+    username      text not null unique,
     password_hash text not null,
     number_phone  text not null
         unique,
@@ -9,6 +9,9 @@ create table public.users
     image_profile text not null
 );
 
-alter table public.users
-    owner to i21s597;
-
+create table public.message
+(
+    id serial,
+    username text,
+    id_message text
+)
