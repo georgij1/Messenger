@@ -51,7 +51,7 @@ public class RegistrationController {
             response.sendError(400);
         }
 
-        else if ((registrationForm.getLogin().length() > 0 && registrationForm.getPassword().length() > 0 && registrationForm.getRepeatPassword().length() > 0)) {
+        else if ((registrationForm.getLogin().length() > 0 && registrationForm.getPassword().length() >= 8 && registrationForm.getRepeatPassword().length() >= 8)) {
             if ((Objects.equals(registrationForm.getPassword(), registrationForm.getRepeatPassword()))) {
                 userRepo.create(registrationForm, model);
                 response.setStatus(HttpServletResponse.SC_SEE_OTHER);
