@@ -9,5 +9,5 @@ public class RegistrationForm {
     private String RepeatPassword;
     private String NumberPhone;
     private String email;
-    private String avatar;
+//    private String avatar;
 }

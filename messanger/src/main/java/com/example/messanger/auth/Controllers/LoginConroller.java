@@ -82,8 +82,8 @@ public class LoginConroller {
                             if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
                                     model.addAttribute("username", userRepository.select_username(registrationForm));
-//                                    model.addAttribute("PhoneNumber", userRepository.selectPhoneNumber(registrationForm));
-//                                    System.out.println(userRepository.selectPhoneNumber());
+                                    String PhoneNumber = model.addAttribute("PhoneNumber", registrationForm.getNumberPhone()).toString();
+                                    System.out.println(PhoneNumber);
                                     try {
                                         Algorithm algorithm = Algorithm.HMAC512(secret);
                                         String jwtToken = JWT.create()
@@ -98,8 +98,9 @@ public class LoginConroller {
                                         DecodedJWT decodedJWT = verifier.verify(jwtToken);
                                         Cookie cookie = new Cookie("auth_token", jwtToken);
                                         response.addCookie(cookie);
-                                    } catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException |
-                                             org.springframework.dao.DataIntegrityViolationException exception) {
+                                    }
+
+                                    catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException ignored) {
                                     }
                                     return "redirect:/main_page";
                                 }

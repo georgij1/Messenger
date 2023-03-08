@@ -14,7 +14,7 @@
 
     <div class="padding"></div>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="login_div_flex">
             <label for="login">Логин</label>
             <input id="login" placeholder="Придумайте логин" type="text" class="login" name="login">
@@ -40,14 +40,18 @@
             <input id="email" type="email" placeholder="Введите свой email" name="email" class="enter_email" required>
         </div>
     
-        <div class="icon_upload_profile_div_flex">
-            <label for="icon_profile" class="icon_profile_label">Загрузить аватарку</label>
-            <input id="icon_profile" name="avatar" type="file" class="upload_icon_profile" required hidden="hidden">
+<!--        <div class="icon_upload_profile_div_flex">-->
+<!--            <label for="icon_profile" class="icon_profile_label">Загрузить аватарку</label>-->
+<!--            <input id="icon_profile" name="avatar" type="file" class="upload_icon_profile" required hidden="hidden">-->
 
-            <div class="icon_profile"></div>
-        </div>
+<!--            <div class="icon_profile"></div>-->
+<!--        </div>-->
+
+            <div class="form-group">
+                <input type="file" name="avatar" accept="image/*" class="form-control-file">
+            </div>
     
-        <input type="submit" class="registration_user" value="Зарегистрироваться">
+        <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
     </form>
 
     <p class="info_auth">Если вы уже имеете аккаунт <a th:href="login">авторизуйтесь</a></p>

@@ -1,6 +1,7 @@
 package com.example.messanger.auth.User;
 
 import com.example.messanger.auth.forms.LoginForm;
+import com.example.messanger.auth.forms.MessageForm;
 import com.example.messanger.auth.forms.RegistrationForm;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -17,16 +18,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRepo {
     public JdbcTemplate jdbcTemplate;
 
+    public boolean save_message(MessageForm messageForm, Model model) {
+        try {
+            if (messageForm.getMessage_send().length() > 0) {
+                jdbcTemplate.update(
+                        "insert into public.message(message) values (?)",
+                        messageForm.getMessage_send()
+                );
+            }
+
+            else {
+                model.addAttribute("ErrorAddMessage", "Ошибка в отправки сообщения");
+            }
+        }
+
+        catch (DataAccessException exception) {
+            return false;
+        }
+
+        return true;
+    }
+
     public boolean create(RegistrationForm registrationForm, Model model) {
         try {
             if (registrationForm.getLogin().length() > 0) {
                 jdbcTemplate.update(
-                        "insert into public.users(username, password_hash, number_phone, email, image_profile) values (?, ?, ?, ?, ?)",
+                        "insert into public.users(username, password_hash, number_phone, email) values (?, ?, ?, ?)",
                         registrationForm.getLogin(),
                         BCrypt.hashpw(registrationForm.getPassword(), BCrypt.gensalt()),
                         registrationForm.getNumberPhone(),
-                        registrationForm.getEmail(),
-                        registrationForm.getAvatar()
+                        registrationForm.getEmail()
+                        // registrationForm.getAvatar()
                 );
             }
 

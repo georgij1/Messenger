@@ -1,0 +1,71 @@
+.form_send_message {
+    position: fixed;
+    bottom: 10px;
+    width: 93%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    padding: 10px;
+}
+
+.delete_message_input {
+    padding: 10px;
+    color: #FFFFFF;
+    background: red;
+    box-shadow: 0 0 10px red;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.message_border {
+    padding: 10px;
+    background: blue;
+    border: 2px solid blue;
+    box-shadow: 0 0 10px blue;
+    border-radius: 10px;
+}
+
+.message_text {
+    color: #FFFFFF;
+}
+
+.author_text {
+    color: grey;
+}
+
+.content {
+    width: 300px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input_message {
+    padding: 10px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px blue;
+    width: 85%;
+}
+
+.send_message_btn {
+    border: 2px solid blue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px blue;
+    background: blue;
+    color: #FFF;
+}
+
+@media (min-width: 768px) {
+    .content {
+        width: 700px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content {
+        width: 900px;
+    }
+}
