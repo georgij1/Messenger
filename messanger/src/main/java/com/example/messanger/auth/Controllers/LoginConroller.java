@@ -79,7 +79,7 @@ public class LoginConroller {
                         String secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
 
                         try {
-                            if (form.getLogin().length() > 8 && form.getPassword().length() > 8) {
+                            if (form.getLogin().length() > 0 && form.getPassword().length() > 8) {
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
                                     model.addAttribute("username", userRepository.select_username(registrationForm));
                                     String PhoneNumber = model.addAttribute("PhoneNumber", registrationForm.getNumberPhone()).toString();
