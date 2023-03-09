@@ -78,7 +78,7 @@ public class RegistrationController {
         }
 
         else {
-            response.setStatus(400);
+            response.sendError(400, "Пароль и повторение парроля меньше 8");
         }
 
         return "registration";
