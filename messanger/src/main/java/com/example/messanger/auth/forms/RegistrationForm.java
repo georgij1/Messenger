@@ -4,10 +4,9 @@ import lombok.Data;
 
 @Data
 public class RegistrationForm {
-    private String login;
-    private String password;
-    private String RepeatPassword;
-    private String NumberPhone;
-    private String email;
-//    private String avatar;
+    public String login;
+    public String password;
+    public String RepeatPassword;
+    public String NumberPhone;
+    public String email;
 }

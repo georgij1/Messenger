@@ -1,18 +1,20 @@
-package com.example.messanger.auth.User.upload_file;
+/*TODO: Старый код загрузки фотографии в проект*/
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+/*  package com.example.messanger.auth.User.upload_file;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.ui.Model;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+    import java.io.IOException;
+    import java.nio.file.Files;
+    import java.nio.file.Path;
+    import java.nio.file.Paths;
+
+    @Controller
 public class UploadController {
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
         @GetMapping("/upload_image") public String displayUploadForm() {
@@ -27,4 +29,4 @@ public class UploadController {
         System.out.println(fileNames.toString());
         return "image_upload";
     }
-}
+}*/

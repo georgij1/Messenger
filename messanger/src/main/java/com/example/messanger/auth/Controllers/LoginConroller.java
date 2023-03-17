@@ -64,8 +64,10 @@ public class LoginConroller {
         String token = null;
 
         if (cookies == null) {
+            System.out.println(cookies + "is null");
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                System.out.println("form_login is null" + "or is " + form.getLogin());
             }
 
             else {
@@ -80,6 +82,7 @@ public class LoginConroller {
 
                         try {
                             if (form.getLogin().length() > 0 && form.getPassword().length() > 8) {
+                                System.out.println("Password field > 0 and Login field > 8");
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
                                     model.addAttribute("username", userRepository.select_username(registrationForm));
                                     String PhoneNumber = model.addAttribute("PhoneNumber", registrationForm.getNumberPhone()).toString();
@@ -115,6 +118,7 @@ public class LoginConroller {
                 }
 
                 catch (NullPointerException exception) {
+                    System.out.println("catch NullPointerException");
                     model.addAttribute("error_login", "Ошибка в логине");
                 }
             }

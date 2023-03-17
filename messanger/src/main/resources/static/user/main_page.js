@@ -1,0 +1,1 @@
+window.open('/main_page', '_self')

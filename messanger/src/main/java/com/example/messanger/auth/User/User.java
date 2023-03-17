@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class User {
-    private String id;
-    private String login;
-    private String password;
-    private String RepeatPassword;
-    private String NumberPhone;
-    private String email;
-    private String avatar;
+    public String id;
+    public String login;
+    public String password;
+    public String RepeatPassword;
+    public String NumberPhone;
+    public String email;
+    public String avatar;
 }

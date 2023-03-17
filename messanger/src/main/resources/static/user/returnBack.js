@@ -5,7 +5,7 @@ return_back.addEventListener('click', () => {
     let history = window.history.go(-1)
 
     if (history === undefined) {
-        alert("Прошлой страницы нет")
+        console.log("Прошлой страницы нет")
     }
 })
 
