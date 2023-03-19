@@ -1,49 +1,23 @@
-.header {
-    padding: 15px;
-    color: #FFF;
-    box-shadow: 0 0 10px;
-    position: fixed;
-    width: 100%;
-    background: black;
-}
-
-.padding {
-    padding-top: 70px;
-}
-
-.login_div_flex, .password_div_flex {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-
-label {
-    color: #000;
-    padding-bottom: 15px;
-}
-
-input {
-    padding: 10px;
-    border: 2px solid bisque;
-    background: black;
-    border-radius: 10px;
-    box-shadow: 0 0 10px navajowhite;
-    color: #FFF;
-}
-
-.auth_btn {
-    background: blue;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border: none;
-    cursor: pointer;
-}
-
-.auth_btn:hover {
-    box-shadow: none;
-}
-
 .info {
-    padding: 10px;
+    text-align: center;
+    font-size: 17px;
+    background: antiquewhite;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    box-shadow: 0 0 10px;
+    border-radius: 20px;
+    width: 300px;
+    margin: 30px auto 0;
+}
+
+@media (min-width: 768px) {
+    .info {
+        width: 700px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .info {
+        width: 1000px;
+    }
 }

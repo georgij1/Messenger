@@ -16,10 +16,3 @@ btn_up.addEventListener('click', () => {
     btn_up.classList.toggle('round')
     delete_account.classList.toggle('block')
 })
-
-let btn_delete_account = document.querySelector('.btn_delete_account')
-let username_get = document.querySelector('.username')
-btn_delete_account.addEventListener('click', () => {
-    fetch('/delete_user', {})
-        .then(data => {console.log(data.json())})
-})

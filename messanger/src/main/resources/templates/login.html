@@ -7,25 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/main_page.css}">
     <link rel="stylesheet" th:href="@{/login/login.css}">
+    <link rel="stylesheet" th:href="@{/registration/registration.css}">
 </head>
 
 <body>
-    <div class="header">Авторизация</div>
+    <div class="header">
+        <p>Авторизация</p>
+    </div>
 
     <div class="padding"></div>
 
     <form method="post">
-        <div class="login_div_flex">
-            <label for="login">Логин</label>
-            <input id="login" placeholder="Введите логин" name="login" class="input_login" required>
+        <div class="border">
+            <div class="login_div_flex">
+                <label class="label_input" for="login">Логин</label>
+                <input id="login" placeholder="Введите логин" name="login" class="input_login" required>
+            </div>
         </div>
 
-        <div class="password_div_flex">
-            <label for="password">Пароль</label>
-            <input id="password" placeholder="Введите пароль" name="password" type="password" class="input_password" required>
+        <div class="border">
+            <div class="password_div_flex">
+                <label class="label_input" for="password">Пароль</label>
+                <input id="password" placeholder="Введите пароль" name="password" type="password" class="input_password" required>
+            </div>
         </div>
 
-        <input type="submit" value="Авторизоваться" class="auth_btn">
+        <input type="submit" value="Авторизоваться" class="registration_user">
     </form>
 
     <p class="info">Если у вас нет аккаунта <a th:href="registration">зарегистрируйтесь</a></p>

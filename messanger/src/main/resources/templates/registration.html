@@ -10,46 +10,41 @@
 </head>
 
 <body>
-    <div class="header">Регистрация</div>
+    <div class="header">
+        <p>Регистрация</p>
+    </div>
 
     <div class="padding"></div>
 
     <form method="post" enctype="multipart/form-data">
-        <div class="login_div_flex">
-            <label for="login">Логин</label>
-            <input id="login" placeholder="Придумайте логин" type="text" class="login" name="login">
-        </div>
-    
-        <div class="password_div_flex">
-            <label for="password">Пароль</label>
-            <input id="password" type="password" placeholder="Придумайте пароль свой пароль" class="password" name="password" required>
-        </div>
-    
-        <div class="repeatePassword_div_flex">
-            <label for="repeat_password">Повторите пароль</label>
-            <input id="repeat_password" type="password" placeholder="Повторите придуманный пароль" class="repeat_password" name="RepeatPassword" required>
-        </div>
-    
-        <div class="telephone_div_flex">
-            <label for="telephone">Номер телефона</label>
-            <input id="telephone" placeholder="Введите свой номер телефона" type="tel" class="enter_tel" name="NumberPhone" required>
-        </div>
-    
-        <div class="email_div_flex">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="Введите свой email" name="email" class="enter_email" required>
-        </div>
-    
-<!--        <div class="icon_upload_profile_div_flex">-->
-<!--            <label for="icon_profile" class="icon_profile_label">Загрузить аватарку</label>-->
-<!--            <input id="icon_profile" name="image_profile" type="file" class="upload_icon_profile" required hidden="hidden">-->
-
-<!--            <div class="icon_profile"></div>-->
-<!--        </div>-->
-
-            <div class="form-group">
-                <input type="file" name="avatar" accept="image/*" class="form-control-file">
+        <div class="border">
+            <div class="login_div_flex">
+                <label class="label_input" for="login">Логин</label>
+                <input id="login" placeholder="Придумайте логин" type="text" class="login" name="login">
             </div>
+        </div>
+
+        <div class="border">
+            <div class="password_div_flex">
+                <label class="label_input" for="password">Пароль</label>
+                <input id="password" type="password" placeholder="Придумайте пароль свой пароль" class="password" name="password" required>
+            </div>
+        </div>
+
+        <div class="border">
+            <div class="repeatePassword_div_flex">
+                <label class="label_input" for="repeat_password">Повторите пароль</label>
+                <input id="repeat_password" type="password" placeholder="Повторите придуманный пароль" class="repeat_password" name="RepeatPassword" required>
+            </div>
+        </div>
+
+        <div class="border">
+            <div class="form-group">
+                <div class="label_input">Аватарка</div>
+                <label for="ava_profile" class="send_icon_profile">Прикрепить аватарку</label>
+                <input id="ava_profile" type="file" name="avatar" accept="image/*" class="form-control-file">
+            </div>
+        </div>
     
         <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
     </form>

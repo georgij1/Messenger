@@ -6,6 +6,7 @@
     <title>Домашняя страница</title>
     <link rel="stylesheet" th:href="@{main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
+    <link rel="icon" th:href="@{image/main_page/home_icon.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 
@@ -47,9 +48,9 @@
             </a>
         </div>
 
-        <div class="delete_account">
-            <div class="btn_delete_account">Удалить аккаунт</div>
-        </div>
+        <form class="delete_account" method="get" action="/logout">
+            <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+        </form>
     </div>
 
     <div class="body"></div>

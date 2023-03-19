@@ -1,6 +1,7 @@
 package com.example.messanger;
 
 import com.auth0.jwt.JWT;
+import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.User.UserRepo;
 import com.example.messanger.auth.forms.LoginForm;
 import com.example.messanger.auth.forms.RegistrationForm;
@@ -28,29 +29,9 @@ public class MainController {
     public JdbcTemplate jdbcTemplate;
 
     @GetMapping("settings")
-    public String settings(Model model, RegistrationForm registrationForm, HttpServletRequest request) {
-        var cookies = request.getCookies();
-        String token = null;
-
-        if (cookies == null) {
-            return "main_page";
-        }
-
-        else {
-            for (Cookie cookie: cookies) {
-                if (cookie.getName().equals("auth_token")) {
-                    token = cookie.getValue();
-                    System.out.println(token);
-                    var json = JWT.decode(token.formatted("utf-8")).getSubject();
-                    System.out.println(json);
-                    model.addAttribute("username", json);
-                    String phone_number = jdbcTemplate.queryForList("select number_phone from users where username=?", json).toString();
-                    model.addAttribute("phone_number", phone_number);
-                    return "user/settings";
-                }
-            }
-        }
-        return "main_page";
+    @AuthorizedUser
+    public String settings(HttpServletRequest request, Model model) {
+        return "user/settings";
     }
 
     @GetMapping("main_page")

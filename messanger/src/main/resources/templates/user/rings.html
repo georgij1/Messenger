@@ -2,9 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>rings</title>
+    <title>Уведомления</title>
+    <link rel="stylesheet" th:href="@{main_page.css}">
+    <link rel="stylesheet" th:href="@{user/main_page.css}">
+    <link rel="icon" th:href="@{image/main_page/icon_rings.png}">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
+    <div class="header">
+        <div class="info_user">
+            <div class="image_profile"></div>
+            <div class="username_div">
+                <p class="username" th:text="${username}"></p>
+                <div class="btn_up"></div>
+            </div>
+        </div>
 
+        <div class="links">
+            <a href="/" class="link withOutSlash">
+                <div class="home_icon"></div>
+                <div class="name_link">Дом</div>
+            </a>
+
+            <a href="/websocket_chat" class="link withOutSlash">
+                <div class="icon_chats"></div>
+                <div class="name_link chat_link">Чаты</div>
+            </a>
+
+            <div class="link start_page">
+                <div class="this_page"></div>
+                <div class="icon_rings"></div>
+                <div class="name_link">Уведомления</div>
+            </div>
+
+            <a href="/calendar" class="link withOutSlash">
+                <div class="icon_calendar"></div>
+                <div class="name_link">Календарь</div>
+            </a>
+
+            <a href="/settings" class="link withOutSlash">
+                <div class="icon_settings"></div>
+                <div class="name_link">Настройки</div>
+            </a>
+        </div>
+
+        <form class="delete_account" method="get" action="/logout">
+            <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+        </form>
+    </div>
+
+    <div class="body"></div>
+
+    <script th:src="@{/user/home_page.js}"></script>
 </body>
 </html>

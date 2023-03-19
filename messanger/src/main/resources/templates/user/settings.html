@@ -2,127 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>settings</title>
+    <title>Настройки</title>
+    <link rel="icon" th:href="@{image/main_page/icon_settings.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" th:href="@{main_page.css}">
     <link rel="stylesheet" th:href="@{user/setting.css}">
+    <link rel="stylesheet" th:href="@{user/main_page.css}">
 </head>
 <body>
+
     <div class="header">
-        <div class="first_part_header">
-            <div class="arrow_back return_back"></div>
-            <div class="points">
-                <div class="menu">
-<!--                    <div class="list">-->
-<!--                        <div class="image_change_name"></div>-->
-<!--                        <div class="text_change_name">Изменить имя</div>-->
-<!--                    </div>-->
-
-<!--                    <div class="list">-->
-<!--                        <div class="image_change_photo"></div>-->
-<!--                        <div class="text_change_name">Выбрать фотографию</div>-->
-<!--                    </div>-->
-
-                    <form class="list" method="get" action="logout">
-                        <input type="submit" value="Выход" class="image_logout text_change_name text_logout">
-                    </form>
-                </div>
+        <div class="info_user">
+            <div class="image_profile"></div>
+            <div class="username_div">
+                <p class="username" th:text="${username}"></p>
+                <div class="btn_up"></div>
             </div>
         </div>
-        <div class="padding_header"></div>
-        <div class="second_part_header">
-            <div class="icon_profile"></div>
-            <div class="flex">
-                <div class="username" th:text="${username}"></div>
-<!--                <div class="status">в сети</div>-->
+
+        <div class="links">
+            <a href="/" class="link withOutSlash">
+                <div class="home_icon"></div>
+                <div class="name_link">Дом</div>
+            </a>
+
+            <a href="/websocket_chat" class="link withOutSlash">
+                <div class="icon_chats"></div>
+                <div class="name_link chat_link">Чаты</div>
+            </a>
+
+            <a href="/rings" class="link withOutSlash">
+                <div class="icon_rings"></div>
+                <div class="name_link">Уведомления</div>
+            </a>
+
+            <a href="/calendar" class="link withOutSlash">
+                <div class="icon_calendar"></div>
+                <div class="name_link">Календарь</div>
+            </a>
+
+            <div class="link start_page">
+                <div class="this_page"></div>
+                <div class="icon_settings"></div>
+                <div class="name_link">Настройки</div>
             </div>
         </div>
+
+        <form class="delete_account" method="get" action="/logout">
+            <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+        </form>
     </div>
 
-<!--    <div class="add_photo"></div>-->
-
-    <div class="content">
-        <p class="text_account">Аккаунт</p>
-
-        <div class="settings">
-            <div class="setting">
-                <div class="number_phone"></div>
-                <span class="info_number">Нажмите, чтобы изменить номер телефона</span>
-                <div class="line"></div>
-            </div>
-
-            <div class="setting">
-                <div class="email"></div>
-                <span class="info_number info_nickname">Email</span>
-                <div class="line"></div>
-            </div>
-
-<!--            <div class="setting">-->
-<!--                <input type="text" class="number_phone info_myself" value="#AdrianForever">-->
-<!--                <span class="info_number info_myself_text">О себе</span>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-        </div>
+    <div class="body">
+        <div class="label_text">Настройки</div>
+        <div class="btn_delete_account">Удалить аккаунт</div>
     </div>
 
-    <div class="padding_settings"></div>
-
-<!--    <div class="content">-->
-<!--        <p class="text_account text_settings">Настройки</p>-->
-
-<!--        <div class="settings">-->
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="image_conf"></div>-->
-<!--                    <div class="text_image">Конфиденциальность</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="image_dataStorage"></div>-->
-<!--                    <div class="text_image">Данные и память</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="image_settingChat"></div>-->
-<!--                    <div class="text_image">Настройки чатов</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="imageStickersImodji"></div>-->
-<!--                    <div class="text_image">Стикеры и эмодзи</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="image_directory"></div>-->
-<!--                    <div class="text_image">Папки</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-
-<!--            <div class="setting">-->
-<!--                <div class="flex_setting">-->
-<!--                    <div class="image_language"></div>-->
-<!--                    <div class="text_image">Язык</div>-->
-<!--                </div>-->
-<!--                <div class="line"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-    <div class="padding"></div>
-
+    <script th:src="@{/user/home_page.js}"></script>
     <script th:src="@{user/returnBack.js}"></script>
     <script th:src="@{/user/settings.js}"></script>
 </body>

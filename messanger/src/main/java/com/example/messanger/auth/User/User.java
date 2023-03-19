@@ -8,7 +8,5 @@ public class User {
     public String login;
     public String password;
     public String RepeatPassword;
-    public String NumberPhone;
-    public String email;
     public String avatar;
 }

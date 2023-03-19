@@ -35,11 +35,9 @@ public class UserRepo {
         try {
             if (registrationForm.getLogin().length() > 0) {
                 jdbcTemplate.update(
-                        "insert into public.users(username, password_hash, number_phone, email, image) values (?, ?, ?, ?, ?)",
+                        "insert into public.users(username, password_hash, image) values (?, ?, ?)",
                         registrationForm.getLogin(),
                         BCrypt.hashpw(registrationForm.getPassword(), BCrypt.gensalt()),
-                        registrationForm.getNumberPhone(),
-                        registrationForm.getEmail(),
                         fileName
                 );
             }
