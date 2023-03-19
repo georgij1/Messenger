@@ -3,15 +3,14 @@ create table public.users
     id            serial,
     username      text not null unique,
     password_hash text not null,
-    number_phone  text not null
-        unique,
+    number_phone  text not null,
     email         text not null,
-    image_profile text not null
+    image         text default '../image/settings/icon_profile.png'::text
 );
 
 create table public.message
 (
-    id serial,
-    username text,
-    id_message text
-)
+    message text not null,
+    author  text,
+    id      serial
+);
