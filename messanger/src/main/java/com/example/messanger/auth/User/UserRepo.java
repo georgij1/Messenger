@@ -1,15 +1,12 @@
 package com.example.messanger.auth.User;
 
 import com.auth0.jwt.JWT;
+import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.RegistrationForm;
-import io.jsonwebtoken.io.IOException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -136,5 +132,35 @@ public class UserRepo {
     public List<Map<String, Object>> delete_message(@PathVariable int id) {
         jdbcTemplate.update("delete from public.message where id=?", id);
         return jdbcTemplate.queryForList("select * from message");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @DeleteMapping("delete_user/{id}")
+    public List<Map<String, Object>> delete_user(@PathVariable int id) {
+        jdbcTemplate.update("delete from public.users where id=?", id);
+        System.out.println("User is delete");
+        return jdbcTemplate.queryForList("select * from users");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("user/id")
+    public List<Map<String, Object>> getUserID(HttpServletRequest request) {
+        System.out.println("ОПА, НИХРЕНА. Я РАНЬШЕ КОНТРОЛЛЕРА ПОЛУЧИЛ ЗАПРОС");
+
+        var cookies = request.getCookies();
+
+        String token = null;
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("auth_token")) {
+                token = cookie.getValue();
+                break;
+            }
+        }
+
+        var json = JWT.decode(token.formatted("utf-8")).getSubject();
+        return jdbcTemplate.queryForList("select id from public.users where username=?", json);
     }
 }

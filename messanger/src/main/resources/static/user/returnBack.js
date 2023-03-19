@@ -1,12 +1,29 @@
-let return_back = document.querySelector('.return_back')
-
-return_back.addEventListener('click', () => {
-    window.history.go(-1)
-    let history = window.history.go(-1)
-
-    if (history === undefined) {
-        console.log("Прошлой страницы нет")
-    }
+let btn_delete_account = document.querySelectorAll('.btn_delete_account')
+console.log(btn_delete_account)
+for (let btn_delete_Accounts of btn_delete_account) {
+    btn_delete_Accounts.addEventListener('click', () => {
+        fetch(`/user/id`, {
+     method: 'get',
+     headers: {
+         "Content-Type": "application/json"
+     },
+     mode: "cors"
 })
-
-console.log(document.referrer)
+    .then(response => response.json())
+    .then((data) => (data.forEach((item) => {
+        console.log(item.id)
+        console.log(item.id)
+        fetch(`/delete_user/${item.id}`, {
+            method: 'delete',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            mode: "cors"
+        })
+            .catch(err => {console.log(err)})
+            .then(res => {
+                console.log(res)
+            })
+    })))
+    })
+}

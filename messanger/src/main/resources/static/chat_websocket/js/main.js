@@ -162,7 +162,7 @@ fetch('http://localhost:8080/all_message',{
         let form_delete_message = document.querySelectorAll('.form_delete_message')
         for (let form_delete_message_1 of form_delete_message) {
             form_delete_message_1.addEventListener('click', () => {
-                fetch(`http://localhost:8080/delete_message/${item.id}`, {
+                fetch(`/delete_message/${item.id}`, {
                     method: 'delete',
                     headers: {
                         "Content-Type": "application/json"

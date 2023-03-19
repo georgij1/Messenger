@@ -55,11 +55,13 @@
 
     <div class="body">
         <div class="label_text">Настройки</div>
-        <div class="btn_delete_account">Удалить аккаунт</div>
+        <form method="get" action="/logout">
+            <input type="submit" class="btn_delete_account" value="Удалить аккаунт">
+        </form>
     </div>
 
-    <script th:src="@{/user/home_page.js}"></script>
     <script th:src="@{user/returnBack.js}"></script>
+    <script th:src="@{/user/home_page.js}"></script>
     <script th:src="@{/user/settings.js}"></script>
 </body>
 </html>
