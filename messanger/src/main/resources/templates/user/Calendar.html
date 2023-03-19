@@ -11,6 +11,7 @@
 <body>
     <div class="header">
         <div class="info_user">
+            <div class="min_size_window"></div>
             <div class="image_profile"></div>
             <div class="username_div">
                 <p class="username" th:text="${username}"></p>
@@ -51,7 +52,9 @@
         </form>
     </div>
 
-    <div class="body"></div>
+    <div class="body">
+        <div class="burger_menu"></div>
+    </div>
 
     <script th:src="@{/user/home_page.js}"></script>
 </body>
