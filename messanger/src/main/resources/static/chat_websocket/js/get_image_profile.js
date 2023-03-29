@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/image_profile',{
+fetch('/image_profile',{
     headers: new Headers({
         'Content-Type': 'application/json'
     }),
