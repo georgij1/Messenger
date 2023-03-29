@@ -6,7 +6,7 @@ let header = document.querySelectorAll('.header')
 let body_class = document.querySelectorAll('.body')
 let flex_content = document.querySelectorAll('.flex-content')
 
-fetch('http://localhost:8080/image_profile',{
+fetch('/image_profile',{
     headers: new Headers({
     'Content-Type': 'application/json'
 }),
