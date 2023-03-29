@@ -1,4 +1,4 @@
-package com.example.messanger.auth.Controllers;
+package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping
-public class RingsController {
+public class Calendar {
+    @GetMapping("/calendar")
     @AuthorizedUser
-    @GetMapping("/rings")
-    public String Rings(HttpServletRequest request, Model model) {
-        return "user/rings";
+    public String calendar(HttpServletRequest request, Model model) {
+        return "user/Calendar";
     }
 }

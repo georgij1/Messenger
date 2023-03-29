@@ -5,6 +5,7 @@
     <title>Уведомления</title>
     <link rel="stylesheet" th:href="@{main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
+    <link rel="stylesheet" th:href="@{user/rings.css}">
     <link rel="icon" th:href="@{image/main_page/icon_rings.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
@@ -28,6 +29,11 @@
             <a href="/websocket_chat" class="link withOutSlash">
                 <div class="icon_chats"></div>
                 <div class="name_link chat_link">Чаты</div>
+            </a>
+
+            <a href="/contacts" class="link withOutSlash">
+                <div class="icon_contacts"></div>
+                <div class="name_link">Контакты</div>
             </a>
 
             <div class="link start_page">
@@ -54,6 +60,8 @@
 
     <div class="body">
         <div class="burger_menu"></div>
+
+        <h1>Уведомлений нет</h1>
     </div>
 
     <script th:src="@{/user/home_page.js}"></script>

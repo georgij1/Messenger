@@ -1,4 +1,4 @@
-package com.example.messanger.auth.Controllers;
+package com.example.messanger.Controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

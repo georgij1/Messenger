@@ -6,6 +6,7 @@
     <title>Домашняя страница</title>
     <link rel="stylesheet" th:href="@{main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
+    <link rel="stylesheet" th:href="@{user/main_css.css}">
     <link rel="icon" th:href="@{image/main_page/home_icon.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
@@ -33,6 +34,11 @@
                 <div class="name_link chat_link">Чаты</div>
             </a>
 
+            <a href="/contacts" class="link withOutSlash">
+                <div class="icon_contacts"></div>
+                <div class="name_link">Контакты</div>
+            </a>
+
             <a href="/rings" class="link withOutSlash">
                 <div class="icon_rings"></div>
                 <div class="name_link">Уведомления</div>
@@ -56,6 +62,7 @@
 
     <div class="body">
         <div class="burger_menu"></div>
+        <h1>Домашняя страница пустая</h1>
     </div>
 
     <script th:src="@{/user/home_page.js}"></script>

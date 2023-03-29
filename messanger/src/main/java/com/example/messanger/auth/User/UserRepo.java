@@ -1,8 +1,8 @@
 package com.example.messanger.auth.User;
 
 import com.auth0.jwt.JWT;
-import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.RegistrationForm;
+import com.example.messanger.auth.forms.UsernameUserID;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -64,7 +64,7 @@ public class UserRepo {
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> all_users() {
-        return jdbcTemplate.queryForList("select username from users");
+        return jdbcTemplate.queryForList("select * from users");
     }
 
     @GetMapping("/image_profile")
@@ -126,6 +126,14 @@ public class UserRepo {
         return jdbcTemplate.queryForList("select * from message");
     }
 
+    @PostMapping("/username")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> userChatID(@RequestBody UsernameUserID usernameUserID) {
+        System.out.println(usernameUserID.getUsername());
+        return jdbcTemplate.queryForList("select id from users where username=?", usernameUserID.getUsername());
+    }
+
     @ResponseBody
     @CrossOrigin("*")
     @DeleteMapping("delete_message/{id}")
@@ -162,5 +170,19 @@ public class UserRepo {
 
         var json = JWT.decode(token.formatted("utf-8")).getSubject();
         return jdbcTemplate.queryForList("select id from public.users where username=?", json);
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("count/username")
+    public List<Map<String, Object>> getCountUserName(HttpServletRequest request) {
+        return jdbcTemplate.queryForList("select count(username) from public.users");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("list_chats")
+    public List<Map<String, Object>> getListChats() {
+        return jdbcTemplate.queryForList("select * from chat");
     }
 }

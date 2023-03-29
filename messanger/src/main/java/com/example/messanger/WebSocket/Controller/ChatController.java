@@ -2,7 +2,9 @@ package com.example.messanger.WebSocket.Controller;
 
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
+import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,13 +13,18 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
 @RequestMapping("/")
 @AllArgsConstructor
-@CrossOrigin("*")
 public class ChatController {
     public JdbcTemplate jdbcTemplate;
 
@@ -25,7 +32,12 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage sendMessage (@Payload ChatMessage chatMessage) {
         System.out.println("public ChatMessage sendMessage - " + chatMessage.getContent());
-        jdbcTemplate.update("insert into message(message, author) values (?, ?)", chatMessage.getContent(), chatMessage.getSender());
+        System.out.println(chatMessage.getChat_id());
+        System.out.println(chatMessage.getSender());
+        int sender_id = Integer.parseInt(chatMessage.getSender());
+        int chat_id = Integer.parseInt(chatMessage.getChat_id());
+        System.out.println(chatMessage.GetTimeStamp());
+        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp) values (?, ?, ?, ?)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStamp());
         return chatMessage;
     }
 
@@ -35,13 +47,14 @@ public class ChatController {
         Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username", chatMessage.getSender());
         System.out.println(chatMessage.getContent());
         System.out.println(chatMessage.getSender());
+        System.out.println(chatMessage.GetTimeStamp());
+        System.out.println(headerAccessor);
         return chatMessage;
     }
 
-
-    @AuthorizedUser
-    @GetMapping("websocket_chat")
-    public String example_chat(HttpServletRequest request, Model model) {
-        return "chat_websocket/index";
+    @MessageMapping("/chat.deleteUser/{id}")
+    @SendTo("/topic/public")
+    public ChatMessage deleteUser(@Payload ChatMessage chatMessage) {
+         return null;
     }
 }

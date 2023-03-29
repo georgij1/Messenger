@@ -3,81 +3,120 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Чат</title>
+    <link rel="icon" th:href="@{image/main_page/icon_chats.png}">
+    <link rel="stylesheet" th:href="@{user/main_page.css}">
+    <link rel="stylesheet" th:href="@{main_page.css}">
     <link rel="stylesheet" th:href="@{/chat_websocket/css/main.css}" />
 </head>
 <body>
-    <noscript>
-        <h2>Sorry! Your browser doesn't support Javascript</h2>
-    </noscript>
-
-    <div id="username-page">
-        <div class="list_all_chat">
-            <div class="header">
-                <a href="settings">Настройки</a>
-
-                <a href="/">
-                    <div class="info_user">
-                        <p class="username" th:text="${username}"></p>
-                        <div class="image_profile"></div>
-                    </div>
-                </a>
-            </div>
-            <div class="padding_header"></div>
-            <div class="choose_header_chat"></div>
-            <div class="option">Общий чат</div>
-            <div class="all_users"></div>
-        </div>
-    <!--    <div class="close_window"></div>-->
-        <div class="username-page-container">
-            <div class="arrow_close"></div>
-            <h1 class="title white_color">Введите своё имя пользователя</h1>
-            <form id="usernameForm" name="usernameForm">
-                <div class="form-group form-window-start">
-                    <input type="text" id="name" placeholder="Имя пользователя" autocomplete="off" th:value="${username}" class="form-control" />
-                </div>
-
-                <div class="form-group form-window-start">
-                    <button type="submit" class="accent username-submit">Чатиться</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="header">
-        <a href="settings">Настройки</a>
-
-        <a href="/">
-            <div class="info_user">
+    <div class="header" id="header">
+        <div class="info_user">
+            <div class="min_size_window"></div>
+            <div class="image_profile"></div>
+            <div class="username_div">
                 <p class="username" th:text="${username}"></p>
-                <div class="image_profile"></div>
+                <div class="btn_up"></div>
             </div>
-        </a>
+        </div>
+
+        <div class="links">
+            <a href="/" class="link withOutSlash">
+                <div class="home_icon"></div>
+                <div class="name_link">Дом</div>
+            </a>
+
+            <div class="link start_page">
+                <div class="this_page"></div>
+                <div class="icon_chats"></div>
+                <div class="name_link chat_link">Чаты</div>
+            </div>
+
+            <a href="/contacts" class="link withOutSlash">
+                <div class="icon_contacts"></div>
+                <div class="name_link">Контакты</div>
+            </a>
+
+            <a href="/rings" class="link withOutSlash">
+                <div class="icon_rings"></div>
+                <div class="name_link">Уведомления</div>
+            </a>
+
+            <a href="/calendar" class="link withOutSlash">
+                <div class="icon_calendar"></div>
+                <div class="name_link">Календарь</div>
+            </a>
+
+            <a href="/settings" class="link withOutSlash">
+                <div class="icon_settings"></div>
+                <div class="name_link">Настройки</div>
+            </a>
+        </div>
+
+        <form class="delete_account" method="get" action="/logout">
+            <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+        </form>
     </div>
 
-    <div id="chat-page" class="hidden">
-        <div class="chat-container">
-            <div class="chat-header">
-                <h2>Общий чат</h2>
-            </div>
-
-            <div class="connecting">
-                Соединение...
-            </div>
-
-            <ul id="messageArea">
-
-            </ul>
-
-            <form id="messageForm" enctype="multipart/form-data">
-                <div class="form-group">
-                    <form class="input-group clearfix" name="messageForm">
-                        <input type="text" id="message" placeholder="Введите сообщение..." autocomplete="off" class="form-control"/>
-                        <button type="submit" class="primary">Отправить</button>
-                    </form>
-
-                    <a href="add_photo" class="primary">Прикрепить фото</a>
+    <div class="body body_js">
+        <div class="burger_menu"></div>
+        <div class="content">
+            <div class="flex-content">
+                <div class="label_page">Чаты</div>
+                <div class="btn_create_chat">
+                    <div class="image_plus"></div>
+                    <div class="text_create_chat">Создать новый чат</div>
                 </div>
+            </div>
+
+<!--            <input class="label_search" id="search" placeholder="Поиск...">-->
+
+            <div class="list_chats"></div>
+        </div>
+    </div>
+
+    <div class="body_1">
+        <div class="close_window close_window_new"></div>
+
+        <div class="window_create_chat">
+            <div class="flex-group">
+                <label class="label_create_chat" for="name_chat">Имя чата</label>
+                <input type="text" placeholder="Придумайте название чата" class="name_chat name_chat_div" id="name_chat" required>
+            </div>
+
+            <div class="flex-group">
+                <label class="label_create_chat" for="desc_chat">Описание чата</label>
+                <input type="text" placeholder="Придумайте название чата" class="name_chat desc_chat_1" id="desc_chat" required>
+            </div>
+
+            <div class="flex-group">
+                <label class="label_create_chat">Пользователи чата</label>
+                <div class="list_users"></div>
+            </div>
+
+            <input type="submit" class="create_chat" value="Создать чат">
+        </div>
+    </div>
+
+    <div class="body_chat">
+        <div id="arrowTop" hidden class="btn_up_1"></div>
+        <div id="arrowBottom" class="btn_down_1"></div>
+
+        <div class="flex_content_chat_top_tools">
+            <div class="close_window close_window_2"></div>
+            <div class="border_name_chat"></div>
+        </div>
+
+        <div class="height"></div>
+
+        <div class="list_chat"></div>
+
+        <div class="tools">
+            <div class="btn_tools_chat"></div>
+            <form id="messageForm" enctype="multipart/form-data" name="messageForm">
+                <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
+                <button type="submit" class="send_message primary"></button>
             </form>
+            <div class="smile"></div>
         </div>
     </div>
 
@@ -85,5 +124,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script th:src="@{/chat_websocket/js/main.js}"></script>
     <script th:src="@{/chat_websocket/js/get_image_profile.js}"></script>
+    <script th:src="@{user/home_page.js}"></script>
+    <script th:src="@{/chat_websocket/js/create_chat.js}"></script>
+    <script th:src="@{/chat_websocket/js/list_chats.js}"></script>
+    <script th:src="@{/chat_websocket/js/scroll.js}"></script>
 </body>
 </html>

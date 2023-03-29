@@ -227,19 +227,14 @@ a {
     display: block;
 }
 
-.body {
+.body, .body_1 {
     padding: 10px;
 }
 
-body {
-    display: flex;
-    flex-direction: row;
-}
-
-.body {
+.body, .body_1 {
     padding: 10px;
     width: 60vh;
-    display: flex;
+    display: block;
     justify-content: space-between;
 }
 
@@ -250,6 +245,24 @@ body {
     justify-content: flex-end;
 }
 
+.none_content {
+    display: none;
+}
+
+body::-webkit-scrollbar {
+    width: 6px;
+    height: 79px;
+    background: #B7BDCB;
+    box-shadow: 4px 4px 15px rgba(112, 124, 151, 0.05), 2px 2px 10px rgba(112, 124, 151, 0.1), 1px 1px 50px rgba(112, 124, 151, 0.15);
+    border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+    .none_content {
+        display: block;
+    }
+}
+
 @media (min-width: 1024px) {
     .min_size_window, .burger_menu {
         display: none;
@@ -257,5 +270,11 @@ body {
 
     .header {
         display: block;
+    }
+
+    .body, .body_1 {
+        width: 100vh;
+        display: flex;
+        justify-content: flex-end;
     }
 }

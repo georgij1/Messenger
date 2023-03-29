@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/example_pagination/style.css}">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users.content}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <a href="#" class="prev">&laquo;</a>
+    <a href="#" class="page active">1</a>
+    <a href="#" class="page">2</a>
+    <a href="#" class="page">3</a>
+    <a href="#" class="page">4</a>
+    <a href="#" class="page">5</a>
+    <a href="#" class="next">&raquo;</a>
+</div>
+
+<script th:src="@{/example_pagination/script.js}"></script>
+</body>
+</html>
