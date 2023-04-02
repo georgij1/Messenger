@@ -36,8 +36,8 @@ fetch('/all_users', {
             console.log(item)
             list_users.innerHTML+=`
                 <div class="user" id="user">
-                    <div class="id"></div>
-                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px"></div>
+                    <!--<div class="id"></div>-->
+                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
                     <div class="name">${item.username}</div>
                 </div>
             `
@@ -72,11 +72,14 @@ create_chat.addEventListener('click', () => {
         console.log('user')
     }
 
+    let username_1 = document.querySelector('.username').textContent
 
     const formData = {
         "name_chat": name_chat_div.value,
         "desc_chat": desc_chat.value,
-        "user_chat": user_chat
+        "user_chat": user_chat,
+        "type": "group_chat",
+        "owner": username_1
     }
 
     fetch('/create_chat', {

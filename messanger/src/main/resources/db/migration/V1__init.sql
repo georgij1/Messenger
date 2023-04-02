@@ -10,7 +10,10 @@ create table public.chat
 (
     id serial primary key,
     name text,
-    desc_chat text
+    desc_chat text default 'Описания нет',
+    type text,
+    image_chat text default '../image/settings/icon_profile.png',
+    owner text not null
 );
 
 create table public.message

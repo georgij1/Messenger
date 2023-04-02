@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping
@@ -24,7 +25,7 @@ public class CreateChat {
     @PostMapping("/create_chat")
     @CrossOrigin("*")
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
-        jdbcTemplate.update("insert into public.chat(name, desc_chat) values (?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat());
+        jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
         System.out.println(formCreateChat.getUser_chat());
         String getUserChat = String.join(" ", formCreateChat.getUser_chat());
         System.out.println(getUserChat);

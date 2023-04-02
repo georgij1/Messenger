@@ -47,7 +47,7 @@ function onMessageReceived(payload) {
 
     textElement.appendChild(messageText);
 
-    messageElement.appendChild(textElement);
+    // messageElement.appendChild(textElement);
 
     messageArea.appendChild(messageElement);
     messageArea.scrollMarginBottom = messageArea.scrollHeight;

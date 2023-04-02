@@ -233,8 +233,8 @@ a {
 
 .body, .body_1 {
     padding: 10px;
-    width: 60vh;
-    display: block;
+    width: max-content;
+    /*display: block;*/
     justify-content: space-between;
 }
 
@@ -249,17 +249,32 @@ a {
     display: none;
 }
 
-body::-webkit-scrollbar {
-    width: 6px;
-    height: 79px;
-    background: #B7BDCB;
-    box-shadow: 4px 4px 15px rgba(112, 124, 151, 0.05), 2px 2px 10px rgba(112, 124, 151, 0.1), 1px 1px 50px rgba(112, 124, 151, 0.15);
-    border-radius: 10px;
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 15px; /* ширина для вертикального скролла */
+    height: 8px; /* высота для горизонтального скролла */
+    background-color: #2a8bf2;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: #2a8bf2;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2a8bf2;
 }
 
 @media (min-width: 768px) {
     .none_content {
         display: block;
+    }
+
+    .body, .body_1 {
+        width: 700px;
+        flex-direction: column;
     }
 }
 
@@ -272,9 +287,9 @@ body::-webkit-scrollbar {
         display: block;
     }
 
-    .body, .body_1 {
-        width: 100vh;
-        display: flex;
-        justify-content: flex-end;
-    }
+    /*.body, .body_1 {*/
+    /*    width: 100vh;*/
+    /*    display: flex;*/
+    /*    justify-content: flex-end;*/
+    /*}*/
 }

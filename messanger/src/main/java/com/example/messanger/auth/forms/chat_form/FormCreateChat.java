@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class FormCreateChat {
@@ -18,4 +16,10 @@ public class FormCreateChat {
 
     @JsonProperty("user_chat")
     public ArrayList<String> user_chat;
+
+    @JsonProperty("type")
+    public String type;
+
+    @JsonProperty("owner")
+    public String owner;
 }

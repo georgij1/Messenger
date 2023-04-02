@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/main_page.css}">
     <link rel="stylesheet" th:href="@{/registration/registration.css}">
+    <link rel="stylesheet" th:href="@{user/scrollbar_register.css}">
 </head>
 
 <body>
@@ -44,6 +45,10 @@
                 <label for="ava_profile" class="send_icon_profile">Прикрепить аватарку</label>
                 <input id="ava_profile" type="file" name="avatar" accept="image/*" class="form-control-file">
             </div>
+            <div class="icon_profile"></div>
+            <div class="warning">
+                <p>В файле не должно быть пробелов</p>
+            </div>
         </div>
     
         <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
@@ -51,20 +56,7 @@
 
     <p class="info_auth">Если вы уже имеете аккаунт <a th:href="login">авторизуйтесь</a></p>
 
-    <script>
-        let icon_profile = document.querySelector('.upload_icon_profile')
-        icon_profile.addEventListener('change', () => {
-            let name_file = icon_profile.files[0].name
-            let type_file = icon_profile.files[0].type
-            let list_file = document.querySelector('.icon_profile')
-            console.log(name_file)
-            console.log(type_file)
-            list_file.innerHTML=`
-                <div class="name_file">Имя файла - ${name_file}</div>
-                <div class="type_file">Тип файла - ${type_file}</div>
-            `
-        })
-    </script>
+    <script th:src="@{user/registration.js}"></script>
     <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </body>
 </html>

@@ -70,7 +70,20 @@
 
 <!--            <input class="label_search" id="search" placeholder="Поиск...">-->
 
-            <div class="list_chats"></div>
+            <div class="buttons_nav_chats">
+                <div class="btn_nav_chat all_chat">Все чаты</div>
+                <div class="btn_nav_chat all_my_chat">Мои чаты</div>
+            </div>
+
+            <div class="content_all_chat visible">
+                <h1>Все чаты</h1>
+                <div class="list_chats"></div>
+            </div>
+
+            <div class="content_all_my_chat">
+                <h1>Мои чаты</h1>
+                <div class="list_my_chats"></div>
+            </div>
         </div>
     </div>
 
@@ -93,6 +106,13 @@
                 <div class="list_users"></div>
             </div>
 
+            <div class="flex-group">
+                <p>Иконка будет по default её можно будет изменить в настройках чата</p>
+                <div class="border_icon">
+                    <div class="icon"></div>
+                </div>
+            </div>
+
             <input type="submit" class="create_chat" value="Создать чат">
         </div>
     </div>
@@ -110,6 +130,8 @@
 
         <div class="list_chat"></div>
 
+        <div class="window_edit_message"></div>
+
         <div class="tools">
             <div class="btn_tools_chat"></div>
             <form id="messageForm" enctype="multipart/form-data" name="messageForm">
@@ -117,6 +139,18 @@
                 <button type="submit" class="send_message primary"></button>
             </form>
             <div class="smile"></div>
+        </div>
+
+        <div class="window_settings_chat">
+            <div class="close_window close_window_3"></div>
+
+            <div class="image_chat_open_settings"></div>
+
+            <div class="btn_change_icon">Изменить иконку</div>
+
+            <h1>Список пользователей</h1>
+
+            <div class="list_users_open_settings"></div>
         </div>
     </div>
 

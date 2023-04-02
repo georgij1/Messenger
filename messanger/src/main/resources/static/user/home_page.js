@@ -14,8 +14,16 @@ fetch('/image_profile',{
 })
     .then(response => response.json())
     .then((data) => (data.forEach((item) => {
-        let image_profile = document.querySelector('.image_profile')
-        image_profile.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 100%; height: 100%; width: 100%; border-radius: 50px;">`
+        console.log(item.image)
+        let image_profile = document.querySelectorAll('.image_profile')
+        for (let image_profile_1 of image_profile) {
+            image_profile_1.style.background=`url(${item.image})` + 'no-repeat'
+            image_profile_1.style.backgroundSize=`100%`
+            // image_profile_1.style.height=`100%`
+            image_profile_1.style.width=`34%`
+            image_profile_1.style.borderRadius=`50px`
+            // image_profile_1.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px">`
+        }
     })));
 
 

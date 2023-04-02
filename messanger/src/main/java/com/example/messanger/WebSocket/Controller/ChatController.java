@@ -2,6 +2,7 @@ package com.example.messanger.WebSocket.Controller;
 
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
+import com.example.messanger.auth.forms.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,9 +53,11 @@ public class ChatController {
         return chatMessage;
     }
 
-    @MessageMapping("/chat.deleteUser/{id}")
-    @SendTo("/topic/public")
-    public ChatMessage deleteUser(@Payload ChatMessage chatMessage) {
-         return null;
+    @PostMapping("/edit_message/{id}")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
+        jdbcTemplate.update("update message set text=? where id=?", formEditMessage.getMessage(), id);
+        return jdbcTemplate.queryForList("select * from message where id=?", id);
     }
 }

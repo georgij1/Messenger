@@ -9,15 +9,15 @@
 }
 
 .header p {
-    height: 73px;
+    height: 55px;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 25px;
     display: flex;
     align-items: center;
-    text-align: center;
     text-transform: uppercase;
-    color: #000000;
-    margin: -15px auto;
+    color: #FFF;
+    margin: auto;
+    text-align: center;
 }
 
 .login_div_flex, .password_div_flex, .repeatePassword_div_flex, .telephone_div_flex, .email_div_flex, .icon_upload_profile_div_flex, .form-group {
@@ -49,6 +49,7 @@
     padding-bottom: 15px;
     text-align: center;
     color: #000000;
+    cursor: pointer;
 }
 
 input, .send_icon_profile {
@@ -86,23 +87,50 @@ input::placeholder, input::-ms-value {
 
 .registration_user {
     background: rgba(42, 139, 242, 0.25);
-    border: 1px solid rgba(42, 139, 242, 0.25);
+    border: 2px solid rgba(42, 139, 242, 0.25);
     border-radius: 10px;
     padding: 10px;
     margin: auto;
     display: block;
+    width: 300px;
+    cursor: pointer;
+}
+
+.registration_user:hover {
+    background: #FFF;
 }
 
 .info_auth {
     text-align: center;
-    font-size: 17px;
-    background: antiquewhite;
-    margin-bottom: 0;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    box-shadow: 0 0 10px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+}
+
+.input_password, .login, .password, .repeat_password, .input_login {
+    cursor: pointer;
+}
+
+.input_password:hover, .login:hover, .password:hover, .repeat_password:hover, .input_login:hover {
+    box-shadow: 0 0 10px bisque;
+}
+
+label {
+    width: max-content;
+}
+
+input {
+    outline: none;
+}
+
+.icon_profile {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.warning {
+    text-align: center;
 }
 
 @media (min-width: 700px) {

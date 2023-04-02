@@ -1,23 +1,5 @@
 .info {
+    padding: 10px;
     text-align: center;
-    font-size: 17px;
-    background: antiquewhite;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    box-shadow: 0 0 10px;
-    border-radius: 20px;
-    width: 300px;
-    margin: 30px auto 0;
-}
-
-@media (min-width: 768px) {
-    .info {
-        width: 700px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .info {
-        width: 1000px;
-    }
+    line-height: 30px;
 }
