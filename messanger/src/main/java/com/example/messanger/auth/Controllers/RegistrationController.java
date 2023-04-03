@@ -29,8 +29,6 @@ import java.util.Objects;
 public class RegistrationController {
     public UserRepo userRepo;
 
-    public static String UPLOAD_DIRECTORY = "uploads";
-
     @GetMapping("registration")
     public String registration_redirect(HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
@@ -68,23 +66,26 @@ public class RegistrationController {
                 System.out.println(file.getOriginalFilename());
                     System.out.println(file.getOriginalFilename());
                     if (Objects.equals(file.getOriginalFilename(), "")) {
-                            String DirectotyPath = "../messanger/src/main/resources/static/uploads" + "/" + registrationForm.getLogin();
-                            File directory = new File(DirectotyPath);
+                            String DirectoryPath = "../messanger/src/main/resources/static/uploads" + "/" + registrationForm.getLogin();
+                            File directory = new File(DirectoryPath);
                             if (!directory.exists()) {
                                 boolean result = directory.mkdir();
                                 System.out.println(result);
+
                                 if (result) {
                                     System.out.println("Directory is create");
                                     userRepo.create(registrationForm, model, "../image/settings/icon_profile.png");
-                                    System.out.println(DirectotyPath);
+                                    System.out.println(DirectoryPath);
+                                    return "success_create_account";
                                 }
 
                                 else {
-                                    System.out.println("Error on create directory");
+                                    return "error_register";
                                 }
                             }
+
                             else {
-                                System.out.println("Directory is exists");
+                                return "error_name";
                             }
                     }
 
@@ -98,18 +99,6 @@ public class RegistrationController {
                         Path fileNameAndPath = Paths.get(fileName);
                         fileNames.append(file.getOriginalFilename());
                         Files.write(fileNameAndPath, file.getBytes());
-
-
-//                        ClassLoader classLoader = getClass().getClassLoader();
-//                        System.out.println(classLoader);
-//                        new File(Objects.requireNonNull(classLoader.getResource("static/uploads")).getFile());
-
-//                        System.out.println(file_new);
-//                        new File().;
-//                        FileOutputStream outputStream = new FileOutputStream(file_new);
-//                        System.out.println(outputStream);
-//                        outputStream.write(file.getBytes());
-//                        outputStream.close();
                     }
                 return "redirect:login";
             }
@@ -121,7 +110,7 @@ public class RegistrationController {
         }
 
         else {
-            response.sendError(400, "Пароль и повторение пароля меньше 8");
+            return "password_not_correct";
         }
 
         return "registration";

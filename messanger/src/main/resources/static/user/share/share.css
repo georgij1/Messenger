@@ -1,0 +1,32 @@
+.text {
+    padding: 10px;
+    background: aliceblue;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px lightblue;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+}
+
+.btn_edit_message, .btn_delete_message {
+    padding: 10px;
+    background: #f7f7f7;
+    border: 1px solid #d2d2d2;
+    margin-top: 10px;
+    border-radius: 50px;
+    width: max-content;
+    font-family: 'YS Text', Arial, sans-serif;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.tools {
+    display: flex;
+    overflow-x: auto;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn_edit_message:hover, .btn_delete_message:hover {
+    border-color: rgba(0,0,0,0.25);
+    opacity: 1;
+}

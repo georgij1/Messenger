@@ -420,7 +420,11 @@ li {
 }
 
 .image {
-    width: 22%;
+    width: 60px;
+}
+
+.image_chat_open_settings {
+    width: 300px;
 }
 
 .border_name_chat {
@@ -508,7 +512,21 @@ li {
     display: flex;
 }
 
+.image_settings_open {
+    display: block;
+}
+
+.user_chat_open_settings {
+    margin-top: 25px;
+}
+
 @media (min-width: 768px) {
+    .image_settings_open {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     .window_create_chat {
         box-shadow: 0 0 10px blue;
         margin: 30px auto 0;

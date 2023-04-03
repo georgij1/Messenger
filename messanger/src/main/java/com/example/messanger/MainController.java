@@ -24,7 +24,29 @@ import java.util.Map;
 public class MainController {
     UserRepo userRepo;
     @GetMapping
-    public String start_page() {return "start_page";}
+    public String start_page(HttpServletRequest request, Model model) {
+        var cookies = request.getCookies();
+        String token = null;
+
+        if (cookies == null) {
+            return "start_page";
+        }
+
+        else {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("auth_token")) {
+                    token = cookie.getValue();
+                    System.out.println(token);
+                    var json = JWT.decode(token.formatted("utf-8")).getSubject();
+                    System.out.println(json);
+                    model.addAttribute("username", json);
+                    return "home_page";
+                }
+            }
+        }
+
+        return "start_page";
+    }
 
     public JdbcTemplate jdbcTemplate;
 

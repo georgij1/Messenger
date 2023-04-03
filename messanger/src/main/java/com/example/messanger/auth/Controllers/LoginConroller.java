@@ -52,7 +52,7 @@ public class LoginConroller {
         }
 
         catch (NullPointerException exception) {
-            model.addAttribute("error_login", "Ошибка в логин");
+            return "error_login";
         }
 
         return "login";
@@ -101,22 +101,23 @@ public class LoginConroller {
                                     }
 
                                     catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException ignored) {
+                                        System.out.println("catch - JWTCreationException | org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException ignored");
                                     }
+
                                     return "redirect:/main_page";
                                 }
                             }
                         }
 
                         catch (org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException exception) {
-                            model.addAttribute("not_valid_user", "Такого пользователя не существует");
-                            return "login";
+                            return "not_valid_user";
                         }
                     }
                 }
 
                 catch (NullPointerException exception) {
                     System.out.println("catch NullPointerException");
-                    model.addAttribute("error_login", "Ошибка в логине");
+                    return "error_login";
                 }
             }
 

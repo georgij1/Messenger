@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Аккаунт успешно создан</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="main_page.css">
+  <link rel="stylesheet" href="user/password_not_correct.css">
+  <link rel="stylesheet" href="user/scrollbar_register.css">
+</head>
+
+<body>
+  <h1>Ошибка в логине</h1>
+
+  <div class="flex_error">
+    <div class="image_failed"></div>
+
+    <div class="div_btn_return_back">
+      <div>
+        <div class="btn_return_back">Вернуться назад</div>
+      </div>
+
+      <a href="/login">
+        <div class="repeat_authorization_new_data">Авторизация</div>
+      </a>
+    </div>
+  </div>
+
+  <script th:src="@{user/password_not_correct.js}"></script>
+</body>
+</html>

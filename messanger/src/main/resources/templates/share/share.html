@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <title th:text="${share_text}"></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/user/main_page.css}">
+  <link rel="stylesheet" th:href="@{main_page.css}">
+  <link rel="stylesheet" th:href="@{/user/share/share.css}" />
 </head>
+
 <body>
-<!--  <div class="ya-share2" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,telegram,whatsapp"></div>-->
-  <div class="ya-share2" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,telegram,whatsapp"></div>
+  <div class="text" th:text="${share_text}"></div>
+  <div class="tools">
+    <div class="ya-share2 btn_share" th:data-description="${share_text}" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="long" data-url="off" data-use-links data-services="vkontakte,telegram,whatsapp"></div>
+    <div class="btn_edit_message">Редактировать сообщение</div>
+    <div class="btn_delete_message">Удалить сообщение</div>
+  </div>
   <script src="https://yastatic.net/share2/share.js"></script>
 <!--  <script th:src="@{user/share/share.js}"></script>-->
 </body>
