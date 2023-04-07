@@ -79,7 +79,10 @@ create_chat.addEventListener('click', () => {
         "desc_chat": desc_chat.value,
         "user_chat": user_chat,
         "type": "group_chat",
-        "owner": username_1
+        "owner": username_1,
+        // "chat_id": "",
+        "role_id_admin": "",
+        "role_id_user": ""
     }
 
     fetch('/create_chat', {
@@ -92,7 +95,7 @@ create_chat.addEventListener('click', () => {
     })
         .then(() => {console.log(formData)})
         .then(() => {alert("Чат с названием - " + formData.name_chat + " создан")})
-        .then(() => {window.location.reload()})
+        // .then(() => {window.location.reload()})
 
     console.log(formData)
 })

@@ -5,6 +5,7 @@
     box-shadow: 0 0 10px lightblue;
     border: 2px solid lightblue;
     border-radius: 10px;
+    font-family: monospace;
 }
 
 .btn_edit_message, .btn_delete_message {
@@ -21,7 +22,6 @@
 
 .tools {
     display: flex;
-    overflow-x: auto;
     align-items: center;
     gap: 15px;
 }

@@ -9,6 +9,45 @@ let all_my_chat = document.querySelector('.all_my_chat')
 for (let btn_nav_chat_itter of btn_nav_chat) {
     btn_nav_chat_itter.addEventListener('click', () => {
         btn_nav_chat_itter.classList.add('btn_nav_chat_checked')
+        let username = document.querySelector('.username').textContent
+        fetch(`/MyChats/${username}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            mode: "cors",
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then((data) => {
+                data.forEach((item) => {
+                    let list_my_chats = document.querySelector('.list_my_chats')
+                    list_my_chats.innerHTML+=`
+                        <div class="one_chat">
+                            <div class="chat">
+                                <div class="id">${item.id}</div>
+                                <div class="image"></div>
+                                <div class="about_chat">
+                                    <div class="name">${item.name}</div>
+                                </div>
+                            </div>
+                        
+                            <div class="tools_start">
+                                <div class="btn_delete_chat">Удалить чат</div>
+                                <div class="btn_change_name_chat">Изменить имя чата</div>
+                            </div>
+                        </div>
+                    `
+                    let image_user_1 = document.querySelectorAll('.image');
+                    for (let image_user_new of image_user_1) {
+                        image_user_new.style.background = `url(${item.image_chat})` + 'center no-repeat'
+                        image_user_new.style.backgroundSize = `80%`
+                        // image_user_1.style.width = `10%`
+                        image_user_new.style.borderRadius = `50px`
+                        image_user_new.style.height = '60px'
+                        image_user_new.style.boxShadow = '0 0 10px bisque'
+                    }
+                })
+            })
     })
 }
 
@@ -23,6 +62,11 @@ all_my_chat.addEventListener('click', () => {
 })
 
 for (let list_chat_itter of list_chats) {
+        list_chat_itter.addEventListener('click', () => {
+            let tools = document.querySelector('.tools')
+            tools.classList.add('flex')
+        })
+
         console.log('ListChats')
 
         fetch('/list_chats', {
@@ -39,7 +83,7 @@ for (let list_chat_itter of list_chats) {
                     for (let list_chats_itter of list_chats) {
                         list_chats_itter.innerHTML += `
                         <div class="chat">
-                            <!--<div class="id">${item.id}</div>-->
+                            <div class="id">${item.id}</div>
                             <div class="image"></div>
                             <div class="about_chat">
                                 <div class="name">${item.name}</div>
@@ -83,11 +127,8 @@ for (let list_chat_itter of list_chats) {
                             body_1_class.classList.toggle('none')
                             console.log("ItemName - " + item.name)
                             let border_name_chat = document.querySelector('.border_name_chat')
-                            border_name_chat.innerText = event.currentTarget.children[1].children[0].textContent
+                            border_name_chat.innerText = event.currentTarget.children[2].children[0].textContent
                             header.classList.toggle('none')
-                            console.log(event.currentTarget.children[1].children[0].textContent)
-                            console.log("event - " + event.currentTarget.children[0].textContent)
-                            // console.log(event)
                             let chat_id_var = item.id
                             console.log("chat_id_var - " + chat_id_var)
                             let list_chat = document.querySelector('.list_chat')
@@ -175,10 +216,14 @@ for (let list_chat_itter of list_chats) {
 
                             messageForm.addEventListener('submit', sendMessage, true)
 
-                            fetch('/all_message', {
+                            // console.log(event.currentTarget.children[1].children[0].textContent)
+                            // console.log(event.currentTarget.children[0].textContent)
+
+                            fetch(`/chats/${event.currentTarget.children[0].textContent}`, {
                                 headers: new Headers({
                                     'Content-Type': 'application/json'
                                 }),
+                                method: "POST",
                                 mode: "cors"
                             })
                                 .then((response) => {
@@ -293,6 +338,7 @@ for (let list_chat_itter of list_chats) {
                             body_1_class.classList.remove('none')
                             header.classList.remove('none')
                             window.location.reload()
+                            tools.classList.remove('flex')
                         })
                     }
 
@@ -377,5 +423,25 @@ for (let list_chat_itter of list_chats) {
                 console.log("str isn't empty - " + input_message.value)
                 input_message.classList.remove('red')
             }
+        })
+
+        let btn_tools_chat = document.querySelector('.btn_tools_chat')
+        let window_add_file = document.querySelector('.window_add_file')
+        let flex_content_chat_top_tools = document.querySelector('.flex_content_chat_top_tools')
+        let list_chat = document.querySelector('.list_chat')
+        let tools = document.querySelector('.tools')
+
+        btn_tools_chat.addEventListener('click', () => {
+            window_add_file.classList.add('flex')
+            flex_content_chat_top_tools.classList.add('none')
+            list_chat.classList.add('none')
+            tools.classList.remove('flex')
+        })
+
+        let btn_close_add_file = document.querySelector('.btn_close_add_file')
+        btn_close_add_file.addEventListener('click', () => {
+            window_add_file.classList.remove('flex')
+            flex_content_chat_top_tools.classList.remove('none')
+            list_chat.classList.remove('none')
         })
 }
