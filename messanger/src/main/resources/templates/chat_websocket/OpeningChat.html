@@ -68,12 +68,12 @@
 
     <div class="username" style="display: none" th:text="${username}"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script th:src="@{/chat_websocket/js/close_chat.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
     <script th:src="@{/chat_websocket/js/main.js}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </body>
 </html>
