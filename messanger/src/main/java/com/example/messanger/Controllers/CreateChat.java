@@ -2,6 +2,7 @@ package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
+import com.example.messanger.auth.forms.chat_form.UpdateNameChat;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
@@ -72,16 +73,27 @@ public class CreateChat {
         return jdbcTemplate.queryForList("select * from chat where owner=?", owner_chat);
     }
 
+    @PostMapping("/ChatName/{IdChat}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> ChatName(@PathVariable int IdChat) {
+        return jdbcTemplate.queryForList("select * from chat where id=?", IdChat);
+    }
+
     @PostMapping("/EditNameChat/{id}")
     @CrossOrigin("*")
-    public List<Map<String, Object>> EditNameChat1(@PathVariable String id) {
-        return null;
+    @ResponseBody
+    public List<Map<String, Object>> EditNameChat1(@PathVariable int id, @RequestBody UpdateNameChat updateNameChat) {
+        jdbcTemplate.update("update chat set name=? where id=?", updateNameChat.getNewNameChat(), id);
+        return jdbcTemplate.queryForList("select * from chat");
     }
 
     @DeleteMapping("/delete_chat/{id}")
     @CrossOrigin("*")
-    public List<Map<String, Object>> DeleteChat_1(@PathVariable String id) {
+    @ResponseBody
+    public List<Map<String, Object>> DeleteChat_1(@PathVariable int id) {
+        jdbcTemplate.update("delete from public.message where chat_id=?", id);
         jdbcTemplate.update("delete from public.chat where id=?", id);
-        return jdbcTemplate.queryForList("select * from public.chat");
+        return jdbcTemplate.queryForList("select * from chat");
     }
 }

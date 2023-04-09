@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title class="title"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" th:href="@{/image/main_page/icon_chats.png}">
+    <link rel="stylesheet" th:href="@{/user/main_page.css}">
+    <link rel="stylesheet" th:href="@{/main_page.css}">
+    <link rel="stylesheet" th:href="@{/chat_websocket/css/main.css}" />
+</head>
+<body>
+    <div th:text="${IdChat}" class="IdChat"></div>
+    <div class="body_chat">
+        <div id="arrowTop" hidden class="btn_up_1"></div>
+        <div id="arrowBottom" class="btn_down_1"></div>
+
+        <div class="flex_content_chat_top_tools">
+            <div class="close_window close_window_2"></div>
+            <div class="border_name_chat"></div>
+        </div>
+
+        <div class="height"></div>
+
+        <div class="list_chat"></div>
+
+        <div class="window_add_file">
+            <div class="btn_close_add_file"></div>
+            <label for="input_file_chat" class="btn_add_just_file">Загрузить файл</label>
+            <input id="input_file_chat" type="file" hidden="hidden">
+        </div>
+
+        <div class="window_edit_message"></div>
+
+        <div class="window_settings_chat">
+            <div class="close_window close_window_3"></div>
+
+            <div class="image_settings_open">
+                <div class="image_chat_open_settings"></div>
+
+                <div class="btn_change_icon">Изменить иконку</div>
+            </div>
+
+            <h1>Админ чата</h1>
+
+            <div class="admin_chat"></div>
+
+            <h1>Список пользователей</h1>
+
+            <div class="list_users_open_settings"></div>
+
+            <h1>Ссылка на чат</h1>
+
+            <div class="list_link_chat"></div>
+        </div>
+    </div>
+
+    <div class="tools">
+        <div class="btn_tools_chat"></div>
+
+        <form id="messageForm" enctype="multipart/form-data" name="messageForm">
+            <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
+            <button type="submit" class="send_message primary"></button>
+        </form>
+
+        <div class="smile"></div>
+    </div>
+
+    <div class="username" style="display: none" th:text="${username}"></div>
+
+    <script th:src="@{/chat_websocket/js/close_chat.js}"></script>
+    <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
+    <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
+    <script th:src="@{/chat_websocket/js/scroll.js}"></script>
+    <script th:src="@{/chat_websocket/js/main.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</body>
+</html>

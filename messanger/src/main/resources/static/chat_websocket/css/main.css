@@ -212,10 +212,6 @@ input {
 }
 
 .body_chat {
-    display: none;
-}
-
-.body_chat {
     padding: 10px;
 }
 
@@ -242,6 +238,10 @@ input {
     border-top-right-radius: 10px;
     width: 93%;
     justify-content: space-around;
+    display: flex;
+}
+
+.IdChat {
     display: none;
 }
 
@@ -607,6 +607,7 @@ li {
     display: flex;
     gap: 55px;
     padding: 10px;
+    margin-top: 20px;
 }
 
 .btn_delete_chat {
@@ -633,6 +634,63 @@ li {
     cursor: pointer;
     box-shadow: 0 0 10px blue;
     border: 2px solid blue;
+}
+
+.window_edit_name_chat {
+    display: none;
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px navajowhite;
+}
+
+.change_name_chat {
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.tools_edit_message {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    gap: 30px;
+}
+
+.btn_save_change_name {
+    padding: 10px;
+    background: cornsilk;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px aquamarine;
+}
+
+.btn_cancel_change_name_chat {
+    padding: 10px;
+    background: #f48181;
+    border: 2px solid #de4a4a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px #f30101;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.btn_cancel_change_name_chat:hover {
+    background: #FFF;
+    box-shadow: none;
+    color: black;
+}
+
+.btn_save_change_name:hover {
+    background: #FFF;
+    box-shadow: none;
 }
 
 .visible {

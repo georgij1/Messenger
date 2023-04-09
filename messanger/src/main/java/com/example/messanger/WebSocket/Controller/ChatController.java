@@ -3,9 +3,7 @@ package com.example.messanger.WebSocket.Controller;
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.FormEditMessage;
-import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,11 +12,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -59,5 +54,13 @@ public class ChatController {
     public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
         jdbcTemplate.update("update message set text=? where id=?", formEditMessage.getMessage(), id);
         return jdbcTemplate.queryForList("select * from message where id=?", id);
+    }
+
+    @GetMapping("/chat/{id}")
+    @CrossOrigin("*")
+    @AuthorizedUser
+    public String OpenChat(@PathVariable String id, Model model, HttpServletRequest request) {
+        model.addAttribute("IdChat", id);
+        return "chat_websocket/OpeningChat";
     }
 }

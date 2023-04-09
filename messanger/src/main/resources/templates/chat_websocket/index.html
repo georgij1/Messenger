@@ -83,6 +83,15 @@
             <div class="content_all_my_chat">
                 <h1>Мои чаты</h1>
                 <div class="list_my_chats"></div>
+
+                <div class="window_edit_name_chat">
+                    <h2>Изменение имени чата</h2>
+                    <div class="input_change_name_chat"></div>
+                    <div class="tools_edit_message">
+                        <div class="btn_cancel_change_name_chat">Отмена</div>
+                        <input type="button" value="Сохранить" class="btn_save_change_name">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -117,58 +126,12 @@
         </div>
     </div>
 
-    <div class="body_chat">
-        <div id="arrowTop" hidden class="btn_up_1"></div>
-        <div id="arrowBottom" class="btn_down_1"></div>
-
-        <div class="flex_content_chat_top_tools">
-            <div class="close_window close_window_2"></div>
-            <div class="border_name_chat"></div>
-        </div>
-
-        <div class="height"></div>
-
-        <div class="list_chat"></div>
-
-        <div class="window_add_file">
-            <div class="btn_close_add_file"></div>
-            <label for="input_file_chat" class="btn_add_just_file">Загрузить файл</label>
-            <input id="input_file_chat" type="file" hidden="hidden">
-        </div>
-
-        <div class="window_edit_message"></div>
-
-        <div class="window_settings_chat">
-            <div class="close_window close_window_3"></div>
-
-            <div class="image_settings_open">
-                <div class="image_chat_open_settings"></div>
-
-                <div class="btn_change_icon">Изменить иконку</div>
-            </div>
-
-            <h1>Список пользователей</h1>
-
-            <div class="list_users_open_settings"></div>
-        </div>
-    </div>
-
-    <div class="tools">
-        <div class="btn_tools_chat"></div>
-        <form id="messageForm" enctype="multipart/form-data" name="messageForm">
-            <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
-            <button type="submit" class="send_message primary"></button>
-        </form>
-        <div class="smile"></div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script th:src="@{/chat_websocket/js/main.js}"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>-->
+<!--    <script th:src="@{/chat_websocket/js/main.js}"></script>-->
     <script th:src="@{/chat_websocket/js/get_image_profile.js}"></script>
     <script th:src="@{user/home_page.js}"></script>
     <script th:src="@{/chat_websocket/js/create_chat.js}"></script>
     <script th:src="@{/chat_websocket/js/list_chats.js}"></script>
-    <script th:src="@{/chat_websocket/js/scroll.js}"></script>
 </body>
 </html>
