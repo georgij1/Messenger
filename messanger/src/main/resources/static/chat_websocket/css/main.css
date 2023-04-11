@@ -887,6 +887,12 @@ li {
         margin-left: 300px;
     }
 
+    .list_users_open_settings {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
     .none {
         display: none;
     }
@@ -939,6 +945,12 @@ li {
 
     .close_window_new {
         margin-left: 333px;
+    }
+
+    .list_users_open_settings {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
 
     .none {
