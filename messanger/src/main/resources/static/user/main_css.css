@@ -13,7 +13,8 @@ h1 {
 .hello {
     display: flex;
     align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    margin: 30px auto 30px;
 }
 
 .btn_start_message {
@@ -27,6 +28,7 @@ h1 {
     padding-left: 20px;
     padding-right: 20px;
     cursor: pointer;
+    color: blue;
 }
 
 .btn_start_message:hover, .calendar_btn:hover {
@@ -45,11 +47,88 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 85vh;
+    flex-direction: column;
+}
+
+.block {
+    display: block;
+}
+
+.none {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .body, .body_1 {
+        padding: 10px;
+        width: 600px;
+        display: block;
+        justify-content: space-between;
+        margin: auto;
+    }
+
+    .hello {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 50px;
+        margin: auto;
+    }
+
+    .HelloHeaderOpen {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 15px;
+        margin: auto;
+        text-align: left;
+        justify-content: end;
+        width: 689px;
+        margin-left: -39px;
+    }
+
+    .hello {
+        margin: 0;
+    }
+
+    .flex {
+        flex-direction: row;
+    }
+
+    .BtnStartMessageBurgerOpened {
+        display: flex;
+        margin: auto;
+        margin-left: 38vh;
+    }
+
+    .signboard {
+        display: block;
+    }
+
+    .NoneBtn {
+        display: block;
+    }
+
+    .FlexWidth {
+        display: flex;
+        width: 80vh;
+        margin-left: 156px;
+    }
 }
 
 @media (min-width: 1024px) {
     .body_1, .body {
         margin-left: 333px;
+    }
+
+    .HelloHeaderOpen {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 15px;
+        margin: auto;
+        text-align: left;
+        justify-content: end;
+        width: 689px;
     }
 }
