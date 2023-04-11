@@ -26,12 +26,6 @@ public class FormCreateChat {
     @JsonProperty("user_id")
     public String user_id;
 
-//    @JsonProperty("chat_id")
-//    public String chat_id;
-
-//    @JsonProperty("role_id_admin")
-//    public String role_id_admin;
-
-//    @JsonProperty("role_id_user")
-//    public String role_id_user;
+    @JsonProperty("ImageUser")
+    public ArrayList<String> ImageUser;
 }

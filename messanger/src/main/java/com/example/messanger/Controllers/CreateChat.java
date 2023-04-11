@@ -38,7 +38,9 @@ public class CreateChat {
 
         for (String users_chat:formCreateChat.getUser_chat()) {
             System.out.println("Users_chat - " + users_chat);
-            jdbcTemplate.update("insert into public.role(name, chat_nane) values (?, ?)", users_chat, formCreateChat.getName_chat());
+            for (String ImageUser:formCreateChat.getImageUser()) {
+                jdbcTemplate.update("insert into public.userschata(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
+            }
             // jdbcTemplate.update("insert into public.users_chat_new_table(name_chat, username_user_chat) values (?, ?)", formCreateChat.getName_chat(), users_chat);
         }
 
@@ -56,7 +58,7 @@ public class CreateChat {
     @PostMapping("/users/{chat_id}")
     @CrossOrigin("*")
     public List<Map<String, Object>> getUsersChat(@PathVariable String chat_id) {
-        return jdbcTemplate.queryForList("select * from role where name=?", chat_id);
+        return jdbcTemplate.queryForList("select * from userschata where name=?", chat_id);
     }
 
     @PostMapping("/chats/{ChatId}")

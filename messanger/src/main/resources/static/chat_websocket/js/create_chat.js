@@ -5,6 +5,7 @@ let body_1 = document.querySelector('.body_1')
 let close_window = document.querySelector('.close_window')
 let header_id_dom = document.querySelector('#header')
 let user_chat = []
+let ImageUser = []
 
 btn_create_chat.addEventListener('click', () => {
     window_create_chat.classList.toggle('visible')
@@ -37,7 +38,7 @@ fetch('/all_users', {
             list_users.innerHTML+=`
                 <div class="user" id="user">
                     <!--<div class="id"></div>-->
-                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
+                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px">${item.image}</div>
                     <div class="name">${item.username}</div>
                 </div>
             `
@@ -51,7 +52,8 @@ fetch('/all_users', {
                         if (user_div_id_itter.classList.contains("tick")) {
                             console.log(user_div_id_itter.classList.contains("tick"))
                             user_chat.push(user_itter.childNodes[5].textContent)
-                            console.log(user_itter.childNodes[5].textContent)
+                            ImageUser.push(user_itter.childNodes[3].textContent)
+                            console.log(user_itter.childNodes[3].textContent)
                         }
                     }
                 })
@@ -80,9 +82,7 @@ create_chat.addEventListener('click', () => {
         "user_chat": user_chat,
         "type": "group_chat",
         "owner": username_1,
-        // "chat_id": "",
-        "role_id_admin": "",
-        "role_id_user": ""
+        "ImageUser": ImageUser
     }
 
     fetch('/create_chat', {

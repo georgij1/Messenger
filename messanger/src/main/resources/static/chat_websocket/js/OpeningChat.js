@@ -18,12 +18,33 @@ fetch(`/ChatName/${IdChat.textContent}`, {
         response.json().then(res => res.forEach(item => {
             border_name_chat.innerText=`${item.name}`
             title.innerText=`${item.name}`
-            list_users_open_settings.innerText=`Список пользователей пуст`
             image_chat_open_settings.innerHTML=`
              <div class="image_chat_open_settings" style="background: url(${item.image_chat}) no-repeat center; width: 100%; height: 45vh; background-size: 90%; box-shadow: 0 0 10px burlywood; border-radius: 100%"></div>
             `
             admin_chat.innerText=`${item.owner}`
-        }))})
+
+            // Пользователи чата
+            console.log(item.name)
+            fetch(`/Find/${item.name}`, {
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                method: "POST",
+                mode: "cors"
+            })
+
+                .then((response) => {
+                    console.log(response)
+                    response.json().then(res => (res.forEach(item => {
+                        console.log(item)
+                        list_users_open_settings.innerHTML+=`
+                            <div class="UserDiv">
+                                <div class="UserChat" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
+                                <div class="UserChat">${item.name}</div>
+                            </div>
+                        `
+                    })))
+        })}))})
 
 fetch(`/chats/${IdChat.textContent}`, {
     headers: new Headers({
@@ -33,9 +54,8 @@ fetch(`/chats/${IdChat.textContent}`, {
     mode: "cors"
 })
     .then((response) => {
-        response.json().then(res => console.log(res.forEach(item => {
+        response.json().then(res => (res.forEach(item => {
             console.log(item.text)
-            connect()
             list_chat.innerHTML +=
                 `
                                      <div class="message">
@@ -222,8 +242,6 @@ CopyBtnChat.addEventListener('click', () => {
 
     function copyTextToClipboard(text) {
         const textArea = document.createElement("textarea");
-
-        // Обеспечивает, чтобы не было видно элемента:
         textArea.style.position = 'fixed';
         textArea.style.top = 0;
         textArea.style.left = 0;
@@ -241,12 +259,12 @@ CopyBtnChat.addEventListener('click', () => {
 
         try {
             const successful = document.execCommand('copy');
-            const msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copying text command was ' + msg);
+            const msg = successful ? 'Успешно' : 'Не успешно';
+            console.log('Скопированный текст был таким - ' + msg);
         }
 
         catch (err) {
-            console.log('Oops, unable to copy');
+            console.log('Что - то пошло не так');
         }
 
         document.body.removeChild(textArea);
@@ -254,3 +272,66 @@ CopyBtnChat.addEventListener('click', () => {
 
     copyTextToClipboard(`${LinkChat.textContent}`);
 })
+
+let messageForm = document.querySelector('#messageForm');
+let messageAreaNew = document.querySelector('.list_chat');
+
+let stompClient = null;
+let username = document.querySelector('.username').textContent
+console.log(username)
+
+
+function connect() {
+    username = document.querySelector('.username').textContent;
+    console.log(username)
+
+    if (username) {
+        let socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnected, ErrorSocket);
+    }
+}
+
+function onConnected() {
+    stompClient.subscribe('/topic/public', onMessageReceived);
+
+    stompClient.send("/app/chat.addUser",
+        {},
+        JSON.stringify({sender: username, type: 'JOIN'})
+    )
+}
+
+function onMessageReceived(payload) {
+    let message = JSON.parse(payload.body);
+
+    let messageElement = document.createElement('li');
+
+    if (message.type === 'JOIN') {
+        messageElement.classList.add('event-message');
+        message.content = message.sender + ' присоединился!';
+    }
+
+    else if (message.type === 'LEAVE') {
+        messageElement.classList.add('event-message');
+        message.content = message.sender + ' вышел!';
+    }
+
+    let textElement = document.createElement('p');
+    let messageText = document.createTextNode(message.content);
+
+    textElement.appendChild(messageText);
+
+    // messageElement.appendChild(textElement);
+
+    messageAreaNew.appendChild(messageElement);
+    messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+
+    console.log(payload)
+}
+
+function ErrorSocket() {
+    console.log('Произошла ошибка возможно сервер упал')
+}
+
+connect()

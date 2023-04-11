@@ -706,6 +706,15 @@ li {
     border: 2px solid beige;
 }
 
+.UserDiv {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .CopyBtnChat {
     padding: 10px;
     background: powderblue;
