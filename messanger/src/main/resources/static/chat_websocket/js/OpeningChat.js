@@ -199,4 +199,58 @@ send_message.addEventListener('click', () => {
 })
 
 let list_link_chat = document.querySelector('.list_link_chat')
-list_link_chat.innerHTML=`<a href="${document.referrer}">${document.referrer}</a>`
+console.log(document.location.href)
+list_link_chat.innerHTML=`
+    <div class="LinkChat">${document.location.href}</div>
+    <div class="CopyBtnChat">Скопироавть ссылку на чат</div>
+`
+
+let LinkChat = document.querySelector('.LinkChat')
+LinkChat.addEventListener('click', () => {
+    if (LinkChat.textContent === document.location.href) {
+        alert('Вы уже на это странице')
+    }
+
+    else {
+        window.open(`${document.location.href}`)
+    }
+})
+
+let CopyBtnChat = document.querySelector('.CopyBtnChat')
+CopyBtnChat.addEventListener('click', () => {
+    console.log(LinkChat.textContent)
+
+    function copyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+
+        // Обеспечивает, чтобы не было видно элемента:
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            const msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copying text command was ' + msg);
+        }
+
+        catch (err) {
+            console.log('Oops, unable to copy');
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    copyTextToClipboard(`${LinkChat.textContent}`);
+})

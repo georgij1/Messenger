@@ -694,6 +694,30 @@ li {
     box-shadow: none;
 }
 
+.LinkChat {
+    padding: 10px;
+    background: aliceblue;
+    padding-bottom: 10px;
+    margin: auto;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    border: 2px solid beige;
+}
+
+.CopyBtnChat {
+    padding: 10px;
+    background: powderblue;
+    width: max-content;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px burlywood;
+}
+
 .visible {
     display: block;
 }
@@ -760,7 +784,7 @@ li {
     }
 
     .label_page {
-        width: 22VW;
+        width: 19VW;
     }
 
     .flex-content-new {
@@ -836,6 +860,22 @@ li {
     .red {
         border: 1px solid red;
         box-shadow: 0 0 10px red;
+    }
+
+    .ButtonsNavChatsHeaderOpened {
+        display: flex;
+        margin-top: 33px;
+        justify-content: space-evenly;
+        gap: 10px;
+        margin-left: 180px;
+    }
+
+    .h1HeaderOpened {
+        margin-left: 300px;
+    }
+
+    .OneChatBlock {
+        margin-left: 300px;
     }
 
     .none {

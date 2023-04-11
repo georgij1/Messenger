@@ -1,4 +1,3 @@
-let list_chats_new = document.querySelector('.list_chats')
 let btn_up = document.querySelector('.btn_up')
 let delete_account = document.querySelector('.delete_account')
 let min_size_window = document.querySelectorAll('.min_size_window')
@@ -8,8 +7,8 @@ let flex_content = document.querySelectorAll('.flex-content')
 
 fetch('/image_profile',{
     headers: new Headers({
-    'Content-Type': 'application/json'
-}),
+        'Content-Type': 'application/json'
+    }),
     mode: "cors"
 })
     .then(response => response.json())
@@ -19,10 +18,8 @@ fetch('/image_profile',{
         for (let image_profile_1 of image_profile) {
             image_profile_1.style.background=`url(${item.image})` + 'no-repeat'
             image_profile_1.style.backgroundSize=`100%`
-            // image_profile_1.style.height=`100%`
             image_profile_1.style.width=`34%`
             image_profile_1.style.borderRadius=`50px`
-            // image_profile_1.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px">`
         }
     })));
 
@@ -52,7 +49,6 @@ for (let min_size_windo of min_size_window) {
             btn_start_message.classList.remove('BtnStartMessageBurgerOpened')
             calendar_btn.classList.remove('NoneBtn')
             flex.classList.remove('FlexWidth')
-            // head.classList.remove('none')
             head.classList.toggle('visible')
             for (let body of body_class) {
                 body.classList.remove('max_size_window')
@@ -67,10 +63,6 @@ for (let min_size_windo of min_size_window) {
                 flex_content_itter.classList.toggle('flex-content-new')
                 flex_content_itter.classList.remove('flex-content-new-burger-open')
             }
-            let list_chats = document.querySelector('.list_chats')
-            list_chats.classList.remove('header_list_chats_burger_open')
-            body_1.classList.remove('none')
-            list_chats_new.classList.remove('header_list_chats')
             let chat = document.querySelectorAll('.chat')
             for (let chat_all of chat) {
                 chat_all.classList.remove('chat_burger_open')
@@ -92,7 +84,6 @@ for (let menu of burger_menu) {
             btn_start_message.classList.add('none')
             hello.classList.add('HelloHeaderOpen')
             btn_start_message.classList.add('BtnStartMessageBurgerOpened')
-            // calendar_btn.classList.add('block')
             calendar_btn.classList.add('NoneBtn')
             flex.classList.add('FlexWidth')
             for (let min_size_windows of min_size_window) {
@@ -108,10 +99,6 @@ for (let menu of burger_menu) {
                 flex_content_itter.classList.toggle('flex-content-new')
                 flex_content_itter.classList.toggle('flex-content-new-burger-open')
             }
-            let list_chats = document.querySelector('.list_chats')
-            list_chats.classList.toggle('header_list_chats_burger_open')
-            body_1.classList.toggle('none')
-            list_chats_new.classList.toggle('header_list_chats')
             let chat = document.querySelectorAll('.chat')
             for (let chat_all of chat) {
                 chat_all.classList.toggle('chat_burger_open')

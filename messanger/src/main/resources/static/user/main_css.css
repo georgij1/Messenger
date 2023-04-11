@@ -83,7 +83,7 @@ h1 {
         margin: auto;
         text-align: left;
         justify-content: end;
-        width: 689px;
+        width: 665px;
         margin-left: -39px;
     }
 
@@ -130,5 +130,10 @@ h1 {
         text-align: left;
         justify-content: end;
         width: 689px;
+    }
+
+    .FlexWidth {
+        display: flex;
+        margin-left: -200px;
     }
 }

@@ -8,8 +8,8 @@ let flex_content = document.querySelectorAll('.flex-content')
 
 fetch('/image_profile',{
     headers: new Headers({
-    'Content-Type': 'application/json'
-}),
+        'Content-Type': 'application/json'
+    }),
     mode: "cors"
 })
     .then(response => response.json())
@@ -32,27 +32,23 @@ btn_up.addEventListener('click', () => {
     delete_account.classList.toggle('block')
 })
 
-let signboard = document.querySelector('.signboard')
 let hello = document.querySelector('.hello')
-let calendar_btn = document.querySelector('.calendar_btn')
-let btn_start_message = document.querySelector('.btn_start_message')
 let flex = document.querySelector('.flex')
+let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
+let h1 = document.querySelectorAll('h1')
 
 console.log(hello)
 
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
         for (let head of header) {
-            signboard.classList.remove('none')
-            calendar_btn.classList.remove('none')
-            hello.classList.remove('none')
-            btn_start_message.classList.remove('none')
+            let one_chat = document.querySelector('.one_chat')
+            one_chat.classList.remove('OneChatBlock')
+            for (let H1Itter of h1) {
+                H1Itter.classList.remove('h1HeaderOpened')
+            }
+            buttons_nav_chats.classList.remove('ButtonsNavChatsHeaderOpened')
             min_size_windo.classList.toggle('none')
-            hello.classList.remove('HelloHeaderOpen')
-            btn_start_message.classList.remove('BtnStartMessageBurgerOpened')
-            calendar_btn.classList.remove('NoneBtn')
-            flex.classList.remove('FlexWidth')
-            // head.classList.remove('none')
             head.classList.toggle('visible')
             for (let body of body_class) {
                 body.classList.remove('max_size_window')
@@ -84,17 +80,14 @@ let burger_menu = document.querySelectorAll('.burger_menu')
 for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
         for (let head of header) {
-            calendar_btn.classList.add('none')
-            signboard.classList.add('none')
+            buttons_nav_chats.classList.add('ButtonsNavChatsHeaderOpened')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
-            hello.classList.add('none')
-            btn_start_message.classList.add('none')
-            hello.classList.add('HelloHeaderOpen')
-            btn_start_message.classList.add('BtnStartMessageBurgerOpened')
-            // calendar_btn.classList.add('block')
-            calendar_btn.classList.add('NoneBtn')
-            flex.classList.add('FlexWidth')
+            let one_chat = document.querySelector('.one_chat')
+            one_chat.classList.add('OneChatBlock')
+            for (let H1Itter of h1) {
+                H1Itter.classList.add('h1HeaderOpened')
+            }
             for (let min_size_windows of min_size_window) {
                 min_size_windows.classList.remove('none')
             }
