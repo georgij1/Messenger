@@ -6,20 +6,11 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 mt-5">
-            <form method="POST" enctype="multipart/form-data" action="add_photo">
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="file">
-                        <label class="custom-file-label" for="customFile">Выбрать файл</label>
-                    </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Опубликовать</button>
-            </form>
-        </div>
-    </div>
-</div>
+<form method="POST" enctype="multipart/form-data"
+      action="/upload">
+    File to upload: <input type="file" name="file"><br /> Name: <input
+        type="text" name="name"><br /> <br /> <input type="submit"
+                                                     value="Upload"> Press here to upload the file!
+</form>
 </body>
 </html>

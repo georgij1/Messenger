@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: system-ui;
+    background: #FFF;
+}
+
+.btnAddDev, .ReturnBack {
+    padding: 10px 20px;
+    background: antiquewhite;
+    width: max-content;
+    margin: 10px auto auto;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.btnAddDev:hover, .ReturnBack:hover {
+    background: #FFF;
+}
+
+.ListDevTitle {
+    padding: 10px;
+    font-weight: 900;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.Link {
+    color: blue;
+    cursor: pointer;
+}
+
+.Link:hover {
+    text-decoration: 2px solid blue underline;
+}
+
+.dev {
+    padding: 10px;
+    background: aliceblue;
+    border-radius: 10px;
+    border: 2px solid bisque;
+    box-shadow: 0 0 10px blanchedalmond;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.WindowOpenAddDev {
+    display: none;
+    padding: 10px;
+}
+
+.BtnCloseWindow {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat;
+    background-size: 50px;
+    box-shadow: 0 0 10px;
+    border-radius: 10px;
+}
+
+.yourIdDiv, .AboutMeDiv, .LinkPortfolioDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+    background: aliceblue;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.Name, .AboutMe, .LinkPortfolio {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px burlywood;
+    cursor: pointer;
+}
+
+.Name:hover, .AboutMe:hover, .LinkPortfolio:hover {
+    box-shadow: none;
+}
+
+label {
+    width: max-content;
+}
+
+input {
+    outline: none;
+}
+
+.SendOffer {
+    background: antiquewhite;
+    width: max-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.SendOffer:hover {
+    background: #FFF;
+}
+
+.LinkPortfolioItem, .AboutDevItem, .NameDevItem {
+    padding: 10px;
+    background: azure;
+    box-shadow: 0 0 10px burlywood;
+    border: 2px solid beige;
+    border-radius: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ListDev {
+    padding: 10px;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .LinkPortfolioItem {
+        display: flex;
+        gap: 10px;
+    }
+
+    .ListDev {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .ListDev {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

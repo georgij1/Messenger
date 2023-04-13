@@ -1,10 +1,8 @@
 package com.example.messanger.Controllers;
 
-import com.auth0.jwt.JWT;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.contacts.FormContacts;
 import com.example.messanger.auth.forms.contacts.FormStartMessage;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;

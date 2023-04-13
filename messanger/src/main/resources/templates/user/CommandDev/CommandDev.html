@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Разработчики Мессенджера</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" th:href="@{user/ComandDev/style.css}">
+    <link rel="stylesheet" th:href="@{user/scrollbar_register.css}">
+</head>
+<body>
+    <div class="WindowMain">
+        <div class="btnAddDev">Вступить в команду</div>
+
+        <div class="ListDevTitle">Список разработчиков</div>
+
+        <div class="ListDev"></div>
+
+        <div class="ReturnBack">Вернуться назад</div>
+    </div>
+
+    <div class="WindowOpenAddDev">
+        <div class="BtnCloseWindow"></div>
+
+        <h1>Вступление в команду разработчиков</h1>
+
+        <div class="InputForAddCommand">
+            <div class="yourIdDiv">
+                <label for="Name">Ваш id</label>
+                <input id="Name" class="Name" placeholder="Введите ваш id в колледже">
+            </div>
+
+            <div class="AboutMeDiv">
+                <label for="AboutMe">О себе</label>
+                <input id="AboutMe" class="AboutMe" placeholder="Напишите информацию о себе">
+            </div>
+
+            <div class="LinkPortfolioDiv">
+                <label for="LinkPortfolio">Ссылка на портфолио</label>
+                <input id="LinkPortfolio" class="LinkPortfolio" placeholder="Ссылка на портфолио">
+            </div>
+
+            <div class="SendOffer">Отправить заявку</div>
+        </div>
+    </div>
+
+    <script th:src="@{/user/ComandDev/script.js}"></script>
+</body>
+</html>

@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Controller
@@ -35,7 +33,7 @@ public class RegistrationController {
         String token = null;
 
         if (cookies == null) {
-            return "registration";
+            return "/auth/registration";
         }
 
         else {
@@ -50,7 +48,7 @@ public class RegistrationController {
             }
         }
 
-        return "registration";
+        return "/auth/registration";
     }
 
     public JdbcTemplate jdbcTemplate;
@@ -76,16 +74,16 @@ public class RegistrationController {
                                     System.out.println("Directory is create");
                                     userRepo.create(registrationForm, model, "../image/settings/icon_profile.png");
                                     System.out.println(DirectoryPath);
-                                    return "success_create_account";
+                                    return "/auth/ErrorsPage/success_create_account";
                                 }
 
                                 else {
-                                    return "error_register";
+                                    return "/auth/ErrorsPage/error_register";
                                 }
                             }
 
                             else {
-                                return "error_name";
+                                return "/auth/ErrorsPage/error_name";
                             }
                     }
 
@@ -105,14 +103,14 @@ public class RegistrationController {
 
             else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                return "registration";
+                return "/auth/registration";
             }
         }
 
         else {
-            return "password_not_correct";
+            return "/auth/ErrorsPage/password_not_correct";
         }
 
-        return "registration";
+        return "/auth/registration";
     }
 }

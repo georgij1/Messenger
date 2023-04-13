@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/main_page.css}">
+    <link rel="stylesheet" th:href="@{/user/main_page/main_page.css}">
+    <link rel="stylesheet" th:href="@{/user/scrollbar_register.css}">
+    <link rel="icon" th:href="@{/image/icons8-m-key-100.png}">
 </head>
+
 <body>
     <div class="logo"></div>
 
     <div class="buttons">
-        <a th:href="registration" class="button">
+        <div class="button BtnLinkRegistration">
             <div class="text_button">Регистрация</div>
-        </a>
+        </div>
 
-        <a th:href="login" class="button">
+        <div class="button BtnLinkAuthorization">
             <div class="text_button">Авторизация</div>
-        </a>
+        </div>
     </div>
 
-    <h1 class="no_auth">Достпно при регистрации:</h1>
-    <h1 class="no_auth">1) Админка, пользователь, чаты (доступ, админка управление чатами, история сообщений)</h1>
-    <h1 class="no_auth">2) Групповые чаты</h1>
-    <h1 class="no_auth font_size_3">3) Дублирование сообщений в любой мессенжер(Telegram, watsapp и другие)</h1>
-    <h1 class="no_auth font_size_4">4) Простой пользователь имеет возможность: профиль(увидеть информацию о себе и изменить её), настройки(настроить тему и другие параметры)</h1>
-    <h1 class="no_auth">5) Пользователь имеет возможность отправить файл менее или равное 3 мегабайт (в системе у файла автоматически рассчитывается размер)</h1>
-    <h1 class="no_auth">6) Подтверждение отправки и прочтения сообщения</h1>
-    <h1 class="no_auth">7) Сохранение сообщений (в любое время можно изменить сообщение)</h1>
+    <div class="no_auth">Админка, пользователь, чаты (доступ, админка управление чатами, история сообщений)</div>
+    <div class="no_auth">Групповые чаты</div>
+    <div class="no_auth font_size_3">Дублирование сообщений в любой мессенджер(Telegram, WhatsApp и другие)</div>
+    <div class="no_auth font_size_4">Простой пользователь имеет возможность: профиль(увидеть информацию о себе и изменить её), настройки(настроить тему и другие параметры)</div>
+    <div class="no_auth">Пользователь имеет возможность отправить файл менее или равное 3 мегабайт (в системе у файла автоматически рассчитывается размер)</div>
+    <div class="no_auth">Подтверждение отправки и прочтения сообщения</div>
+    <div class="no_auth">Сохранение сообщений (в любое время можно изменить сообщение)</div>
+
+    <script th:src="@{/user/main_page/main_page.js}"></script>
 </body>
 </html>

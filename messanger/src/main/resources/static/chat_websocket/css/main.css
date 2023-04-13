@@ -182,6 +182,10 @@ label {
     padding: 10px;
 }
 
+.user_image p {
+    display: none;
+}
+
 input {
     outline: none;
     cursor: pointer;
@@ -704,6 +708,12 @@ li {
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
     border: 2px solid beige;
+    color: blue;
+    cursor: pointer;
+}
+
+.LinkChat:hover {
+    text-decoration: 2px solid blue underline;
 }
 
 .UserDiv {
@@ -724,7 +734,12 @@ li {
     border: 2px solid bisque;
     border-radius: 10px;
     margin: 30px auto;
+    cursor: pointer;
     box-shadow: 0 0 10px burlywood;
+}
+
+.CopyBtnChat:hover {
+    background: #FFF;
 }
 
 .visible {

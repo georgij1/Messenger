@@ -3,15 +3,15 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Ошибка в регистрации</title>
+  <title>Ошибка в авторизации</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="main_page.css">
-  <link rel="stylesheet" href="user/password_not_correct.css">
-  <link rel="stylesheet" href="user/scrollbar_register.css">
+  <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
+  <link rel="stylesheet" th:href="@{user/password_not_correct.css}">
+  <link rel="stylesheet" th:href="@{user/scrollbar_register.css}">
 </head>
 
 <body>
-  <h1>Во время регистрации что-то пошло не так</h1>
+  <h1>Ошибка в логине</h1>
 
   <div class="flex_error">
     <div class="image_failed"></div>
@@ -20,10 +20,6 @@
       <div>
         <div class="btn_return_back">Вернуться назад</div>
       </div>
-
-      <a href="/registration">
-        <div class="repeat_registration_new_data">Регистрация</div>
-      </a>
 
       <a href="/login">
         <div class="repeat_authorization_new_data">Авторизация</div>

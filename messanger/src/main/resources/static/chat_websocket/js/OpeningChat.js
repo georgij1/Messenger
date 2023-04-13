@@ -36,13 +36,14 @@ fetch(`/ChatName/${IdChat.textContent}`, {
                 .then((response) => {
                     console.log(response)
                     response.json().then(res => (res.forEach(item => {
-                        console.log(item)
+                        console.log(res)
+                        console.log(item.name)
                         list_users_open_settings.innerHTML+=`
-                            <div class="UserDiv">
-                                <div class="UserChat" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
-                                <div class="UserChat">${item.name}</div>
-                            </div>
-                        `
+                                <div class="UserDiv">
+                                    <div class="UserChat" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
+                                    <div class="UserChat">${item.name}</div>
+                                </div>
+                            `
                     })))
         })}))})
 

@@ -38,7 +38,7 @@ fetch('/all_users', {
             list_users.innerHTML+=`
                 <div class="user" id="user">
                     <!--<div class="id"></div>-->
-                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px">${item.image}</div>
+                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
                     <div class="name">${item.username}</div>
                 </div>
             `
@@ -53,7 +53,7 @@ fetch('/all_users', {
                             console.log(user_div_id_itter.classList.contains("tick"))
                             user_chat.push(user_itter.childNodes[5].textContent)
                             ImageUser.push(user_itter.childNodes[3].textContent)
-                            console.log(user_itter.childNodes[3].textContent)
+                            console.log(user_itter.childNodes[3].childNodes[0].textContent)
                         }
                     }
                 })

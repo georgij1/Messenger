@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Домашняя страница</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{main_page.css}">
+    <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_css.css}">
     <link rel="stylesheet" th:href="@{user/mini_calendar.css}">
@@ -112,9 +112,11 @@
         <h1 class="hello">Приветствуем, <p th:text="${username}"></p></h1>
 
         <a href="/websocket_chat" class="btn_start_message">Начать общаться</a>
+
+        <div class="CommandDev">Попасть в команду разработчиков</div>
     </div>
 
-    <script th:src="@{/user/home_pageNewStartPage.js}"></script>
+    <script th:src="@{/user/home_page/home_pageNewStartPage.js}"></script>
     <script th:src="@{/user/mini_calendar.js}"></script>
 </body>
 </html>

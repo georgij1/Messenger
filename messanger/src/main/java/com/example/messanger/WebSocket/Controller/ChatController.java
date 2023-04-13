@@ -2,7 +2,6 @@ package com.example.messanger.WebSocket.Controller;
 
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
-import com.example.messanger.auth.User.User;
 import com.example.messanger.auth.forms.FormEditMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -70,7 +69,7 @@ public class ChatController {
     @ResponseBody
     public List<Map<String, Object>> FindUsersByChatName(@PathVariable String UserNameChat) {
         System.out.println("UserNameChat - " + UserNameChat);
-        System.out.println(jdbcTemplate.queryForList("select * from public.userschata where chat_nane=?", UserNameChat));
-        return jdbcTemplate.queryForList("select * from public.userschata where chat_nane=?", UserNameChat);
+        System.out.println(jdbcTemplate.queryForList("select * from public.users_chat where chat_nane=?", UserNameChat));
+        return jdbcTemplate.queryForList("select * from public.users_chat where chat_nane=?", UserNameChat);
     }
 }

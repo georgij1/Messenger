@@ -15,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -40,7 +38,7 @@ public class MainController {
                     var json = JWT.decode(token.formatted("utf-8")).getSubject();
                     System.out.println(json);
                     model.addAttribute("username", json);
-                    return "home_page";
+                    return "/user/home_page";
                 }
             }
         }
@@ -73,7 +71,7 @@ public class MainController {
                     var json = JWT.decode(token.formatted("utf-8")).getSubject();
                     System.out.println(json);
                     model.addAttribute("username", json);
-                    return "home_page";
+                    return "/user/home_page";
                 }
             }
         }

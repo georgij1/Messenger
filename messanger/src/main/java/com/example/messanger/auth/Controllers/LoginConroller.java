@@ -34,7 +34,7 @@ public class LoginConroller {
         String token = null;
 
         if (cookies == null) {
-            return "login";
+            return "/auth/login";
         }
 
         else {
@@ -52,7 +52,7 @@ public class LoginConroller {
         }
 
         catch (NullPointerException exception) {
-            return "error_login";
+            return "/auth/ErrorsPage/error_login";
         }
 
         return "login";
@@ -110,20 +110,20 @@ public class LoginConroller {
                         }
 
                         catch (org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException exception) {
-                            return "not_valid_user";
+                            return "/auth/ErrorsPage/not_valid_user";
                         }
                     }
                 }
 
                 catch (NullPointerException exception) {
                     System.out.println("catch NullPointerException");
-                    return "error_login";
+                    return "/auth/ErrorsPage/error_login";
                 }
             }
 
-            return "login";
+            return "/auth/login";
         }
 
-        return "login";
+        return "/auth/login";
     }
 }

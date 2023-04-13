@@ -34,8 +34,7 @@ let hello = document.querySelector('.hello')
 let calendar_btn = document.querySelector('.calendar_btn')
 let btn_start_message = document.querySelector('.btn_start_message')
 let flex = document.querySelector('.flex')
-
-console.log(hello)
+let CommandDev = document.querySelector('.CommandDev')
 
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
@@ -50,6 +49,7 @@ for (let min_size_windo of min_size_window) {
             calendar_btn.classList.remove('NoneBtn')
             flex.classList.remove('FlexWidth')
             head.classList.toggle('visible')
+            CommandDev.classList.remove('NoneCommandDev')
             for (let body of body_class) {
                 body.classList.remove('max_size_window')
             }
@@ -86,6 +86,7 @@ for (let menu of burger_menu) {
             btn_start_message.classList.add('BtnStartMessageBurgerOpened')
             calendar_btn.classList.add('NoneBtn')
             flex.classList.add('FlexWidth')
+            CommandDev.classList.add('NoneCommandDev')
             for (let min_size_windows of min_size_window) {
                 min_size_windows.classList.remove('none')
             }
@@ -106,3 +107,7 @@ for (let menu of burger_menu) {
         }
     })
 }
+
+CommandDev.addEventListener('click', () => {
+    window.open('/CommandDev', '_self')
+})

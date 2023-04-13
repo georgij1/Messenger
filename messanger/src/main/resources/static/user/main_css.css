@@ -41,6 +41,7 @@ h1 {
     background: cornsilk;
     border: 2px solid cornsilk;
     border-radius: 10px;
+    color: blue;
 }
 
 .flex {
@@ -54,7 +55,7 @@ h1 {
     display: block;
 }
 
-.none {
+.none, .NoneCommandDev {
     display: none;
 }
 
@@ -113,6 +114,12 @@ h1 {
         display: flex;
         width: 80vh;
         margin-left: 156px;
+    }
+
+    .NoneCommandDev {
+        display: flex;
+        margin: auto;
+        margin-left: 38vh;
     }
 }
 
