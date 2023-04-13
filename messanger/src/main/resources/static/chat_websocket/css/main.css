@@ -742,6 +742,21 @@ li {
     background: #FFF;
 }
 
+.link_image {
+    padding: 10px;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    color: blue;
+    cursor: pointer;
+}
+
+.link_image:hover {
+    text-decoration: 2px solid blue underline;
+}
+
 .visible {
     display: block;
 }

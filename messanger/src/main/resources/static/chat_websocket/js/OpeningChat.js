@@ -168,12 +168,32 @@ let btn_tools_chat = document.querySelector('.btn_tools_chat')
 let window_add_file = document.querySelector('.window_add_file')
 let flex_content_chat_top_tools = document.querySelector('.flex_content_chat_top_tools')
 let btn_close_add_file = document.querySelector('.btn_close_add_file')
+let ListUploadedImage = document.querySelector('.ListUploadedImage')
 
 btn_tools_chat.addEventListener('click', () => {
     window_add_file.classList.add('flex')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
     height.classList.add('none')
+    tools.classList.add('none')
+    fetch('http://localhost:8080/files', {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        mode: "cors"
+    })
+        .then(res => res.json())
+        .then(data => data.forEach(item => {
+            console.log(item)
+            ListUploadedImage.innerHTML+=`<div class="link_image">${item.url}</div>`
+            let link_image = document.querySelectorAll('.link_image')
+            for (let LinkImage of link_image) {
+                LinkImage.addEventListener('click', () => {
+                    // console.log(LinkImage.textContent)
+                    window.open(`${LinkImage.textContent}`, '_self')
+                })
+            }
+        }))
 })
 
 btn_close_add_file.addEventListener('click', () => {
@@ -181,6 +201,7 @@ btn_close_add_file.addEventListener('click', () => {
     list_chat.classList.remove('none')
     flex_content_chat_top_tools.classList.remove('none')
     height.classList.remove('none')
+    tools.classList.remove('none')
 })
 
 let window_settings_chat = document.querySelector('.window_settings_chat')

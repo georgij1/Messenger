@@ -5,7 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "image-message")
+@Table(name = "image_message")
 public class FileDB {
     @Id
     @GeneratedValue(generator = "uuid")

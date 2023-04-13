@@ -26,9 +26,17 @@
         <div class="list_chat"></div>
 
         <div class="window_add_file">
-            <div class="btn_close_add_file"></div>
-            <label for="input_file_chat" class="btn_add_just_file">Загрузить файл</label>
-            <input id="input_file_chat" type="file" hidden="hidden">
+            <form method="post" class="FormElem">
+                <div class="btn_close_add_file"></div>
+                <form id="formElem">
+                    <input type="file" name="picture" accept="image/*">
+                    <input type="submit">
+                </form>
+
+                <div class="TitleUploadedImage">Загруженные изображения</div>
+            </form>
+
+            <div class="ListUploadedImage"></div>
         </div>
 
         <div class="window_edit_message"></div>
@@ -78,5 +86,6 @@
     <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
     <script th:src="@{/chat_websocket/js/main.js}"></script>
+    <script th:src="@{/chat_websocket/js/UploadFile.js}"></script>
 </body>
 </html>
