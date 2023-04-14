@@ -5,13 +5,12 @@ create table public.mycontacts
     image text
 );
 
-create table public.ImageMessage
+create table public.image_message
 (
     id serial primary key,
-    text text,
-    sender_id integer not null references public.users,
-    chat_id integer not null references public.chat,
-    time_stamp text
+    name text,
+    data text,
+    type text
 );
 
 create table public.comand_dev

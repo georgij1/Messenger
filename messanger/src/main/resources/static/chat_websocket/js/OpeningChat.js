@@ -18,9 +18,13 @@ fetch(`/ChatName/${IdChat.textContent}`, {
         response.json().then(res => res.forEach(item => {
             border_name_chat.innerText=`${item.name}`
             title.innerText=`${item.name}`
-            image_chat_open_settings.innerHTML=`
-             <div class="image_chat_open_settings" style="background: url(${item.image_chat}) no-repeat center; width: 100%; height: 45vh; background-size: 90%; box-shadow: 0 0 10px burlywood; border-radius: 100%"></div>
-            `
+
+            image_chat_open_settings.style.background=`url(${item.image_chat}) no-repeat center`
+            image_chat_open_settings.style.height='45vh'
+            image_chat_open_settings.style.backgroundSize='90%'
+            image_chat_open_settings.style.boxShadow='0 0 10px burlywood'
+            image_chat_open_settings.style.borderRadius='100%'
+
             admin_chat.innerText=`${item.owner}`
 
             // Пользователи чата

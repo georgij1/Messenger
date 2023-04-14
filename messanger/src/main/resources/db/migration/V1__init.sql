@@ -27,7 +27,7 @@ create table public.message
 
 create table public.users_chat
 (
-    id integer primary key,
+    id integer not null primary key,
     name text,
     chat_nane text,
     image_user text default '../image/settings/icon_profile.png'

@@ -3,7 +3,6 @@ let window_create_chat = document.querySelector('.window_create_chat');
 let body_new = document.querySelector('.body')
 let body_1 = document.querySelector('.body_1')
 let close_window = document.querySelector('.close_window')
-let header_id_dom = document.querySelector('#header')
 let user_chat = []
 let ImageUser = []
 
@@ -94,8 +93,7 @@ create_chat.addEventListener('click', () => {
         body: JSON.stringify(formData)
     })
         .then(() => {console.log(formData)})
-        .then(() => {alert("Чат с названием - " + formData.name_chat + " создан")})
-        // .then(() => {window.location.reload()})
+        .then(() => {window.location.reload()})
 
     console.log(formData)
 })
