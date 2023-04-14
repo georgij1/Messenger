@@ -1,19 +1,19 @@
-let formElem = document.querySelector('#formElem')
-console.log(formElem)
+let BtnSendFile = document.querySelector('.BtnSendFile')
 
-formElem.onsubmit = () => {
-    console.log('run')
+BtnSendFile.addEventListener('click', () => {
+    let file = document.querySelector('.file')
+
+    let formData = new FormData()
+    formData.append('file', file.files[0])
+
     const Form = {
-        "file": new FormData(formElem)
+        "file": formData
     }
 
-    fetch('/upload', {
-        method: 'POST',
-        body: Form,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        mode: "cors"
-    })
-        .then(res => {res.json().then(r => r)})
-};
+    console.log(Form.file)
+    console.log(file.files[0])
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "/upload");
+    request.send(formData);
+})

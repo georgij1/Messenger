@@ -753,6 +753,21 @@ li {
     cursor: pointer;
 }
 
+.file {
+    background: antiquewhite;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.BtnSendFile {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px navajowhite;
+}
+
 .link_image:hover {
     text-decoration: 2px solid blue underline;
 }
