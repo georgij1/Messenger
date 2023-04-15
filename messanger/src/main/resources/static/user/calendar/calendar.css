@@ -5,9 +5,23 @@ h1 {
 .body, .body_1 {
     padding: 10px;
     width: 300px;
-    display: block;
     justify-content: space-between;
     margin: auto;
+}
+
+.None768px {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .body_1, .body {
+        width: 700px;
+    }
+
+    .None768px {
+        display: block;
+        margin-left: 330px;
+    }
 }
 
 @media (min-width: 1024px) {
