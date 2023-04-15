@@ -47,11 +47,11 @@ h1 {
     box-shadow: none;
 }
 
-.ContentRequestChat {
+.ContentAllRequestChat, .ContentSentRequestChat, .ContentCheckRequestChat {
     display: none;
 }
 
-.BtnGetSendAccessOffer, .BtnGetSendAccessOfferCheck, .AllRequest {
+.BtnGetSendAccessOffer, .BtnGetSendAccessOfferCheck, .AllRequest, .ContentMessageFromChat, .ContentEventMessage {
     display: none;
 }
 
