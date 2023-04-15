@@ -76,7 +76,7 @@ h1 {
     border: 2px solid bisque;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
-    width: 100%;
+    width: 92%;
 }
 
 .BtnDeleteRequest {
@@ -142,6 +142,11 @@ h1 {
     margin-bottom: 30px;
 }
 
+.ContentAllRequestChat h1, .ContentSentRequestChat h1, .ContentCheckRequestChat h1, .BtnGetSendAccessOfferCheck h1, .ContentCancelRequestChat h1, .ContentMessageFromChat h1, .ContentEventMessage h1 {
+    width: max-content;
+    font-size: 21px;
+}
+
 .IdRequest {
     display: none;
 }
@@ -180,6 +185,11 @@ h1 {
         display: flex;
         margin-left: 300px;
         width: 59%;
+    }
+
+    .ContentAllRequestChat h1, .ContentSentRequestChat h1, .ContentCheckRequestChat h1, .BtnGetSendAccessOfferCheck h1, .ContentCancelRequestChat h1, .ContentMessageFromChat h1, .ContentEventMessage h1 {
+        width: max-content;
+        font-size: revert;
     }
 }
 

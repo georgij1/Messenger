@@ -15,6 +15,8 @@ let ListRequest = document.querySelector('.ListRequest')
 let burger_menu_1 = document.querySelector('.burger_menu')
 let BtnGetSendAccessOfferCancel = document.querySelector('.BtnGetSendAccessOfferCancel')
 let ContentCancelRequestChat = document.querySelector('.ContentCancelRequestChat')
+let Header = document.querySelector('#Header')
+let HeaderDiv = document.querySelector('.header')
 
 const FormDataUsername = {
     "username_from_sent": document.querySelector('.username').textContent
@@ -67,6 +69,11 @@ RequestChat.addEventListener('click', () => {
     else {
         burger_menu_1.classList.remove('none')
     }
+
+    if (Header.classList.contains('visible')) {
+        HeaderDiv.classList.remove('visible')
+        BtnHeader.classList.remove('None768px')
+    }
 })
 
 CloseWindowRequest.addEventListener('click', () => {
@@ -85,6 +92,7 @@ CloseWindowRequest.addEventListener('click', () => {
     ContentEventMessage.classList.remove('block')
     burger_menu_1.classList.remove('none')
     ContentCancelRequestChat.classList.remove('block')
+    BtnGetSendAccessOfferCancel.classList.remove('block')
 })
 
 MessageMessanger.addEventListener('click', () => {
