@@ -90,10 +90,41 @@ h1 {
     color: #FFF;
 }
 
-.ListRequest {
+.ListRequest, .ListCheckRequest, .ListSentRequest, .ListSentRequestMe {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
+}
+
+.BtnSuccessRequest, .BtnSuccessRequest1 {
+    background: beige;
+    width: max-content;
+    padding: 10px 20px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.BtnSuccessRequest:hover, .BtnSuccessRequest1:hover {
+    background: #FFF;
+    box-shadow: none;
+}
+
+.tools {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 33px;
+}
+
+.WindowAnswerRequest {
+    display: none;
+}
+
+.title {
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .BtnDeleteRequest:hover {
@@ -120,6 +151,10 @@ h1 {
 
 .block {
     display: block;
+}
+
+.flex {
+    display: flex;
 }
 
 @media (min-width: 768px) {

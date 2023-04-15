@@ -14,6 +14,34 @@ let ContentEventMessage = document.querySelector('.ContentEventMessage')
 let ListRequest = document.querySelector('.ListRequest')
 let burger_menu_1 = document.querySelector('.burger_menu')
 
+const FormDataUsername = {
+    "username_from_sent": document.querySelector('.username').textContent
+}
+
+fetch('/rings/AllRequestAccessChat', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'POST',
+    body: JSON.stringify(FormDataUsername)
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        console.log(item)
+        ListRequest.innerHTML+=`
+                <div class="RequestAccess">
+                    <div class="IdRequest">${item.id}</div>
+                    <div class="TextMessage">Вы отправили запрос на вступление в чат ${item.chat_name}</div>
+                    <div class="Info">${item.usernamefromsent}</div>
+                    <div class="Info">${item.chat_name}</div>
+                    <div class="Info">${item.usernametosent}</div>
+                </div>
+                
+                <div class="BtnDeleteRequest">Удалить запрос</div>
+            `
+    }))
+
 RequestChat.addEventListener('click', () => {
     BtnGetSendAccessOfferCheck.classList.add('block')
     BtnGetSendAccessOffer.classList.add('block')
@@ -26,34 +54,6 @@ RequestChat.addEventListener('click', () => {
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.remove('block')
     ContentMessageFromChat.classList.remove('block')
-
-    const FormDataUsername = {
-        "username_from_sent": document.querySelector('.username').textContent
-    }
-
-    fetch('/rings/AllRequestAccessChat', {
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        mode: "cors",
-        method: 'POST',
-        body: JSON.stringify(FormDataUsername)
-    })
-        .then(res => res.json())
-        .then(data => data.forEach(item => {
-            console.log(item)
-            ListRequest.innerHTML+=`
-                <div class="RequestAccess">
-                    <div class="IdRequest">${item.id}</div>
-                    <div class="TextMessage">Вы отправили запрос на вступление в чат ${item.chat_name}</div>
-                    <div class="Info">${item.usernamefromsent}</div>
-                    <div class="Info">${item.chat_name}</div>
-                    <div class="Info">${item.usernametosent}</div>
-                </div>
-                
-                <div class="BtnDeleteRequest">Удалить запрос</div>
-            `
-        }))
 
     let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
     if (CloseWindowRequestId.classList.contains("block")) {
@@ -122,8 +122,106 @@ BtnGetSendAccessOffer.addEventListener('click', () => {
     ContentCheckRequestChat.classList.remove('block')
 })
 
+fetch('/rings/SentRequestAccessChat', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'POST',
+    body: JSON.stringify(FormDataUsername)
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        // console.log(item)
+        let ListSentRequest = document.querySelector('.ListSentRequest')
+        ListSentRequest.innerHTML+=`
+                <div class="RequestAccess">
+                    <div class="IdRequest">${item.id}</div>
+                    <div class="TextMessage">Вы отправили запрос на вступление в чат ${item.chat_name}</div>
+                    <div class="Info">${item.usernamefromsent}</div>
+                    <div class="Info">${item.chat_name}</div>
+                    <div class="Info">${item.usernametosent}</div>
+                </div>
+                
+                <div class="BtnDeleteRequest">Удалить запрос</div>
+            `
+    }))
+
+let ListSentRequestMe = document.querySelector('.ListSentRequestMe')
+fetch('/rings/RequestAccessChatNotChecked', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'POST',
+    body: JSON.stringify(FormDataUsername)
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        console.log(item)
+        ListSentRequestMe.innerHTML+=`
+                <div class="RequestAccessMain">
+                        <div class="RequestAccess">
+                        <div class="title">Заявка на встпупление</div>
+                        <div class="IdRequest">${item.id}</div>
+                        <div class="TextMessage">${item.usernamefromsent} отправил вам запрос на вступление в чат ${item.chat_name}</div>
+                        <div class="Info">${item.usernamefromsent}</div>
+                        <div class="Info">${item.chat_name}</div>
+                        <div class="Info">${item.usernametosent}</div>
+                    </div>
+                    
+                    <div class="tools">
+                        <div class="BtnSuccessRequest">Ответить</div>        
+                    </div>
+                    
+                    <div class="WindowAnswerRequest">
+                        <div class="BtnDeleteRequest">Отклонить</div>
+                        <div class="BtnSuccessRequest1">Принять</div>        
+                    </div>
+                </div>
+            `
+        let BtnSuccessRequest = document.querySelectorAll('.BtnSuccessRequest')
+        console.log(BtnSuccessRequest)
+        let RequestAccessMain = document.querySelectorAll('.RequestAccessMain')
+            for (let RequestMainItter of RequestAccessMain) {
+                RequestMainItter.addEventListener('click', (event) => {
+                    let EventId = event.currentTarget.children[0].children[1].textContent
+                    console.log(EventId)
+                    let WindowAnswerRequest = document.querySelector('.WindowAnswerRequest')
+                    WindowAnswerRequest.classList.add('flex')
+                    let BtnSuccessRequest = document.querySelectorAll('.BtnSuccessRequest')
+                    for (let BtnSuccessRequestItter of BtnSuccessRequest) {
+                        BtnSuccessRequestItter.classList.add('none')
+                    }
+                })
+            }
+    }))
+
 BtnGetSendAccessOfferCheck.addEventListener('click', () => {
     ContentAllRequestChat.classList.remove('block')
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.add('block')
 })
+
+fetch('/rings/CheckRequestAccessChat', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'POST',
+    body: JSON.stringify(FormDataUsername)
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        console.log(item)
+        let ListCheckRequest = document.querySelector('.ListCheckRequest')
+        ListCheckRequest.innerHTML+=`
+                <div class="RequestAccess">
+                    <div class="IdRequest">${item.id}</div>
+                    <div class="TextMessage">Вы входите в число участников в чате ${item.chat_name}</div>
+                    <div class="Info">${item.usernamefromsent}</div>
+                    <div class="Info">${item.chat_name}</div>
+                    <div class="Info">${item.usernametosent}</div>
+                </div>
+            `
+    }))
