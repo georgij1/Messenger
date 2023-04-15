@@ -116,6 +116,11 @@ h1 {
     flex-direction: row;
     align-items: center;
     gap: 33px;
+    margin-top: 15px;
+}
+
+.ImageProfilePBlock {
+    display: none;
 }
 
 .WindowAnswerRequest {

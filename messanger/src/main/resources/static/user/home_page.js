@@ -22,6 +22,8 @@ fetch('/image_profile',{
             // image_profile_1.style.height=`100%`
             image_profile_1.style.width=`34%`
             image_profile_1.style.borderRadius=`50px`
+            let ImageProfilePBlock = document.querySelector('.ImageProfilePBlock')
+            ImageProfilePBlock.innerText=`${item.image}`
             // image_profile_1.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px">`
         }
     })));

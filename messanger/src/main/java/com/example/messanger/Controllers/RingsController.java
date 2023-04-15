@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping
@@ -31,7 +32,7 @@ public class RingsController {
     @ResponseBody
     public List<Map<String, Object>> AllRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
         System.out.println(allRequestAccessChatForm.getUsername_from_sent());
-        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernamefromsent=?", allRequestAccessChatForm.getUsername_from_sent());
+        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernametosent=?", allRequestAccessChatForm.getUsername_from_sent());
     }
 
     @PostMapping("/rings/SentRequestAccessChat")
@@ -39,7 +40,7 @@ public class RingsController {
     @ResponseBody
     public List<Map<String, Object>> SentRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
         System.out.println(allRequestAccessChatForm.getUsername_from_sent());
-        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernamefromsent=? and access=false", allRequestAccessChatForm.getUsername_from_sent());
+        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernametosent=? and access=true and cancel=false", allRequestAccessChatForm.getUsername_from_sent());
     }
 
     @PostMapping("/rings/CheckRequestAccessChat")
@@ -47,16 +48,27 @@ public class RingsController {
     @ResponseBody
     public List<Map<String, Object>> CheckRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
         System.out.println(allRequestAccessChatForm.getUsername_from_sent());
-        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernametosent=? and access=true", allRequestAccessChatForm.getUsername_from_sent());
+        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernamefromsent=? and access=true and order_status=false and cancel=false", allRequestAccessChatForm.getUsername_from_sent());
     }
 
     @PostMapping("/rings/UpdateRequestAccessChatStatus")
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> SetRequestAccessChatStatus(@RequestBody SetRequestAccessChatStatusForm setRequestAccessChatStatusForm) {
-        System.out.println(setRequestAccessChatStatusForm.getAccess());
-        System.out.println(setRequestAccessChatStatusForm.getId());
-        jdbcTemplate.update("update send_access_to_chat_post set access=true where id=?");
+        System.out.println(setRequestAccessChatStatusForm);
+
+        if (Objects.equals(setRequestAccessChatStatusForm.getAccess(), "true")) {
+            System.out.println("Админ принял заявку");
+            jdbcTemplate.update("update send_access_to_chat_post set access=true where id=?", setRequestAccessChatStatusForm.getId());
+            jdbcTemplate.update("update send_access_to_chat_post set order_status=false where id=?", setRequestAccessChatStatusForm.getId());
+            jdbcTemplate.update("insert into users_chat(name, chat_nane, image_user) values (?, ?, ?)", setRequestAccessChatStatusForm.getUsername(), setRequestAccessChatStatusForm.getChat_nane(), setRequestAccessChatStatusForm.getImage_user());
+        }
+
+        else {
+            System.out.println("Админ отклонил заявку");
+            jdbcTemplate.update("update send_access_to_chat_post set order_status=false, cancel=true, access=false where id=?", setRequestAccessChatStatusForm.getId());
+        }
+
         return jdbcTemplate.queryForList("select * from send_access_to_chat_post");
     }
 
@@ -64,6 +76,6 @@ public class RingsController {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> RequestAccessChatNotChecked(@RequestBody RequestAccessChatNotCheckedForm requestAccessChatNotCheckedForm) {
-        return jdbcTemplate.queryForList("select * from send_access_to_chat_post where usernamefromsent!=?", requestAccessChatNotCheckedForm.getUsername());
+        return jdbcTemplate.queryForList("select * from send_access_to_chat_post where usernamefromsent!=? and order_status=true", requestAccessChatNotCheckedForm.getUsername());
     }
 }

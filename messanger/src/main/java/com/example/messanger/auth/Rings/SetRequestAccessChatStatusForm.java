@@ -6,7 +6,13 @@ import lombok.Data;
 @Data
 public class SetRequestAccessChatStatusForm {
     @JsonProperty("id")
-    public String id;
+    public int id;
     @JsonProperty("access")
     public String access;
+    @JsonProperty("username")
+    public String username;
+    @JsonProperty("chat_nane")
+    public String chat_nane;
+    @JsonProperty("image_user")
+    public String image_user;
 }
