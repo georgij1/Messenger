@@ -3,8 +3,10 @@ package com.example.messanger.WebSocket.Controller;
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.FormEditMessage;
+import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.json.JSONArray;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -32,8 +34,9 @@ public class ChatController {
         System.out.println(chatMessage.getSender());
         int sender_id = Integer.parseInt(chatMessage.getSender());
         int chat_id = Integer.parseInt(chatMessage.getChat_id());
-        System.out.println(chatMessage.GetTimeStamp());
-        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp) values (?, ?, ?, ?)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStamp());
+        System.out.println(chatMessage.GetTimeStampShort());
+        System.out.println(chatMessage.GetTimeStampLong());
+        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long) values (?, ?, ?, ?, ?)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStampShort(), chatMessage.GetTimeStampLong());
         return chatMessage;
     }
 
@@ -43,7 +46,8 @@ public class ChatController {
         Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username", chatMessage.getSender());
         System.out.println(chatMessage.getContent());
         System.out.println(chatMessage.getSender());
-        System.out.println(chatMessage.GetTimeStamp());
+        System.out.println(chatMessage.GetTimeStampShort());
+        System.out.println(chatMessage.GetTimeStampLong());
         System.out.println(headerAccessor);
         return chatMessage;
     }
@@ -71,5 +75,30 @@ public class ChatController {
         System.out.println("UserNameChat - " + UserNameChat);
         System.out.println(jdbcTemplate.queryForList("select * from public.users_chat where chat_nane=?", UserNameChat));
         return jdbcTemplate.queryForList("select * from public.users_chat where chat_nane=?", UserNameChat);
+    }
+
+    @PostMapping("/Access")
+    @CrossOrigin("*")
+    @ResponseBody
+    public String Access(@RequestBody AccessChat accessChat) {
+        var is_available = jdbcTemplate.queryForObject("select exists(select * from users_chat where name=? and chat_nane=?)", Boolean.class, accessChat.getUsername(), accessChat.getNameChat());
+        var is_available1 = jdbcTemplate.queryForObject("select exists(select * from chat where owner=? and name=?)",  Boolean.class, accessChat.getUsername(), accessChat.getNameChat());
+
+        System.out.println(is_available);
+        System.out.println(is_available1);
+
+        if (Boolean.TRUE.equals(is_available) && Boolean.TRUE.equals(is_available1)) {
+            System.out.println("success with user");
+            return "[{\"status\":\"success\"}]";
+        }
+
+        else if (Boolean.TRUE.equals(is_available1)) {
+            return "[{\"status\":\"success\"}]";
+        }
+
+        else {
+            System.out.println("permission denied");
+            return "[{\"status\":\"permission denied\"}]";
+        }
     }
 }

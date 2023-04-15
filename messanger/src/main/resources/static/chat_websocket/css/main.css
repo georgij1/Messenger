@@ -232,16 +232,13 @@ input {
 .tools {
     position: fixed;
     bottom: 0;
-    gap: 13px;
     align-items: center;
     background: azure;
     box-shadow: 0 0 10px aqua;
     padding: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 93%;
-    justify-content: space-around;
     display: flex;
+    width: 100%;
+    gap: 15px;
 }
 
 .IdChat {
@@ -249,8 +246,8 @@ input {
 }
 
 .btn_tools_chat {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 10px;
     background: url("../image/plus.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
     cursor: pointer;
@@ -268,7 +265,7 @@ input {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px blanchedalmond;
-    width: 120px;
+    width: 63%;
     outline: 2px solid cyan;
 }
 
@@ -293,7 +290,7 @@ input {
 }
 
 .send_message {
-    width: 30px;
+    width: 35px;
     height: 30px;
     background: url("../image/send_message.png") no-repeat center, linear-gradient(325.78deg, #0c0c0d 14.76%, #7CB8F7 87.3%);
     background-size: 15px;
@@ -402,6 +399,7 @@ li {
     align-items: center;
     display: flex;
     gap: 17px;
+    width: 100%;
 }
 
 .chat {
@@ -419,7 +417,7 @@ li {
 
 .btn_down_1 {
     position: fixed;
-    bottom: 90px;
+    bottom: 119px;
     right: 16px;
     background: url("../image/icon_down.png") no-repeat center, #FFF;
     padding: 10px;
@@ -437,7 +435,7 @@ li {
 
 .btn_up_1 {
     position: fixed;
-    bottom: 90px;
+    bottom: 119px;
     right: 16px;
     background: url("../image/icon_down.png") no-repeat center, #FFF;
     padding: 10px;
@@ -772,6 +770,32 @@ li {
     text-decoration: 2px solid blue underline;
 }
 
+.TimeStampShort {
+    text-align: right;
+    color: gainsboro;
+    margin-top: 10px;
+}
+
+.MessageListNull {
+    margin-top: 35px;
+    text-align: center;
+    background: aliceblue;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+}
+
+.ImageMessageNull {
+    height: 100px;
+    background: url("../../chat_websocket/image/MessageNo.png") no-repeat center;
+    background-size: 100px;
+    margin: 10px auto;
+    box-shadow: 0 0 10px beige;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 50%;
+}
+
 .visible {
     display: block;
 }
@@ -887,21 +911,12 @@ li {
         width: 52vW;
     }
 
-    .tools {
-        width: 119vh;
-        justify-content: space-between;
-    }
-
     .input_message {
         border: 2px solid blanchedalmond;
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px blanchedalmond;
         width: 90%;
-    }
-
-    .tools {
-        width: 94%;
     }
 
     #messageForm {
@@ -936,6 +951,14 @@ li {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
+    }
+
+    .image_chat_open_settings {
+         margin: 0;
+    }
+
+    .smile {
+        margin-right: 20px;
     }
 
     .none {
@@ -982,10 +1005,6 @@ li {
 
     .chat {
         width: 60vW;
-    }
-
-    .tools {
-        width: 96%;
     }
 
     .close_window_new {

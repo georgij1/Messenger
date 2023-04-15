@@ -55,7 +55,7 @@ public class LoginConroller {
             return "/auth/ErrorsPage/error_login";
         }
 
-        return "login";
+        return "auth/login";
     }
 
     @PostMapping("login")

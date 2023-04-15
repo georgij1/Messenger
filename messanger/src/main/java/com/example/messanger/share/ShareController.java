@@ -13,6 +13,6 @@ public class ShareController {
     @AuthorizedUser
     public String share(@PathVariable String message, Model model) {
         model.addAttribute("share_text", message);
-        return "share/share";
+        return "user/share/share";
     }
 }

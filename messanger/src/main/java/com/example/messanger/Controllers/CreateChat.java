@@ -1,6 +1,7 @@
 package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
+import com.example.messanger.auth.forms.chat_form.AccessChat;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import com.example.messanger.auth.forms.chat_form.UpdateNameChat;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +32,6 @@ public class CreateChat {
     @PostMapping("/create_chat")
     @CrossOrigin("*")
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
-        // work code
         jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
 
         String getUserChat = String.join(" ", formCreateChat.getUser_chat());
@@ -41,16 +41,11 @@ public class CreateChat {
             for (String ImageUser:formCreateChat.getImageUser()) {
                 jdbcTemplate.update("insert into public.users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
             }
-            // jdbcTemplate.update("insert into public.users_chat_new_table(name_chat, username_user_chat) values (?, ?)", formCreateChat.getName_chat(), users_chat);
         }
 
         System.out.println(formCreateChat.getUser_chat());
         System.out.println("formCreateChat.getUser_chat().toArray().length - "+ formCreateChat.getUser_chat().toArray().length);
         System.out.println("getUserChat - " + getUserChat);
-
-        // not working code
-        // jdbcTemplate.update("insert into public.role(name) values (?)", getUserChat);
-        // jdbcTemplate.update("insert into public.userchat(user_id, chat_id, role_id) VALUES (?, ?, ?)", formCreateChat.user_id, formCreateChat.chat_id, formCreateChat.role_id);
 
         return "chat_websocket/index";
     }

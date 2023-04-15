@@ -60,21 +60,26 @@ fetch(`/chats/${IdChat.textContent}`, {
 })
     .then((response) => {
         response.json().then(res => (res.forEach(item => {
+            console.log(item)
             console.log(item.text)
+            let MessageNullDiv = document.querySelector('.MessageNullDiv')
+            MessageNullDiv.classList.add('none')
             list_chat.innerHTML +=
                 `
                                      <div class="message">
                                          <div class="id">${item.id}</div>
                                          <div class="text">${item.text}</div>
-                                         <div class="timestamp">${item.time_stamp}</div>
 
                                          <div class="tools_message">
                                              <div class="delete_message"></div>
                                              <div class="edit_message"></div>
                                              <div class="share_message"></div>
                                          </div>
+                                         
+                                         <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                                      </div>
                                  `
+
             let edit_message = document.querySelectorAll('.edit_message')
             let window_edit_message = document.querySelector('.window_edit_message')
             for (let edit_message_itter of edit_message) {
@@ -166,6 +171,18 @@ fetch(`/chats/${IdChat.textContent}`, {
                 })
             }
         })))
+
+        if (list_chat.clientHeight === 0) {
+            btn_down_1.classList.add('none')
+            list_chat.innerHTML=`
+                <div class="MessageNullDiv">
+                    <div class="MessageListNull">
+                        <div class="text">Сообщений нет начните общаться первым</div>
+                        <div class="ImageMessageNull"></div>
+                    </div>
+                </div>
+            `
+        }
     })
 
 let btn_tools_chat = document.querySelector('.btn_tools_chat')

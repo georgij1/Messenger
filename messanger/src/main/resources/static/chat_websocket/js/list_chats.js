@@ -172,7 +172,45 @@ for (let list_chat_itter of list_chats) {
             for (let chat_itter of chat) {
                 chat_itter.addEventListener('click', (event) => {
                     console.log(event.currentTarget.children[0].textContent)
-                    window.open(`chat/${event.currentTarget.children[0].textContent}`, '_self')
+                    console.log(event.currentTarget.children[2].children[0].textContent)
+                    let UsernameNew = document.querySelector('.username').textContent
+                    console.log(UsernameNew)
+
+                    const formData = {
+                        "NameChat": event.currentTarget.children[2].children[0].textContent,
+                        "username": UsernameNew
+                    }
+
+                    let IDChat = event.currentTarget.children[0].textContent
+                    console.log(IDChat)
+
+                    fetch(`/Access`, {
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        mode: "cors",
+                        method: 'POST',
+                        body: JSON.stringify(formData)
+                    })
+                        .then(response => response.json())
+                        .then(data => (data.forEach(item => {
+                            console.log(item.status)
+                            if (item.status === "success") {
+                                console.log("success")
+                                console.log(event.currentTarget)
+                                window.open(`chat/${IDChat}`, '_self')
+                            }
+
+                            else {
+                                console.log("permission denied")
+                                alert('Доступ запрещён')
+                            }
+                        })))
+
+                        .then(() => {
+                            console.log(formData.NameChat)
+                            console.log(formData.username)
+                        })
                 })
             }
 

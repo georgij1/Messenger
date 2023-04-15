@@ -22,24 +22,31 @@ function sendMessage(event) {
                     console.log("websocket id - " + item.id)
                     let item_id_user = item.id
                     console.log(new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds())
-                    let Date_new = new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+                    let DateLong = new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+                    let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
+
                     let chatMessage = {
                         sender: item_id_user,
                         content: messageInput.value,
                         chat_id: IdChat.textContent,
-                        TimeStamp: Date_new,
+                        TimeStampShort: DateShort,
+                        TimeStampLong: DateLong,
                         type: 'CHAT'
                     };
-                    console.log(chatMessage.TimeStamp)
+
+                    console.log(chatMessage.TimeStampShort)
+                    console.log(chatMessage.TimeStampLong)
                     console.log(messageInput.value)
                     stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
                     messageInput.value = '';
                     let list_chat = document.querySelector('.list_chat')
+                    let MessageNullDiv = document.querySelector('.MessageNullDiv')
+                    MessageNullDiv.classList.add('none')
                     list_chat.innerHTML += `
                                                     <div class="message">
                                                         <div class="id">${chatMessage.id}</div>
                                                         <div class="text">${chatMessage.content}</div>
-                                                        <div class="text">${chatMessage.TimeStamp}</div>
+                                                        <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>
 
 <!--                                                        <div class="tools_message">-->
 <!--                                                            <div class="delete_message"></div>-->
@@ -54,7 +61,6 @@ function sendMessage(event) {
                         delete_message_itter.addEventListener('click', () => {
                             console.log(delete_message)
                             console.log(item.id)
-                            console.log()
                             fetch(`/delete_message/${event.currentTarget.children[2].children[0].textContent}`, {
                                 method: 'delete',
                                 headers: {
@@ -69,9 +75,8 @@ function sendMessage(event) {
                                     console.log(res)
                                     console.log(event.currentTarget.children[2].children[0].textContent)
                                     alert('Сообщение - ' + item.content + ' успешно удалено')
-                                    // window.location.reload()
+                                    window.location.reload()
                                 })
-                            // stompClient.send(`/app/chat.deleteMessage/${formData.id}`, {}, JSON.stringify(chatMessage));
                         })
                     }
                 })
