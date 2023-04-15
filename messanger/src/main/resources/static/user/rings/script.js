@@ -11,6 +11,8 @@ let ContentSentRequestChat = document.querySelector('.ContentSentRequestChat')
 let ContentCheckRequestChat = document.querySelector('.ContentCheckRequestChat')
 let ContentMessageFromChat = document.querySelector('.ContentMessageFromChat')
 let ContentEventMessage = document.querySelector('.ContentEventMessage')
+let ListRequest = document.querySelector('.ListRequest')
+let burger_menu_1 = document.querySelector('.burger_menu')
 
 RequestChat.addEventListener('click', () => {
     BtnGetSendAccessOfferCheck.classList.add('block')
@@ -24,6 +26,43 @@ RequestChat.addEventListener('click', () => {
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.remove('block')
     ContentMessageFromChat.classList.remove('block')
+
+    const FormDataUsername = {
+        "username_from_sent": document.querySelector('.username').textContent
+    }
+
+    fetch('/rings/AllRequestAccessChat', {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        mode: "cors",
+        method: 'POST',
+        body: JSON.stringify(FormDataUsername)
+    })
+        .then(res => res.json())
+        .then(data => data.forEach(item => {
+            console.log(item)
+            ListRequest.innerHTML+=`
+                <div class="RequestAccess">
+                    <div class="IdRequest">${item.id}</div>
+                    <div class="TextMessage">Вы отправили запрос на вступление в чат ${item.chat_name}</div>
+                    <div class="Info">${item.usernamefromsent}</div>
+                    <div class="Info">${item.chat_name}</div>
+                    <div class="Info">${item.usernametosent}</div>
+                </div>
+                
+                <div class="BtnDeleteRequest">Удалить запрос</div>
+            `
+        }))
+
+    let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
+    if (CloseWindowRequestId.classList.contains("block")) {
+        burger_menu_1.classList.add('none')
+    }
+
+    else {
+        burger_menu_1.classList.remove('none')
+    }
 })
 
 CloseWindowRequest.addEventListener('click', () => {
@@ -40,18 +79,35 @@ CloseWindowRequest.addEventListener('click', () => {
     ContentCheckRequestChat.classList.remove('block')
     ContentMessageFromChat.classList.remove('block')
     ContentEventMessage.classList.remove('block')
+    burger_menu_1.classList.remove('none')
 })
 
 MessageMessanger.addEventListener('click', () => {
     BtnHeader.classList.add('none')
     CloseWindowRequest.classList.add('block')
     ContentMessageFromChat.classList.add('block')
+    let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
+    if (CloseWindowRequestId.classList.contains("block")) {
+        burger_menu_1.classList.add('none')
+    }
+
+    else {
+        burger_menu_1.classList.remove('none')
+    }
 })
 
 EventCalendar.addEventListener('click', () => {
     BtnHeader.classList.add('none')
     CloseWindowRequest.classList.add('block')
     ContentEventMessage.classList.add('block')
+    let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
+    if (CloseWindowRequestId.classList.contains("block")) {
+        burger_menu_1.classList.add('none')
+    }
+
+    else {
+        burger_menu_1.classList.remove('none')
+    }
 })
 
 AllRequest.addEventListener('click', () => {
