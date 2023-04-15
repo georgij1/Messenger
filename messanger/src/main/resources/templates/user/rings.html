@@ -5,7 +5,7 @@
     <title>Уведомления</title>
     <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
-    <link rel="stylesheet" th:href="@{user/rings.css}">
+    <link rel="stylesheet" th:href="@{user/rings/rings.css}">
     <link rel="icon" th:href="@{image/main_page/icon_rings.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
@@ -61,9 +61,25 @@
     <div class="body">
         <div class="burger_menu"></div>
 
-        <h1>Уведомлений нет</h1>
+        <div class="CloseWindowRequest"></div>
+
+        <div class="BtnHeader">
+            <div class="RequestChat">Запросы</div>
+
+            <div class="AllRequest">Все</div>
+            <div class="BtnGetSendAccessOffer">Отправленные</div>
+            <div class="BtnGetSendAccessOfferCheck">Принятые</div>
+
+            <div class="MessageMessanger">Сообщения из Чатов</div>
+            <div class="EventCalendar">Ближайшие события</div>
+        </div>
+
+        <div class="ContentRequestChat">
+            <h1>Запросы в чат</h1>
+        </div>
     </div>
 
     <script th:src="@{/user/home_page.js}"></script>
+    <script th:src="@{/user/rings/script.js}"></script>
 </body>
 </html>

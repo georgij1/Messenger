@@ -154,6 +154,7 @@ for (let list_chat_itter of list_chats) {
                             <div class="image"></div>
                             <div class="about_chat">
                                 <div class="name">${item.name}</div>
+                                <div class="owner">${item.owner}</div>
                             </div>
                         </div>
                     `
@@ -173,8 +174,12 @@ for (let list_chat_itter of list_chats) {
                 chat_itter.addEventListener('click', (event) => {
                     console.log(event.currentTarget.children[0].textContent)
                     console.log(event.currentTarget.children[2].children[0].textContent)
+
                     let UsernameNew = document.querySelector('.username').textContent
                     console.log(UsernameNew)
+                    let ChatName = event.currentTarget.children[2].children[0].textContent
+                    let AdminChat = event.currentTarget.children[2].children[1].textContent
+                    console.log(AdminChat)
 
                     const formData = {
                         "NameChat": event.currentTarget.children[2].children[0].textContent,
@@ -225,25 +230,34 @@ for (let list_chat_itter of list_chats) {
                             }
 
                             CloseWindowPermissionDenied.addEventListener('click', () => {
-                                PermissionDenied.classList.remove('visible')
-                                list_chats.classList.remove('none')
-                                CloseWindowPermissionDenied.classList.remove('none')
-                                flex_content.classList.remove('none')
-                                content_all_chat.classList.remove('none')
-                                content_all_chat.classList.add('visible')
-                                buttons_nav_chats.classList.remove('none')
-                            })
-
-                            BtnSendAccess.addEventListener('click', () => {
-                                alert('Сообщение на получение доступа отправлено')
                                 window.location.reload()
                             })
-                        })))
 
-                        .then(() => {
-                            console.log(formData.NameChat)
-                            console.log(formData.username)
-                        })
+                            let ListAccess = document.querySelector('.ListAccess')
+
+                            BtnSendAccess.addEventListener('click', () => {
+                                console.log(ChatName)
+                                ListAccess.innerHTML=`
+                                    <div class="AccessToSent">Вы отправили за прос на вступление в чат ${ChatName}</div>
+                                `
+
+                                const formDataSendAccess = {
+                                    "UsernameSentOfferAccess": UsernameNew,
+                                    "chat_name": ChatName,
+                                    "UsernameOwnerChat": AdminChat
+                                }
+
+                                fetch('/UserPostAccessChat', {
+                                    headers: new Headers({
+                                        'Content-Type': 'application/json'
+                                    }),
+                                    mode: "cors",
+                                    method: 'POST',
+                                    body: JSON.stringify(formDataSendAccess)
+                                })
+                                    .then(res => console.log(res))
+                            })
+                        })))
                 })
             }
 
