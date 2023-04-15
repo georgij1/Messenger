@@ -13,6 +13,8 @@ let ContentMessageFromChat = document.querySelector('.ContentMessageFromChat')
 let ContentEventMessage = document.querySelector('.ContentEventMessage')
 let ListRequest = document.querySelector('.ListRequest')
 let burger_menu_1 = document.querySelector('.burger_menu')
+let BtnGetSendAccessOfferCancel = document.querySelector('.BtnGetSendAccessOfferCancel')
+let ContentCancelRequestChat = document.querySelector('.ContentCancelRequestChat')
 
 const FormDataUsername = {
     "username_from_sent": document.querySelector('.username').textContent
@@ -54,6 +56,8 @@ RequestChat.addEventListener('click', () => {
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.remove('block')
     ContentMessageFromChat.classList.remove('block')
+    BtnGetSendAccessOfferCancel.classList.add('block')
+    ContentCancelRequestChat.classList.remove('block')
 
     let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
     if (CloseWindowRequestId.classList.contains("block")) {
@@ -80,6 +84,7 @@ CloseWindowRequest.addEventListener('click', () => {
     ContentMessageFromChat.classList.remove('block')
     ContentEventMessage.classList.remove('block')
     burger_menu_1.classList.remove('none')
+    ContentCancelRequestChat.classList.remove('block')
 })
 
 MessageMessanger.addEventListener('click', () => {
@@ -114,12 +119,14 @@ AllRequest.addEventListener('click', () => {
     ContentAllRequestChat.classList.add('block')
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.remove('block')
+    ContentCancelRequestChat.classList.remove('block')
 })
 
 BtnGetSendAccessOffer.addEventListener('click', () => {
     ContentAllRequestChat.classList.remove('block')
     ContentSentRequestChat.classList.add('block')
     ContentCheckRequestChat.classList.remove('block')
+    ContentCancelRequestChat.classList.remove('block')
 })
 
 fetch('/rings/SentRequestAccessChat', {
@@ -257,6 +264,7 @@ BtnGetSendAccessOfferCheck.addEventListener('click', () => {
     ContentAllRequestChat.classList.remove('block')
     ContentSentRequestChat.classList.remove('block')
     ContentCheckRequestChat.classList.add('block')
+    ContentCancelRequestChat.classList.remove('block')
 })
 
 fetch('/rings/CheckRequestAccessChat', {
@@ -281,3 +289,12 @@ fetch('/rings/CheckRequestAccessChat', {
                 </div>
             `
     }))
+
+BtnGetSendAccessOfferCancel.addEventListener('click', () => {
+    ContentCancelRequestChat.classList.add('block')
+    ContentAllRequestChat.classList.remove('block')
+    ContentSentRequestChat.classList.remove('block')
+    ContentCheckRequestChat.classList.remove('block')
+    ContentMessageFromChat.classList.remove('block')
+    ContentEventMessage.classList.remove('block')
+})

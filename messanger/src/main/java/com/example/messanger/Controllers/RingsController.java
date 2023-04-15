@@ -48,7 +48,15 @@ public class RingsController {
     @ResponseBody
     public List<Map<String, Object>> CheckRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
         System.out.println(allRequestAccessChatForm.getUsername_from_sent());
-        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernamefromsent=? and access=true and order_status=false and cancel=false", allRequestAccessChatForm.getUsername_from_sent());
+        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernametosent=? and access=true and order_status=false and cancel=false", allRequestAccessChatForm.getUsername_from_sent());
+    }
+
+    @PostMapping("/rings/CancelRequestAccessChat")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> CancelRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
+        System.out.println(allRequestAccessChatForm.getUsername_from_sent());
+        return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernamefromsent=? and access=false and order_status=false and cancel=true", allRequestAccessChatForm.getUsername_from_sent());
     }
 
     @PostMapping("/rings/UpdateRequestAccessChatStatus")

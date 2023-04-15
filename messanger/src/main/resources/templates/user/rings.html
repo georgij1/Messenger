@@ -70,6 +70,7 @@
             <div class="AllRequest">Все</div>
             <div class="BtnGetSendAccessOffer">Отправленные</div>
             <div class="BtnGetSendAccessOfferCheck">Принятые</div>
+            <div class="BtnGetSendAccessOfferCancel">Отменённые</div>
 
             <div class="MessageMessanger">Сообщения из Чатов</div>
             <div class="EventCalendar">Ближайшие события</div>
@@ -100,8 +101,14 @@
         <div class="ContentEventMessage">
             <h1>События из календаря</h1>
         </div>
+
+        <div class="ContentCancelRequestChat">
+            <h1>Отменённые запросы</h1>
+            <div class="ListCancelRequest"></div>
+        </div>
     </div>
 
+    <script th:src="@{/user/rings/GetCancelChat.js}"></script>
     <script th:src="@{/user/home_page.js}"></script>
     <script th:src="@{/user/rings/script.js}"></script>
 </body>
