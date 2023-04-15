@@ -40,3 +40,4 @@ out/
 .idea/.gitignore
 .idea/compiler.xml
 .idea/dataSources.xml
+.idea/jpa-buddy.xml
