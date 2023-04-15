@@ -6,10 +6,11 @@
     <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
     <link rel="stylesheet" th:href="@{user/calendar/calendar.css}">
+    <link rel="stylesheet" th:href="@{/user/calendar/VisualCalendar.css}">
     <link rel="icon" th:href="@{image/main_page/icon_calendar.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
-<body>
+<body class="light">
     <div class="header">
         <div class="info_user">
             <div class="min_size_window"></div>
@@ -60,10 +61,65 @@
 
     <div class="body">
         <div class="burger_menu"></div>
+        <div class="calendar">
+            <div class="calendar-header">
+                <span class="month-picker" id="month-picker">
+                    February
+                </span>
+                <div class="year-picker">
+                    <span class="year-change" id="prev-year">
+                        <pre><</pre>
+                    </span>
+                    <span id="year">2021</span>
+                    <span class="year-change" id="next-year">
+                        <pre>></pre>
+                    </span>
+                </div>
+            </div>
 
-        <h1>Календарь пуст</h1>
+            <div class="calendar-body">
+                <div class="calendar-week-day">
+                    <div>Понедельник</div>
+                    <div>Вторник</div>
+                    <div>Среда</div>
+                    <div>Четверг</div>
+                    <div>Пятница</div>
+                    <div>Суббота</div>
+                    <div>Воскресенье</div>
+                </div>
+
+                <div class="calendar-days">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                </div>
+            </div>
+
+            <div class="calendar-footer">
+                <div class="toggle">
+                    <span>Тёмная тема</span>
+                    <div class="dark-mode-switch">
+                        <div class="dark-mode-switch-ident"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-list"></div>
+        </div>
     </div>
 
     <script th:src="@{/user/calendar/Calendar.js}"></script>
+    <script th:src="@{/user/calendar/VisualCalendar.js}"></script>
 </body>
 </html>

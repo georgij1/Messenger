@@ -9,6 +9,20 @@ h1 {
     margin: auto;
 }
 
+.burger_menu {
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--color-txt);
+    padding: 10px;
+}
+
 .None768px {
     display: none;
 }
