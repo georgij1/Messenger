@@ -808,6 +808,34 @@ li {
     display: flex;
 }
 
+.PermissionDenied {
+    display: none;
+}
+
+.CloseWindowPermissionDenied {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+}
+
+.CloseWindowPermissionDenied:hover {
+    box-shadow: none;
+}
+
+.PermissionDenied h1 {
+    width: max-content;
+    padding: 20px;
+}
+
+.CloseWindowPermissionDenied {
+    display: none;
+}
+
 @media (min-width: 768px) {
     .image_settings_open {
         display: flex;

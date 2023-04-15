@@ -195,16 +195,49 @@ for (let list_chat_itter of list_chats) {
                         .then(response => response.json())
                         .then(data => (data.forEach(item => {
                             console.log(item.status)
+                            let PermissionDenied = document.querySelector('.PermissionDenied')
+                            let list_chats = document.querySelector('.list_chats')
+                            let CloseWindowPermissionDenied = document.querySelector('.CloseWindowPermissionDenied')
+                            let flex_content = document.querySelector('.flex-content')
+                            let content_all_chat = document.querySelector('.content_all_chat')
+                            let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
+                            let BtnSendAccess = document.querySelector('.BtnSendAccess')
+
                             if (item.status === "success") {
                                 console.log("success")
                                 console.log(event.currentTarget)
                                 window.open(`chat/${IDChat}`, '_self')
+                                PermissionDenied.classList.remove('visible')
+                                list_chats.classList.remove('none')
+                                flex_content.classList.remove('none')
+                                content_all_chat.classList.remove('none')
+                                buttons_nav_chats.classList.remove('none')
                             }
 
                             else {
-                                console.log("permission denied")
-                                alert('Доступ запрещён')
+                                PermissionDenied.classList.add('visible')
+                                list_chats.classList.add('none')
+                                CloseWindowPermissionDenied.classList.add('visible')
+                                flex_content.classList.add('none')
+                                content_all_chat.classList.add('none')
+                                content_all_chat.classList.remove('visible')
+                                buttons_nav_chats.classList.add('none')
                             }
+
+                            CloseWindowPermissionDenied.addEventListener('click', () => {
+                                PermissionDenied.classList.remove('visible')
+                                list_chats.classList.remove('none')
+                                CloseWindowPermissionDenied.classList.remove('none')
+                                flex_content.classList.remove('none')
+                                content_all_chat.classList.remove('none')
+                                content_all_chat.classList.add('visible')
+                                buttons_nav_chats.classList.remove('none')
+                            })
+
+                            BtnSendAccess.addEventListener('click', () => {
+                                alert('Сообщение на получение доступа отправлено')
+                                window.location.reload()
+                            })
                         })))
 
                         .then(() => {

@@ -175,10 +175,6 @@
     cursor: pointer;
 }
 
-.block {
-    display: block;
-}
-
 .start_page {
     cursor: default;
 }
@@ -204,10 +200,6 @@ a {
     background-size: 50px;
     box-shadow: 0 0 10px;
     border-radius: 10px;
-}
-
-.none {
-    display: none;
 }
 
 .burger_menu {
@@ -265,6 +257,29 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: #2a8bf2;
+}
+
+.BtnSendAccess {
+    padding: 10px 20px;
+    background: antiquewhite;
+    width: max-content;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px navajowhite;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.BtnSendAccess:hover {
+    background: #FFF;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
 }
 
 @media (min-width: 768px) {
