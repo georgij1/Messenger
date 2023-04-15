@@ -207,8 +207,14 @@ a {
     height: 50px;
     background: url("../image/main_page/burger_menu.png") no-repeat;
     background-size: 50px;
-    box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px aquamarine;
     border-radius: 10px;
+    border: 2px solid bisque;
+    cursor: pointer;
+}
+
+.burger_menu:hover {
+    box-shadow: none;
 }
 
 .header {
@@ -226,7 +232,6 @@ a {
 .body, .body_1 {
     padding: 10px;
     width: max-content;
-    /*display: block;*/
     justify-content: space-between;
 }
 
@@ -241,14 +246,12 @@ a {
     display: none;
 }
 
-/* полоса прокрутки (скроллбар) */
 ::-webkit-scrollbar {
-    width: 15px; /* ширина для вертикального скролла */
-    height: 8px; /* высота для горизонтального скролла */
+    width: 15px;
+    height: 8px;
     background-color: #2a8bf2;
 }
 
-/* ползунок скроллбара */
 ::-webkit-scrollbar-thumb {
     background-color: #2a8bf2;
     border-radius: 9em;
@@ -301,10 +304,4 @@ a {
     .header {
         display: block;
     }
-
-    /*.body, .body_1 {*/
-    /*    width: 100vh;*/
-    /*    display: flex;*/
-    /*    justify-content: flex-end;*/
-    /*}*/
 }
