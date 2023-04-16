@@ -6,7 +6,6 @@ import com.example.messanger.auth.forms.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.json.JSONArray;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -87,7 +86,7 @@ public class ChatController {
         System.out.println(is_available);
         System.out.println(is_available1);
 
-        if (Boolean.TRUE.equals(is_available) && Boolean.TRUE.equals(is_available1)) {
+        if (Boolean.TRUE.equals(is_available)) {
             System.out.println("success with user");
             return "[{\"status\":\"success\"}]";
         }

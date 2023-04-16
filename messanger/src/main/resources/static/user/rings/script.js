@@ -215,7 +215,8 @@ fetch('/rings/RequestAccessChatNotChecked', {
                         BtnSuccessRequestItter.classList.add('none')
                     }
                     let BtnSuccessRequest1 = document.querySelectorAll('.BtnSuccessRequest1')
-                    let UsernameNew = document.querySelector('.username').textContent
+                    // let UsernameNew = document.querySelector('.username').textContent
+                    let UsernameNew = item.usernamefromsent
                     for (let BtnSuccessRequest1Itter of BtnSuccessRequest1) {
                         BtnSuccessRequest1Itter.addEventListener('click', () => {
                             console.log('true')
