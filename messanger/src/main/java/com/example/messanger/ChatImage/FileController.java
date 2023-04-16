@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -64,8 +65,13 @@ public class FileController {
 //    }
 
     @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getDataImage(@PathVariable String id) {
+    public ResponseEntity<byte[]> getDataImage(@PathVariable String id, Model model) {
         FileDB fileDB = storageService.getFile(id);
+        model.addAttribute("ImageChat", ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, fileDB.getType() + "filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData())
+        );
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, "image/png; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());

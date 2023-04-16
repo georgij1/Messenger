@@ -86,3 +86,18 @@ function sendMessage(event) {
 }
 
 messageForm.addEventListener('submit', sendMessage, true)
+
+fetch('/ImageChat', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: 'cors',
+    method: 'POST'
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        console.log("/files/"+item.id)
+        let url = "/files/"+item.id
+        let list_chat = document.querySelector('.list_chat')
+        list_chat.innerHTML+=`<img class="ImageChat" src="${url}" alt="">`
+    }))

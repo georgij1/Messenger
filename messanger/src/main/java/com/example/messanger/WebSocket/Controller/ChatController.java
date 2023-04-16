@@ -1,11 +1,15 @@
 package com.example.messanger.WebSocket.Controller;
 
+import com.example.messanger.ChatImage.FileStorageService;
+import com.example.messanger.ChatImage.model.FileDB;
 import com.example.messanger.WebSocket.model.ChatMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -14,6 +18,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -59,12 +64,26 @@ public class ChatController {
         return jdbcTemplate.queryForList("select * from message where id=?", id);
     }
 
+    private FileStorageService storageService;
+
     @GetMapping("/chat/{id}")
-    @CrossOrigin("*")
     @AuthorizedUser
     public String OpenChat(@PathVariable String id, Model model, HttpServletRequest request) {
         model.addAttribute("IdChat", id);
+        FileDB fileDB = storageService.getFile("3e8eff83-4674-4123-9309-2bc1e047669b");
+        List<Map<String, Object>> IdImage = jdbcTemplate.queryForList("select id from image_message");
+        for (Map<String, Object> IdImageItter : IdImage) {
+            System.out.println(IdImageItter.get("id"));
+            model.addAttribute("ImageChat", "/files/"+IdImageItter.get("id"));
+        }
         return "chat_websocket/OpeningChat";
+    }
+
+    @PostMapping("/ImageChat")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> GetImageChat() {
+        return jdbcTemplate.queryForList("select id from image_message");
     }
 
     @PostMapping("/Find/{UserNameChat}")

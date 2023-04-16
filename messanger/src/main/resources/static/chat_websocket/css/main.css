@@ -850,6 +850,22 @@ li {
     background: #FFF;
 }
 
+.ImageChat {
+    display: block;
+    height: 300px;
+    width: 284px;
+    border: 2px solid beige;
+    padding: 10px 7px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+    margin: 30px auto 60px;
+}
+
+.ImageChat:hover {
+    box-shadow: 0 0 10px;
+}
+
 .owner {
     display: none;
 }
@@ -1016,8 +1032,9 @@ li {
          margin: 0;
     }
 
-    .smile {
-        margin-right: 20px;
+    .ImageChat {
+        width: 600px;
+        height: 600px;
     }
 
     .none {
