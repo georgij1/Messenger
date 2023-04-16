@@ -1,11 +1,16 @@
 .calendar {
-    height: 100vh;
+    height: max-content;
     width: 287px;
     background-color: aliceblue;
     border-radius: 30px;
     padding: 5px;
     position: relative;
     overflow: hidden;
+}
+
+.calendar .month-list {
+    padding: 90px 0;
+    margin-bottom: 30px;
 }
 
 .calendar-body {
@@ -47,6 +52,11 @@
     margin: 10px;
     border: 2px solid bisque;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.AddEvent:hover {
+    background: #FFF;
 }
 
 .calendar-days div {
@@ -185,14 +195,13 @@ pre {
 }
 
 .month-list {
-    position: absolute;
-    width: 100%;
-    height: 292px;
-    padding: 47px 0;
+    width: 107%;
+    height: max-content;
+    padding: 43px 0;
     grid-template-columns: repeat(1, 1fr);
     gap: 5px;
     transform: scale(1.5);
-    margin-top: 50px;
+    margin-top: 35px;
     display: none;
     overflow: scroll;
 }
@@ -216,7 +225,7 @@ pre {
     background: azure;
     border: 2px solid beige;
     border-radius: 10px;
-    width: 130px;
+    width: 50%;
 }
 
 .dark {
@@ -270,14 +279,15 @@ pre {
     }
 
     .calendar {
-        width: 53vW;
-        height: 83vh;
-        margin: auto;
+        width: 95vW;
+        margin: 0;
     }
 }
 
 @media (min-width: 1024px) {
     .calendar {
         width: 100%;
+        height: 606px;
+        margin: 0;
     }
 }

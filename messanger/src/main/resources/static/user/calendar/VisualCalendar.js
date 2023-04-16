@@ -19,26 +19,6 @@ generateCalendar = (month, year) => {
     if (!month) month = currDate.getMonth()
     if (!year) year = currDate.getFullYear()
     month_picker.innerHTML = `${month_names[month]}`
-    let date = new Date()
-    console.log(date.getMonth())
-    console.log(month_names[date.getMonth()])
-    let div = document.querySelector('.month-list')
-    console.log(div.children[0].children[0].textContent)
-    console.log(div.children[1].children[0].textContent)
-    console.log(div.children[2].children[0].textContent)
-    console.log(div.children[3].children[0].textContent)
-    console.log(div.children[4].children[0].textContent)
-    console.log(div.children[5].children[0].textContent)
-    console.log(div.children[6].children[0].textContent)
-    console.log(div.children[7].children[0].textContent)
-    console.log(div.children[8].children[0].textContent)
-    console.log(div.children[9].children[0].textContent)
-    console.log(div.children[10].children[0].textContent)
-    console.log(div.children[11].children[0].textContent)
-    if (month_names[date.getMonth()]) {
-        console.log('this month')
-        month_picker.innerHTML=`${month_names[date.getMonth()]}`
-    }
     calendar_header_year.innerHTML = year
     let first_day = new Date(year, month, 1)
     for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {

@@ -6,9 +6,6 @@ let body_class = document.querySelectorAll('.body')
 let flex_content = document.querySelectorAll('.flex-content')
 let burger_menu = document.querySelectorAll('.burger_menu')
 let flex = document.querySelector('.flex')
-let body = document.querySelector('.body')
-let AddEvent = document.querySelector('.AddEvent')
-let WindowAddEvent = document.querySelector('.WindowAddEvent')
 
 fetch('/image_profile',{
     headers: new Headers({
@@ -27,6 +24,7 @@ fetch('/image_profile',{
             image_profile_1.style.borderRadius=`50px`
         }
     })));
+
 
 btn_up.addEventListener('click', () => {
     btn_up.classList.toggle('round')
@@ -55,11 +53,9 @@ for (let min_size_windo of min_size_window) {
             for (let chat_all of chat) {
                 chat_all.classList.remove('chat_burger_open')
             }
-            body.classList.remove('None768px')
         }
     })
 }
-
 
 for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
@@ -83,14 +79,6 @@ for (let menu of burger_menu) {
             for (let chat_all of chat) {
                 chat_all.classList.toggle('chat_burger_open')
             }
-            body.classList.add('None768px')
         }
     })
 }
-
-AddEvent.addEventListener('click', () => {
-    calendar_header.classList.add('none')
-    calendar_body.classList.add('none')
-    calendar_footer.classList.add('none')
-    WindowAddEvent.classList.add('block')
-})

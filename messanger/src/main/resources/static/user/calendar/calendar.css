@@ -11,6 +11,8 @@ h1 {
 
 .burger_menu {
     margin-bottom: 20px;
+    position: fixed;
+    z-index: 9999;
 }
 
 .calendar-header {
@@ -19,7 +21,7 @@ h1 {
     align-items: center;
     font-size: 25px;
     font-weight: 600;
-    padding: 10px;
+    padding: 10px 5px;
 }
 
 .calendar-day-hover:hover {
@@ -36,6 +38,19 @@ h1 {
     background: black;
 }
 
+.height {
+    height: 69px;
+}
+
+.WindowAddEvent {
+    display: none;
+    padding: 10px 20px;
+}
+
+.month-list > div > div:hover {
+    box-shadow: 0 0 10px bisque;
+}
+
 .None768px {
     display: none;
 }
@@ -50,7 +65,7 @@ h1 {
 
 @media (min-width: 768px) {
     .body_1, .body {
-        width: 700px;
+        width: 97%;
     }
 
     .None768px {
@@ -61,6 +76,11 @@ h1 {
 
 @media (min-width: 1024px) {
     .body_1, .body {
+        width: 64%;
         margin-left: 333px;
+    }
+
+    .height {
+        display: none;
     }
 }

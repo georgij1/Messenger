@@ -25,3 +25,23 @@
 .body_1, .body {
     margin: auto;
 }
+
+@media (min-width: 768px) {
+    .none_content {
+        display: block;
+        margin-left: 300px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content {
+        margin-left: 180px;
+    }
+}
