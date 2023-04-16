@@ -91,35 +91,6 @@ public class UserRepo {
         return null;
     }
 
-    /*    @GetMapping("/image_profile")
-    public ResponseEntity<byte[]> getImage(HttpServletRequest request, Model model) throws IOException, java.io.IOException {
-
-        var cookies = request.getCookies();
-        String token;
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("auth_token")) {
-                token = cookie.getValue();
-                System.out.println(token);
-                var json = JWT.decode(token.formatted("utf-8")).getSubject();
-                System.out.println(json);
-                model.addAttribute("username", json);
-                model.addAttribute("all_message", jdbcTemplate.queryForList("select * from public.message"));
-                model.addAttribute( "icon_profile", jdbcTemplate.queryForList("select image from users where username=?", json));
-                System.out.println(jdbcTemplate.queryForList("select image from users where username=?", json));
-
-                System.out.println(jdbcTemplate.queryForObject("select image from users where username=?", String.class, json));
-
-                ClassLoader classLoader = getClass().getClassLoader();
-                InputStream inputStream = classLoader.getResourceAsStream(jdbcTemplate.queryForObject("select image from users where username=?", String.class, json));
-                byte[] imageBytes = IOUtils.toByteArray(inputStream);
-                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-            }
-        }
-        return null;
-    }
- */
-
     @GetMapping("/all_message")
     @ResponseBody
     @CrossOrigin("*")
