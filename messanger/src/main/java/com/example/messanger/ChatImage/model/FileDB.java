@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "image_message")
 public class FileDB {
     @Id
-    public int id;
+    @GeneratedValue(strategy=GenerationType.UUID)
+    public String id;
 
     private String name;
 
@@ -24,7 +25,7 @@ public class FileDB {
         this.data = data;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

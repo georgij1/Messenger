@@ -4,13 +4,13 @@ import com.example.messanger.ChatImage.model.FileDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,13 +54,20 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-        FileDB fileDB = storageService.getFile(id);
+//    @GetMapping("/files/{id}")
+//    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+//        FileDB fileDB = storageService.getFile(id);
 
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+//                .body(fileDB.getData());
+//    }
+
+    @GetMapping("/files/{id}")
+    public ResponseEntity<byte[]> getDataImage(@PathVariable String id) {
+        FileDB fileDB = storageService.getFile(id);
         return ResponseEntity.ok()
-//                .contentType(MediaType.IMAGE_JPEG)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
     }
 }
