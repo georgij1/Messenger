@@ -55,15 +55,6 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-//    @GetMapping("/files/{id}")
-//    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-//        FileDB fileDB = storageService.getFile(id);
-
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-//                .body(fileDB.getData());
-//    }
-
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getDataImage(@PathVariable String id, Model model) {
         FileDB fileDB = storageService.getFile(id);

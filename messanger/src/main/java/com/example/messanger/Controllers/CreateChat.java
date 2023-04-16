@@ -60,7 +60,8 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> OpenChat(@PathVariable int ChatId) {
-        return jdbcTemplate.queryForList("select * from message where chat_id=?", ChatId);
+        System.out.println(jdbcTemplate.queryForList("SELECT * FROM message join users u on message.sender_id = u.id where chat_id=?", ChatId));
+        return jdbcTemplate.queryForList("SELECT * FROM message join users u on message.sender_id = u.id where chat_id=?", ChatId);
     }
 
     @PostMapping("/MyChats/{owner_chat}")

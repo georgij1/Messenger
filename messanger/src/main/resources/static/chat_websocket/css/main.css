@@ -862,6 +862,35 @@ li {
     margin: 30px auto 60px;
 }
 
+.ToolsAdmin {
+    display: none;
+}
+
+.ItemUsername {
+    color: blue;
+    font-size: 13px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    width: max-content;
+}
+
+.MessageMain {
+    display: flex;
+    align-items: center;
+}
+
+.ImageProfileMessage {
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 0 10px beige;
+    border: 2px solid aqua;
+    border-radius: 54px;
+}
+
+.ItemUsername:hover {
+    text-decoration: 2px solid blue underline;
+}
+
 .ImageChat:hover {
     box-shadow: 0 0 10px;
 }
@@ -1035,6 +1064,10 @@ li {
     .ImageChat {
         width: 600px;
         height: 600px;
+    }
+
+    .message {
+        width: 70vh;
     }
 
     .none {

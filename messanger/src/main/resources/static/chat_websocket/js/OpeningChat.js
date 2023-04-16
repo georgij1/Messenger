@@ -66,19 +66,28 @@ fetch(`/chats/${IdChat.textContent}`, {
             MessageNullDiv.classList.add('none')
             list_chat.innerHTML +=
                 `
-                                     <div class="message">
-                                         <div class="id">${item.id}</div>
-                                         <div class="text">${item.text}</div>
+                    <div class="MessageMain">
+                        <div class="ImageProfileMessage"></div>
+                        <div class="message">
+                        <div class="ItemUsername">${item.username}</div>
+                         <div class="id">${item.id}</div>
+                         <div class="text">${item.text}</div>
 
-                                         <div class="tools_message">
-                                             <div class="delete_message"></div>
-                                             <div class="edit_message"></div>
-                                             <div class="share_message"></div>
-                                         </div>
-                                         
-                                         <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
-                                     </div>
-                                 `
+                         <div class="tools_message">
+                             <div class="delete_message"></div>
+                             <div class="edit_message"></div>
+                             <div class="share_message"></div>
+                         </div>
+                         
+                         <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                     </div>
+                    </div>
+                `
+            let ImageProfileMessage = document.querySelectorAll('.ImageProfileMessage')
+            for (let ImageProfileMessageItter of ImageProfileMessage) {
+                ImageProfileMessageItter.style.background=`url(${item.image})` + 'no-repeat'
+                ImageProfileMessageItter.style.backgroundSize='100px'
+            }
 
             let edit_message = document.querySelectorAll('.edit_message')
             let window_edit_message = document.querySelector('.window_edit_message')

@@ -25,7 +25,7 @@ function sendMessage(event) {
                     let DateLong = new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
                     let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
 
-                    let chatMessage = {
+                    let chatMessage  = {
                         sender: item_id_user,
                         content: messageInput.value,
                         chat_id: IdChat.textContent,
@@ -99,5 +99,27 @@ fetch('/ImageChat', {
         console.log("/files/"+item.id)
         let url = "/files/"+item.id
         let list_chat = document.querySelector('.list_chat')
-        list_chat.innerHTML+=`<img class="ImageChat" src="${url}" alt="">`
+        list_chat.innerHTML+=`
+            <img class="ImageChat" src="${url}" alt="">
+            <div class="TimeStampShort" title="${item.time_stamp_long}">${item.time_stamp_short}</div>
+        `
+        if (list_chat.clientHeight === 0) {
+            btn_down_1.classList.add('none')
+            list_chat.innerHTML=`
+        <div class="MessageNullDiv">
+            <div class="MessageListNull">
+                <div class="text">Сообщений нет начните общаться первым</div>
+                <div class="ImageMessageNull"></div>
+            </div>
+        </div>
+    `
+            let MessageNullDiv = document.querySelector('.MessageNullDiv')
+            MessageNullDiv.classList.remove('none')
+        }
+
+        else {
+            btn_down_1.classList.remove('none')
+            let MessageNullDiv = document.querySelector('.MessageNullDiv')
+            MessageNullDiv.classList.add('none')
+        }
     }))
