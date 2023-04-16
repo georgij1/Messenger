@@ -1,16 +1,12 @@
 package com.example.messanger.ChatImage.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "image_message")
 public class FileDB {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    public int id;
 
     private String name;
 
@@ -28,7 +24,7 @@ public class FileDB {
         this.data = data;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
