@@ -19,12 +19,33 @@ h1 {
     align-items: center;
     font-size: 25px;
     font-weight: 600;
-    color: var(--color-txt);
     padding: 10px;
+}
+
+.calendar-day-hover:hover {
+    border-radius: 50%;
+    box-shadow: 0 0 10px bisque;
+    border: 2px solid aquamarine;
+}
+
+.LightPre {
+    color: black;
+}
+
+.dark-month-picker {
+    background: black;
 }
 
 .None768px {
     display: none;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
 }
 
 @media (min-width: 768px) {
