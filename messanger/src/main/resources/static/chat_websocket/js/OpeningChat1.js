@@ -100,8 +100,10 @@ fetch('/ImageChat', {
         let url = "/files/"+item.id
         let list_chat = document.querySelector('.list_chat')
         list_chat.innerHTML+=`
-            <img class="ImageChat" src="${url}" alt="">
-            <div class="TimeStampShort" title="${item.time_stamp_long}">${item.time_stamp_short}</div>
+            <div class="ImageBorder">
+                <img class="ImageChat" src="${url}" alt="">
+                <div class="TimeStampShort" title="${item.time_stamp_long}">${item.time_stamp_short}</div>
+            </div>
         `
         if (list_chat.clientHeight === 0) {
             btn_down_1.classList.add('none')

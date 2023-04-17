@@ -83,6 +83,15 @@ fetch(`/chats/${IdChat.textContent}`, {
                      </div>
                     </div>
                 `
+            let MessageMain = document.querySelectorAll('.MessageMain')
+            for (let MessageMainItter of MessageMain) {
+                console.log(MessageMainItter)
+                MessageMainItter.addEventListener('click', (event) => {
+                    console.log(event.currentTarget.children[1].children[3])
+                    event.currentTarget.children[1].children[3].classList.add('flex')
+                })
+            }
+
             let ImageProfileMessage = document.querySelectorAll('.ImageProfileMessage')
             for (let ImageProfileMessageItter of ImageProfileMessage) {
                 ImageProfileMessageItter.style.background=`url(${item.image})` + 'no-repeat'

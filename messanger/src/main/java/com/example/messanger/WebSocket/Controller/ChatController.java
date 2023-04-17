@@ -70,7 +70,7 @@ public class ChatController {
     @AuthorizedUser
     public String OpenChat(@PathVariable String id, Model model, HttpServletRequest request) {
         model.addAttribute("IdChat", id);
-        FileDB fileDB = storageService.getFile("3e8eff83-4674-4123-9309-2bc1e047669b");
+//        FileDB fileDB = storageService.getFile("3e8eff83-4674-4123-9309-2bc1e047669b");
         List<Map<String, Object>> IdImage = jdbcTemplate.queryForList("select id from image_message");
         for (Map<String, Object> IdImageItter : IdImage) {
             System.out.println(IdImageItter.get("id"));

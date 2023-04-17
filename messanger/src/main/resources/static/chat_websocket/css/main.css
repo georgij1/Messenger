@@ -325,8 +325,10 @@ input {
 .message {
     padding: 10px;
     box-shadow: 0 0 10px lightblue;
-    margin: 30px auto 10px;
+    margin: 30px 0 10px;
     border-radius: 10px;
+    background: #FFF;
+    cursor: default;
 }
 
 .delete_message {
@@ -377,10 +379,10 @@ input {
 }
 
 .tools_message {
-    display: flex;
     justify-content: start;
     gap: 5%;
     margin-top: 20px;
+    display: none;
 }
 
 .red {
@@ -439,12 +441,17 @@ li {
     right: 16px;
     background: url("../image/icon_down.png") no-repeat center, #FFF;
     padding: 10px;
-    box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px #a7acd2;
     border-radius: 100%;
     background-size: 25px;
     width: 30px;
     height: 30px;
     rotate: 180deg;
+    cursor: pointer;
+}
+
+.btn_up_1:hover {
+    box-shadow: 0 0 10px bisque;
 }
 
 .buttons_nav_chats {
@@ -774,6 +781,7 @@ li {
     text-align: right;
     color: gainsboro;
     margin-top: 10px;
+    cursor: default;
 }
 
 .MessageListNull {
@@ -854,12 +862,23 @@ li {
     display: block;
     height: 300px;
     width: 284px;
+    margin: 0 auto 0;
+    cursor: pointer;
+}
+
+.ImageBorder {
     border: 2px solid beige;
     padding: 10px 7px;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
-    cursor: pointer;
-    margin: 30px auto 60px;
+    width: max-content;
+    margin: auto;
+}
+
+.ImageBorder:hover {
+    background: #eaebef;
+    border-radius: 20px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .ToolsAdmin {
@@ -877,6 +896,17 @@ li {
 .MessageMain {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 15px;
+    cursor: pointer;
+    margin: 20px 0 20px;
+}
+
+.MessageMain:hover {
+    background: #eaebef;
+    border-radius: 20px;
+    box-shadow: 0 0 10px bisque;
+    margin: 20px 0 20px;
 }
 
 .ImageProfileMessage {
@@ -892,7 +922,8 @@ li {
 }
 
 .ImageChat:hover {
-    box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px aqua;
+    border-radius: 20px;
 }
 
 .owner {
