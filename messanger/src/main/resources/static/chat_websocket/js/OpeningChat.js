@@ -84,11 +84,15 @@ fetch(`/chats/${IdChat.textContent}`, {
                     </div>
                 `
             let MessageMain = document.querySelectorAll('.MessageMain')
+
+            console.log(MessageMain)
+
             for (let MessageMainItter of MessageMain) {
                 console.log(MessageMainItter)
                 MessageMainItter.addEventListener('click', (event) => {
+                    console.log('click')
                     console.log(event.currentTarget.children[1].children[3])
-                    event.currentTarget.children[1].children[3].classList.add('flex')
+                    event.currentTarget.children[1].children[3].classList.toggle('flex')
                 })
             }
 
@@ -393,6 +397,8 @@ function onMessageReceived(payload) {
 
 function ErrorSocket() {
     console.log('Произошла ошибка возможно сервер упал')
+    alert('траница будет перезагружена')
+    window.location.reload()
 }
 
 connect()

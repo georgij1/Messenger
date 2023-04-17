@@ -42,19 +42,52 @@ function sendMessage(event) {
                     let list_chat = document.querySelector('.list_chat')
                     let MessageNullDiv = document.querySelector('.MessageNullDiv')
                     MessageNullDiv.classList.add('none')
-                    list_chat.innerHTML += `
-                                                    <div class="message">
-                                                        <div class="id">${chatMessage.id}</div>
-                                                        <div class="text">${chatMessage.content}</div>
-                                                        <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>
+                    let UsernameNew = document.querySelector('.username').textContent
+                    fetch('/image_profile',{
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        mode: "cors"
+                    })
+                        .then(response => response.json())
+                        .then((data) => console.log(data.forEach((item) => {
+                            let ItemImageMessage = item.image
+                            list_chat.innerHTML += `
+                        <div class="MessageMain">
+                            <div class="ImageProfileMessage1"></div>
+                            <div class="message">
+                            <div class="ItemUsername">${UsernameNew}</div>
+                            <div class="id">1</div>
+                            <div class="text">${chatMessage.content}</div>
+    
+<!--                            <div class="tools_message">-->
+<!--                                <div class="delete_message"></div>-->
+<!--                                <div class="edit_message"></div>-->
+<!--                                <div class="share_message"></div>-->
+<!--                            </div>-->
+                             
+                            <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>
+                         </div>
+                        </div>
+<!--                                                    <div class="message">-->
+<!--                                                        <div class="id">${chatMessage.id}</div>-->
+<!--                                                        <div class="text">${chatMessage.content}</div>-->
+<!--                                                        <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>-->
 
 <!--                                                        <div class="tools_message">-->
 <!--                                                            <div class="delete_message"></div>-->
 <!--                                                            <div class="edit_message"></div>-->
 <!--                                                            <div class="share_message"></div>-->
 <!--                                                        </div>-->
-                                                    </div>
+<!--                                                    </div>-->
                                                 `
+                            let ImageProfileMessage1 = document.querySelectorAll('.ImageProfileMessage1')
+
+                            for (let ImageProfileMessageItter1 of ImageProfileMessage1) {
+                                ImageProfileMessageItter1.style.background=`url(${item.image})` + 'no-repeat'
+                                ImageProfileMessageItter1.style.backgroundSize='100px'
+                            }
+                        })));
                     let delete_message = document.querySelectorAll('.delete_message')
                     console.log(delete_message)
                     for (let delete_message_itter of delete_message) {
