@@ -219,7 +219,7 @@ btn_tools_chat.addEventListener('click', () => {
     flex_content_chat_top_tools.classList.add('none')
     height.classList.add('none')
     tools.classList.add('none')
-    fetch('http://localhost:8080/files', {
+    fetch('/files', {
         headers: {
             "Content-Type": "application/json"
         },
