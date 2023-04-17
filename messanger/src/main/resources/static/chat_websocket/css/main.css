@@ -864,6 +864,7 @@ li {
     width: 284px;
     margin: 0 auto 0;
     cursor: pointer;
+    border-radius: 20px;
 }
 
 .ImageBorder {
