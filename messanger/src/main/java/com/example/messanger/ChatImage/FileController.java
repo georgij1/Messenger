@@ -1,5 +1,6 @@
 package com.example.messanger.ChatImage;
 
+import com.example.messanger.ChatImage.forms.FormsGetTimeStamp;
 import com.example.messanger.ChatImage.model.FileDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,16 +21,18 @@ public class FileController {
     private FileStorageService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, FileDB formsGetTimeStamp) {
         System.out.println(file);
         String message = "";
-        try {
-            storageService.store(file);
 
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+        try {
+            storageService.store(file, formsGetTimeStamp.GetTimeStampShort(), formsGetTimeStamp.GetTimeStampLong());
+            message = "Файл успешно загружен: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-        } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+        }
+
+        catch (Exception e) {
+            message = "Не можем загрузить файл: " + file.getOriginalFilename() + "!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
     }

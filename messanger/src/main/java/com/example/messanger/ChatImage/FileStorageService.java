@@ -14,9 +14,13 @@ import java.util.stream.Stream;
 public class FileStorageService {
     private FileDBRepository fileDBRepository;
 
-    public FileDB store(MultipartFile file) throws IOException {
+    public FileDB store(MultipartFile file, String timeStampShort, String timeStampLong) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), timeStampShort, timeStampLong);
+
+        System.out.println(timeStampShort);
+        System.out.println(timeStampLong);
+        System.out.println(FileDB);
 
         return fileDBRepository.save(FileDB);
     }

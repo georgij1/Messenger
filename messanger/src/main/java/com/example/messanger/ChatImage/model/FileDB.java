@@ -1,7 +1,15 @@
 package com.example.messanger.ChatImage.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "image_message")
 public class FileDB {
@@ -16,13 +24,16 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    public FileDB() {
-    }
+    public String timeStampShort;
 
-    public FileDB(String name, String type, byte[] data) {
+    public String timeStampLong;
+
+    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong) {
         this.name = name;
         this.type = type;
         this.data = data;
+        this.timeStampShort = timeStampShort;
+        this.timeStampLong = timeStampLong;
     }
 
     public String getId() {
@@ -51,5 +62,26 @@ public class FileDB {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public String GetTimeStampShort() {
+        return timeStampShort;
+    }
+
+    public String GetTimeStampLong() {
+        return timeStampLong;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        FileDB fileDB = (FileDB) o;
+        return getId() != null && Objects.equals(getId(), fileDB.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

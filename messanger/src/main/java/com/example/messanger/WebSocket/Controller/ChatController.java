@@ -83,7 +83,7 @@ public class ChatController {
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> GetImageChat() {
-        return jdbcTemplate.queryForList("select id from image_message");
+        return jdbcTemplate.queryForList("select * from image_message");
     }
 
     @PostMapping("/Find/{UserNameChat}")
