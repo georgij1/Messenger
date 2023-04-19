@@ -1,7 +1,7 @@
 package com.example.messanger.auth.Controllers;
 
 import com.example.messanger.auth.User.UserRepo;
-import com.example.messanger.auth.forms.RegistrationForm;
+import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,7 +26,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public class RegistrationController {
     public UserRepo userRepo;
+    public JdbcTemplate jdbcTemplate;
 
+    //  Контроллер для отображения страницы /auth/registration в браузере
     @GetMapping("registration")
     public String registration_redirect(HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
@@ -51,8 +53,6 @@ public class RegistrationController {
         return "/auth/registration";
     }
 
-    public JdbcTemplate jdbcTemplate;
-
     @PostMapping("registration")
     public String registration_user(RegistrationForm registrationForm, Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam("avatar") MultipartFile file) throws IOException {
         if ((Objects.equals(registrationForm.getPassword(), "😩🍆💦💦💦")) && (Objects.equals(registrationForm.getRepeatPassword(), "😩🍆💦💦💦"))) {
@@ -61,19 +61,14 @@ public class RegistrationController {
 
         else if ((registrationForm.getLogin().length() > 0 && registrationForm.getPassword().length() >= 8 && registrationForm.getRepeatPassword().length() >= 8)) {
             if ((Objects.equals(registrationForm.getPassword(), registrationForm.getRepeatPassword()))) {
-                System.out.println(file.getOriginalFilename());
-                    System.out.println(file.getOriginalFilename());
                     if (Objects.equals(file.getOriginalFilename(), "")) {
                             String DirectoryPath = "../messanger/src/main/resources/static/uploads" + "/" + registrationForm.getLogin();
                             File directory = new File(DirectoryPath);
                             if (!directory.exists()) {
                                 boolean result = directory.mkdir();
-                                System.out.println(result);
 
                                 if (result) {
-                                    System.out.println("Directory is create");
                                     userRepo.create(registrationForm, model, "../image/settings/icon_profile.png");
-                                    System.out.println(DirectoryPath);
                                     return "/auth/ErrorsPage/success_create_account";
                                 }
 

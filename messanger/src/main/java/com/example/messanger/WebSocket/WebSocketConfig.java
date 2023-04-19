@@ -1,3 +1,5 @@
+// Конфигурация websocket
+
 package com.example.messanger.WebSocket;
 
 import org.springframework.context.annotation.Configuration;

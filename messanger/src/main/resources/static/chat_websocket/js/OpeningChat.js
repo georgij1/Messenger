@@ -6,6 +6,22 @@ let title = document.querySelector('.title')
 let image_chat_open_settings = document.querySelector('.image_chat_open_settings')
 let list_users_open_settings = document.querySelector('.list_users_open_settings')
 let admin_chat = document.querySelector('.admin_chat')
+let window_settings_chat = document.querySelector('.window_settings_chat')
+let btn_down_1 = document.querySelector('.btn_down_1')
+let tools = document.querySelector('.tools')
+let height = document.querySelector('.height')
+let close_window_3 = document.querySelector('.close_window_3')
+let btn_tools_chat = document.querySelector('.btn_tools_chat')
+let window_add_file = document.querySelector('.window_add_file')
+let flex_content_chat_top_tools = document.querySelector('.flex_content_chat_top_tools')
+let btn_close_add_file = document.querySelector('.btn_close_add_file')
+let ListUploadedImage = document.querySelector('.ListUploadedImage')
+let send_message = document.querySelector('.send_message')
+let messageForm = document.querySelector('#messageForm');
+let messageAreaNew = document.querySelector('.list_chat');
+let stompClient = null;
+let username = document.querySelector('.username').textContent
+let input_message = document.querySelector('.input_message')
 
 fetch(`/ChatName/${IdChat.textContent}`, {
     headers: new Headers({
@@ -27,8 +43,6 @@ fetch(`/ChatName/${IdChat.textContent}`, {
 
             admin_chat.innerText=`${item.owner}`
 
-            // Пользователи чата
-            console.log(item.name)
             fetch(`/Find/${item.name}`, {
                 headers: new Headers({
                     'Content-Type': 'application/json'
@@ -40,8 +54,6 @@ fetch(`/ChatName/${IdChat.textContent}`, {
                 .then((response) => {
                     console.log(response)
                     response.json().then(res => (res.forEach(item => {
-                        console.log(res)
-                        console.log(item.name)
                         list_users_open_settings.innerHTML+=`
                                 <div class="UserDiv">
                                     <div class="UserChat" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
@@ -60,9 +72,7 @@ fetch(`/chats/${IdChat.textContent}`, {
 })
     .then((response) => {
         response.json().then(res => (res.forEach(item => {
-            console.log(item)
-            console.log(item.text)
-            let MessageNullDiv = document.querySelector('.MessageNullDiv')
+            const MessageNullDiv = document.querySelector('.MessageNullDiv')
             MessageNullDiv.classList.add('none')
             list_chat.innerHTML +=
                 `
@@ -72,7 +82,7 @@ fetch(`/chats/${IdChat.textContent}`, {
                         <div class="ItemUsername">${item.username}</div>
                          <div class="id">${item.id}</div>
                          <div class="text">${item.text}</div>
-
+    
                          <div class="tools_message">
                              <div class="delete_message"></div>
                              <div class="edit_message"></div>
@@ -83,56 +93,50 @@ fetch(`/chats/${IdChat.textContent}`, {
                      </div>
                     </div>
                 `
-            let MessageMain = document.querySelectorAll('.MessageMain')
 
-            console.log(MessageMain)
-
-            for (let MessageMainItter of MessageMain) {
+            for (let MessageMainItter of document.querySelectorAll('.MessageMain')) {
                 console.log(MessageMainItter)
                 MessageMainItter.addEventListener('click', (event) => {
-                    console.log('click')
-                    console.log(event.currentTarget.children[1].children[3])
+                    console.log(event)
                     event.currentTarget.children[1].children[3].classList.toggle('flex')
                 })
             }
 
-            let ImageProfileMessage = document.querySelectorAll('.ImageProfileMessage')
-            for (let ImageProfileMessageItter of ImageProfileMessage) {
+            for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
                 ImageProfileMessageItter.style.background=`url(${item.image})` + 'no-repeat'
                 ImageProfileMessageItter.style.backgroundSize='100px'
             }
 
-            let edit_message = document.querySelectorAll('.edit_message')
-            let window_edit_message = document.querySelector('.window_edit_message')
+            const edit_message = document.querySelectorAll('.edit_message')
+            const window_edit_message = document.querySelector('.window_edit_message')
+            const cancel_edit_message = document.querySelector('.cancel_edit_message')
+
             for (let edit_message_itter of edit_message) {
                 edit_message_itter.addEventListener('click', () => {
-                    console.log(edit_message)
-                    console.log(item)
+                    height.classList.add('none')
                     list_chat.classList.add('none')
                     flex_content_chat_top_tools.classList.add('none')
                     window_edit_message.classList.add('flex')
+                    cancel_edit_message.classList.add('block')
+                    tools.classList.add('none')
+
                     window_edit_message.innerHTML=`
-                     <input class="input_edit_message" value="${item.text}" name="message">
-                     <input type="button" class="save_edit_message" value="Сохранить">
-                     <input type="button" class="cancel_edit_message" value="Закрыть">
-                     `
-                    let save_edit_message = document.querySelector('.save_edit_message')
-                    let input_edit_message = document.querySelector('.input_edit_message')
-                    let cancel_edit_message = document.querySelector('.cancel_edit_message')
+                        <textarea class="input_edit_message" value="${item.text}" name="message"></textarea>
+                        <input type="submit" class="save_edit_message" value="Сохранить">
+                    `
+
+                    const save_edit_message = document.querySelector('.save_edit_message')
+                    const input_edit_message = document.querySelector('.input_edit_message')
 
                     cancel_edit_message.addEventListener('click', () => {
                         window_edit_message.classList.remove('flex')
                         list_chat.classList.remove('none')
                         flex_content_chat_top_tools.classList.remove('none')
+                        height.classList.remove('none')
+                        tools.classList.remove('none')
                     })
 
                     save_edit_message.addEventListener('click', () => {
-                        console.log('id message')
-                        console.log(item.id)
-                        console.log('text message')
-                        console.log(item.text)
-                        console.log('input_edit_message.value')
-                        console.log(input_edit_message.value)
                         window_edit_message.classList.remove('flex')
                         list_chat.classList.remove('none')
                         flex_content_chat_top_tools.classList.remove('none')
@@ -141,29 +145,32 @@ fetch(`/chats/${IdChat.textContent}`, {
                             "message": input_edit_message.value
                         }
 
-                        fetch(`/edit_message/${item.id}`, {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(formData)
-                        })
-                            .then(res => {console.log(res)})
-                            .then(() => {
-                                console.log(item.text)
-                                window.location.reload()
+                        if (input_edit_message.value.length > 0 && input_edit_message.value !== item.text) {
+                            fetch(`/edit_message/${item.id}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
                             })
+                                .then(() => {
+                                    console.log(input_edit_message.value.length)
+                                    console.log(item.text)
+                                    // window.location.reload()
+                                })
+                        }
+
+                        else {
+                            alert('Сообщение не обновленно так как оно пустое или такой же контент')
+                        }
                     })
                 })
             }
 
             let delete_message = document.querySelectorAll('.delete_message')
-            console.log(delete_message)
             for (let delete_message_itter of delete_message) {
                 delete_message_itter.addEventListener('click', () => {
-                    console.log(delete_message)
-                    console.log(item.id)
                     fetch(`/delete_message/${item.id}`, {
                         method: 'delete',
                         headers: {
@@ -171,24 +178,15 @@ fetch(`/chats/${IdChat.textContent}`, {
                         },
                         mode: "cors"
                     })
-                        .catch(err => {
-                            console.log(err)
-                        })
                         .then(res => {
-                            console.log(res)
                             alert('Сообщение - ' + item.text + ' успешно удалено')
                             window.location.reload()
                         })
                 })
             }
 
-            let share_message = document.querySelectorAll('.share_message')
-            console.log('share_message')
-            console.log(share_message)
-            for (let share_message_itter of share_message) {
-                console.log('share_content')
-                console.log(item.text)
-                share_message_itter.addEventListener('click', () => {
+            for (let ShareMessageItter of document.querySelectorAll('.share_message')) {
+                ShareMessageItter.addEventListener('click', () => {
                     window.open(`/share/${item.text}`, '_self')
                 })
             }
@@ -207,18 +205,13 @@ fetch(`/chats/${IdChat.textContent}`, {
         }
     })
 
-let btn_tools_chat = document.querySelector('.btn_tools_chat')
-let window_add_file = document.querySelector('.window_add_file')
-let flex_content_chat_top_tools = document.querySelector('.flex_content_chat_top_tools')
-let btn_close_add_file = document.querySelector('.btn_close_add_file')
-let ListUploadedImage = document.querySelector('.ListUploadedImage')
-
 btn_tools_chat.addEventListener('click', () => {
     window_add_file.classList.add('flex')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
     height.classList.add('none')
     tools.classList.add('none')
+
     fetch('/files', {
         headers: {
             "Content-Type": "application/json"
@@ -227,13 +220,11 @@ btn_tools_chat.addEventListener('click', () => {
     })
         .then(res => res.json())
         .then(data => data.forEach(item => {
-            console.log(item)
-            ListUploadedImage.innerHTML+=`<div class="link_image">${item.url}</div>`
+            ListUploadedImage.innerHTML+=`<div class="link_image">files/${item.id}</div>`
             let link_image = document.querySelectorAll('.link_image')
             for (let LinkImage of link_image) {
                 LinkImage.addEventListener('click', () => {
-                    // console.log(LinkImage.textContent)
-                    window.open(`${LinkImage.textContent}`, '_self')
+                    window.open(`/${LinkImage.textContent}`, '_self')
                 })
             }
         }))
@@ -247,10 +238,6 @@ btn_close_add_file.addEventListener('click', () => {
     tools.classList.remove('none')
 })
 
-let window_settings_chat = document.querySelector('.window_settings_chat')
-let btn_down_1 = document.querySelector('.btn_down_1')
-let tools = document.querySelector('.tools')
-let height = document.querySelector('.height')
 
 border_name_chat.addEventListener('click', () => {
     window_settings_chat.classList.add('visible')
@@ -261,7 +248,6 @@ border_name_chat.addEventListener('click', () => {
     height.classList.add('none')
 })
 
-let close_window_3 = document.querySelector('.close_window_3')
 close_window_3.addEventListener('click', () => {
     window_settings_chat.classList.remove('visible')
     list_chat.classList.remove('none')
@@ -271,14 +257,12 @@ close_window_3.addEventListener('click', () => {
     height.classList.remove('none')
 })
 
-let send_message = document.querySelector('.send_message')
 send_message.addEventListener('click', () => {
-    let input_message = document.querySelector('.input_message')
     if (input_message.value === '') {
         console.log('str is empty')
-        input_message.classList.toggle('red')
-    } else {
-        console.log("str isn't empty - " + input_message.value)
+    }
+
+    else {
         input_message.classList.remove('red')
     }
 })
@@ -303,20 +287,9 @@ LinkChat.addEventListener('click', () => {
 
 let CopyBtnChat = document.querySelector('.CopyBtnChat')
 CopyBtnChat.addEventListener('click', () => {
-    console.log(LinkChat.textContent)
-
     function copyTextToClipboard(text) {
         const textArea = document.createElement("textarea");
-        textArea.style.position = 'fixed';
-        textArea.style.top = 0;
-        textArea.style.left = 0;
-        textArea.style.width = '2em';
-        textArea.style.height = '2em';
-        textArea.style.padding = 0;
-        textArea.style.border = 'none';
-        textArea.style.outline = 'none';
-        textArea.style.boxShadow = 'none';
-        textArea.style.background = 'transparent';
+        textArea.className = 'textArea'
 
         textArea.value = text;
         document.body.appendChild(textArea);
@@ -325,7 +298,7 @@ CopyBtnChat.addEventListener('click', () => {
         try {
             const successful = document.execCommand('copy');
             const msg = successful ? 'Успешно' : 'Не успешно';
-            console.log('Скопированный текст был таким - ' + msg);
+            alert('Текст скопирован - ' + msg)
         }
 
         catch (err) {
@@ -338,17 +311,8 @@ CopyBtnChat.addEventListener('click', () => {
     copyTextToClipboard(`${LinkChat.textContent}`);
 })
 
-let messageForm = document.querySelector('#messageForm');
-let messageAreaNew = document.querySelector('.list_chat');
-
-let stompClient = null;
-let username = document.querySelector('.username').textContent
-console.log(username)
-
-
 function connect() {
     username = document.querySelector('.username').textContent;
-    console.log(username)
 
     if (username) {
         let socket = new SockJS('/ws');
@@ -396,8 +360,7 @@ function onMessageReceived(payload) {
 }
 
 function ErrorSocket() {
-    console.log('Произошла ошибка возможно сервер упал')
-    alert('траница будет перезагружена')
+    alert('страница будет перезагружена')
     window.location.reload()
 }
 

@@ -42,8 +42,6 @@ console.log(hello)
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
         for (let head of header) {
-            let one_chat = document.querySelector('.one_chat')
-            one_chat.classList.remove('OneChatBlock')
             for (let H1Itter of h1) {
                 H1Itter.classList.remove('h1HeaderOpened')
             }
@@ -83,8 +81,6 @@ for (let menu of burger_menu) {
             buttons_nav_chats.classList.add('ButtonsNavChatsHeaderOpened')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
-            let one_chat = document.querySelector('.one_chat')
-            one_chat.classList.add('OneChatBlock')
             for (let H1Itter of h1) {
                 H1Itter.classList.add('h1HeaderOpened')
             }

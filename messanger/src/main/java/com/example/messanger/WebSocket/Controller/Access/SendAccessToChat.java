@@ -1,3 +1,5 @@
+// Контроллер для получения доступа в чат
+
 package com.example.messanger.WebSocket.Controller.Access;
 
 import com.example.messanger.auth.forms.chat_form.UserPostAccessChat;

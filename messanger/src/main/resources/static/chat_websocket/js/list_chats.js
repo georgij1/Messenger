@@ -178,8 +178,9 @@ for (let list_chat_itter of list_chats) {
                     let UsernameNew = document.querySelector('.username').textContent
                     console.log(UsernameNew)
                     let ChatName = event.currentTarget.children[2].children[0].textContent
-                    let AdminChat = event.currentTarget.children[2].children[1].textContent
-                    console.log(AdminChat)
+                    // let AdminChat = event.currentTarget.children[2].children[1].textContent
+                    // console.log(AdminChat)
+                    console.log(event.currentTarget)
 
                     const formData = {
                         "NameChat": event.currentTarget.children[2].children[0].textContent,

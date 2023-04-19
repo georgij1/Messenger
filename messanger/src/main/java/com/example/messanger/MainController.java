@@ -1,10 +1,12 @@
+// Контроллеры для главной страницы
+
 package com.example.messanger;
 
 import com.auth0.jwt.JWT;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.User.UserRepo;
-import com.example.messanger.auth.forms.LoginForm;
-import com.example.messanger.auth.forms.RegistrationForm;
+import com.example.messanger.auth.forms.AuthForm.LoginForm;
+import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -556,13 +556,36 @@ li {
     border: 2px solid bisque;
     border-radius: 10px;
     box-shadow: 0 0 10px burlywood;
+    width: 93%;
+    outline: 2px solid burlywood;
+    height: 54vh;
 }
 
-.save_edit_message, .cancel_edit_message {
+.save_edit_message {
     padding: 10px;
     border-radius: 10px;
-    background: antiquewhite;
     box-shadow: 0 0 10px cadetblue;
+}
+
+.cancel_edit_message {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.save_edit_message:hover {
+    box-shadow: none;
+}
+
+.cancel_edit_message:hover {
+
 }
 
 .image_settings_open {
@@ -873,7 +896,20 @@ li {
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
     width: max-content;
-    margin: auto;
+    margin: 40px auto;
+}
+
+.textArea {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
 }
 
 .ImageBorder:hover {
@@ -918,6 +954,17 @@ li {
     border-radius: 54px;
 }
 
+.ImageProfileMessage:hover, .ImageProfileMessage1:hover {
+    box-shadow: 0 0 10px chartreuse;
+}
+
+.CheckedBorderMessage {
+    background: #eaebef;
+    border-radius: 20px;
+    box-shadow: 0 0 10px bisque;
+    margin: 20px 0 20px;
+}
+
 .ItemUsername:hover {
     text-decoration: 2px solid blue underline;
 }
@@ -940,8 +987,21 @@ li {
     padding: 20px;
 }
 
+.text {
+    cursor: auto;
+    width: max-content;
+}
+
 .CloseWindowPermissionDenied {
     display: none;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
 }
 
 @media (min-width: 768px) {
@@ -949,6 +1009,10 @@ li {
         display: flex;
         justify-content: space-around;
         align-items: center;
+    }
+
+    .flex {
+        margin-bottom: 0;
     }
 
     .window_create_chat {

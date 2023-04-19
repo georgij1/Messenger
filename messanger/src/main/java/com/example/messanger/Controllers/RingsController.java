@@ -1,9 +1,11 @@
+//Контроллер для уведомлений
+
 package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
-import com.example.messanger.auth.Rings.AllRequestAccessChatForm;
-import com.example.messanger.auth.Rings.RequestAccessChatNotCheckedForm;
-import com.example.messanger.auth.Rings.SetRequestAccessChatStatusForm;
+import com.example.messanger.auth.forms.Rings.AllRequestAccessChatForm;
+import com.example.messanger.auth.forms.Rings.RequestAccessChatNotCheckedForm;
+import com.example.messanger.auth.forms.Rings.SetRequestAccessChatStatusForm;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;

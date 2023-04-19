@@ -34,6 +34,7 @@
             <div class="ListUploadedImage"></div>
         </div>
 
+        <div class="cancel_edit_message"></div>
         <div class="window_edit_message"></div>
 
         <div class="window_settings_chat">
@@ -74,6 +75,7 @@
         </form>
     </div>
 
+    <div class="IdUser" style="display: none"></div>
     <div class="username" style="display: none" th:text="${username}"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
@@ -82,7 +84,6 @@
     <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
-    <script th:src="@{/chat_websocket/js/main.js}"></script>
     <script th:src="@{/chat_websocket/js/UploadFile.js}"></script>
 </body>
 </html>

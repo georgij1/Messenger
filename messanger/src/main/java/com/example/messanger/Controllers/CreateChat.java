@@ -1,3 +1,5 @@
+// Контроллер для создания группового чата (3 и более человек)
+
 package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;

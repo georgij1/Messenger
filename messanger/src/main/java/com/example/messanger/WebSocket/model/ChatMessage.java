@@ -1,3 +1,5 @@
+// Модель группового чата
+
 package com.example.messanger.WebSocket.model;
 
 import lombok.Data;

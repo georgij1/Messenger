@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+// Форма для отправки на получение доступа с JSON Object
 @Data
 public class UserPostAccessChat {
     @JsonProperty("UsernameSentOfferAccess")

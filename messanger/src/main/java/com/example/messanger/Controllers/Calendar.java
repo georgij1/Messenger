@@ -1,3 +1,5 @@
+// Контроллер для мини приложения календаря
+
 package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;

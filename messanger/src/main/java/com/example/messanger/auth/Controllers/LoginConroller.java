@@ -6,8 +6,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.messanger.auth.User.UserRepo;
-import com.example.messanger.auth.forms.LoginForm;
-import com.example.messanger.auth.forms.RegistrationForm;
+import com.example.messanger.auth.forms.AuthForm.LoginForm;
+import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +27,7 @@ import java.util.Objects;
 public class LoginConroller {
     public UserRepo userRepository;
 
+    //  онтроллер дл€ отображени€ страницы auth/login.html в браузере
     @GetMapping("login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         var cookies = request.getCookies();
@@ -58,6 +59,7 @@ public class LoginConroller {
         return "auth/login";
     }
 
+    //  онтроллер дл€ авторизации - дл€ добавлени€ jwt token'a
     @PostMapping("login")
     public String login(LoginForm form, Model model, RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
@@ -82,7 +84,6 @@ public class LoginConroller {
 
                         try {
                             if (form.getLogin().length() > 0 && form.getPassword().length() >= 8) {
-                                System.out.println("Password field > 0 and Login field > 8");
                                 if (userRepository.validPassword(form.getLogin(), form.getPassword())) {
                                     try {
                                         Algorithm algorithm = Algorithm.HMAC512(secret);
@@ -116,7 +117,6 @@ public class LoginConroller {
                 }
 
                 catch (NullPointerException exception) {
-                    System.out.println("catch NullPointerException");
                     return "/auth/ErrorsPage/error_login";
                 }
             }

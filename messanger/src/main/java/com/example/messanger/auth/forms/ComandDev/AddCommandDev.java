@@ -3,6 +3,9 @@ package com.example.messanger.auth.forms.ComandDev;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/* Форма для добавления разработчика в команду разработчиков
+ (это определённый список из разработчиков)
+*/
 @Data
 public class AddCommandDev {
     @JsonProperty("name")

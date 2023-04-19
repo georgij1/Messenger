@@ -1,3 +1,5 @@
+// Прослушка websocket
+
 package com.example.messanger.WebSocket;
 
 import com.example.messanger.WebSocket.model.ChatMessage;

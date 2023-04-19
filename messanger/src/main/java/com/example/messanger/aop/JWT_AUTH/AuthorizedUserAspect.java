@@ -22,8 +22,6 @@ public class AuthorizedUserAspect {
     @Around("@within(com.example.messanger.aop.JWT_AUTH.AuthorizedUser) || @annotation(com.example.messanger.aop.JWT_AUTH.AuthorizedUser)")
     public Object checkUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        System.out.println("ОПА, НИХРЕНА. Я РАНЬШЕ КОНТРОЛЛЕРА ПОЛУЧИЛ ЗАПРОС");
-
         var cookies = request.getCookies();
 
         if (cookies == null) {
@@ -44,6 +42,7 @@ public class AuthorizedUserAspect {
             ((Model) joinPoint.getArgs()[1]).addAttribute("username", json);
             return joinPoint.proceed();
         }
+
         catch (org.springframework.dao.DataIntegrityViolationException exception) {
             return "redirect:/login";
         }

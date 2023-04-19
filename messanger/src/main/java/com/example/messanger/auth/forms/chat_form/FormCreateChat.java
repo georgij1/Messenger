@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 
+// Форма для создания чата с JSON Object
 @Data
 public class FormCreateChat {
     @JsonProperty("desc_chat")

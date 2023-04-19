@@ -1,3 +1,5 @@
+// Описание db для изображения
+
 package com.example.messanger.ChatImage.model;
 
 import jakarta.persistence.*;
@@ -28,12 +30,18 @@ public class FileDB {
 
     public String timeStampLong;
 
-    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong) {
+    public String ChatID;
+
+    public String ChatSender;
+
+    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong, String getChatID, String getChatSender) {
         this.name = name;
         this.type = type;
         this.data = data;
         this.timeStampShort = timeStampShort;
         this.timeStampLong = timeStampLong;
+        this.ChatID = getChatID;
+        this.ChatSender = getChatSender;
     }
 
     public String getId() {
@@ -70,6 +78,14 @@ public class FileDB {
 
     public String GetTimeStampLong() {
         return timeStampLong;
+    }
+
+    public String GetChatID() {
+        return ChatID;
+    }
+
+    public String GetChatSender() {
+        return ChatSender;
     }
 
     @Override

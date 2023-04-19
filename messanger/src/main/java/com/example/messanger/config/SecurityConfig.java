@@ -1,3 +1,5 @@
+// Конфигурация spring security для выхода из системы и удаления jwt token
+
 package com.example.messanger.config;
 
 import org.springframework.context.annotation.Bean;

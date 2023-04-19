@@ -1,3 +1,5 @@
+// Контроллер для share
+
 package com.example.messanger.share;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;

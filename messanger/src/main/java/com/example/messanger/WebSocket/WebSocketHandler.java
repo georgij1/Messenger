@@ -1,7 +1,6 @@
 package com.example.messanger.WebSocket;
 
-import com.example.messanger.auth.forms.DeleteMessage;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.messanger.auth.forms.Messages.DeleteMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.io.IOException;
 import org.springframework.stereotype.Component;

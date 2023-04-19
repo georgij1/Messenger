@@ -1,3 +1,5 @@
+// Контроллер для удаления сообщения
+
 package com.example.messanger.WebSocket.Controller;
 
 import com.example.messanger.WebSocket.WebSocketHandler;

@@ -1,8 +1,9 @@
-package com.example.messanger.auth.Rings;
+package com.example.messanger.auth.forms.Rings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+// Форма для получения статуса доступа
 @Data
 public class SetRequestAccessChatStatusForm {
     @JsonProperty("id")

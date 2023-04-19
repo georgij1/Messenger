@@ -3,6 +3,7 @@ package com.example.messanger.auth.forms.chat_form;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+// Форма для получения доступа к чату с JSON Object
 @Data
 public class AccessChat {
     @JsonProperty("NameChat")
