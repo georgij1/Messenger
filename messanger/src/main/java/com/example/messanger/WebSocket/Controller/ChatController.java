@@ -57,13 +57,6 @@ public class ChatController {
         return "chat_websocket/OpeningChat";
     }
 
-    @PostMapping("/ImageChat")
-    @ResponseBody
-    @CrossOrigin("*")
-    public List<Map<String, Object>> GetImageChat() {
-        return jdbcTemplate.queryForList("select * from image_message");
-    }
-
     @PostMapping("/Find/{UserNameChat}")
     @CrossOrigin("*")
     @ResponseBody
