@@ -98,7 +98,7 @@ public class UserRepo {
     }
 
     // Получения конкретного пользователя по username по условии where
-    @PostMapping("/username")
+        @PostMapping("/username")
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> userChatID(@RequestBody UsernameUserID usernameUserID) {

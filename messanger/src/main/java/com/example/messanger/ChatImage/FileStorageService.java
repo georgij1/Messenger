@@ -27,7 +27,7 @@ public class FileStorageService {
     }
 
     // Метод для получения файлов
-    public FileDB getFile(String id) {
-        return fileDBRepository.findById(id).get();
+    public FileDB getFile(String IdImage) {
+        return fileDBRepository.findById(IdImage).get();
     }
 }

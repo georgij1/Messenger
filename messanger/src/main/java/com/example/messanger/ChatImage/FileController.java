@@ -49,9 +49,9 @@ public class FileController {
     }
 
     // Получения изображения по id
-    @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getDataImage(@PathVariable String id) {
-        FileDB fileDB = storageService.getFile(id);
+    @GetMapping("/files/{IdImage}")
+    public ResponseEntity<byte[]> getDataImage(@PathVariable String IdImage) {
+        FileDB fileDB = storageService.getFile(IdImage);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, "image/png; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());

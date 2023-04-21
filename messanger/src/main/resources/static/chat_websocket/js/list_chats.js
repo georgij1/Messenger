@@ -208,6 +208,7 @@ for (let list_chat_itter of list_chats) {
                             let content_all_chat = document.querySelector('.content_all_chat')
                             let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
                             let BtnSendAccess = document.querySelector('.BtnSendAccess')
+                            document.querySelector('.burger_menu').classList.add('none')
 
                             if (item.status === "success") {
                                 console.log("success")

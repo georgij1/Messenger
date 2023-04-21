@@ -59,7 +59,7 @@ public class LoginConroller {
         return "auth/login";
     }
 
-    // Контроллер для авторизации - для добавления jwt token'a
+    // Контроллер для авторизации - для добавления jwt token's
     @PostMapping("login")
     public String login(LoginForm form, Model model, RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();

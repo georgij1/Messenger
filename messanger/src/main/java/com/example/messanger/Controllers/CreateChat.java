@@ -4,6 +4,7 @@ package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
+import com.example.messanger.auth.forms.chat_form.AddUserChat;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import com.example.messanger.auth.forms.chat_form.UpdateNameChat;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,8 +63,7 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> OpenChat(@PathVariable int ChatId) {
-        System.out.println(jdbcTemplate.queryForList("SELECT * FROM message join users u on message.sender_id = u.id where chat_id=?", ChatId));
-        return jdbcTemplate.queryForList("SELECT * FROM message join users u on message.sender_id = u.id where chat_id=?", ChatId);
+        return jdbcTemplate.queryForList("select * from users, message, image_message where chat_id=? and chatid=?", ChatId, ChatId);
     }
 
     @PostMapping("/MyChats/{owner_chat}")
@@ -95,5 +95,21 @@ public class CreateChat {
         jdbcTemplate.update("delete from public.message where chat_id=?", id);
         jdbcTemplate.update("delete from public.chat where id=?", id);
         return jdbcTemplate.queryForList("select * from chat");
+    }
+
+    @PostMapping("/AddUserChatAdmin")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
+        jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)", addUserChat.getName(), addUserChat.getChat_name(), addUserChat.getImage_user());
+        return jdbcTemplate.queryForList("select * from users_chat");
+    }
+
+    @DeleteMapping("/DeleteUser/{ChatId}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> EditUserChatAdmin(@PathVariable int ChatId) {
+        jdbcTemplate.update("delete from users_chat where id=?", ChatId);
+        return jdbcTemplate.queryForList("select * from users_chat");
     }
 }

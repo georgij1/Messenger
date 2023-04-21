@@ -5,7 +5,6 @@ package com.example.messanger.ChatImage.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-
 import java.util.Objects;
 
 @Getter
@@ -17,7 +16,7 @@ import java.util.Objects;
 public class FileDB {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
-    public String id;
+    public String id_image;
 
     private String name;
 
@@ -26,9 +25,9 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    public String timeStampShort;
+    public String time_stamp_short_image;
 
-    public String timeStampLong;
+    public String time_stamp_long_image;
 
     public String ChatID;
 
@@ -38,14 +37,14 @@ public class FileDB {
         this.name = name;
         this.type = type;
         this.data = data;
-        this.timeStampShort = timeStampShort;
-        this.timeStampLong = timeStampLong;
+        this.time_stamp_short_image = timeStampShort;
+        this.time_stamp_long_image = timeStampLong;
         this.ChatID = getChatID;
         this.ChatSender = getChatSender;
     }
 
     public String getId() {
-        return id;
+        return id_image;
     }
 
     public String getName() {
@@ -73,11 +72,11 @@ public class FileDB {
     }
 
     public String GetTimeStampShort() {
-        return timeStampShort;
+        return time_stamp_short_image;
     }
 
     public String GetTimeStampLong() {
-        return timeStampLong;
+        return time_stamp_long_image;
     }
 
     public String GetChatID() {
