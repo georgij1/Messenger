@@ -15,9 +15,9 @@ public class FileStorageService {
     private FileDBRepository fileDBRepository;
 
     // Метод для сохранения файлов
-    public FileDB store(MultipartFile file, String timeStampShort, String timeStampLong, String GetChatID, String GetChatSender) throws IOException {
+    public FileDB store(MultipartFile file, String timeStampShort, String timeStampLong, String GetChatID, Integer GetChatSender, String GetPlaceHolderImage) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), timeStampShort, timeStampLong, GetChatID, GetChatSender);
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), timeStampShort, timeStampLong, GetChatID, GetChatSender, GetPlaceHolderImage);
 
         System.out.println(timeStampShort);
         System.out.println(timeStampLong);

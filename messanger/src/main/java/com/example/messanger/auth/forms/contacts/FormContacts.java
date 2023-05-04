@@ -8,6 +8,8 @@ import lombok.Data;
 public class FormContacts {
     @JsonProperty("username")
     public String username;
+    @JsonProperty("your_username")
+    public String your_username;
     @JsonProperty("image")
     public String image;
 }

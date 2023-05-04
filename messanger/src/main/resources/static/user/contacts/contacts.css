@@ -15,8 +15,13 @@ h1 {
     border-radius: 10px;
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+}
+
+.ImageUsername {
+    display: flex;
+    justify-content: space-around;
+    width: 177px;
 }
 
 .contacts {
@@ -75,7 +80,7 @@ h1 {
 .close_window {
     width: 50px;
     height: 50px;
-    background: url(".././image/main_page/open_min_window.png") no-repeat, #FFF;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
     background-size: 50px;
     box-shadow: 0 0 10px;
     border-radius: 10px;
@@ -110,7 +115,7 @@ h1 {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: url("../chat_websocket/image/plus.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
+    background: url("../../chat_websocket/image/plus.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
 }
 
 #messageForm {
@@ -130,7 +135,7 @@ h1 {
 .send_message {
     width: 30px;
     height: 30px;
-    background: url("../chat_websocket/image/send_message.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
+    background: url("../../chat_websocket/image/send_message.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
     background-size: 20px;
     padding: 5px;
     border-radius: 100%;
@@ -140,8 +145,12 @@ h1 {
 .smile {
     width: 24px;
     height: 24px;
-    background: url("../chat_websocket/image/smile.png") no-repeat;
+    background: url("../../chat_websocket/image/smile.png") no-repeat;
     background-size: 24px;
+}
+
+.ImageProfilePBlock {
+    display: none;
 }
 
 input {
@@ -199,6 +208,22 @@ input {
         width: 100%;
     }
 
+    .header_list_chats_burger_open {
+        grid-template-columns: repeat(1, 1fr);
+        margin-left: 300px;
+        width: 60%;
+    }
+
+    .max_size_window .all_contacts h1 {
+        margin-left: 300px;
+    }
+
+    .max_size_window .btn_nav_contacts {
+        text-align: center;
+        width: max-content;
+        margin-left: auto;
+    }
+
     .visible {
         display: block;
     }
@@ -214,7 +239,7 @@ input {
     }
 
     .body {
-        width: 94vh;
+        width: 61vW;
         display: flex;
         justify-content: start;
     }
@@ -225,6 +250,7 @@ input {
 
     .contacts {
         width: 83%;
+        margin: 30px auto;
     }
 
     .none {

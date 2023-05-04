@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http = http.logout(logout ->
+        http.logout(logout ->
                 logout.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("auth_token"));
         http = http.formLogin().disable().csrf().disable();
         return http.build();

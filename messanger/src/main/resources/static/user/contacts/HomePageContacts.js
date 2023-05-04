@@ -1,14 +1,10 @@
+let list_chats_new = document.querySelector('.list_chats')
 let btn_up = document.querySelector('.btn_up')
 let delete_account = document.querySelector('.delete_account')
 let min_size_window = document.querySelectorAll('.min_size_window')
 let header = document.querySelectorAll('.header')
 let body_class = document.querySelectorAll('.body')
 let flex_content = document.querySelectorAll('.flex-content')
-let burger_menu = document.querySelectorAll('.burger_menu')
-let flex = document.querySelector('.flex')
-let body = document.querySelector('.body')
-let AddEvent = document.querySelector('.AddEvent')
-let WindowAddEvent = document.querySelector('.WindowAddEvent')
 
 fetch('/image_profile',{
     headers: new Headers({
@@ -22,16 +18,28 @@ fetch('/image_profile',{
         let image_profile = document.querySelectorAll('.image_profile')
         for (let image_profile_1 of image_profile) {
             image_profile_1.style.background=`url(${item.image})` + 'no-repeat'
+            image_profile_1.innerHTML=`<p class="ImageProfilePBlock">${item.image}</p>`
             image_profile_1.style.backgroundSize=`100%`
+            // image_profile_1.style.height=`100%`
             image_profile_1.style.width=`34%`
             image_profile_1.style.borderRadius=`50px`
+            // image_profile_1.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px">`
         }
     })));
+
 
 btn_up.addEventListener('click', () => {
     btn_up.classList.toggle('round')
     delete_account.classList.toggle('block')
 })
+
+let signboard = document.querySelector('.signboard')
+let hello = document.querySelector('.hello')
+let calendar_btn = document.querySelector('.calendar_btn')
+let btn_start_message = document.querySelector('.btn_start_message')
+let flex = document.querySelector('.flex')
+
+console.log(hello)
 
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
@@ -51,15 +59,18 @@ for (let min_size_windo of min_size_window) {
                 flex_content_itter.classList.toggle('flex-content-new')
                 flex_content_itter.classList.remove('flex-content-new-burger-open')
             }
+            let list_chats = document.querySelector('.list_chats')
+            list_chats.classList.remove('header_list_chats_burger_open')
+            list_chats_new.classList.remove('header_list_chats')
             let chat = document.querySelectorAll('.chat')
             for (let chat_all of chat) {
                 chat_all.classList.remove('chat_burger_open')
             }
-            body.classList.remove('None768px')
         }
     })
 }
 
+let burger_menu = document.querySelectorAll('.burger_menu')
 
 for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
@@ -79,18 +90,13 @@ for (let menu of burger_menu) {
                 flex_content_itter.classList.toggle('flex-content-new')
                 flex_content_itter.classList.toggle('flex-content-new-burger-open')
             }
+            let list_chats = document.querySelector('.list_chats')
+            list_chats.classList.toggle('header_list_chats_burger_open')
+            list_chats_new.classList.toggle('header_list_chats')
             let chat = document.querySelectorAll('.chat')
             for (let chat_all of chat) {
                 chat_all.classList.toggle('chat_burger_open')
             }
-            body.classList.add('None768px')
         }
     })
 }
-
-AddEvent.addEventListener('click', () => {
-    calendar_header.classList.add('none')
-    calendar_body.classList.add('none')
-    calendar_footer.classList.add('none')
-    WindowAddEvent.classList.add('block')
-})

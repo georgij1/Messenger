@@ -18,17 +18,23 @@
 
         <div class="flex_content_chat_top_tools">
             <div class="close_window close_window_2"></div>
+            <div class="ErrorConnect">Соединение с сервером...</div>
             <div class="border_name_chat"></div>
         </div>
 
         <div class="height"></div>
 
         <div class="list_chat"></div>
-        <div class="list_image"></div>
 
         <div class="window_add_file">
             <div class="btn_close_add_file"></div>
             <input type="file" class="file" name="file">
+
+            <div class="PlaceHolderBlock">
+                <label for="PlaceHolderImage">Подпись под изображением</label>
+                <input id="PlaceHolderImage" class="PlaceHolderImageInput" type="text" placeholder="Введите подпись под изображением...">
+            </div>
+
             <input type="submit" class="BtnSendFile">
 
             <div class="ListUploadedImage"></div>
@@ -45,7 +51,7 @@
 
                 <div class="image_chat_open_settings"></div>
 
-                <div class="btn_change_icon">Изменить иконку</div>
+<!--                <div class="btn_change_icon">Изменить иконку</div>-->
             </div>
 
             <h1>Админ чата</h1>
@@ -96,8 +102,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script th:src="@{/chat_websocket/js/close_chat.js}"></script>
-    <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
+    <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
     <script th:src="@{/chat_websocket/js/UploadFile.js}"></script>
 </body>

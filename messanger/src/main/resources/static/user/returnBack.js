@@ -13,7 +13,7 @@ for (let btn_delete_Accounts of btn_delete_account) {
     .then((data) => (data.forEach((item) => {
         console.log(item.id)
         console.log(item.id)
-        fetch(`/delete_user/${item.id}`, {
+        fetch(`/delete_user/${item.id}/${item.id}`, {
             method: 'delete',
             headers: {
                 "Content-Type": "application/json"

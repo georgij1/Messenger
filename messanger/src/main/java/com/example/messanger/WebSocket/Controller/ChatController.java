@@ -31,7 +31,7 @@ public class ChatController {
     public ChatMessage sendMessage (@Payload ChatMessage chatMessage) {
         int sender_id = Integer.parseInt(chatMessage.getSender());
         int chat_id = Integer.parseInt(chatMessage.getChat_id());
-        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long) values (?, ?, ?, ?, ?)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStampShort(), chatMessage.GetTimeStampLong());
+        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long, type, id_image, image_name, data) values (?, ?, ?, ?, ?, 'text', 'TextMessage', 'TextMessage', 0)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStampShort(), chatMessage.GetTimeStampLong());
         return chatMessage;
     }
 
@@ -46,8 +46,8 @@ public class ChatController {
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
-        jdbcTemplate.update("update message set text=? where id=?", formEditMessage.getMessage(), id);
-        return jdbcTemplate.queryForList("select * from message where id=?", id);
+        jdbcTemplate.update("update message set text=? where id_message=?", formEditMessage.getMessage(), id);
+        return jdbcTemplate.queryForList("select * from message where id_message=?", id);
     }
 
     @GetMapping("/chat/{id}")

@@ -16,6 +16,12 @@
     align-items: center;
     text-align: center;
     color: #0D1C2E;
+    cursor: pointer;
+}
+
+.username:hover {
+    color: blue;
+    text-decoration: 2px solid black;
 }
 
 .btn_up {

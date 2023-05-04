@@ -1,0 +1,309 @@
+.close_window {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+    position: fixed;
+}
+
+.height {
+    height: 50px;
+}
+
+.close_window_1 {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+}
+
+.btn_cancel_change_name_chat {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+}
+
+.btn_cancel_change_name_chat:hover {
+    box-shadow: none;
+}
+
+.change_name_chat_input {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 86vW;
+    box-shadow: 0 0 10px blanchedalmond;
+    cursor: pointer;
+}
+
+.change_name_chat_input:hover {
+    box-shadow: none;
+}
+
+.btn_save_change_name {
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    text-align: center;
+}
+
+.UserName {
+    padding: 10px;
+    text-align: center;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin-top: 44px;
+}
+
+.BtnUpdateImage, .BtnEditUsername {
+    padding: 10px;
+    background: cornsilk;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    height: max-content;
+}
+
+.BtnUpdateImage:hover, .BtnEditUsername:hover {
+    background: aliceblue;
+}
+
+.ImageUser {
+    padding: 10px;
+    background: aliceblue;
+    height: max-content;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.GroupYorOwn {
+    margin-top: 44px;
+    background: azure;
+    box-shadow: 0 0 10px blanchedalmond;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+}
+
+.DeleteAccount, .LogoutAccount {
+    padding: 10px;
+    background: red;
+    border: 2px solid burlywood;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.DeleteAccount:hover, .LogoutAccount:hover {
+    background: #FFF;
+    color: black;
+}
+
+.body_js {
+    padding: 10px;
+}
+
+.FormEditUserName {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    margin-top: 20px;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+}
+
+.InputUserName {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px blanchedalmond;
+    cursor: pointer;
+}
+
+.BtnSaveNewName {
+    padding: 10px;
+    cursor: pointer;
+    background: bisque;
+    border: 2px solid beige;
+    border-radius: 10px;
+    width: 111px;
+}
+
+.ImageUser img {
+    height: 100vW;
+    margin: auto;
+    display: block;
+    width: 100%;
+}
+
+.InputUserName:hover {
+    box-shadow: none;
+}
+
+.close_window:hover {
+    box-shadow: none;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.btn_delete_account {
+    background: linear-gradient(92.68deg, red 0%, #2A8BF2 100%);
+}
+
+.btn_delete_chat {
+    padding: 10px;
+    text-align: center;
+    background: red;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #FFF;
+    border: 2px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rosybrown;
+    cursor: pointer;
+}
+
+.btn_delete_chat:hover {
+    background: #FFF;
+    color: black;
+    box-shadow: none;
+}
+
+.btn_change_name_chat:hover {
+    background: #FFF;
+    box-shadow: none;
+}
+
+.btn_delete_account {
+    margin: 20px auto;
+}
+
+.BtnAddEventChats {
+    padding: 10px;
+    background: #2A8BF2;
+    width: max-content;
+    margin: auto;
+    border-radius: 10px;
+    color: #FFF;
+    box-shadow: 0 0 10px coral;
+}
+
+.PBlockNoChats {
+    text-align: center;
+}
+
+.name {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+}
+
+.btn_change_name_chat {
+    padding: 10px;
+    text-align: center;
+    background: antiquewhite;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px aquamarine;
+    cursor: pointer;
+}
+
+.image {
+    height: 100vW;
+}
+
+.window_edit_name_chat {
+    display: none;
+}
+
+.id {
+    display: none;
+}
+
+.none {
+    display: none;
+}
+
+.window_edit_chat {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .flex {
+        align-items: center;
+    }
+
+    .GroupYorOwn {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .image {
+        height: 40vW;
+    }
+
+    .ImageUser img {
+        height: 40vW;
+    }
+
+    .height {
+        height: 11px;
+    }
+
+    .none {
+        display: none;
+    }
+
+    .block {
+        display: block;
+    }
+}
+
+@media (min-width: 1024px) {
+    .GroupYorOwn {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .ImageUser img {
+        height: 30vW;
+    }
+
+    .image {
+        height: 30vW;
+    }
+}

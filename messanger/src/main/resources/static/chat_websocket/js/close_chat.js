@@ -11,6 +11,6 @@ fetch('/image_profile',{
     mode: "cors"
 })
     .then(response => response.json())
-    .then((data) => console.log(data.forEach((item) => {
+    .then((data) => (data.forEach((item) => {
         IdUser.innerText=`${item.id}`
     })));

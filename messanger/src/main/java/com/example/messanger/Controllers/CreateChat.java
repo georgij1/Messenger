@@ -35,6 +35,7 @@ public class CreateChat {
     @PostMapping("/create_chat")
     @CrossOrigin("*")
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
+
         jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
 
         String getUserChat = String.join(" ", formCreateChat.getUser_chat());
@@ -62,8 +63,8 @@ public class CreateChat {
     @PostMapping("/chats/{ChatId}")
     @CrossOrigin("*")
     @ResponseBody
-    public List<Map<String, Object>> OpenChat(@PathVariable int ChatId) {
-        return jdbcTemplate.queryForList("select * from users, message, image_message where chat_id=? and chatid=?", ChatId, ChatId);
+    public List<Map<String, Object>> OpenChat(@PathVariable String ChatId) {
+        return jdbcTemplate.queryForList("select * from users join message m on users.id = m.sender_id where chat_id=?", ChatId);
     }
 
     @PostMapping("/MyChats/{owner_chat}")

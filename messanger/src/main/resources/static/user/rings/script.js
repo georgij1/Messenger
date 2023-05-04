@@ -50,8 +50,6 @@ RequestChat.addEventListener('click', () => {
     BtnGetSendAccessOfferCheck.classList.add('block')
     BtnGetSendAccessOffer.classList.add('block')
     RequestChat.classList.add('none')
-    MessageMessanger.classList.add('none')
-    EventCalendar.classList.add('none')
     CloseWindowRequest.classList.add('block')
     AllRequest.classList.add('block')
     ContentAllRequestChat.classList.add('block')
@@ -80,8 +78,6 @@ CloseWindowRequest.addEventListener('click', () => {
     BtnGetSendAccessOfferCheck.classList.remove('block')
     BtnGetSendAccessOffer.classList.remove('block')
     RequestChat.classList.remove('none')
-    MessageMessanger.classList.remove('none')
-    EventCalendar.classList.remove('none')
     CloseWindowRequest.classList.remove('block')
     AllRequest.classList.remove('block')
     BtnHeader.classList.remove('none')
@@ -93,34 +89,6 @@ CloseWindowRequest.addEventListener('click', () => {
     burger_menu_1.classList.remove('none')
     ContentCancelRequestChat.classList.remove('block')
     BtnGetSendAccessOfferCancel.classList.remove('block')
-})
-
-MessageMessanger.addEventListener('click', () => {
-    BtnHeader.classList.add('none')
-    CloseWindowRequest.classList.add('block')
-    ContentMessageFromChat.classList.add('block')
-    let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
-    if (CloseWindowRequestId.classList.contains("block")) {
-        burger_menu_1.classList.add('none')
-    }
-
-    else {
-        burger_menu_1.classList.remove('none')
-    }
-})
-
-EventCalendar.addEventListener('click', () => {
-    BtnHeader.classList.add('none')
-    CloseWindowRequest.classList.add('block')
-    ContentEventMessage.classList.add('block')
-    let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
-    if (CloseWindowRequestId.classList.contains("block")) {
-        burger_menu_1.classList.add('none')
-    }
-
-    else {
-        burger_menu_1.classList.remove('none')
-    }
 })
 
 AllRequest.addEventListener('click', () => {

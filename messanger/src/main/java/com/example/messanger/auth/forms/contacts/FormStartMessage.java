@@ -8,4 +8,6 @@ import lombok.Data;
 public class FormStartMessage {
     @JsonProperty("username")
     public String username;
+    @JsonProperty("ImageChat")
+    public String ImageChat;
 }

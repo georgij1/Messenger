@@ -4,6 +4,7 @@
 package com.example.messanger.auth.User;
 
 import com.auth0.jwt.JWT;
+import com.example.messanger.auth.forms.AccountsSettings.EditPerson;
 import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import com.example.messanger.auth.forms.Users.UsernameUserID;
 import jakarta.servlet.http.Cookie;
@@ -110,16 +111,19 @@ public class UserRepo {
     @CrossOrigin("*")
     @DeleteMapping("delete_message/{id}")
     public List<Map<String, Object>> delete_message(@PathVariable int id) {
-        jdbcTemplate.update("delete from public.message where id=?", id);
+        jdbcTemplate.update("delete from message where id_message=?", id);
         return jdbcTemplate.queryForList("select * from message");
     }
 
     // Удаления пользователя по id
     @ResponseBody
     @CrossOrigin("*")
-    @DeleteMapping("delete_user/{id}")
-    public List<Map<String, Object>> delete_user(@PathVariable int id) {
-        jdbcTemplate.update("delete from public.users where id=?", id);
+    @DeleteMapping("delete_user/{id}/{id_1}")
+    public List<Map<String, Object>> delete_user(@PathVariable String id, @PathVariable int id_1) {
+        jdbcTemplate.update("delete from message where sender_id=?", id);
+        jdbcTemplate.update("delete from chat where owner=(select username from users where id=?)", id_1);
+        jdbcTemplate.update("delete from public.users where id=?", id_1);
+        jdbcTemplate.update("delete from users_chat where name=(select username from users where id=?)", id_1);
         return jdbcTemplate.queryForList("select * from users");
     }
 
@@ -154,6 +158,22 @@ public class UserRepo {
     @CrossOrigin("*")
     @GetMapping("list_chats")
     public List<Map<String, Object>> getListChats() {
-        return jdbcTemplate.queryForList("select * from chat");
+        return jdbcTemplate.queryForList("select * from chat where type='group_chat'");
+    }
+
+    // Получения id пользователя
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("GetIdPerson/{UserName}")
+    public List<Map<String, Object>> getUserId(@PathVariable String UserName) {
+        return jdbcTemplate.queryForList("select * from users where username=?", UserName);
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @PostMapping("EditPersonsById/{IdPerson}")
+    public List<Map<String, Object>> EditPersonsById (@PathVariable int IdPerson, @RequestBody EditPerson editPerson) {
+        jdbcTemplate.update("update users set username=? where id=?", editPerson.getNewUsername(), IdPerson);
+        return jdbcTemplate.queryForList("select * from users");
     }
 }

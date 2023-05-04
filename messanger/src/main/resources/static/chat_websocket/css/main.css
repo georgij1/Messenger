@@ -99,6 +99,29 @@
     cursor: pointer;
 }
 
+.delete_message_image {
+    width: 24px;
+    height: 24px;
+    background: url("../image/icon_delete_message.png") no-repeat center, #FFF;
+    background-size: 24px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid #ededed;
+    box-shadow: none;
+}
+
+.share_message_image {
+    width: 24px;
+    height: 24px;
+    background: url("../image/icon_share_messsage.png") no-repeat center, #FFF;
+    background-size: 24px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid #ededed;
+}
+
 .id {
     display: none;
 }
@@ -328,7 +351,14 @@ input {
     margin: 30px 0 10px;
     border-radius: 10px;
     background: #FFF;
-    cursor: default;
+    cursor: pointer;
+    width: 67vW;
+}
+
+.message:hover {
+    background: #eaebef;
+    border-radius: 20px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .delete_message {
@@ -382,7 +412,15 @@ input {
     justify-content: start;
     gap: 5%;
     margin-top: 20px;
+    margin-bottom: 20px;
     display: none;
+}
+
+.ToolsTick {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: start;
 }
 
 .red {
@@ -800,11 +838,40 @@ li {
     text-decoration: 2px solid blue underline;
 }
 
+.ImageTimeStampShort {
+    text-align: right;
+    color: gainsboro;
+    margin-top: 10px;
+    cursor: default;
+    width: max-content;
+    margin-left: auto;
+}
+
+.UrlImageChat {
+    display: none;
+}
+
+.cancel_edit_message:hover {
+    box-shadow: none;
+}
+
 .TimeStampShort {
     text-align: right;
     color: gainsboro;
     margin-top: 10px;
     cursor: default;
+    width: max-content;
+    margin-left: auto;
+}
+
+.UserNameEventLink {
+    color: blue;
+    text-decoration: 2px underline;
+    cursor: pointer;
+}
+
+.UserNameEventLink:hover {
+    text-decoration: none;
 }
 
 .MessageListNull {
@@ -893,6 +960,17 @@ li {
     box-shadow: 0 0 10px bisque;
     width: max-content;
     margin: 40px auto;
+    cursor: pointer;
+}
+
+.ImageBorderClick {
+    background: #eaebef;
+    border-radius: 20px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.ImageBorderClick .ImageTimeStampShort {
+    color: cadetblue;
 }
 
 .textArea {
@@ -912,6 +990,7 @@ li {
     background: #eaebef;
     border-radius: 20px;
     box-shadow: 0 0 10px bisque;
+    color: cadetblue;
 }
 
 .ToolsAdmin {
@@ -930,26 +1009,39 @@ li {
 
 .MessageMain {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: end;
     gap: 15px;
-    cursor: pointer;
-    margin: 20px 0 20px;
-}
-
-.MessageMain:hover {
-    background: #eaebef;
-    border-radius: 20px;
-    box-shadow: 0 0 10px bisque;
+    cursor: default;
     margin: 20px 0 20px;
 }
 
 .ImageProfileMessage, .ImageProfileMessage1 {
-    width: 100px;
-    height: 100px;
+    width: 51.0px;
+    height: 46.8px;
     box-shadow: 0 0 10px beige;
     border: 2px solid aqua;
     border-radius: 54px;
+}
+
+.ImageProfileMessage {
+    cursor: pointer;
+}
+
+.PlaceHolderBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.PlaceHolderImageInput {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.PlaceHolderImageInput:hover {
+    box-shadow: none;
 }
 
 .ImageProfileMessage:hover, .ImageProfileMessage1:hover {
@@ -972,10 +1064,6 @@ li {
     border-radius: 20px;
 }
 
-.owner {
-    display: none;
-}
-
 .CloseWindowPermissionDenied:hover {
     box-shadow: none;
 }
@@ -986,8 +1074,17 @@ li {
 }
 
 .text {
-    cursor: auto;
     margin: 25px auto 25px;
+    background: aliceblue;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px bisque;
+}
+
+.text:hover {
+    box-shadow: none;
 }
 
 .AddUsersBtn, .EditChatUser {
@@ -1046,6 +1143,57 @@ li {
     color: black;
 }
 
+.ReadMessage, .GetMessage {
+    padding: 10px;
+    background: aliceblue;
+    width: max-content;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px bisque;
+}
+
+.ReadMessage:hover, .GetMessage:hover {
+    box-shadow: none;
+}
+
+.EventInvite {
+    text-align: center;
+    background: aliceblue;
+    width: max-content;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin: 20px auto auto;
+    display: flex;
+    align-items: center;
+    height: max-content;
+    gap: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.EventLogOut {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    width: max-content;
+    margin: auto;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    color: #FFF;
+    margin-top: 20px;
+    box-shadow: 0 0 10px red;
+    margin-bottom: 20px;
+}
+
+.owner {
+    display: none;
+}
+
+.ErrorConnect {
+    display: none;
+}
+
 .close_window_4, .close_window_5 {
     width: 50px;
     height: 50px;
@@ -1079,6 +1227,10 @@ li {
 }
 
 @media (min-width: 768px) {
+    .ToolsTick {
+        flex-direction: row;
+    }
+
     .image_settings_open {
         display: flex;
         justify-content: space-around;
@@ -1237,7 +1389,7 @@ li {
     }
 
     .message {
-        width: 70vh;
+        width: 100%;
     }
 
     .none {

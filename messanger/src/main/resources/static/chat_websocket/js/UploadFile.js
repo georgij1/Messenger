@@ -8,13 +8,17 @@ BtnSendFile.addEventListener('click', () => {
 
     let ChatID = document.querySelector('.IdChat').textContent
     let ChatSender = document.querySelector('.IdUser').textContent
+    let PlaceHolderImage = document.querySelector('.PlaceHolderImageInput').value
+
+    console.log(PlaceHolderImage)
 
     let formData = new FormData()
     formData.append('file', file.files[0])
-    formData.append('TimeStampShort', DateShort)
-    formData.append('TimeStampLong', DateLong)
-    formData.append('ChatID', ChatID)
-    formData.append('ChatSender', ChatSender)
+    formData.append('time_stamp_short', DateShort)
+    formData.append('time_stamp_long', DateLong)
+    formData.append('chat_id', ChatID)
+    formData.append('sender_id', ChatSender)
+    formData.append('text', PlaceHolderImage)
 
     const Form = {
         "file": formData,

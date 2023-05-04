@@ -6,8 +6,7 @@
     <title>Контакты</title>
     <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
-    <link rel="stylesheet" th:href="@{user/contacts.css}">
-    <!--    <link rel="stylesheet" th:href="@{chat_websocket/css/main.css}">-->
+    <link rel="stylesheet" th:href="@{user/contacts/contacts.css}">
     <link rel="icon" th:href="@{image/main_page/icon_contacts.png}">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
@@ -34,26 +33,21 @@
             <div class="name_link chat_link">Чаты</div>
         </a>
 
-        <div class="link start_page">
-            <div class="this_page"></div>
-            <div class="icon_contacts"></div>
-            <div class="name_link">Контакты</div>
-        </div>
+<!--        <div class="link start_page">-->
+<!--            <div class="this_page"></div>-->
+<!--            <div class="icon_contacts"></div>-->
+<!--            <div class="name_link">Контакты</div>-->
+<!--        </div>-->
 
         <a href="/rings" class="link withOutSlash">
             <div class="icon_rings"></div>
             <div class="name_link">Уведомления</div>
         </a>
 
-        <a href="/calendar" class="link withOutSlash">
-            <div class="icon_calendar"></div>
-            <div class="name_link">Календарь</div>
-        </a>
-
-        <a href="/settings" class="link withOutSlash">
-            <div class="icon_settings"></div>
-            <div class="name_link">Настройки</div>
-        </a>
+<!--        <a href="/settings" class="link withOutSlash">-->
+<!--            <div class="icon_settings"></div>-->
+<!--            <div class="name_link">Настройки</div>-->
+<!--        </a>-->
     </div>
 
     <form class="delete_account" method="get" action="/logout">
@@ -92,9 +86,8 @@
         </div>
     </div>
 
-    <script th:src="@{/user/home_page.js}"></script>
+    <script th:src="@{/user/contacts/HomePageContacts.js}"></script>
     <script th:src="@{/user/AllMyContacts.js}"></script>
-    <script th:src="@{/user/contacts.js}"></script>
-
+    <script th:src="@{/user/contacts/contacts.js}"></script>
 </body>
 </html>

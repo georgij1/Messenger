@@ -12,35 +12,38 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "image_message")
+@Table(name = "message")
 public class FileDB {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
     public String id_image;
 
-    private String name;
+    private String image_name;
 
     private String type;
 
     @Lob
     private byte[] data;
 
-    public String time_stamp_short_image;
+    public String time_stamp_short;
 
-    public String time_stamp_long_image;
+    public String time_stamp_long;
 
-    public String ChatID;
+    public String chat_id;
 
-    public String ChatSender;
+    public Integer sender_id;
 
-    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong, String getChatID, String getChatSender) {
-        this.name = name;
+    public String text;
+
+    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong, String getChatID, Integer getChatSender, String PlaceHolderImage) {
+        this.image_name = name;
         this.type = type;
         this.data = data;
-        this.time_stamp_short_image = timeStampShort;
-        this.time_stamp_long_image = timeStampLong;
-        this.ChatID = getChatID;
-        this.ChatSender = getChatSender;
+        this.time_stamp_short = timeStampShort;
+        this.time_stamp_long = timeStampLong;
+        this.chat_id = getChatID;
+        this.sender_id = getChatSender;
+        this.text = PlaceHolderImage;
     }
 
     public String getId() {
@@ -48,11 +51,11 @@ public class FileDB {
     }
 
     public String getName() {
-        return name;
+        return image_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.image_name = name;
     }
 
     public String getType() {
@@ -72,19 +75,23 @@ public class FileDB {
     }
 
     public String GetTimeStampShort() {
-        return time_stamp_short_image;
+        return time_stamp_short;
     }
 
     public String GetTimeStampLong() {
-        return time_stamp_long_image;
+        return time_stamp_long;
     }
 
     public String GetChatID() {
-        return ChatID;
+        return chat_id;
     }
 
-    public String GetChatSender() {
-        return ChatSender;
+    public Integer GetChatSender() {
+        return sender_id;
+    }
+
+    public String GetPlaceHolderImage() {
+        return text;
     }
 
     @Override

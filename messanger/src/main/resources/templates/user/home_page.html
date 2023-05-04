@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Домашняя страница</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_css.css}">
@@ -36,25 +35,20 @@
                 <div class="name_link chat_link">Чаты</div>
             </a>
 
-            <a href="/contacts" class="link withOutSlash">
-                <div class="icon_contacts"></div>
-                <div class="name_link">Контакты</div>
-            </a>
+<!--            <a href="/contacts" class="link withOutSlash">-->
+<!--                <div class="icon_contacts"></div>-->
+<!--                <div class="name_link">Контакты</div>-->
+<!--            </a>-->
 
             <a href="/rings" class="link withOutSlash">
                 <div class="icon_rings"></div>
                 <div class="name_link">Уведомления</div>
             </a>
 
-            <a href="/calendar" class="link withOutSlash">
-                <div class="icon_calendar"></div>
-                <div class="name_link">Календарь</div>
-            </a>
-
-            <a href="/settings" class="link withOutSlash">
-                <div class="icon_settings"></div>
-                <div class="name_link">Настройки</div>
-            </a>
+<!--            <a href="/settings" class="link withOutSlash">-->
+<!--                <div class="icon_settings"></div>-->
+<!--                <div class="name_link">Настройки</div>-->
+<!--            </a>-->
         </div>
 
         <form class="delete_account" method="get" action="/logout">
@@ -65,58 +59,56 @@
     <div class="body">
         <div class="burger_menu"></div>
 
-        <div class="flex">
-            <div class="signboard outer">
-                <div class="signboard front inner anim04c">
-                    <li class="year anim04c">
+        <div class="signboard outer">
+            <div class="signboard front inner anim04c">
+                <li class="year anim04c">
+                    <span></span>
+                </li>
+                <ul class="calendarMain anim04c">
+                    <li class="month anim04c">
                         <span></span>
                     </li>
-                    <ul class="calendarMain anim04c">
-                        <li class="month anim04c">
-                            <span></span>
-                        </li>
-                        <li class="date anim04c">
-                            <span></span>
-                        </li>
-                        <li class="day anim04c">
-                            <span></span>
-                        </li>
-                    </ul>
-                    <li class="clock minute anim04c">
+                    <li class="date anim04c">
                         <span></span>
                     </li>
-                    <li class="calendarNormal date2 anim04c">
+                    <li class="day anim04c">
                         <span></span>
                     </li>
-                </div>
-                <div class="signboard left inner anim04c">
-                    <li class="clock hour anim04c">
-                        <span></span>
-                    </li>
-                    <li class="calendarNormal day2 anim04c">
-                        <span></span>
-                    </li>
-                </div>
-                <div class="signboard right inner anim04c">
-                    <li class="clock second anim04c">
-                        <span></span>
-                    </li>
-                    <li class="calendarNormal month2 anim04c">
-                        <span></span>
-                    </li>
-                </div>
+                </ul>
+                <li class="clock minute anim04c">
+                    <span></span>
+                </li>
+                <li class="calendarNormal date2 anim04c">
+                    <span></span>
+                </li>
             </div>
-            <a href="/calendar" class="calendar_btn">Добавить событие</a>
+            <div class="signboard left inner anim04c">
+                <li class="clock hour anim04c">
+                    <span></span>
+                </li>
+                <li class="calendarNormal day2 anim04c">
+                    <span></span>
+                </li>
+            </div>
+            <div class="signboard right inner anim04c">
+                <li class="clock second anim04c">
+                    <span></span>
+                </li>
+                <li class="calendarNormal month2 anim04c">
+                    <span></span>
+                </li>
+            </div>
         </div>
 
-        <h1 class="hello">Приветствуем, <p th:text="${username}"></p></h1>
+        <h1 class="hello">Приветствуем, <p class="UserName" th:text="${username}"></p></h1>
 
         <a href="/websocket_chat" class="btn_start_message">Начать общаться</a>
 
-        <div class="CommandDev">Попасть в команду разработчиков</div>
+<!--        <div class="CommandDev">Попасть в команду разработчиков</div>-->
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script th:src="@{/user/home_page/home_pageNewStartPage.js}"></script>
-    <script th:src="@{/user/mini_calendar.js}"></script>
+    <script th:src="@{/user/home_page/mini_calendar.js}"></script>
 </body>
 </html>

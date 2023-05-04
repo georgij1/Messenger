@@ -82,3 +82,11 @@ for (let menu of burger_menu) {
         }
     })
 }
+
+let username1 = document.querySelectorAll('.username')
+for (let UserNameItter of username1) {
+    UserNameItter.addEventListener('click', (event) => {
+        console.log(event.currentTarget.textContent)
+        window.open(`/AccountPage/${event.currentTarget.textContent}`, '_self')
+    })
+}

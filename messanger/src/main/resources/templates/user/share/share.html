@@ -11,10 +11,12 @@
 </head>
 
 <body>
+  <div class="close_window"></div>
   <div class="text" th:text="${share_text}"></div>
   <div class="tools">
-    <div class="ya-share2 btn_share" th:data-description="${share_text}" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="long" data-url="off" data-use-links data-services="vkontakte,telegram,whatsapp"></div>
+    <div class="ya-share2 btn_share" th:data-description="${share_text}" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="long" data-use-links data-services="vkontakte,telegram,whatsapp"></div>
   </div>
   <script src="https://yastatic.net/share2/share.js"></script>
+  <script th:src="@{/user/share/share_main.js}"></script>
 </body>
 </html>

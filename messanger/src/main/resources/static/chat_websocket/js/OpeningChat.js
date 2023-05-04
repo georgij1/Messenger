@@ -23,6 +23,7 @@ let stompClient = null;
 let username = document.querySelector('.username').textContent
 let input_message = document.querySelector('.input_message')
 let ToolsAdmin = document.querySelector('.ToolsAdmin')
+let ErrorConnect = document.querySelector('.ErrorConnect')
 
 fetch(`/ChatName/${IdChat.textContent}`, {
     headers: new Headers({
@@ -61,6 +62,12 @@ fetch(`/ChatName/${IdChat.textContent}`, {
                                     <div class="UserChat">${item.name}</div>
                                 </div>
                             `
+                        for (let UserDivItter of document.querySelectorAll('.UserDiv')) {
+                            UserDivItter.addEventListener('click', (event) => {
+                                console.log(event.currentTarget.children[1])
+                                window.open(`AccountPage/${event.currentTarget.children[1].textContent}`, '_self')
+                            })
+                        }
                     })))
         })}))})
 
@@ -75,122 +82,268 @@ fetch(`/chats/${IdChat.textContent}`, {
         response.json().then(res => (res.forEach(item => {
             const MessageNullDiv = document.querySelector('.MessageNullDiv')
             MessageNullDiv.classList.add('none')
-            list_chat.innerHTML +=
-                `
+            // document.querySelector('.btn_down_1').classList.add('none')
+            console.log(item.id_image)
+            if (item.id_image === "TextMessage") {
+                list_chat.innerHTML += `
                     <div class="MessageMain">
                         <div class="ImageProfileMessage"></div>
                         
                         <div class="message">
                         
-                        <div class="ItemUsername">${item.username}</div>
-                            <div class="id">${item.id}</div>
-                            <div class="text">${item.text}</div>
+                            <div class="ItemUsername">${item.username}</div>
+                            
+                            <div class="id">${item.id_message}</div>
+                            <div class="text" title="Скопировать текст">${item.text}</div>
     
                             <div class="tools_message">
                                 <div class="delete_message"></div>
                                 <div class="edit_message"></div>
                                 <div class="share_message"></div>
                             </div>
+                            
+                            <div class="ToolsTick">
+                                <div class="ReadMessage">Прочитано</div>
+                                <div class="GetMessage">Получено</div>
+                            </div>
                          
                             <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                         </div>
                     </div>
-                    
-                    <div class="ImageBorder">
-                        <img class="ImageChat" src="/files/${item.id_image}" alt="">
-                        <div class="TimeStampShort" title="${item.time_stamp_long_image}">${item.time_stamp_short_image}</div>
-                    </div>
                 `
+            }
+
+            else if (item.text === null) {
+                list_chat.innerHTML +=
+                    `
+                        <div class="ImageBorder">
+                            <div class="ImageChat_1">
+                                <img class="ImageChat" src="/files/${item.id_image}" alt="">
+                                <div class="UrlImageChat">/files/${item.id_image}</div>
+                            </div>
+                        
+                            <div class="tools_message">
+                                <div class="delete_message_image"></div>
+                                <div class="share_message_image"></div>
+                            </div>
+                            
+                            <div class="ToolsTick">
+                                <div class="ReadMessage">Прочитано</div>
+                                <div class="GetMessage">Получено</div>
+                            </div>
+                            
+                            <div class="ImageTimeStampShort" title="${item.time_stamp_long}">${item.time_stamp_short}</div>
+                        </div>
+                    `
+            }
+
+            else if (item.text != null) {
+                list_chat.innerHTML +=
+                    `
+                        <div class="ImageBorder">
+                            <div class="ImageChat_1">
+                                <img class="ImageChat" src="/files/${item.id_image}" alt="">
+                                <div class="UrlImageChat">/files/${item.id_image}</div>
+                            </div>
+                            
+                            <div class="TextImage">${item.text}</div>
+                        
+                            <div class="tools_message">
+                                <div class="delete_message_image"></div>
+                                <div class="share_message_image"></div>
+                            </div>
+                            
+                            <div class="ToolsTick">
+                                <div class="ReadMessage">Прочитано</div>
+                                <div class="GetMessage">Получено</div>
+                            </div>
+                            
+                            <div class="ImageTimeStampShort" title="${item.time_stamp_long}">${item.time_stamp_short}</div>
+                        </div>
+                    `
+            }
+
+            let ImageChat = document.querySelectorAll('.ImageChat_1')
+
+            for (let ImageBorderItter of document.querySelectorAll('.ImageBorder')) {
+                ImageBorderItter.addEventListener('click', (event) => {
+                    event.currentTarget.children[1].classList.toggle('flex')
+                    event.currentTarget.children[2].classList.toggle('flex')
+                    ImageBorderItter.classList.toggle('ImageBorderClick')
+                })
+            }
+
+            for (let ImageChatItter of ImageChat) {
+                console.log(ImageChatItter)
+                ImageChatItter.addEventListener('click', (event) => {
+                    console.log(event.currentTarget.children[1].textContent)
+                    window.open(event.currentTarget.children[1].textContent, '_self')
+                })
+            }
 
             for (let MessageMainItter of document.querySelectorAll('.MessageMain')) {
-                console.log(MessageMainItter)
                 MessageMainItter.addEventListener('click', (event) => {
-                    console.log(event)
-                    event.currentTarget.children[1].children[3].classList.toggle('flex')
+                    let EventUserName = event.currentTarget.children[1].children[0].textContent
+
+                    console.log(EventUserName)
+
+                    for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
+                        console.log(ImageProfileMessageItter)
+                        ImageProfileMessageItter.addEventListener('click', () => {
+                            window.open(`AccountPage/${EventUserName}`, '_self')
+                        })
+                    }
+                })
+            }
+
+            for (let message of document.querySelectorAll('.message')) {
+                console.log(message)
+                message.addEventListener('click', (event) => {
+                    // event.currentTarget.children[1].children[4].classList.toggle('flex')
+                    // event.currentTarget.children[1].children[3].classList.toggle('flex')
+                    event.currentTarget.children[3].classList.toggle('flex')
+                    event.currentTarget.children[4].classList.toggle('flex')
+                    console.log(event.currentTarget)
+                    console.log('without websocket')
+
+                    let EventIDMessage = event.currentTarget.children[1]
+
+                    let EventText = event.currentTarget.children[2]
+                    console.log(EventText.textContent)
+
+                    let delete_message = document.querySelectorAll('.delete_message')
+                    for (let delete_message_itter of delete_message) {
+                        delete_message_itter.addEventListener('click', () => {
+                            console.log(EventIDMessage.textContent)
+                            fetch(`/delete_message/${EventIDMessage.textContent}`, {
+                                method: 'delete',
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                mode: "cors"
+                            })
+                                .then(res => {
+                                    alert('Сообщение - ' + item.text + ' успешно удалено')
+                                    console.log(res)
+                                    // window.location.reload()
+                                })
+                        })
+                    }
+
+                    const edit_message = document.querySelectorAll('.edit_message')
+                    const window_edit_message = document.querySelector('.window_edit_message')
+                    const cancel_edit_message = document.querySelector('.cancel_edit_message')
+
+                    for (let edit_message_itter of edit_message) {
+                        edit_message_itter.addEventListener('click', () => {
+                            height.classList.add('none')
+                            list_chat.classList.add('none')
+                            flex_content_chat_top_tools.classList.add('none')
+                            window_edit_message.classList.add('flex')
+                            cancel_edit_message.classList.add('block')
+                            tools.classList.add('none')
+
+                            window_edit_message.innerHTML=`
+                                <textarea class="input_edit_message" name="message">${EventText.textContent}</textarea>
+                                <input type="submit" class="save_edit_message" value="Сохранить">
+                            `
+
+                            const save_edit_message = document.querySelector('.save_edit_message')
+                            const input_edit_message = document.querySelector('.input_edit_message')
+
+                            cancel_edit_message.addEventListener('click', () => {
+                                window_edit_message.classList.remove('flex')
+                                list_chat.classList.remove('none')
+                                flex_content_chat_top_tools.classList.remove('none')
+                                height.classList.remove('none')
+                                tools.classList.remove('none')
+                            })
+
+                            save_edit_message.addEventListener('click', () => {
+                                window_edit_message.classList.remove('flex')
+                                list_chat.classList.remove('none')
+                                flex_content_chat_top_tools.classList.remove('none')
+
+                                const formData = {
+                                    "message": input_edit_message.value
+                                }
+
+                                if (input_edit_message.value.length > 0 && input_edit_message.value !== item.text) {
+                                    fetch(`/edit_message/${EventIDMessage.textContent}`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(formData)
+                                    })
+                                        .then(() => {
+                                            console.log(input_edit_message.value.length)
+                                            console.log(item.text)
+                                            // window.location.reload()
+                                        })
+                                }
+
+                                else {
+                                    alert('Сообщение не обновлено так как оно пустое или такой же контент')
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+
+            let text = document.querySelectorAll('.text')
+
+            for (let TextItter of text) {
+                TextItter.addEventListener('click', () => {
+                    function copyTextToClipboard(text) {
+                        const textArea = document.createElement("textarea");
+                        textArea.className = 'textArea'
+
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+
+                        try {
+                            const successful = document.execCommand('copy');
+                            const msg = successful ? 'Успешно' : 'Не успешно';
+                            alert('Текст скопирован - ' + msg)
+                        }
+
+                        catch (err) {
+                            console.log('Что - то пошло не так');
+                        }
+
+                        document.body.removeChild(textArea);
+                    }
+
+                    copyTextToClipboard(`${TextItter.textContent}`);
+
+                    console.log(text)
+
+                    for (let ToolsMessageItter of document.querySelectorAll('.tools_message')) {
+                        ToolsMessageItter.classList.remove('flex')
+                    }
+
+                    for (let ToolsTickItter of document.querySelectorAll('.ToolsTick')) {
+                        ToolsTickItter.classList.remove('flex')
+                    }
+                })
+            }
+
+            let ItemUsername = document.querySelectorAll('.ItemUsername')
+            for (let ItemUsernameItter of ItemUsername) {
+                ItemUsernameItter.addEventListener('click', (event) => {
+                    console.log(event.currentTarget.textContent)
+                    window.open(`AccountPage/${event.currentTarget.textContent}`, '_self')
+                    let EventUserName = event.currentTarget.textContent
                 })
             }
 
             for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
-                ImageProfileMessageItter.style.background=`url(${item.image})` + 'no-repeat'
-                ImageProfileMessageItter.style.backgroundSize='100px'
-            }
-
-            const edit_message = document.querySelectorAll('.edit_message')
-            const window_edit_message = document.querySelector('.window_edit_message')
-            const cancel_edit_message = document.querySelector('.cancel_edit_message')
-
-            for (let edit_message_itter of edit_message) {
-                edit_message_itter.addEventListener('click', () => {
-                    height.classList.add('none')
-                    list_chat.classList.add('none')
-                    flex_content_chat_top_tools.classList.add('none')
-                    window_edit_message.classList.add('flex')
-                    cancel_edit_message.classList.add('block')
-                    tools.classList.add('none')
-
-                    window_edit_message.innerHTML=`
-                        <textarea class="input_edit_message" value="${item.text}" name="message"></textarea>
-                        <input type="submit" class="save_edit_message" value="Сохранить">
-                    `
-
-                    const save_edit_message = document.querySelector('.save_edit_message')
-                    const input_edit_message = document.querySelector('.input_edit_message')
-
-                    cancel_edit_message.addEventListener('click', () => {
-                        window_edit_message.classList.remove('flex')
-                        list_chat.classList.remove('none')
-                        flex_content_chat_top_tools.classList.remove('none')
-                        height.classList.remove('none')
-                        tools.classList.remove('none')
-                    })
-
-                    save_edit_message.addEventListener('click', () => {
-                        window_edit_message.classList.remove('flex')
-                        list_chat.classList.remove('none')
-                        flex_content_chat_top_tools.classList.remove('none')
-
-                        const formData = {
-                            "message": input_edit_message.value
-                        }
-
-                        if (input_edit_message.value.length > 0 && input_edit_message.value !== item.text) {
-                            fetch(`/edit_message/${item.id}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(formData)
-                            })
-                                .then(() => {
-                                    console.log(input_edit_message.value.length)
-                                    console.log(item.text)
-                                    // window.location.reload()
-                                })
-                        }
-
-                        else {
-                            alert('Сообщение не обновленно так как оно пустое или такой же контент')
-                        }
-                    })
-                })
-            }
-
-            let delete_message = document.querySelectorAll('.delete_message')
-            for (let delete_message_itter of delete_message) {
-                delete_message_itter.addEventListener('click', () => {
-                    fetch(`/delete_message/${item.id}`, {
-                        method: 'delete',
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        mode: "cors"
-                    })
-                        .then(res => {
-                            alert('Сообщение - ' + item.text + ' успешно удалено')
-                            window.location.reload()
-                        })
-                })
+                ImageProfileMessageItter.style.background=`url(${item.image})` + 'no-repeat center'
+                ImageProfileMessageItter.style.backgroundSize='40px'
             }
 
             for (let ShareMessageItter of document.querySelectorAll('.share_message')) {
@@ -201,7 +354,7 @@ fetch(`/chats/${IdChat.textContent}`, {
         })))
 
         if (list_chat.clientHeight === 0) {
-            btn_down_1.classList.add('none')
+            // btn_down_1.classList.add('none')
             list_chat.innerHTML=`
                 <div class="MessageNullDiv">
                     <div class="MessageListNull">
@@ -228,7 +381,7 @@ btn_tools_chat.addEventListener('click', () => {
     })
         .then(res => res.json())
         .then(data => data.forEach(item => {
-            ListUploadedImage.innerHTML+=`<div class="link_image">files/${item.id}</div>`
+            ListUploadedImage.innerHTML+=`<div class="link_image">files/${item.id_image}</div>`
             let link_image = document.querySelectorAll('.link_image')
             for (let LinkImage of link_image) {
                 LinkImage.addEventListener('click', () => {
@@ -250,7 +403,7 @@ border_name_chat.addEventListener('click', () => {
     window_settings_chat.classList.add('visible')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
-    btn_down_1.classList.add('none')
+    // btn_down_1.classList.add('none')
     tools.classList.add('none')
     height.classList.add('none')
     console.log("username - " + username)
@@ -388,7 +541,7 @@ close_window_3.addEventListener('click', () => {
     window_settings_chat.classList.remove('visible')
     list_chat.classList.remove('none')
     flex_content_chat_top_tools.classList.remove('none')
-    btn_down_1.classList.remove('none')
+    // btn_down_1.classList.remove('none')
     tools.classList.remove('none')
     height.classList.remove('none')
     ToolsAdmin.classList.add('visible')
@@ -397,10 +550,21 @@ close_window_3.addEventListener('click', () => {
 send_message.addEventListener('click', () => {
     if (input_message.value === '') {
         console.log('str is empty')
+        input_message.classList.remove('red')
     }
 
     else {
         input_message.classList.remove('red')
+    }
+})
+
+send_message.addEventListener('input', () => {
+    if (input_message.value.length > 0) {
+        input_message.classList.remove('red')
+    }
+
+    else {
+        input_message.classList.add('red')
     }
 })
 
@@ -456,11 +620,19 @@ function connect() {
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, ErrorSocket);
+
+        ErrorConnect.classList.remove('block')
+
+        console.log(socket)
     }
+
+    console.log('connect')
 }
 
 function onConnected() {
     stompClient.subscribe('/topic/public', onMessageReceived);
+
+    console.log('onConnected')
 
     stompClient.send("/app/chat.addUser",
         {},
@@ -471,34 +643,89 @@ function onConnected() {
 function onMessageReceived(payload) {
     let message = JSON.parse(payload.body);
 
+    console.log('onMessageReceived')
+
     let messageElement = document.createElement('li');
 
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' присоединился!';
+        message.EventInviteSender = message.sender;
+        message.EventInvite = 'онлайн';
+        ErrorConnect.classList.remove('block')
     }
 
     else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' вышел!';
+        message.EventLogout = message.sender + 'офлайн';
+        ErrorConnect.classList.remove('block')
     }
 
-    let textElement = document.createElement('p');
-    let messageText = document.createTextNode(message.content);
+    else if (message.type === 'SEND') {
+        ErrorConnect.classList.remove('block')
+    }
 
-    textElement.appendChild(messageText);
+    else if (message.type === 'Whoops! Lost connection to http://localhost:8080/ws') {
+        ErrorConnect.classList.add('block')
+    }
 
-    // messageElement.appendChild(textElement);
+    let textElementInvite = document.createElement('p');
+    let textElementLogOut = document.createElement('p');
+    let textChat = document.createElement('p');
+    let messageEventInvite = document.createTextNode(message.EventInvite);
+    let messageEventSender = document.createTextNode(message.EventInviteSender)
+    let messageEventLogout = document.createTextNode(message.EventLogout);
+    let TextChat = document.createTextNode(message.content)
+    let UsernameP = document.createElement('p')
+    let PBlockTextOnline = document.createElement('p')
 
-    messageAreaNew.appendChild(messageElement);
-    messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+    textElementInvite.className='EventInvite'
+    textElementLogOut.className='EventLogOut'
+
+    textChat.className='TextChat'
+    UsernameP.className='UserNameEventLink'
+
+    console.log(message)
+
+    if (message.type === 'JOIN') {
+        messageElement.appendChild(textElementInvite)
+        textElementInvite.appendChild(UsernameP)
+        textElementInvite.appendChild(PBlockTextOnline)
+        UsernameP.appendChild(messageEventSender)
+        PBlockTextOnline.appendChild(messageEventInvite)
+        messageAreaNew.appendChild(messageElement);
+        messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+        console.log('if')
+    }
+
+    else if (message.type === 'LEAVE') {
+        messageElement.appendChild(textElementLogOut)
+        textElementLogOut.appendChild(messageEventLogout)
+        messageAreaNew.appendChild(messageElement);
+        messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+    }
+
+    else {
+        // textChat.appendChild(TextChat)
+        messageElement.appendChild(textChat);
+        messageAreaNew.appendChild(messageElement);
+        messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+        console.log('else')
+    }
+
+    let UserNameEventLink = document.querySelectorAll('.UserNameEventLink')
+
+    for (let UserNameEventLinkItter of UserNameEventLink) {
+        UserNameEventLinkItter.addEventListener('click', (event) => {
+            window.open(`AccountPage/${event.currentTarget.textContent}`, '_self')
+        })
+    }
 
     console.log(payload)
+    console.log(payload.body)
 }
 
 function ErrorSocket() {
-    alert('страница будет перезагружена')
-    window.location.reload()
+    ErrorConnect.classList.add('block')
 }
 
 connect()

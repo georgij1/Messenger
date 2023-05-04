@@ -22,6 +22,14 @@ function sendMessage(event) {
                     let DateLong = new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
                     let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
 
+                    console.log(DateLong)
+                    console.log(DateShort)
+
+                    let ErrorConnect = document.querySelector('.ErrorConnect')
+                    ErrorConnect.classList.remove('block')
+
+                    console.log(new Date().getMinutes())
+
                     let chatMessage  = {
                         sender: item_id_user,
                         content: messageInput.value,
@@ -30,6 +38,8 @@ function sendMessage(event) {
                         TimeStampLong: DateLong,
                         type: 'CHAT'
                     };
+
+                    console.log(chatMessage)
 
                     stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
                     messageInput.value = '';
@@ -45,21 +55,30 @@ function sendMessage(event) {
                         mode: "cors"
                     })
                         .then(response => response.json())
-                        .then((data) => console.log(data.forEach((item) => {
-                            let ItemImageMessage = item.image
+                        .then((data) => (data.forEach((item) => {
+                            console.log(item)
                             list_chat.innerHTML += `
                                 <div class="MessageMain">
                                     <div class="ImageProfileMessage1"></div>
                                     <div class="message">
                                         <div class="ItemUsername">${UsernameNew}</div>
                                             <div class="text">${chatMessage.content}</div>
-                                            <!--<div class="tools_message">-->
-                                                <!--<div class="delete_message"></div>-->
-                                                <!--<div class="edit_message"></div>-->
-                                                <!--<div class="share_message"></div>-->
-                                            <!--</div>-->
+                                            
+                                            <div class="id">${item.id}</div>
+                                            
+                                            <div class="tools_message">
+                                                <div class="delete_message"></div>
+                                                <div class="edit_message"></div>
+                                                <div class="share_message"></div>
+                                            </div>
+                                                                                        
+                                            <div class="ToolsTick">
+                                                <div class="ReadMessage">Прочитано</div>
+                                                <div class="GetMessage">Получено</div>
+                                            </div>
+                                            
                                             <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>
-                                        </div>
+                                    </div>
                                 </div>
                             `
                             let ImageProfileMessage1 = document.querySelectorAll('.ImageProfileMessage1')
@@ -68,7 +87,20 @@ function sendMessage(event) {
                                 ImageProfileMessageItter1.style.background=`url(${item.image})` + 'no-repeat'
                                 ImageProfileMessageItter1.style.backgroundSize='100px'
                             }
+
+                            let message = document.querySelectorAll('.message')
+
+                            for (let MessageItter of message) {
+                                console.log(MessageItter)
+                                MessageItter.addEventListener('click', (event) => {
+                                    event.currentTarget.children[3].classList.toggle('flex')
+                                    event.currentTarget.children[4].classList.toggle('flex')
+                                    console.log(event.currentTarget.children[3])
+                                    console.log('with websocket')
+                                })
+                            }
                         })));
+
                     let delete_message = document.querySelectorAll('.delete_message')
 
                     for (let delete_message_itter of delete_message) {

@@ -29,7 +29,7 @@ public class FileController {
         String message = "";
 
         try {
-            storageService.store(file, formsGetTimeStamp.GetTimeStampShort(), formsGetTimeStamp.GetTimeStampLong(), formsGetTimeStamp.GetChatID(), formsGetTimeStamp.GetChatSender());
+            storageService.store(file, formsGetTimeStamp.GetTimeStampShort(), formsGetTimeStamp.GetTimeStampLong(), formsGetTimeStamp.GetChatID(), formsGetTimeStamp.GetChatSender(), formsGetTimeStamp.GetPlaceHolderImage());
             message = "Файл успешно загружен: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         }
@@ -45,15 +45,16 @@ public class FileController {
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> getListFiles() {
-        return jdbcTemplate.queryForList("select * from image_message");
+        return jdbcTemplate.queryForList("select * from message where data!=0");
     }
 
     // Получения изображения по id
     @GetMapping("/files/{IdImage}")
     public ResponseEntity<byte[]> getDataImage(@PathVariable String IdImage) {
         FileDB fileDB = storageService.getFile(IdImage);
+        System.out.println(fileDB.getType());
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/png; filename=\"" + fileDB.getName() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
     }
 }

@@ -42,7 +42,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         sessions.remove(session);
     }
 
-    // Добавьте метод для удаления сообщения по его идентификатору
+    // Метод для удаления сообщения по его id
     public void deleteMessage(String messageId) {
         messages.removeIf(message -> message.getId().equals(messageId));
     }

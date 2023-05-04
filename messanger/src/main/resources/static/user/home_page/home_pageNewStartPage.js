@@ -31,25 +31,21 @@ btn_up.addEventListener('click', () => {
 
 let signboard = document.querySelector('.signboard')
 let hello = document.querySelector('.hello')
-let calendar_btn = document.querySelector('.calendar_btn')
 let btn_start_message = document.querySelector('.btn_start_message')
 let flex = document.querySelector('.flex')
 let CommandDev = document.querySelector('.CommandDev')
 
-for (let min_size_windo of min_size_window) {
-    min_size_windo.addEventListener('click', () => {
+for (let MinSizeWindowItter of min_size_window) {
+    MinSizeWindowItter.addEventListener('click', () => {
         for (let head of header) {
             signboard.classList.remove('none')
-            calendar_btn.classList.remove('none')
             hello.classList.remove('none')
             btn_start_message.classList.remove('none')
-            min_size_windo.classList.toggle('none')
+            MinSizeWindowItter.classList.toggle('none')
             hello.classList.remove('HelloHeaderOpen')
             btn_start_message.classList.remove('BtnStartMessageBurgerOpened')
-            calendar_btn.classList.remove('NoneBtn')
-            flex.classList.remove('FlexWidth')
             head.classList.toggle('visible')
-            CommandDev.classList.remove('NoneCommandDev')
+            // CommandDev.classList.remove('NoneCommandDev')
             for (let body of body_class) {
                 body.classList.remove('max_size_window')
             }
@@ -76,7 +72,6 @@ let burger_menu = document.querySelectorAll('.burger_menu')
 for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
         for (let head of header) {
-            calendar_btn.classList.add('none')
             signboard.classList.add('none')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
@@ -84,9 +79,7 @@ for (let menu of burger_menu) {
             btn_start_message.classList.add('none')
             hello.classList.add('HelloHeaderOpen')
             btn_start_message.classList.add('BtnStartMessageBurgerOpened')
-            calendar_btn.classList.add('NoneBtn')
-            flex.classList.add('FlexWidth')
-            CommandDev.classList.add('NoneCommandDev')
+            // CommandDev.classList.add('NoneCommandDev')
             for (let min_size_windows of min_size_window) {
                 min_size_windows.classList.remove('none')
             }
@@ -108,6 +101,22 @@ for (let menu of burger_menu) {
     })
 }
 
-CommandDev.addEventListener('click', () => {
-    window.open('/CommandDev', '_self')
-})
+// CommandDev.addEventListener('click', () => {
+//     window.open('/CommandDev', '_self')
+// })
+
+let username1 = document.querySelectorAll('.username')
+for (let UserNameItter of username1) {
+    UserNameItter.addEventListener('click', (event) => {
+        console.log(event.currentTarget.textContent)
+        window.open(`/AccountPage/${event.currentTarget.textContent}`, '_self')
+    })
+}
+
+let username2 = document.querySelectorAll('.UserName')
+for (let UserNameItter of username2) {
+    UserNameItter.addEventListener('click', (event) => {
+        console.log(event.currentTarget.textContent)
+        window.open(`/AccountPage/${event.currentTarget.textContent}`, '_self')
+    })
+}
