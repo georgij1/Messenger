@@ -4,5 +4,3 @@ create table mycontacts
     username text unique,
     image text
 );
-
-alter table mycontacts owner to georgii_1;

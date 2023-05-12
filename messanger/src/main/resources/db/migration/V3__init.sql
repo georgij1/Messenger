@@ -13,5 +13,3 @@ create table message
     read boolean default false,
     get boolean default true
 );
-
-alter table message owner to georgii_1;

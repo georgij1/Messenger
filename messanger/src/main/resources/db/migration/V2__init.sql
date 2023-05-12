@@ -5,5 +5,3 @@ create table comand_dev
     about_me text default 'Информации о себе нет',
     link_portfolio text default 'Ссылки на портфолио нет'
 );
-
-alter table comand_dev owner to georgii_1;

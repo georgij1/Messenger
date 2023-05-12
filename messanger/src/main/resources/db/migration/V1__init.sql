@@ -7,7 +7,3 @@ create table chat
     image_chat text default '../image/settings/icon_profile.png',
     owner text
 );
-
-alter table chat owner to georgii_1;
-
-grant delete, insert, references, select, trigger, truncate, update on chat to georgii;
