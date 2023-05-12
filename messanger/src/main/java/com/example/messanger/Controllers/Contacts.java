@@ -35,7 +35,7 @@ public class Contacts {
     public List<Map<String, Object>> contactsPost(@RequestBody FormContacts formContacts) {
         System.out.println("getUsername from PostMapping - " + formContacts.getUsername());
 
-        if (Objects.equals(jdbcTemplate.queryForList("select name from chat where name=?", String.class, formContacts.getUsername()).toString(), formContacts.getUsername())) {
+        if (Objects.equals(jdbcTemplate.queryForList("select name from chat where name=?", formContacts.getUsername()).toString(), formContacts.getUsername())) {
             System.out.println("chat is exists");
         }
 
@@ -63,7 +63,7 @@ public class Contacts {
     public List<Map<String, Object>> start_chat_contact(@RequestBody FormStartMessage formStartMessage) {
         System.out.println("this user is here" + formStartMessage.getUsername());
 
-        if (Objects.equals(jdbcTemplate.queryForList("select name from chat where name=?", String.class, formStartMessage.getUsername()).toString(), formStartMessage.getUsername())) {
+        if (Objects.equals(jdbcTemplate.queryForList("select name from chat where name=?", formStartMessage.getUsername()).toString(), formStartMessage.getUsername())) {
             System.out.println("chat is exists");
         }
 

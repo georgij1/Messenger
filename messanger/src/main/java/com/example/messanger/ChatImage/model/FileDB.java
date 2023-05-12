@@ -101,9 +101,4 @@ public class FileDB {
         FileDB fileDB = (FileDB) o;
         return getId() != null && Objects.equals(getId(), fileDB.getId());
     }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

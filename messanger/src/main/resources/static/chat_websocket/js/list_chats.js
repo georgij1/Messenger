@@ -213,7 +213,7 @@ for (let list_chat_itter of list_chats) {
                             if (item.status === "success") {
                                 console.log("success")
                                 console.log(event.currentTarget)
-                                window.open(`chat/${IDChat}`, '_self')
+                                window.open(`chat/${IDChat}#BottomPage`, '_self')
                                 PermissionDenied.classList.remove('visible')
                                 list_chats.classList.remove('none')
                                 flex_content.classList.remove('none')

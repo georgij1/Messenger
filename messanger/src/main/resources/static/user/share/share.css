@@ -21,6 +21,15 @@
     font-size: 12px;
 }
 
+.image {
+    margin-top: 20px;
+    width: 100%;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
 .tools {
     display: flex;
     align-items: center;
@@ -45,4 +54,16 @@
 
 .close_window:hover {
     box-shadow: none;
+}
+
+@media (min-width: 768px) {
+    .image {
+        width: 60%;
+        border: 2px solid bisque;
+        border-radius: 10px;
+        box-shadow: 0 0 10px bisque;
+        cursor: pointer;
+        margin: 20px auto;
+        display: flex;
+    }
 }

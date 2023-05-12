@@ -1,6 +1,7 @@
 package com.example.messanger.ChatImage;
 
 import com.example.messanger.ChatImage.model.FileDB;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class FileController {
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, FileDB formsGetTimeStamp) {
         System.out.println(file);
-        String message = "";
+        String message;
 
         try {
             storageService.store(file, formsGetTimeStamp.GetTimeStampShort(), formsGetTimeStamp.GetTimeStampLong(), formsGetTimeStamp.GetChatID(), formsGetTimeStamp.GetChatSender(), formsGetTimeStamp.GetPlaceHolderImage());
@@ -41,20 +42,42 @@ public class FileController {
     }
 
     // Контроллер для получения списка всех файлов
-    @GetMapping("/files")
+    @GetMapping("/files/{IdChat}")
     @ResponseBody
     @CrossOrigin("*")
-    public List<Map<String, Object>> getListFiles() {
-        return jdbcTemplate.queryForList("select * from message where data!=0");
+    public List<Map<String, Object>> getListFilesByIdChat(@PathVariable String IdChat) {
+        return jdbcTemplate.queryForList("select * from message where data!=0 and chat_id=?", IdChat);
+    }
+
+    @GetMapping("/files/limit/{IdChat}")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> getListFilesByIdChatByLimit(@PathVariable String IdChat) {
+        return jdbcTemplate.queryForList("select * from message where data!=0 and chat_id=? limit 10", IdChat);
+    }
+
+    @GetMapping("/files/count/{IdChat}")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> getCountFiles(@PathVariable String IdChat) {
+        return jdbcTemplate.queryForList("select count(*) from message where data!=0 and chat_id=?", IdChat);
     }
 
     // Получения изображения по id
-    @GetMapping("/files/{IdImage}")
-    public ResponseEntity<byte[]> getDataImage(@PathVariable String IdImage) {
+    @GetMapping("/files/{IdChat}/{IdImage}")
+    public ResponseEntity<byte[]> getDataImageByIdChat(@PathVariable String IdChat, @PathVariable String IdImage) {
         FileDB fileDB = storageService.getFile(IdImage);
         System.out.println(fileDB.getType());
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; filename=\"" + fileDB.getName() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; image/gif; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
+    }
+
+    @DeleteMapping("/files/tools/delete/{IdMessage}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> DeleteImageDB(@PathVariable int IdMessage) {
+        jdbcTemplate.update("delete from message where id_message=?", IdMessage);
+        return jdbcTemplate.queryForList("select * from message");
     }
 }

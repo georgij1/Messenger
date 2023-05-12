@@ -64,7 +64,7 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> OpenChat(@PathVariable String ChatId) {
-        return jdbcTemplate.queryForList("select * from users join message m on users.id = m.sender_id where chat_id=?", ChatId);
+        return jdbcTemplate.queryForList("select * from users join message m on users.id = m.sender_id where chat_id=? order by time_stamp_long", ChatId);
     }
 
     @PostMapping("/MyChats/{owner_chat}")
@@ -112,5 +112,13 @@ public class CreateChat {
     public List<Map<String, Object>> EditUserChatAdmin(@PathVariable int ChatId) {
         jdbcTemplate.update("delete from users_chat where id=?", ChatId);
         return jdbcTemplate.queryForList("select * from users_chat");
+    }
+
+    // Получение списка всех чатов
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("list_chats")
+    public List<Map<String, Object>> getListChats() {
+        return jdbcTemplate.queryForList("select * from chat where type='group_chat'");
     }
 }

@@ -122,7 +122,7 @@
     border: 3px solid #ededed;
 }
 
-.id {
+.id, .IdMessage {
     display: none;
 }
 
@@ -188,6 +188,7 @@ label {
     gap: 15px;
     border: 2px solid blue;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .id {
@@ -524,8 +525,25 @@ li {
 }
 
 .image_chat_open_settings {
-    width: 300px;
+    width: 40vW;
     margin: auto;
+    height: 40vW;
+}
+
+.admin_chat {
+    cursor: pointer;
+    border: 2px solid beige;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.TextLink {
+    margin: 0;
+    overflow-x: scroll;
 }
 
 .border_name_chat {
@@ -664,10 +682,21 @@ li {
     height: 50px;
     background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
     background-size: 50px;
-    box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px burlywood;
     border-radius: 10px;
     border: 3px solid bisque;
     cursor: pointer;
+}
+
+.CountFilesChatBorder {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    justify-content: center;
+    box-shadow: 0 0 10px bisque;
 }
 
 .btn_close_add_file:hover {
@@ -765,9 +794,8 @@ li {
 }
 
 .LinkChat {
-    padding: 10px;
     background: aliceblue;
-    padding-bottom: 10px;
+    padding: 10px;
     margin: auto;
     display: block;
     text-align: center;
@@ -776,6 +804,7 @@ li {
     border: 2px solid beige;
     color: blue;
     cursor: pointer;
+    width: 84vW;
 }
 
 .LinkChat:hover {
@@ -808,8 +837,22 @@ li {
     background: #FFF;
 }
 
-.link_image {
+.WarningSizeFile {
     padding: 10px;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px bisque;
+    display: none;
+}
+
+.WarningSizeFile p {
+    color: red;
+    margin: 0;
+}
+
+.link_image {
     background: antiquewhite;
     border: 2px solid bisque;
     margin-top: 15px;
@@ -819,7 +862,7 @@ li {
     cursor: pointer;
 }
 
-.file {
+.LabelFileInput {
     background: antiquewhite;
     padding: 10px;
     border: 2px solid bisque;
@@ -827,11 +870,19 @@ li {
     box-shadow: 0 0 10px bisque;
 }
 
+.LabelFileInput:hover {
+    box-shadow: none;
+}
+
 .BtnSendFile {
     padding: 10px;
     border: 2px solid bisque;
     border-radius: 10px;
     box-shadow: 0 0 10px navajowhite;
+}
+
+.BtnSendFile:hover {
+    box-shadow: none;
 }
 
 .link_image:hover {
@@ -856,12 +907,30 @@ li {
 }
 
 .TimeStampShort {
-    text-align: right;
+    text-align: left;
     color: gainsboro;
     margin-top: 10px;
     cursor: default;
     width: max-content;
     margin-left: auto;
+}
+
+.ListUploadedImage img {
+    width: 92%;
+}
+
+.window_load {
+    display: none;
+    padding: 10px;
+    text-align: center;
+}
+
+.ImageProfileMessage1 p {
+    display: none;
+}
+
+.ImageProfileMessage1 {
+    cursor: pointer;
 }
 
 .UserNameEventLink {
@@ -947,7 +1016,7 @@ li {
 .ImageChat {
     display: block;
     height: 300px;
-    width: 284px;
+    width: 67vW;
     margin: 0 auto 0;
     cursor: pointer;
     border-radius: 20px;
@@ -959,7 +1028,6 @@ li {
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
     width: max-content;
-    margin: 40px auto;
     cursor: pointer;
 }
 
@@ -1002,9 +1070,9 @@ li {
 .ItemUsername {
     color: blue;
     font-size: 13px;
-    padding-bottom: 20px;
     cursor: pointer;
     width: max-content;
+    margin-bottom: 10px;
 }
 
 .MessageMain {
@@ -1027,6 +1095,14 @@ li {
     cursor: pointer;
 }
 
+.imageProfileMessage__1 {
+    width: 0;
+}
+
+.ImageProfileMessage p {
+    display: none;
+}
+
 .PlaceHolderBlock {
     display: flex;
     flex-direction: column;
@@ -1042,6 +1118,32 @@ li {
 
 .PlaceHolderImageInput:hover {
     box-shadow: none;
+}
+
+.TextImage {
+    margin-top: 10px;
+}
+
+.TickAsRead {
+    width: 10px;
+    height: 10px;
+    background: url("../../chat_websocket/image/icon_tick.png") no-repeat;
+    background-size: 10px;
+}
+
+.BlockTicketTimeStamp {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+    align-items: end;
+}
+
+.BlockTwoTickets {
+    display: flex;
+}
+
+.TickAsReadTwoTicket {
+    margin-left: -14px;
 }
 
 .ImageProfileMessage:hover, .ImageProfileMessage1:hover {
@@ -1074,7 +1176,7 @@ li {
 }
 
 .text {
-    margin: 25px auto 25px;
+    margin: 0 auto;
     background: aliceblue;
     padding: 10px;
     border: 2px solid bisque;
@@ -1143,7 +1245,7 @@ li {
     color: black;
 }
 
-.ReadMessage, .GetMessage {
+.ReadMessage, .GetMessage, .ReadMessageImage {
     padding: 10px;
     background: aliceblue;
     width: max-content;
@@ -1153,7 +1255,7 @@ li {
     box-shadow: 0 0 10px bisque;
 }
 
-.ReadMessage:hover, .GetMessage:hover {
+.ReadMessage:hover, .GetMessage:hover, .ReadMessageImage:hover {
     box-shadow: none;
 }
 
@@ -1186,6 +1288,82 @@ li {
     margin-bottom: 20px;
 }
 
+.BorderOptionFile {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.DIVNameFile, .size, .type, .lastModifiedDate {
+    padding: 10px;
+    border: 5px solid gainsboro;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+.BorderOptionFile .DescNameFile, .BorderOptionFile .DescSizeFile, .BorderOptionFile .DescTypeFile, .BorderOptionFile .DescLastModifiedDate {
+    border: 5px solid bisque;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.DIVNameFile p {
+    text-decoration: 2px solid blue underline;
+    cursor: pointer;
+    margin: 0;
+}
+
+.UserDiv {
+    cursor: pointer;
+    border: 2px solid beige;
+}
+
+.BorderNameChat {
+    padding: 10px;
+    border: 2px solid bisque;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.BorderDescriptionChat {
+    padding: 10px;
+    border: 2px solid bisque;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.UserDiv:hover {
+    box-shadow: none;
+}
+
+.DIVNameFile p:hover {
+    text-decoration: none;
+}
+
+.admin_chat:hover {
+    box-shadow: none;
+}
+
+.close_window_5:hover {
+    box-shadow: none;
+}
+
+.close_window_4:hover {
+    box-shadow: none;
+}
+
+.link_image:hover {
+    padding: 0;
+    box-shadow: none;
+}
+
 .owner {
     display: none;
 }
@@ -1214,6 +1392,14 @@ li {
     display: none;
 }
 
+.file {
+    display: none;
+}
+
+.BorderOptionFile {
+    display: none;
+}
+
 .none {
     display: none;
 }
@@ -1231,14 +1417,27 @@ li {
         flex-direction: row;
     }
 
+    .TextLink {
+        overflow-x: auto;
+    }
+
     .image_settings_open {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        gap: 66px;
+        align-items: flex-start;
+    }
+
+    .H1BlockAdminChat {
+        margin-top: 0;
+    }
+
+    .admin_chat {
+        width: 37vW;
     }
 
     .flex {
         margin-bottom: 0;
+        flex-direction: row;
     }
 
     .window_create_chat {
@@ -1384,12 +1583,26 @@ li {
     }
 
     .ImageChat {
-        width: 600px;
+        width: 62vW;
         height: 600px;
     }
 
     .message {
         width: 100%;
+    }
+
+    .window_add_file {
+        flex-direction: column;
+    }
+
+    .ListUploadedImage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .BorderOptionFile {
+        flex-direction: column;
+        margin: 0;
     }
 
     .none {
@@ -1406,6 +1619,11 @@ li {
         width: 125vh;
         display: flex;
         justify-content: flex-end;
+    }
+
+    .ListUploadedImage {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .window_create_chat {
@@ -1446,6 +1664,11 @@ li {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 15px;
+    }
+
+    .image_chat_open_settings {
+        width: 24vW;
+        height: 24vW;
     }
 
     .none {

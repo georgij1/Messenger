@@ -1,4 +1,4 @@
-// ���������� ��� ���������� ����
+// Контроллер для группового чата
 
 package com.example.messanger.WebSocket.Controller;
 
@@ -32,6 +32,29 @@ public class ChatController {
         int sender_id = Integer.parseInt(chatMessage.getSender());
         int chat_id = Integer.parseInt(chatMessage.getChat_id());
         jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long, type, id_image, image_name, data) values (?, ?, ?, ?, ?, 'text', 'TextMessage', 'TextMessage', 0)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStampShort(), chatMessage.GetTimeStampLong());
+        System.out.println(jdbcTemplate.queryForList("select username from users where id=?", sender_id));
+        chatMessage.setSender((String) jdbcTemplate.queryForMap("select username from users where id=?", sender_id).get("username"));
+        chatMessage.setImage((String) jdbcTemplate.queryForMap("select image from users where id=?", sender_id).get("image"));
+        //chatMessage.setStatusMessage((String) jdbcTemplate.queryForMap("select get"));
+        System.out.println("Read" + jdbcTemplate.queryForList("select read from message"));
+        System.out.println("Get" + jdbcTemplate.queryForList("select get from message"));
+
+        if (jdbcTemplate.queryForList("select get from message").equals(true)) {
+            System.out.println("Сообщение получено");
+        }
+        
+        else {
+            System.out.println("Сообщение не получено");
+        }
+        
+        if (jdbcTemplate.queryForList("select read from message").equals(true)) {
+            System.out.println("Сообщение прочитано");
+        }
+
+        else {
+            System.out.println("Сообщение не прочитано");
+        }
+
         return chatMessage;
     }
 

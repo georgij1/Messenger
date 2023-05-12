@@ -4,7 +4,7 @@ let UserName = document.querySelector('.UserName').textContent
 let ImageUser = document.querySelector('.ImageUser')
 let BtnUpdateImage = document.querySelector('.BtnUpdateImage')
 let GroupYorOwn = document.querySelector('.GroupYorOwn')
-let DeleteAccount = document.querySelector('.DeleteAccount')
+let DeleteAccount = document.querySelector('.btn_delete_account')
 let LogoutAccount = document.querySelector('.LogoutAccount')
 let window_edit_chat = document.querySelector('.window_edit_chat')
 let close_window_1 = document.querySelector('.close_window_1')
@@ -14,12 +14,10 @@ close_window.addEventListener('click', () => {
 })
 BtnEditUsername.addEventListener('click', () => {
     ImageUser.classList.add('none')
-    BtnUpdateImage.classList.add('none')
     document.querySelector('.UserName').classList.add('none')
     BtnEditUsername.classList.add('none')
     GroupYorOwn.classList.add('none')
     DeleteAccount.classList.add('none')
-    LogoutAccount.classList.add('none')
     close_window.classList.add('none')
     window_edit_chat.classList.add('block')
 })
@@ -40,7 +38,7 @@ FormEditUserName.innerHTML=`
     <form action="/logout">
         <input class="BtnSaveNewName" type="submit">
     </form>
-    <p>Внимание после изменении имени войдите заново</p>
+    <p>Р’РЅРёРјР°РЅРёРµ РїРѕСЃР»Рµ РёР·РјРµРЅРµРЅРёРё РёРјРµРЅРё РІРѕР№РґРёС‚Рµ Р·Р°РЅРѕРІРѕ</p>
 `
 let BtnSaveNewName = document.querySelector('.BtnSaveNewName')
 BtnSaveNewName.addEventListener('click', () => {

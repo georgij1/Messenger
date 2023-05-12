@@ -99,7 +99,7 @@ public class UserRepo {
     }
 
     // Получения конкретного пользователя по username по условии where
-        @PostMapping("/username")
+    @PostMapping("/username")
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> userChatID(@RequestBody UsernameUserID usernameUserID) {
@@ -120,7 +120,7 @@ public class UserRepo {
     @CrossOrigin("*")
     @DeleteMapping("delete_user/{id}/{id_1}")
     public List<Map<String, Object>> delete_user(@PathVariable String id, @PathVariable int id_1) {
-        jdbcTemplate.update("delete from message where sender_id=?", id);
+        jdbcTemplate.update("delete from message where sender_id=?", id_1);
         jdbcTemplate.update("delete from chat where owner=(select username from users where id=?)", id_1);
         jdbcTemplate.update("delete from public.users where id=?", id_1);
         jdbcTemplate.update("delete from users_chat where name=(select username from users where id=?)", id_1);
@@ -143,37 +143,5 @@ public class UserRepo {
 
         var json = JWT.decode(token.formatted("utf-8")).getSubject();
         return jdbcTemplate.queryForList("select id from public.users where username=?", json);
-    }
-
-    // Получение колл-во username
-    @ResponseBody
-    @CrossOrigin("*")
-    @GetMapping("count/username")
-    public List<Map<String, Object>> getCountUserName(HttpServletRequest request) {
-        return jdbcTemplate.queryForList("select count(username) from public.users");
-    }
-
-    // Получение списка всех чатов
-    @ResponseBody
-    @CrossOrigin("*")
-    @GetMapping("list_chats")
-    public List<Map<String, Object>> getListChats() {
-        return jdbcTemplate.queryForList("select * from chat where type='group_chat'");
-    }
-
-    // Получения id пользователя
-    @ResponseBody
-    @CrossOrigin("*")
-    @GetMapping("GetIdPerson/{UserName}")
-    public List<Map<String, Object>> getUserId(@PathVariable String UserName) {
-        return jdbcTemplate.queryForList("select * from users where username=?", UserName);
-    }
-
-    @ResponseBody
-    @CrossOrigin("*")
-    @PostMapping("EditPersonsById/{IdPerson}")
-    public List<Map<String, Object>> EditPersonsById (@PathVariable int IdPerson, @RequestBody EditPerson editPerson) {
-        jdbcTemplate.update("update users set username=? where id=?", editPerson.getNewUsername(), IdPerson);
-        return jdbcTemplate.queryForList("select * from users");
     }
 }

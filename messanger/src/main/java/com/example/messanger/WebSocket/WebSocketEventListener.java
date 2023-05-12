@@ -3,8 +3,6 @@
 package com.example.messanger.WebSocket;
 
 import com.example.messanger.WebSocket.model.ChatMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
@@ -15,7 +13,6 @@ import java.util.Objects;
 
 @Component
 public class WebSocketEventListener {
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
     private final SimpMessageSendingOperations messagingTemplate;
 
     public WebSocketEventListener(SimpMessageSendingOperations messagingTemplate) {
@@ -24,8 +21,8 @@ public class WebSocketEventListener {
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        logger.info("Received a new web socket connection");
-        logger.info(event.getMessage().toString());
+        System.out.println("Received a new web socket connection");
+        System.out.println(event.getMessage());
         System.out.println("event connect - " + event.getMessage());
     }
 
@@ -35,7 +32,7 @@ public class WebSocketEventListener {
         String username = (String) Objects.requireNonNull(headerAccessor.getSessionAttributes()).get("username");
         System.out.println("event disconnect - " + event);
         if (username != null) {
-            logger.info("User Disconnected : " + username);
+            System.out.println("User Disconnected : " + username);
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);

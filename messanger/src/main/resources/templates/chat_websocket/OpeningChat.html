@@ -13,7 +13,7 @@
     <div th:text="${IdChat}" class="IdChat"></div>
 
     <div class="body_chat">
-        <div id="arrowTop" hidden class="btn_up_1"></div>
+<!--        <div id="arrowTop" hidden class="btn_up_1"></div>-->
         <div id="arrowBottom" class="btn_down_1"></div>
 
         <div class="flex_content_chat_top_tools">
@@ -24,18 +24,54 @@
 
         <div class="height"></div>
 
-        <div class="list_chat"></div>
+        <div class="list_chat">
+            <div id="BottomPage"></div>
+        </div>
 
         <div class="window_add_file">
             <div class="btn_close_add_file"></div>
-            <input type="file" class="file" name="file">
+
+            <label for="FileInput" class="LabelFileInput">Прикрепить файл</label>
+            <input id="FileInput" type="file" class="file" name="file">
+
+
+            <div class="BorderOptionFile">
+                <div class="DescNameFile">Имя файла</div>
+                <div class="DIVNameFile">
+                    <p class="NameFile"></p>
+                </div>
+            </div>
+
+            <div class="BorderOptionFile">
+                <div class="DescSizeFile">Размер файла</div>
+                <p class="size"></p>
+            </div>
+
+            <div class="WarningSizeFile">
+                <p>Файл не должен быть более 3 мб</p>
+            </div>
+
+            <div class="BorderOptionFile">
+                <div class="DescTypeFile">Тип файла</div>
+                <p class="type"></p>
+            </div>
+
+            <div class="BorderOptionFile">
+                <div class="DescLastModifiedDate">Дата последнего редактирования</div>
+                <p class="lastModifiedDate"></p>
+            </div>
 
             <div class="PlaceHolderBlock">
-                <label for="PlaceHolderImage">Подпись под изображением</label>
+                <label for="PlaceHolderImage">Подпись</label>
                 <input id="PlaceHolderImage" class="PlaceHolderImageInput" type="text" placeholder="Введите подпись под изображением...">
             </div>
 
             <input type="submit" class="BtnSendFile">
+
+            <div class="CountFilesChatBorder">
+                <p>Колл-во файлов в чате: </p>
+                <div class="CountFilesChat"></div>
+            </div>
 
             <div class="ListUploadedImage"></div>
         </div>
@@ -51,14 +87,22 @@
 
                 <div class="image_chat_open_settings"></div>
 
-<!--                <div class="btn_change_icon">Изменить иконку</div>-->
+                <div class="AdminPanel">
+                    <div class="BorderNameChat">
+
+                    </div>
+
+                    <div class="BorderDescriptionChat">
+
+                    </div>
+
+                    <h1 class="H1BlockAdminChat">Админ чата</h1>
+
+                    <div class="admin_chat"></div>
+                </div>
             </div>
 
-            <h1>Админ чата</h1>
-
-            <div class="admin_chat"></div>
-
-            <h1>Список пользователей</h1>
+            <h1 class="H1BlockUsersChat">Список пользователей</h1>
 
             <div class="ListUsersChat">
                 <div class="list_users_open_settings"></div>
@@ -68,7 +112,7 @@
                 </div>
             </div>
 
-            <h1>Ссылка на чат</h1>
+            <h1 class="H1BlockLinkChat">Ссылка на чат</h1>
 
             <div class="list_link_chat"></div>
         </div>
@@ -98,6 +142,10 @@
 
     <div class="IdUser" style="display: none"></div>
     <div class="username" style="display: none" th:text="${username}"></div>
+
+    <div class="window_load">
+        <p>Загрузка...</p>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>

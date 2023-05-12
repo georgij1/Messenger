@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>Share изображения</title>
+  <link rel="icon" th:href="${FullPath}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/user/main_page.css}">
+  <link rel="stylesheet" th:href="@{main_page.css}">
+  <link rel="stylesheet" th:href="@{/user/share/share.css}" />
+  <script type="text/javascript" src="https://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+</head>
+
+<body>
+  <div class="close_window"></div>
+
+  <img class="image" th:src="${FullPath}" alt="">
+
+  <div class="PathImage" th:text="${FullPath}"></div>
+
+  <div id="my-share">share</div>
+
+<!--  <div class="tools">-->
+<!--    <div class="ya-share2 btn_share" th:image="${FullPath}" th:data-description="${FullPath}" data-curtain data-size="s" data-shape="round" data-limit="0" data-more-button-type="long" data-use-links data-services="vkontakte,telegram,whatsapp"></div>-->
+<!--  </div>-->
+
+  <div id="vk_share_button"></div>
+
+  <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+  <script src="https://yastatic.net/share2/share.js"></script>
+  <script th:src="@{/user/share/share_main.js}"></script>
+
+    <script type="text/javascript">
+      document.write(VK.Share.button({
+      url: 'http://localhost:8080',
+      title: 'Заголовок страницы',
+      image: "http://localhost:8080" + PathImage,
+      noparse: true
+    }));
+  </script>
+</body>
+</html>
