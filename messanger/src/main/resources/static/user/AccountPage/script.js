@@ -2,10 +2,8 @@ let close_window = document.querySelector('.close_window')
 let BtnEditUsername = document.querySelector('.BtnEditUsername')
 let UserName = document.querySelector('.UserName').textContent
 let ImageUser = document.querySelector('.ImageUser')
-let BtnUpdateImage = document.querySelector('.BtnUpdateImage')
 let GroupYorOwn = document.querySelector('.GroupYorOwn')
 let DeleteAccount = document.querySelector('.btn_delete_account')
-let LogoutAccount = document.querySelector('.LogoutAccount')
 let window_edit_chat = document.querySelector('.window_edit_chat')
 let close_window_1 = document.querySelector('.close_window_1')
 let FormEditUserName = document.querySelector('.FormEditUserName')
@@ -20,17 +18,21 @@ BtnEditUsername.addEventListener('click', () => {
     DeleteAccount.classList.add('none')
     close_window.classList.add('none')
     window_edit_chat.classList.add('block')
+    for (let FlexItter of document.querySelectorAll('.flex')) {
+        FlexItter.classList.remove('flex')
+    }
 })
 close_window_1.addEventListener('click', () => {
     ImageUser.classList.remove('none')
-    BtnUpdateImage.classList.remove('none')
     document.querySelector('.UserName').classList.remove('none')
     BtnEditUsername.classList.remove('none')
     GroupYorOwn.classList.remove('none')
     DeleteAccount.classList.remove('none')
-    LogoutAccount.classList.remove('none')
     close_window.classList.remove('none')
     window_edit_chat.classList.remove('block')
+    for (let AddFlexJsItter of document.querySelectorAll('.AddFlexJs')) {
+        AddFlexJsItter.classList.add('flex')
+    }
 })
 
 FormEditUserName.innerHTML=`

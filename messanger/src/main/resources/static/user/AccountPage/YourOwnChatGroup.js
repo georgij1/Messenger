@@ -1,3 +1,5 @@
+let btn_delete_account_1 = document.querySelector('.btn_delete_account')
+
 fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
     headers: new Headers({
         'Content-Type': 'application/json'
@@ -15,9 +17,7 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
             list_my_chats.innerHTML=`
                 <p class="PBlockNoChats">Чатов нет</p>
                 
-                <a href="/websocket_chat">
-                    <div class="BtnAddEventChats">Вступить в чат</div>                
-                </a>
+                <a href="/websocket_chat" class="BtnAddEventChats">Вступить в чат</a>                
             `
         }
 
@@ -66,6 +66,8 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
                                 window_edit_name_chat.classList.add('block')
                                 list_my_chats.classList.add('none')
 
+                                btn_delete_account_1.classList.add('none')
+
                                 let flex = document.querySelectorAll('.flex')
                                 for (let FlexItter of flex) {
                                     FlexItter.classList.add('none')
@@ -106,6 +108,7 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
                                 btn_cancel_change_name_chat.addEventListener('click', () => {
                                     console.log('btn_cancel_change_name_chat')
                                     window_edit_name_chat.classList.remove('block')
+                                    btn_delete_account_1.classList.remove('none')
                                     list_my_chats.classList.remove('none')
                                     close_window.classList.remove('none')
                                     let flex = document.querySelectorAll('.flex')

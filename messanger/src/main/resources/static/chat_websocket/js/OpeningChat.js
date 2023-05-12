@@ -668,7 +668,7 @@ fetch(`/chats/${IdChat.textContent}`, {
             list_chat.innerHTML=`
                 <div class="MessageNullDiv">
                     <div class="MessageListNull">
-                        <div class="text">Сообщений нет начните общаться первым</div>
+                        <div class="TextNullInfo">Сообщений нет начните общаться первым</div>
                         <div class="ImageMessageNull"></div>
                     </div>
                 </div>
