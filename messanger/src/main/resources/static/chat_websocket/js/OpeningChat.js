@@ -1307,8 +1307,9 @@ function ErrorSocket() {
     })
         .catch(() => ErrorConnect.classList.add('block'))
         .then(res => res.json())
-        .then(data => data.forEach(item => {
-            console.log(item)
+        .catch(() => console.log(`json isn't valid`))
+        .then(data => (item => {
+            console.log(item.ok)
             if (item === 'ok') {
                 ErrorConnect.classList.remove('block')
                 console.log('connect to server is success')
