@@ -271,6 +271,7 @@ fetch(`/chats/${IdChat.textContent}`, {
                             <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorder">
                                 <div class="ItemUsername">${item.username}</div>
+                                
                                 <div class="ImageChat_1">
                                     <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image}" alt="">
                                     <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image}</div>
@@ -326,9 +327,10 @@ fetch(`/chats/${IdChat.textContent}`, {
                 console.log('item.text != null && item.read === false')
                 list_chat.innerHTML +=
                     `
-                        <div class="MessageMain">
+                        <div class="MessageMainImageDesc">
                             <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
-                            <div class="ImageBorder">
+                            
+                            <div class="ImageBorderImageDesc">
                                 <div class="ItemUsername">${item.username}</div>
 
                                 <div class="ImageChat_1">
@@ -357,9 +359,9 @@ fetch(`/chats/${IdChat.textContent}`, {
                 console.log('item.text != null && item.read === false')
                 list_chat.innerHTML +=
                     `
-                        <div class="MessageMain">
+                        <div class="MessageMainImageDesc">
                             <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
-                            <div class="ImageBorder">
+                            <div class="ImageBorderImageDesc">
                                 <div class="ItemUsername">${item.username}</div>
 
                                 <div class="ImageChat_1">
@@ -385,9 +387,9 @@ fetch(`/chats/${IdChat.textContent}`, {
                 console.log('item.text !== null')
                 list_chat.innerHTML +=
                     `
-                        <div class="MessageMain">
+                        <div class="MessageMainImageDesc">
                             <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
-                            <div class="ImageBorder">
+                            <div class="ImageBorderImageDesc">
                             <div class="ItemUsername">${item.username}</div>
                             <div class="ImageChat_1">
                                 <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image}" alt="">
@@ -418,9 +420,9 @@ fetch(`/chats/${IdChat.textContent}`, {
                 console.log('item.text !== null')
                 list_chat.innerHTML +=
                     `
-                        <div class="MessageMain">
+                        <div class="MessageMainImageDesc">
                             <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
-                            <div class="ImageBorder">
+                            <div class="ImageBorderImageDesc">
                             <div class="ItemUsername">${item.username}</div>
                             <div class="ImageChat_1">
                                 <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image}" alt="">
@@ -484,6 +486,50 @@ fetch(`/chats/${IdChat.textContent}`, {
                 })
             }
 
+            for (let MessageImageItter of document.querySelectorAll('.ImageBorderImageDesc')) {
+                MessageImageItter.addEventListener('click', (event) => {
+                    let EventImageId = event.currentTarget.children[4]
+                    let EventImageIdDelete = event.currentTarget.children[3]
+                    let EventIdLinkImage = event.currentTarget.children[1].children[1].textContent
+                    for (let ReadMessageImageItter of document.querySelectorAll('.ReadMessageImage')) {
+                        ReadMessageImageItter.addEventListener('click', () => {
+                            console.log(EventImageId.textContent)
+                            fetch(`read/${EventImageId.textContent}`, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                mode: "cors",
+                                method: 'POST'
+                            })
+                                .then(res => res.json())
+                        })
+                    }
+
+                    for (let DeleteMessageImageItter of document.querySelectorAll('.delete_message_image')) {
+                        console.log(EventImageIdDelete)
+                        DeleteMessageImageItter.addEventListener('click', () => {
+                            fetch(`/files/tools/delete/${EventImageIdDelete.textContent}`, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                mode: "cors",
+                                method: 'DELETE'
+                            })
+                                .then(res => res.json())
+                                .then(() => window.location.reload())
+                        })
+                    }
+
+                    for (let ShareMessageImage of document.querySelectorAll('.share_message_image')) {
+                        ShareMessageImage.addEventListener('click', () => {
+                            console.log(ShareMessageImage)
+                            console.log(EventIdLinkImage)
+                            window.open(`/share/ImageMessage${EventIdLinkImage}`)
+                        })
+                    }
+                })
+            }
+
             let ImageChat = document.querySelectorAll('.ImageChat_1')
 
             for (let ImageBorderItter of document.querySelectorAll('.ImageBorder')) {
@@ -491,6 +537,14 @@ fetch(`/chats/${IdChat.textContent}`, {
                     event.currentTarget.children[2].classList.toggle('flex')
                     event.currentTarget.children[3].classList.toggle('flex')
                     ImageBorderItter.classList.toggle('ImageBorderClick')
+                })
+            }
+
+            for (let ImageBorderItter of document.querySelectorAll('.ImageBorderImageDesc')) {
+                ImageBorderItter.addEventListener('click', (event) => {
+                    event.currentTarget.children[3].classList.toggle('flex')
+                    ImageBorderItter.classList.toggle('ImageBorderClick')
+                    console.log(event.currentTarget)
                 })
             }
 

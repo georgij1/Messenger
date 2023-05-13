@@ -7,4 +7,6 @@ import lombok.Data;
 public class EditPerson {
     @JsonProperty("NewUsername")
     public String NewUsername;
+    @JsonProperty("OldUserName")
+    public String OldUserName;
 }

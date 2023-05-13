@@ -89,12 +89,12 @@ public class CreateChat {
         return jdbcTemplate.queryForList("select * from chat");
     }
 
-    @DeleteMapping("/delete_chat/{id}")
+    @DeleteMapping("/delete_chat/{StringId}/{IntegerId}")
     @CrossOrigin("*")
     @ResponseBody
-    public List<Map<String, Object>> DeleteChat_1(@PathVariable int id) {
-        jdbcTemplate.update("delete from public.message where chat_id=?", id);
-        jdbcTemplate.update("delete from public.chat where id=?", id);
+    public List<Map<String, Object>> DeleteChat_1(@PathVariable String StringId, @PathVariable int IntegerId) {
+        jdbcTemplate.update("delete from public.message where chat_id=?", StringId);
+        jdbcTemplate.update("delete from public.chat where id=?", IntegerId);
         return jdbcTemplate.queryForList("select * from chat");
     }
 

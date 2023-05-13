@@ -19,6 +19,7 @@ public class Persons {
     @PostMapping("EditPersonsById/{IdPerson}")
     public List<Map<String, Object>> EditPersonsById (@PathVariable int IdPerson, @RequestBody EditPerson editPerson) {
         jdbcTemplate.update("update users set username=? where id=?", editPerson.getNewUsername(), IdPerson);
+        jdbcTemplate.update("update chat set owner=? where owner=?", editPerson.getNewUsername(), editPerson.getOldUserName());
         return jdbcTemplate.queryForList("select * from users");
     }
 

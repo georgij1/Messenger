@@ -111,7 +111,7 @@ for (let list_my_chat_itter of list_my_chats) {
                         for (let OneChatItter of one_chat) {
                             OneChatItter.addEventListener('click', (event) => {
                                 console.log(event.currentTarget.children[0].children[0].textContent)
-                                fetch(`/delete_chat/${event.currentTarget.children[0].children[0].textContent}`, {
+                                fetch(`/delete_chat/${event.currentTarget.children[0].children[0].textContent}/${event.currentTarget.children[0].children[0].textContent}`, {
                                     headers: new Headers({
                                         'Content-Type': 'application/json'
                                     }),

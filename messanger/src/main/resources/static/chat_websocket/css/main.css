@@ -261,7 +261,6 @@ input {
     padding: 10px;
     display: flex;
     width: 100%;
-    gap: 15px;
 }
 
 .IdChat {
@@ -313,7 +312,7 @@ input {
 }
 
 .send_message {
-    width: 35px;
+    width: 30px;
     height: 30px;
     background: url("../image/send_message.png") no-repeat center, linear-gradient(325.78deg, #0c0c0d 14.76%, #7CB8F7 87.3%);
     background-size: 15px;
@@ -438,8 +437,8 @@ li {
 #messageForm {
     align-items: center;
     display: flex;
-    gap: 17px;
     width: 100%;
+    justify-content: space-evenly;
 }
 
 .chat {
@@ -1002,14 +1001,14 @@ li {
 
 .ImageChat {
     display: block;
-    height: 300px;
-    width: 67vW;
+    height: max-content;
+    width: 100%;
     margin: 0 auto 0;
     cursor: pointer;
     border-radius: 20px;
 }
 
-.ImageBorder {
+.ImageBorder, .ImageBorderImageDesc {
     border: 2px solid beige;
     padding: 10px 7px;
     border-radius: 10px;
@@ -1041,7 +1040,7 @@ li {
     background: transparent;
 }
 
-.ImageBorder:hover {
+.ImageBorder:hover, .ImageBorderImageDesc:hover {
     background: #eaebef;
     border-radius: 20px;
     box-shadow: 0 0 10px bisque;
@@ -1062,7 +1061,7 @@ li {
     margin-bottom: 10px;
 }
 
-.MessageMain {
+.MessageMain, .MessageMainImageDesc {
     display: flex;
     align-items: end;
     gap: 15px;
@@ -1430,6 +1429,7 @@ li {
         display: flex;
         gap: 66px;
         align-items: flex-start;
+        justify-content: space-around;
     }
 
     .H1BlockAdminChat {
@@ -1546,14 +1546,20 @@ li {
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 0 10px blanchedalmond;
-        width: 90%;
+        width: 89%;
     }
 
     #messageForm {
         align-items: center;
         display: flex;
-        gap: 17px;
-        width: 85%;
+        width: 90%;
+        justify-content: inherit;
+        gap: 20px;
+    }
+
+    .tools {
+        /*justify-content: space-between;*/
+        gap: 20px;
     }
 
     .red {
@@ -1588,8 +1594,8 @@ li {
     }
 
     .ImageChat {
-        width: 62vW;
-        height: 600px;
+        width: 100%;
+        height: max-content;
     }
 
     .message {
@@ -1676,11 +1682,45 @@ li {
         height: 24vW;
     }
 
+    #messageForm {
+        justify-content: inherit;
+        width: 100%;
+    }
+
+    .input_message {
+        width: 90%;
+    }
+
+    .ImageChat {
+        width: 100%;
+        height: max-content;
+    }
+
     .none {
         display: none;
     }
 
     .visible {
         display: block;
+    }
+}
+
+@media (min-width: 1440px) {
+    .input_message {
+        width: 94%;
+    }
+
+    #messageForm {
+        width: 95%;
+    }
+}
+
+@media (min-width: 2560px) {
+    .input_message {
+        width: 100%;
+    }
+
+    #messageForm {
+        width: 97%;
     }
 }

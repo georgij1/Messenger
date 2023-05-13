@@ -120,7 +120,7 @@ input {
     padding: 10px;
     border: 2px solid bisque;
     border-radius: 10px;
-    height: 100px;
+    height: max-content;
 }
 
 .DeleteAccount, .LogoutAccount {
@@ -177,7 +177,7 @@ input {
 }
 
 .ImageUser img {
-    height: 100vW;
+    height: 90vW;
     margin: auto;
     display: block;
     width: 100%;

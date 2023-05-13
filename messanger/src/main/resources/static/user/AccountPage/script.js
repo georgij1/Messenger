@@ -59,7 +59,8 @@ BtnSaveNewName.addEventListener('click', () => {
             let ImageUser = document.querySelector('.ImageUser')
             ImageUser.innerHTML+=`<img src="${item.image}" alt="">`
             const FromData = {
-                "NewUsername": InputUserName.value
+                "NewUsername": InputUserName.value,
+                "OldUserName": document.querySelector('.UserName').textContent
             }
             fetch(`/EditPersonsById/${item.id}`, {
                 headers: new Headers({
