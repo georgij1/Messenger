@@ -7,3 +7,15 @@ create table chat
     image_chat text default '../image/settings/icon_profile.png',
     owner text
 );
+
+insert into chat (
+    name,
+    desc_chat,
+    type,
+    owner
+) VALUES (
+    'Команда',
+    'Описание команды',
+    'group_chat',
+    'i21s597'
+);

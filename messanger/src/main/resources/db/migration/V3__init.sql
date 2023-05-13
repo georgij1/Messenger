@@ -13,3 +13,25 @@ create table message
     read boolean default false,
     get boolean default true
 );
+
+insert into message (
+    text,
+    sender_id,
+    chat_id,
+    time_stamp_short,
+    time_stamp_long,
+    id_image,
+    image_name,
+    data,
+    type
+) values (
+    'Приветствуем в чате',
+    1,
+    '1',
+    '00:00',
+    '13.05.2023 00:00:00',
+    'TextMessage',
+    'TextMessage',
+    0,
+    'text'
+);
