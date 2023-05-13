@@ -4,14 +4,10 @@ package com.example.messanger.ChatImage.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
-import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "message")
 public class FileDB {
     @Id
@@ -44,61 +40,5 @@ public class FileDB {
         this.chat_id = getChatID;
         this.sender_id = getChatSender;
         this.text = PlaceHolderImage;
-    }
-
-    public String getId() {
-        return id_image;
-    }
-
-    public String getName() {
-        return image_name;
-    }
-
-    public void setName(String name) {
-        this.image_name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
-
-    public String GetTimeStampShort() {
-        return time_stamp_short;
-    }
-
-    public String GetTimeStampLong() {
-        return time_stamp_long;
-    }
-
-    public String GetChatID() {
-        return chat_id;
-    }
-
-    public Integer GetChatSender() {
-        return sender_id;
-    }
-
-    public String GetPlaceHolderImage() {
-        return text;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        FileDB fileDB = (FileDB) o;
-        return getId() != null && Objects.equals(getId(), fileDB.getId());
     }
 }

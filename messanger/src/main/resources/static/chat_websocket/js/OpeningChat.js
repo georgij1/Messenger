@@ -145,6 +145,8 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="share_message"></div>
                             </div>
                             
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
                             <div class="ToolsTick">
                                 <div class="ReadMessage">Прочитано</div>
                             </div>
@@ -199,6 +201,8 @@ fetch(`/chats/${IdChat.textContent}`, {
                             
                             <div class="id">${item.id_message}</div>
                             <div class="text" title="Скопировать текст">${item.text}</div>
+    
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
     
                             <div class="tools_message">
                                 <div class="share_message"></div>
@@ -472,7 +476,7 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 method: 'DELETE'
                             })
                                 .then(res => res.json())
-                                .then(() => window.location.reload())
+                                // .then(() => window.location.reload())
                         })
                     }
 
@@ -489,7 +493,8 @@ fetch(`/chats/${IdChat.textContent}`, {
             for (let MessageImageItter of document.querySelectorAll('.ImageBorderImageDesc')) {
                 MessageImageItter.addEventListener('click', (event) => {
                     let EventImageId = event.currentTarget.children[4]
-                    let EventImageIdDelete = event.currentTarget.children[3]
+                    let EventImageIdDelete = event.currentTarget[1]
+                    let EventImageIdDeleteDesc = event.currentTarget.children[4]
                     let EventIdLinkImage = event.currentTarget.children[1].children[1].textContent
                     for (let ReadMessageImageItter of document.querySelectorAll('.ReadMessageImage')) {
                         ReadMessageImageItter.addEventListener('click', () => {
@@ -506,9 +511,9 @@ fetch(`/chats/${IdChat.textContent}`, {
                     }
 
                     for (let DeleteMessageImageItter of document.querySelectorAll('.delete_message_image')) {
-                        console.log(EventImageIdDelete)
+                        console.log(EventImageIdDeleteDesc)
                         DeleteMessageImageItter.addEventListener('click', () => {
-                            fetch(`/files/tools/delete/${EventImageIdDelete.textContent}`, {
+                            fetch(`/files/tools/delete/${EventImageIdDeleteDesc.textContent}`, {
                                 headers: {
                                     "Content-Type": "application/json"
                                 },
@@ -516,7 +521,7 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 method: 'DELETE'
                             })
                                 .then(res => res.json())
-                                .then(() => window.location.reload())
+                                // .then(() => window.location.reload())
                         })
                     }
 
@@ -587,7 +592,7 @@ fetch(`/chats/${IdChat.textContent}`, {
                             })
                                 .then(() => {
                                     alert('Сообщение - ' + item.text + ' успешно удалено')
-                                    // window.location.reload()
+                                    window.location.reload()
                                 })
                         })
                     }
@@ -718,7 +723,6 @@ fetch(`/chats/${IdChat.textContent}`, {
         })))
 
         if (list_chat.clientHeight === 0) {
-            // btn_down_1.classList.add('none')
             list_chat.innerHTML=`
                 <div class="MessageNullDiv">
                     <div class="MessageListNull">
@@ -745,9 +749,7 @@ btn_tools_chat.addEventListener('click', () => {
         },
         mode: "cors"
     })
-        // .catch(() => console.log('Ошибка в файлах'))
         .then(res => res.json())
-        // .catch(() => console.log('Не возможно распарить json'))
         .then(data => data.forEach(item => {
             if (item.text === null || item.text === '') {
                 ListUploadedImage.innerHTML+=`
@@ -768,7 +770,6 @@ btn_tools_chat.addEventListener('click', () => {
             for (let LinkImage of link_image) {
                 LinkImage.addEventListener('click', (event) => {
                     console.log(event.currentTarget)
-                    // window.open(`/${LinkImage.textContent}`, '_self')
                 })
             }
         }))
@@ -779,9 +780,7 @@ btn_tools_chat.addEventListener('click', () => {
         },
         mode: "cors"
     })
-        // .catch(() => console.log('Ошибка в файлах'))
         .then(res => res.json())
-        // .catch(() => console.log('Не возможно распарить json'))
         .then(data => data.forEach(item => {
             console.log(item)
             let CountFilesChat = document.querySelector('.CountFilesChat')
@@ -802,10 +801,13 @@ file.onchange = () => {
         for (let BorderOptionFileItter of BorderOptionFile) {
             BorderOptionFileItter.classList.add('flex')
         }
+
         WarningSizeFile.classList.add('block')
         console.log(FilesItter)
         NameFile.innerHTML=`${FilesItter.name}`
+
         let CountMB = FilesItter.size/1024/1024
+
         if (Math.round(CountMB) > 3) {
             SizeFile.innerHTML=`Размер файла слишком большой`
         }
@@ -813,6 +815,7 @@ file.onchange = () => {
         else {
             SizeFile.innerHTML=`Размер файла имеет допустимую норму`
         }
+
         TypeFile.innerHTML=`${FilesItter.type}`
         LastModifiedDate.innerHTML=`${FilesItter.lastModifiedDate}`
         console.log(Math.round(CountMB))
@@ -832,7 +835,6 @@ border_name_chat.addEventListener('click', () => {
     window_settings_chat.classList.add('visible')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
-    // btn_down_1.classList.add('none')
     tools.classList.add('none')
     height.classList.add('none')
     let admin_chat = document.querySelector('.UserChatName').textContent
@@ -882,7 +884,6 @@ border_name_chat.addEventListener('click', () => {
                     if (item.username !== document.querySelector('.username').textContent && item.username !== UserChatNewItter.textContent) {
                         document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
                         <div class="user" id="user">
-                            <!--<div class="id"></div>-->
                             <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
                             <div class="name">${item.username}</div>
                         </div>
@@ -991,7 +992,6 @@ close_window_3.addEventListener('click', () => {
     window_settings_chat.classList.remove('visible')
     list_chat.classList.remove('none')
     flex_content_chat_top_tools.classList.remove('none')
-    // btn_down_1.classList.remove('none')
     tools.classList.remove('none')
     height.classList.remove('none')
     ToolsAdmin.classList.remove('flex')
@@ -1095,20 +1095,8 @@ function onMessageReceived(payload) {
             <div class="ImageProfileMessage1"><p>${JSON.parse(payload.body).sender}</p></div>
                 <div class="message">
                     <div class="ItemUsername">${JSON.parse(payload.body).sender}</div>
+                    
                     <div class="text">${JSON.parse(payload.body).content}</div>
-                        
-                    <div class="id">IdMessage</div>
-                        
-<!--                    <div class="tools_message">-->
-<!--                        <div class="delete_message"></div>-->
-<!--                        <div class="edit_message"></div>-->
-<!--                        <div class="share_message"></div>-->
-<!--                    </div>-->
-                                                                    
-<!--                    <div class="ToolsTick">-->
-<!--                        <div class="ReadMessage">Прочитано</div>-->
-<!--                        <div class="GetMessage">Получено</div>-->
-<!--                    </div>-->
                         
                     <div title="${JSON.parse(payload.body).TimeStampLong}" class="TimeStampShort">${JSON.parse(payload.body).TimeStampShort}</div>
             </div>
@@ -1156,7 +1144,7 @@ function onMessageReceived(payload) {
                     })
                         .then(() => {
                             alert('Сообщение - ' + JSON.parse(payload.body).content + ' успешно удалено')
-                            // window.location.reload()
+                            window.location.reload()
                         })
                 })
             }
@@ -1196,12 +1184,9 @@ function onMessageReceived(payload) {
     }
 
     else if (message.type === 'LEAVE') {
-        // let messageEventLogout = document.createTextNode(message.EventLogout)
         messageElement.classList.add('event-message');
-        // message.EventLogout = message.sender + 'офлайн';
         ErrorConnect.classList.remove('block')
         messageElement.appendChild(textElementLogOut)
-        // textElementLogOut.appendChild(messageEventLogout)
         messageAreaNew.appendChild(messageElement);
         messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
         let EventLogOut = document.querySelector('.EventLogOut')
@@ -1215,13 +1200,6 @@ function onMessageReceived(payload) {
     else if (message.type === 'Whoops! Lost connection to http://localhost:8080/ws') {
         ErrorConnect.classList.add('block')
     }
-
-    // else {
-    //     // textChat.appendChild(TextChat)
-    //     messageElement.appendChild(textChat);
-    //     messageAreaNew.appendChild(messageElement);
-    //     messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
-    // }
 
     let UserNameEventLink = document.querySelectorAll('.UserNameEventLink')
 
@@ -1255,8 +1233,45 @@ function sendMessage (event) {
             .then((data) => {
                 data.forEach(item => {
                     let item_id_user = item.id
-                    let DateLong = new Date().toLocaleDateString() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
-                    let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
+
+                    let dd = new Date().getDate();
+                    dd < 10 ? dd = '0' + dd : '';
+
+                    console.log("Date - " + dd)
+                    console.log(dd < 10 ? dd = '0' + dd : '')
+
+                    let mm = new Date().getMonth() + 1;
+                    mm < 10 ? mm = '0' + mm : '';
+
+                    console.log("Month - " + mm)
+                    console.log(mm < 10 ? mm = '0' + mm : '')
+
+                    let yy = new Date().getFullYear() % 100;
+                    yy < 10 ? yy = '0' + yy : '';
+
+                    console.log("FullYear - " + yy)
+                    console.log(yy < 10 ? yy = '0' + yy : '')
+
+                    let hh = new Date().getHours()
+                    hh < 10 ? hh += '0' + hh : '';
+
+                    console.log("Hours - " + hh)
+                    console.log(hh < 10 ? hh += '0' + hh : '')
+
+                    let mn = new Date().getMinutes()
+                    mn < 10 ? mn += '0' + mn : '';
+
+                    let sc = new Date().getSeconds()
+                    sc < 10 ? sc += '0' + sc : '';
+
+                    console.log("Minutes - " + mm)
+                    console.log(mn < 10 ? mn += '0' + mn : '')
+
+                    console.log('20' + yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mn + ':' + sc)
+                    console.log(hh + ':' + mn + ':' + sc)
+
+                    let DateLong = '20' + yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mn + ':' + sc
+                    let DateShort = hh + ':' + mn
 
                     let ErrorConnect = document.querySelector('.ErrorConnect')
                     ErrorConnect.classList.remove('block')
@@ -1274,43 +1289,6 @@ function sendMessage (event) {
                     messageInput.value = '';
                     let MessageNullDiv = document.querySelector('.MessageNullDiv')
                     MessageNullDiv.classList.add('none')
-
-                    /*
-
-                        fetch('/image_profile',{
-                            headers: new Headers({
-                                'Content-Type': 'application/json'
-                            }),
-                            mode: "cors"
-                        })
-                            .then(response => response.json())
-                            .then((data) => (data.forEach((item) => {
-                                console.log(event)
-                                list_chat.innerHTML += `
-                                    <div class="MessageMain">
-                                        <div class="ImageProfileMessage1"></div>
-                                        <div class="message">
-                                            <div class="ItemUsername">${UsernameNew}</div>
-                                                <div class="text">${chatMessage.content}</div>
-
-                                                <div class="id">${item.id}</div>
-
-                                                <div class="tools_message">
-                                                    <div class="delete_message"></div>
-                                                    <div class="edit_message"></div>
-                                                    <div class="share_message"></div>
-                                                </div>
-
-                                                <div class="ToolsTick">
-                                                    <div class="ReadMessage">Прочитано</div>
-                                                    <div class="GetMessage">Получено</div>
-                                                </div>
-
-                                                <div title="${chatMessage.TimeStampLong}" class="TimeStampShort">${chatMessage.TimeStampShort}</div>
-                                        </div>
-                                    </div>
-                                `
-                    */
                 })
             })
     }
@@ -1320,23 +1298,22 @@ function sendMessage (event) {
 messageForm.addEventListener('submit', sendMessage, true)
 
 function ErrorSocket() {
-    console.log('may be ok')
-    // fetch('/connect', {
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     mode: "cors",
-    //     method: 'GET'
-    // })
-    //     .catch(() => ErrorConnect.classList.add('block'))
-    //     .then(res => res.json())
-    //     .then(data => data.forEach(item => {
-    //         console.log(item)
-    //         if (item === 'ok') {
-    //             ErrorConnect.classList.remove('block')
-    //             console.log('connect to server is success')
-    //         }
-    //     }))
+    fetch('/connect', {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        mode: "cors",
+        method: 'GET'
+    })
+        .catch(() => ErrorConnect.classList.add('block'))
+        .then(res => res.json())
+        .then(data => data.forEach(item => {
+            console.log(item)
+            if (item === 'ok') {
+                ErrorConnect.classList.remove('block')
+                console.log('connect to server is success')
+            }
+        }))
 }
 
 connect()

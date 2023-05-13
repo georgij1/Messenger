@@ -11,10 +11,6 @@
     color: #0D1C2E;
 }
 
-.close_add_users {
-    display: none;
-}
-
 .btn_create_chat {
     width: max-content;
     height: 60px;
@@ -74,19 +70,6 @@
     outline: none;
 }
 
-.window_create_chat, .border_users {
-    display: none;
-}
-
-.window_create_chat, .border_users {
-    display: none;
-    box-shadow: 0 0 10px blue;
-    margin: 30px auto 0;
-    border-radius: 30px;
-    width: 85vW;
-    padding: 15px;
-}
-
 .close_window, .close_add_users {
     width: 50px;
     height: 50px;
@@ -123,6 +106,27 @@
 
 .id, .IdMessage {
     display: none;
+}
+
+.window_create_chat, .border_users {
+    display: none;
+}
+
+.message_input {
+    display: none;
+}
+
+.close_add_users {
+    display: none;
+}
+
+.window_create_chat, .border_users {
+    display: none;
+    box-shadow: 0 0 10px blue;
+    margin: 30px auto 0;
+    border-radius: 30px;
+    width: 85vW;
+    padding: 15px;
 }
 
 .close_window:hover, .close_add_users:hover {

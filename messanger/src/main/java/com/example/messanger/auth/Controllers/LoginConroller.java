@@ -59,14 +59,13 @@ public class LoginConroller {
         return "auth/login";
     }
 
-    // Контроллер для авторизации - для добавления jwt token's
+    // Контроллер для авторизации - для добавления jwt tokens
     @PostMapping("login")
     public String login(LoginForm form, Model model, RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
         String token = null;
 
         if (cookies == null) {
-            System.out.println(cookies + "is null");
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 System.out.println("form_login is null" + "or is " + form.getLogin());

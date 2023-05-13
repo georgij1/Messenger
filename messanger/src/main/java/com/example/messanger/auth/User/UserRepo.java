@@ -4,7 +4,6 @@
 package com.example.messanger.auth.User;
 
 import com.auth0.jwt.JWT;
-import com.example.messanger.auth.forms.AccountsSettings.EditPerson;
 import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import com.example.messanger.auth.forms.Users.UsernameUserID;
 import jakarta.servlet.http.Cookie;
@@ -90,29 +89,12 @@ public class UserRepo {
         return null;
     }
 
-    // Получение списка всех сообщений
-    @GetMapping("/all_message")
-    @ResponseBody
-    @CrossOrigin("*")
-    public List<Map<String, Object>> all_message() {
-        return jdbcTemplate.queryForList("select * from message");
-    }
-
     // Получения конкретного пользователя по username по условии where
     @PostMapping("/username")
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> userChatID(@RequestBody UsernameUserID usernameUserID) {
         return jdbcTemplate.queryForList("select id from users where username=?", usernameUserID.getUsername());
-    }
-
-    // Удаления сообщения по id
-    @ResponseBody
-    @CrossOrigin("*")
-    @DeleteMapping("delete_message/{id}")
-    public List<Map<String, Object>> delete_message(@PathVariable int id) {
-        jdbcTemplate.update("delete from message where id_message=?", id);
-        return jdbcTemplate.queryForList("select * from message");
     }
 
     // Удаления пользователя по id

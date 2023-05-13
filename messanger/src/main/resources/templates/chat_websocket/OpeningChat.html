@@ -13,7 +13,6 @@
     <div th:text="${IdChat}" class="IdChat"></div>
 
     <div class="body_chat">
-<!--        <div id="arrowTop" hidden class="btn_up_1"></div>-->
         <div id="arrowBottom" class="btn_down_1"></div>
 
         <div class="flex_content_chat_top_tools">
@@ -92,9 +91,7 @@
 
                     </div>
 
-                    <div class="BorderDescriptionChat">
-
-                    </div>
+                    <div class="BorderDescriptionChat"></div>
 
                     <h1 class="H1BlockAdminChat">Админ чата</h1>
 
@@ -135,6 +132,7 @@
         <div class="btn_tools_chat"></div>
 
         <form id="messageForm" enctype="multipart/form-data" name="messageForm">
+            <label for="message" class="message_input"></label>
             <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
             <button type="submit" class="send_message primary"></button>
         </form>

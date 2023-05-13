@@ -92,6 +92,7 @@ public class RegistrationController {
                         Path fileNameAndPath = Paths.get(fileName);
                         fileNames.append(file.getOriginalFilename());
                         Files.write(fileNameAndPath, file.getBytes());
+                        System.out.println("Мы делаем новый способ сохранения авы");
                     }
                 return "redirect:login";
             }

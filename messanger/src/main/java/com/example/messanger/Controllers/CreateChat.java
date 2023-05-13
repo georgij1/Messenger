@@ -121,4 +121,21 @@ public class CreateChat {
     public List<Map<String, Object>> getListChats() {
         return jdbcTemplate.queryForList("select * from chat where type='group_chat'");
     }
+
+    // Получение списка всех сообщений
+    @GetMapping("/all_message")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> all_message() {
+        return jdbcTemplate.queryForList("select * from message");
+    }
+
+    // Удаления сообщения по id
+    @ResponseBody
+    @CrossOrigin("*")
+    @DeleteMapping("delete_message/{id}")
+    public List<Map<String, Object>> delete_message(@PathVariable int id) {
+        jdbcTemplate.update("delete from message where id_message=?", id);
+        return jdbcTemplate.queryForList("select * from message");
+    }
 }

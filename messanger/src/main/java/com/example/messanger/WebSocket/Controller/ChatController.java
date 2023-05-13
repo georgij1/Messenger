@@ -9,6 +9,9 @@ import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -16,6 +19,11 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,7 +39,23 @@ public class ChatController {
     public ChatMessage sendMessage (@Payload ChatMessage chatMessage) {
         int sender_id = Integer.parseInt(chatMessage.getSender());
         int chat_id = Integer.parseInt(chatMessage.getChat_id());
-        jdbcTemplate.update("insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long, type, id_image, image_name, data) values (?, ?, ?, ?, ?, 'text', 'TextMessage', 'TextMessage', 0)", chatMessage.getContent(), sender_id, chat_id, chatMessage.GetTimeStampShort(), chatMessage.GetTimeStampLong());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        String sql = "insert into public.message(text, sender_id, chat_id, time_stamp_short, time_stamp_long, type, id_image, image_name, data) values (?, ?, ?, ?, ?, 'text', 'TextMessage', 'TextMessage', 0)";
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement preparedStatement = con.prepareStatement(sql, new String[]{"id_message"});
+                preparedStatement.setString(1, chatMessage.getContent());
+                preparedStatement.setInt(2, sender_id);
+                preparedStatement.setInt(3, chat_id);
+                preparedStatement.setString(4, chatMessage.GetTimeStampShort());
+                preparedStatement.setString(5, chatMessage.GetTimeStampLong());
+                return preparedStatement;
+            }
+        }, keyHolder);
+
+        System.out.printf("Inserted row has ID: %d", keyHolder.getKey().intValue());
+
         System.out.println(jdbcTemplate.queryForList("select username from users where id=?", sender_id));
         chatMessage.setSender((String) jdbcTemplate.queryForMap("select username from users where id=?", sender_id).get("username"));
         chatMessage.setImage((String) jdbcTemplate.queryForMap("select image from users where id=?", sender_id).get("image"));

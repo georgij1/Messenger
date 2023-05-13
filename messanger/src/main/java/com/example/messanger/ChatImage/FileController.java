@@ -30,13 +30,13 @@ public class FileController {
         String message;
 
         try {
-            storageService.store(file, formsGetTimeStamp.GetTimeStampShort(), formsGetTimeStamp.GetTimeStampLong(), formsGetTimeStamp.GetChatID(), formsGetTimeStamp.GetChatSender(), formsGetTimeStamp.GetPlaceHolderImage());
+            storageService.store(file, formsGetTimeStamp.getTime_stamp_short(), formsGetTimeStamp.getTime_stamp_long(), formsGetTimeStamp.getChat_id(), formsGetTimeStamp.getSender_id(), formsGetTimeStamp.getText());
             message = "Файл успешно загружен: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         }
 
         catch (Exception e) {
-            message = "Не можем загрузить файл: " + file.getOriginalFilename() + "!" + " С такими данными - " + formsGetTimeStamp.GetTimeStampShort() + formsGetTimeStamp.GetTimeStampLong() + formsGetTimeStamp.GetChatID() + formsGetTimeStamp.GetChatSender() + " " + e;
+            message = "Не можем загрузить файл: " + file.getOriginalFilename() + "!" + " С такими данными - " + formsGetTimeStamp.getTime_stamp_short() + formsGetTimeStamp.getTime_stamp_long() + formsGetTimeStamp.getChat_id() + formsGetTimeStamp.getSender_id() + " " + e;
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
     }
@@ -69,7 +69,7 @@ public class FileController {
         FileDB fileDB = storageService.getFile(IdImage);
         System.out.println(fileDB.getType());
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; image/gif; filename=\"" + fileDB.getName() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; image/gif; filename=\"" + fileDB.getImage_name() + "\"")
                 .body(fileDB.getData());
     }
 
