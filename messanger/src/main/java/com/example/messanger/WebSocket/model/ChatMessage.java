@@ -15,6 +15,7 @@ public class ChatMessage {
     private String image;
     private String ReadMessage;
     private String GetMessage;
+    private String IDMessage;
 
     public enum MessageType {CHAT, JOIN, LEAVE}
     public MessageType getType() {return type;}

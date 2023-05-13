@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -54,30 +55,18 @@ public class ChatController {
             }
         }, keyHolder);
 
-        System.out.printf("Inserted row has ID: %d", keyHolder.getKey().intValue());
+        chatMessage.setIDMessage(Objects.requireNonNull(keyHolder.getKey()).toString());
+
+        System.out.println(keyHolder.getKey());
 
         System.out.println(jdbcTemplate.queryForList("select username from users where id=?", sender_id));
         chatMessage.setSender((String) jdbcTemplate.queryForMap("select username from users where id=?", sender_id).get("username"));
         chatMessage.setImage((String) jdbcTemplate.queryForMap("select image from users where id=?", sender_id).get("image"));
-        //chatMessage.setStatusMessage((String) jdbcTemplate.queryForMap("select get"));
+        chatMessage.setGetMessage(jdbcTemplate.queryForMap("select get from message where id_message=?", keyHolder.getKey()).get("get").toString());
+        chatMessage.setReadMessage(jdbcTemplate.queryForMap("select read from message where id_message=?", keyHolder.getKey()).get("read").toString());
+
         System.out.println("Read" + jdbcTemplate.queryForList("select read from message"));
         System.out.println("Get" + jdbcTemplate.queryForList("select get from message"));
-
-        if (jdbcTemplate.queryForList("select get from message").equals(true)) {
-            System.out.println("Сообщение получено");
-        }
-        
-        else {
-            System.out.println("Сообщение не получено");
-        }
-        
-        if (jdbcTemplate.queryForList("select read from message").equals(true)) {
-            System.out.println("Сообщение прочитано");
-        }
-
-        else {
-            System.out.println("Сообщение не прочитано");
-        }
 
         return chatMessage;
     }
