@@ -145,11 +145,11 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="share_message"></div>
                             </div>
                             
-                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
-                            
                             <div class="ToolsTick">
                                 <div class="ReadMessage">Прочитано</div>
                             </div>
+                            
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                         </div>
                     </div>
                 `
