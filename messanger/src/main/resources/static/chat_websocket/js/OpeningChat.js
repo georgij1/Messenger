@@ -755,21 +755,26 @@ btn_tools_chat.addEventListener('click', () => {
                 ListUploadedImage.innerHTML+=`
                     <div class="Border">
                         <img class="link_image" src="/files/${IdChat.textContent}/${item.id_image}" alt="Фото из чата" title="${item.text}">                    
+                        <div class="FilePathText">/files/${IdChat.textContent}/${item.id_image}</div>
                     </div>
                 `
             }
 
             else {
                 ListUploadedImage.innerHTML+=`
-                    <img class="link_image" src="/files/${IdChat.textContent}/${item.id_image}" alt="Фото из чата" title="${item.text}">
-                    <div class="PlaceHolderBlock">${item.text}</div>
+                    <div class="Border">
+                        <img class="link_image" src="/files/${IdChat.textContent}/${item.id_image}" alt="Фото из чата" title="${item.text}">
+                        <div class="FilePathText">/files/${IdChat.textContent}/${item.id_image}</div>
+                        <div class="PlaceHolderBlock">${item.text}</div>
+                    </div>
                 `
             }
 
-            let link_image = document.querySelectorAll('.link_image')
-            for (let LinkImage of link_image) {
+            let Border = document.querySelectorAll('.Border')
+            for (let LinkImage of Border) {
                 LinkImage.addEventListener('click', (event) => {
-                    console.log(event.currentTarget)
+                    console.log(event.currentTarget.children[1].textContent)
+                    window.open(`${event.currentTarget.children[1].textContent}`, '_self')
                 })
             }
         }))
@@ -808,7 +813,10 @@ file.onchange = () => {
 
         let CountMB = FilesItter.size/1024/1024
 
-        if (Math.round(CountMB) > 3) {
+        console.log(Math.fround(CountMB))
+        console.log(CountMB)
+
+        if (Math.fround(CountMB) > 3) {
             SizeFile.innerHTML=`Размер файла слишком большой`
         }
 

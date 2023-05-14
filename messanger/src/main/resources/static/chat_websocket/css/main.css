@@ -129,6 +129,19 @@
     padding: 15px;
 }
 
+.Border {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    height: max-content;
+    margin-bottom: 10px;
+}
+
+.FilePathText {
+    display: none;
+}
+
 .close_window:hover, .close_add_users:hover {
     box-shadow: none;
 }
@@ -857,7 +870,6 @@ li {
 .link_image {
     background: antiquewhite;
     border: 2px solid bisque;
-    margin-top: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
     color: blue;
@@ -918,7 +930,7 @@ li {
 }
 
 .ListUploadedImage img {
-    width: 92%;
+    width: 100%;
 }
 
 .window_load {
@@ -1094,9 +1106,15 @@ li {
 }
 
 .PlaceHolderBlock {
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    padding: 10px;
+    border: 2px solid bisque;
+    margin-top: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px bisque;
 }
 
 .PlaceHolderImageInput {
@@ -1425,6 +1443,10 @@ li {
         flex-direction: row;
     }
 
+    .Border {
+        margin-bottom: 0;
+    }
+
     .TextLink {
         overflow-x: auto;
     }
@@ -1613,6 +1635,7 @@ li {
     .ListUploadedImage {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     .BorderOptionFile {
