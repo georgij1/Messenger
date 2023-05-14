@@ -1147,18 +1147,21 @@ function onMessageReceived(payload) {
             let Text = event.currentTarget.children[2]
 
             console.log(event.currentTarget.children[2])
-            console.log(event.currentTarget.children[1])
+            console.log(event.currentTarget.children[3])
 
             let EventIdMessage = event.currentTarget.children[1]
 
             event.currentTarget.children[3].classList.toggle('flex')
 
+            event.currentTarget.children[3].classList.toggle('flex')
+            event.currentTarget.children[5].classList.toggle('flex')
+
+            let EventEdit = event.currentTarget.children
+
             event.currentTarget.children[3].children[2].addEventListener('click', () => {
                 console.log(Text)
                 window.open(`/share/TextMessage/${Text.textContent}`, '_self')
             })
-
-            let EventEdit = event.currentTarget.children
 
             event.currentTarget.children[3].children[1].addEventListener('click', () => {
                 console.log('edit')
