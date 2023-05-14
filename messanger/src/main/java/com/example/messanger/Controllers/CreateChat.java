@@ -64,7 +64,7 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> OpenChat(@PathVariable String ChatId) {
-        return jdbcTemplate.queryForList("select * from users join message m on users.id = m.sender_id where chat_id=? order by time_stamp_long", ChatId);
+        return jdbcTemplate.queryForList("select * from users join message m on users.id = m.sender_id where chat_id=? order by time_stamp_long, time_stamp_short", ChatId);
     }
 
     @PostMapping("/MyChats/{owner_chat}")

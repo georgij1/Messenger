@@ -1096,7 +1096,15 @@ function onMessageReceived(payload) {
                 <div class="message">
                     <div class="ItemUsername">${JSON.parse(payload.body).sender}</div>
                     
+                    <div class="id">${JSON.parse(payload.body).idmessage}</div>
+                    
                     <div class="text">${JSON.parse(payload.body).content}</div>
+                    
+                    <div class="tools_message">
+                        <div class="delete_message"></div>
+                        <div class="edit_message"></div>
+                        <div class="share_message"></div>
+                    </div>
                         
                     <div title="${JSON.parse(payload.body).TimeStampLong}" class="TimeStampShort">${JSON.parse(payload.body).TimeStampShort}</div>
             </div>
@@ -1127,6 +1135,71 @@ function onMessageReceived(payload) {
     for (let MessageItter of MessageChat) {
         MessageItter.addEventListener('click', (event) => {
             console.log(MessageItter)
+
+            let Text = event.currentTarget.children[2]
+
+            console.log(event.currentTarget.children[2])
+            console.log(event.currentTarget.children[1])
+
+            let EventIdMessage = event.currentTarget.children[1]
+
+            event.currentTarget.children[3].classList.toggle('flex')
+
+            event.currentTarget.children[3].children[2].addEventListener('click', () => {
+                console.log(Text)
+                window.open(`/share/TextMessage/${Text.textContent}`, '_self')
+            })
+
+            let EventEdit = event.currentTarget.children
+
+            event.currentTarget.children[3].children[1].addEventListener('click', () => {
+                console.log('edit')
+                console.log(EventEdit)
+
+                document.querySelector('.list_chat').classList.add('none')
+                document.querySelector('.tools').classList.add('none')
+                document.querySelector('.border_name_chat').classList.add('none')
+                document.querySelector('.close_window_2').classList.add('none')
+                document.querySelector('.cancel_edit_message').classList.add('block')
+                document.querySelector('.height').classList.add('none')
+
+                document.querySelector('.window_edit_message').innerHTML=`
+                     <textarea class="input_edit_message" name="message">${Text.textContent}</textarea>
+                     <input type="submit" class="save_edit_message" value="Сохранить">
+                `
+
+                document.querySelector('.window_edit_message').classList.add('flex')
+
+                document.querySelector('.save_edit_message').addEventListener('click', () => {
+                    console.log(document.querySelector('.input_edit_message').value)
+                    console.log(EventEdit)
+                    let chatMessage  = {
+                        content: document.querySelector('.input_edit_message').value,
+                        IDMessage: EventIdMessage.textContent
+                    };
+
+                    stompClient.send("/app/chat.updateMessage", {}, JSON.stringify(chatMessage));
+                })
+            })
+
+            document.querySelector('.cancel_edit_message').addEventListener('click', () => {
+                document.querySelector('.list_chat').classList.remove('none')
+                document.querySelector('.tools').classList.remove('none')
+                document.querySelector('.border_name_chat').classList.remove('none')
+                document.querySelector('.close_window_2').classList.remove('none')
+                document.querySelector('.cancel_edit_message').classList.remove('block')
+                document.querySelector('.height').classList.remove('none')
+                document.querySelector('.window_edit_message').classList.remove('flex')
+            })
+
+            event.currentTarget.children[3].children[0].addEventListener('click', () => {
+                console.log('delete message')
+                let chatMessage  = {
+                    IDMessage: EventIdMessage.textContent
+                };
+
+                stompClient.send("/app/chat.deleteMessage", {}, JSON.stringify(chatMessage));
+            })
 
             let IdDeleteMessage = event.currentTarget
             let delete_message = document.querySelectorAll('.delete_message')
@@ -1234,44 +1307,277 @@ function sendMessage (event) {
                 data.forEach(item => {
                     let item_id_user = item.id
 
-                    let dd = new Date().getDate();
-                    dd < 10 ? dd = '0' + dd : '';
+                    let GetMonth
+                    let NewDateGetHours = new Date().getHours()
 
-                    console.log("Date - " + dd)
-                    console.log(dd < 10 ? dd = '0' + dd : '')
+                    if (new Date().getMonth() +1 === 1) {
+                        GetMonth = 'Январь'
+                    }
 
-                    let mm = new Date().getMonth() + 1;
-                    mm < 10 ? mm = '0' + mm : '';
+                    else if (new Date().getMonth() +1 === 2) {
+                        GetMonth = 'Февраль'
+                    }
 
-                    console.log("Month - " + mm)
-                    console.log(mm < 10 ? mm = '0' + mm : '')
+                    else if (new Date().getMonth() +1 === 3) {
+                        GetMonth = 'Март'
+                    }
 
-                    let yy = new Date().getFullYear() % 100;
-                    yy < 10 ? yy = '0' + yy : '';
+                    else if (new Date().getMonth() +1 === 4) {
+                        GetMonth = 'Апрель'
+                    }
 
-                    console.log("FullYear - " + yy)
-                    console.log(yy < 10 ? yy = '0' + yy : '')
+                    else if (new Date().getMonth() +1 === 5) {
+                        GetMonth = 'Май'
+                    }
 
-                    let hh = new Date().getHours()
-                    hh < 10 ? hh += '0' + hh : '';
+                    else if (new Date().getMonth() +1 === 6) {
+                        GetMonth = 'Июнь'
+                    }
 
-                    console.log("Hours - " + hh)
-                    console.log(hh < 10 ? hh += '0' + hh : '')
+                    else if (new Date().getMonth() +1 === 7) {
+                        GetMonth = 'Июль'
+                    }
 
-                    let mn = new Date().getMinutes()
-                    mn < 10 ? mn += '0' + mn : '';
+                    else if (new Date().getMonth() +1 === 8) {
+                        GetMonth = 'Август'
+                    }
 
-                    let sc = new Date().getSeconds()
-                    sc < 10 ? sc += '0' + sc : '';
+                    else if (new Date().getMonth() +1 === 9) {
+                        GetMonth = 'Сентябрь'
+                    }
 
-                    console.log("Minutes - " + mm)
-                    console.log(mn < 10 ? mn += '0' + mn : '')
+                    else if (new Date().getMonth() +1 === 10) {
+                        GetMonth = 'Октябрь'
+                    }
 
-                    console.log('20' + yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mn + ':' + sc)
-                    console.log(hh + ':' + mn + ':' + sc)
+                    else if (new Date().getMonth() +1 === 11) {
+                        GetMonth = 'Ноябрь'
+                    }
 
-                    let DateLong = '20' + yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mn + ':' + sc
-                    let DateShort = hh + ':' + mn
+                    else if (new Date().getMonth() +1 === 12) {
+                        GetMonth = 'Декабрь'
+                    }
+
+                    else {
+                        GetMonth = 'Какие-то проблемы с месяцем'
+                    }
+
+                    let GetSeconds
+
+                    if (new Date().getSeconds() === 0) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else if (new Date().getSeconds() === 1) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else if (new Date().getSeconds() === 2) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else if (new Date().getSeconds() === 3) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else if (new Date().getSeconds() === 4) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else if (new Date().getSeconds() === 5) {
+                        let NewDateGetSeconds = new Date().getMinutes()
+                        if (NewDateGetSeconds.length > 1) {
+                            GetSeconds = new Date().getSeconds()
+                        }
+
+                        else {
+                            GetSeconds = new Date().getSeconds() + '0'
+                        }
+                    }
+
+                    else {
+                        GetSeconds = new Date().getSeconds()
+                    }
+
+                    let GetMinutes
+
+                    if (new Date().getMinutes() === 0) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else if (new Date().getMinutes() === 1) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else if (new Date().getMinutes() === 2) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else if (new Date().getMinutes() === 3) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else if (new Date().getMinutes() === 4) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else if (new Date().getMinutes() === 5) {
+                        let NewDateGetMinutes = new Date().getMinutes()
+
+                        if (NewDateGetMinutes.length > 1) {
+                            GetMinutes = new Date().getMinutes()
+                        }
+
+                        else {
+                            GetMinutes = new Date().getMinutes() + '0'
+                        }
+                    }
+
+                    else {
+                        GetMinutes = new Date().getMinutes()
+                    }
+
+                    let GetHours
+
+                    if (new Date().getHours() === 0) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else if (new Date().getHours() === 1) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else if (new Date().getHours() === 2) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else if (new Date().getHours() === 3) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else if (new Date().getHours() === 4) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else if (new Date().getHours() === 5) {
+                        if (NewDateGetHours.length > 1) {
+                            GetHours = new Date().getHours()
+                        }
+
+                        else {
+                            GetHours = new Date().getHours() + '0'
+                        }
+                    }
+
+                    else {
+                        GetHours = new Date().getHours()
+                    }
+
+                    // let DateLong = new Date().getDate() + ' ' + GetMonth + ' ' + new Date().getFullYear() + 'г.' + GetHours + ':' + GetMinutes + ':' + GetSeconds
+                    // let DateShort = GetHours + ':' + GetMinutes;
+
+                    let DateLong = new Date().getDate() + ' ' + GetMonth + ' ' + new Date().getFullYear() + 'г.' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+                    let DateShort = new Date().getHours() + ':' + new Date().getMinutes();
 
                     let ErrorConnect = document.querySelector('.ErrorConnect')
                     ErrorConnect.classList.remove('block')
@@ -1289,6 +1595,12 @@ function sendMessage (event) {
                     messageInput.value = '';
                     let MessageNullDiv = document.querySelector('.MessageNullDiv')
                     MessageNullDiv.classList.add('none')
+
+                    for (let MessageItter of document.querySelectorAll('.message')) {
+                        MessageItter.addEventListener('click', () => {
+                            console.log(MessageItter)
+                        })
+                    }
                 })
             })
     }

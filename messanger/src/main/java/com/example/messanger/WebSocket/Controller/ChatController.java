@@ -71,6 +71,25 @@ public class ChatController {
         return chatMessage;
     }
 
+    @MessageMapping("/chat.deleteMessage")
+    @SendTo("topic/public")
+    public ChatMessage deleteMessage (@Payload ChatMessage chatMessage) {
+        chatMessage.setIDMessage(chatMessage.getIDMessage());
+        jdbcTemplate.update("delete from message where id_message=?", chatMessage.getIDMessage());
+        return chatMessage;
+    }
+
+    @MessageMapping("chat.updateMessage")
+    @SendTo("topic/public")
+    public ChatMessage updateMessage (@Payload ChatMessage chatMessage) {
+        System.out.println(chatMessage.getIDMessage());
+        System.out.println(chatMessage.getContent());
+        chatMessage.setContent(chatMessage.getContent());
+        chatMessage.setIDMessage(chatMessage.getIDMessage());
+        jdbcTemplate.update("update message set text=? where id_message=?", chatMessage.getContent(), chatMessage.getIDMessage());
+        return chatMessage;
+    }
+
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
     public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
