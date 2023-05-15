@@ -1101,12 +1101,12 @@ function onMessageReceived(payload) {
         list_chat.innerHTML += `
         <div class="MessageMain">
             <div class="ImageProfileMessage1"><p>${JSON.parse(payload.body).sender}</p></div>
-                <div class="message">
+                <div class="MessageRealTime">
                     <div class="ItemUsername">${JSON.parse(payload.body).sender}</div>
                     
                     <div class="id">${JSON.parse(payload.body).idmessage}</div>
                     
-                    <div class="text">${JSON.parse(payload.body).content}</div>
+                    <div class="TextRealTime">${JSON.parse(payload.body).content}</div>
                     
                     <div class="tools_message">
                         <div class="delete_message"></div>
@@ -1154,44 +1154,125 @@ function onMessageReceived(payload) {
             event.currentTarget.children[3].classList.toggle('flex')
 
             event.currentTarget.children[3].classList.toggle('flex')
-            event.currentTarget.children[5].classList.toggle('flex')
 
             let EventEdit = event.currentTarget.children
 
-            event.currentTarget.children[3].children[2].addEventListener('click', () => {
-                console.log(Text)
-                window.open(`/share/TextMessage/${Text.textContent}`, '_self')
-            })
+            for (let ShareMessageItter of document.querySelectorAll('.share_message')) {
+                ShareMessageItter.addEventListener('click', () => {
+                    console.log(Text)
+                    window.open(`/share/TextMessage/${Text.textContent}`, '_self')
+                })
+            }
 
-            event.currentTarget.children[3].children[1].addEventListener('click', () => {
-                console.log('edit')
-                console.log(EventEdit)
-
-                document.querySelector('.list_chat').classList.add('none')
-                document.querySelector('.tools').classList.add('none')
-                document.querySelector('.border_name_chat').classList.add('none')
-                document.querySelector('.close_window_2').classList.add('none')
-                document.querySelector('.cancel_edit_message').classList.add('block')
-                document.querySelector('.height').classList.add('none')
-
-                document.querySelector('.window_edit_message').innerHTML=`
-                     <textarea class="input_edit_message" name="message">${Text.textContent}</textarea>
-                     <input type="submit" class="save_edit_message" value="Сохранить">
-                `
-
-                document.querySelector('.window_edit_message').classList.add('flex')
-
-                document.querySelector('.save_edit_message').addEventListener('click', () => {
-                    console.log(document.querySelector('.input_edit_message').value)
-                    console.log(EventEdit)
+            for (let BtnDeleteMessage of document.querySelectorAll('.delete_message')) {
+                BtnDeleteMessage.addEventListener('click', () => {
+                    console.log('delete message')
                     let chatMessage  = {
-                        content: document.querySelector('.input_edit_message').value,
                         IDMessage: EventIdMessage.textContent
                     };
 
-                    stompClient.send("/app/chat.updateMessage", {}, JSON.stringify(chatMessage));
+                    stompClient.send("/app/chat.deleteMessage", {}, JSON.stringify(chatMessage));
                 })
-            })
+            }
+
+            let IdDeleteMessage = event.currentTarget
+            let delete_message = document.querySelectorAll('.delete_message')
+
+            for (let delete_message_itter of delete_message) {
+                delete_message_itter.addEventListener('click', () => {
+                    console.log(delete_message_itter)
+                    console.log(IdDeleteMessage)
+                    fetch(`/delete_message/${IdDeleteMessage.textContent}`, {
+                        method: 'delete',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        mode: "cors"
+                    })
+                        .then(() => {
+                            window.location.reload()
+                        })
+                })
+            }
+        })
+    }
+
+    for (let MessageItterRealTime of document.querySelectorAll('.MessageRealTime')) {
+        MessageItterRealTime.addEventListener('click', (event) => {
+            console.log(MessageItterRealTime)
+
+            let Text = event.currentTarget.children[2]
+
+            console.log(event.currentTarget.children[2])
+            console.log(event.currentTarget.children[3])
+
+            let EventIdMessage = event.currentTarget.children[1]
+
+            event.currentTarget.children[3].classList.toggle('flex')
+
+            let EventEdit = event.currentTarget.children
+
+            for (let ShareMessageItter of document.querySelectorAll('.share_message')) {
+                ShareMessageItter.addEventListener('click', () => {
+                    console.log(Text)
+                    window.open(`/share/TextMessage/${Text.textContent}`, '_self')
+                })
+            }
+
+            for (let EditMessageItter of document.querySelectorAll('.edit_message')) {
+                EditMessageItter.addEventListener('click', () => {
+                    height.classList.add('none')
+                    list_chat.classList.add('none')
+                    flex_content_chat_top_tools.classList.add('none')
+                    document.querySelector('.window_edit_message').classList.add('flex')
+                    document.querySelector('.cancel_edit_message').classList.add('block')
+                    tools.classList.add('none')
+
+                    document.querySelector('.window_edit_message').innerHTML=`
+                                <textarea class="input_edit_message" name="message">${Text.textContent}</textarea>
+                                <input type="submit" class="save_edit_message" value="Сохранить">
+                            `
+
+                    const save_edit_message = document.querySelector('.save_edit_message')
+                    const input_edit_message = document.querySelector('.input_edit_message')
+
+                    document.querySelector('.cancel_edit_message').addEventListener('click', () => {
+                        document.querySelector('.window_edit_message').classList.remove('flex')
+                        list_chat.classList.remove('none')
+                        flex_content_chat_top_tools.classList.remove('none')
+                        height.classList.remove('none')
+                        tools.classList.remove('none')
+                    })
+
+                    save_edit_message.addEventListener('click', () => {
+                        document.querySelector('.window_edit_message').classList.remove('flex')
+                        list_chat.classList.remove('none')
+                        flex_content_chat_top_tools.classList.remove('none')
+
+                        const formData = {
+                            "message": input_edit_message.value
+                        }
+
+                        if (input_edit_message.value.length > 0) {
+                            fetch(`/edit_message/${EventIdMessage.textContent}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
+                            })
+                                .then(() => {
+                                    window.location.reload()
+                                })
+                        }
+
+                        else {
+                            alert('Сообщение не обновлено так как оно пустое или такой же контент')
+                        }
+                    })
+                })
+            }
 
             document.querySelector('.cancel_edit_message').addEventListener('click', () => {
                 document.querySelector('.list_chat').classList.remove('none')
@@ -1212,7 +1293,7 @@ function onMessageReceived(payload) {
                 stompClient.send("/app/chat.deleteMessage", {}, JSON.stringify(chatMessage));
             })
 
-            let IdDeleteMessage = event.currentTarget
+            let IdDeleteMessage = event.currentTarget.children[1]
             let delete_message = document.querySelectorAll('.delete_message')
 
             for (let delete_message_itter of delete_message) {
@@ -1227,7 +1308,6 @@ function onMessageReceived(payload) {
                         mode: "cors"
                     })
                         .then(() => {
-                            alert('Сообщение - ' + JSON.parse(payload.body).content + ' успешно удалено')
                             window.location.reload()
                         })
                 })
