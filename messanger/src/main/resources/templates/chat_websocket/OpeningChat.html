@@ -15,16 +15,29 @@
     <div class="body_chat">
         <div id="arrowBottom" class="btn_down_1"></div>
 
-        <div class="flex_content_chat_top_tools">
+        <div class="flex FlexGroup">
             <div class="close_window close_window_2"></div>
-            <div class="ErrorConnect">Соединение с сервером...</div>
-            <div class="border_name_chat"></div>
+
+            <div class="flex_content_chat_top_tools">
+                <div class="ErrorConnect">Соединение с сервером...</div>
+                <div class="BorderImageChat"></div>
+                <div class="border_name_chat"></div>
+            </div>
+
+            <div class="IconOpenList"></div>
         </div>
 
         <div class="height"></div>
 
-        <div class="list_chat">
-            <div id="BottomPage"></div>
+        <div class="ListMessage">
+            <div class="list_chat">
+                <div id="BottomPage"></div>
+            </div>
+            <div class="ToolChat">
+                <div class="chats"></div>
+
+                <div class="UsersChat"></div>
+            </div>
         </div>
 
         <div class="window_add_file">
@@ -143,6 +156,10 @@
 
     <div class="window_load">
         <p>Загрузка...</p>
+    </div>
+
+    <div class="PermissionDenied">
+        <h1>Доступ запрещён</h1>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>

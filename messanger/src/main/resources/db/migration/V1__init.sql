@@ -17,5 +17,5 @@ insert into chat (
     'Команда',
     'Описание команды',
     'group_chat',
-    'i21s597'
+    'Admin'
 );

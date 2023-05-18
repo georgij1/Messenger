@@ -37,5 +37,9 @@
     </form>
 
     <p class="info">Если у вас нет аккаунта <a th:href="registration">зарегистрируйтесь</a></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
 </body>
 </html>

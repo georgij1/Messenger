@@ -24,6 +24,101 @@ let input_message = document.querySelector('.input_message')
 let ToolsAdmin = document.querySelector('.ToolsAdmin')
 let ErrorConnect = document.querySelector('.ErrorConnect')
 
+document.querySelector('.IconOpenList').addEventListener('click', () => {
+    document.querySelector('.UsersChat').classList.toggle('block')
+    document.querySelector('.chats').classList.toggle('flex')
+    document.querySelector('.ListMessage').classList.toggle('flex')
+    document.querySelector('body').classList.toggle('no_scroll')
+    document.querySelector('.list_chat').classList.toggle('OverflowScroll')
+    document.querySelector('.PermissionDenied').classList.remove('visible')
+    document.querySelector('.list_chat').classList.remove('none')
+})
+
+fetch('/list_chats', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors"
+})
+    .then(res => res.json())
+    .then(data => data.forEach(item => {
+        document.querySelector('.chats').innerHTML+=`
+            <div class="Chat">
+                <div class="ImageChatChat"><p>${item.image_chat}</p></div>
+                <div class="NameChat">${item.name}</div>
+                <div class="IdChat">${item.id}</div>
+                <div class="OwnerChat">${item.owner}</div>
+            </div>
+        `
+
+        for (let ImageChatChatItter of document.querySelectorAll('.ImageChatChat')) {
+            ImageChatChatItter.style.background=`url(${item.image_chat}) no-repeat center`
+            ImageChatChatItter.style.backgroundSize='90%'
+            ImageChatChatItter.style.boxShadow='0 0 10px burlywood'
+            ImageChatChatItter.style.borderRadius='100%'
+        }
+
+        for (let ChatItter of document.querySelectorAll('.Chat')) {
+            ChatItter.addEventListener('click', (event) => {
+                document.querySelector('.list_chat').classList.add('none')
+
+                console.log(event.currentTarget.children[2].textContent)
+
+                console.log(event.currentTarget.children[0].textContent)
+
+                let UsernameNew = document.querySelector('.username').textContent
+                console.log(UsernameNew)
+                let ChatName = event.currentTarget.children[1].textContent
+                let AdminChat = event.currentTarget.children[3].textContent
+
+                console.log(AdminChat)
+                console.log(event.currentTarget)
+
+                const formData = {
+                    "NameChat": event.currentTarget.children[1].textContent,
+                    "username": UsernameNew
+                }
+
+                let IDChat = event.currentTarget.children[2].textContent
+                console.log(IDChat)
+
+                fetch(`/Access`, {
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    mode: "cors",
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                })
+                    .then(response => response.json())
+                    .then(data => (data.forEach(item => {
+                        console.log(item.status)
+                        let PermissionDenied = document.querySelector('.PermissionDenied')
+                        let list_chats = document.querySelector('.list_chats')
+                        let CloseWindowPermissionDenied = document.querySelector('.CloseWindowPermissionDenied')
+                        let flex_content = document.querySelector('.flex-content')
+                        let content_all_chat = document.querySelector('.content_all_chat')
+                        let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
+                        let BtnSendAccess = document.querySelector('.BtnSendAccess')
+
+                        if (item.status === "success") {
+                            console.log("success")
+                            console.log(event.currentTarget)
+                            window.open(`/chat/${IDChat}#BottomPage`, '_self')
+                            PermissionDenied.classList.remove('visible')
+                            console.log(`/chat/${IDChat}#BottomPage`)
+                        }
+
+                        else {
+                            PermissionDenied.classList.add('visible')
+                        }
+                    })))
+            })
+        }
+    }))
+
+
+
 fetch(`/ChatName/${IdChat.textContent}`, {
     headers: new Headers({
         'Content-Type': 'application/json'
@@ -43,6 +138,15 @@ fetch(`/ChatName/${IdChat.textContent}`, {
             image_chat_open_settings.style.backgroundSize='90%'
             image_chat_open_settings.style.boxShadow='0 0 10px burlywood'
             image_chat_open_settings.style.borderRadius='100%'
+
+            document.querySelector('.BorderImageChat').style.background=`url(${item.image_chat}) no-repeat center`
+            document.querySelector('.BorderImageChat').style.backgroundSize='100%'
+            document.querySelector('.BorderImageChat').style.borderRadius='100%'
+            document.querySelector('.BorderImageChat').innerHTML=`<p class="ItemImageChat">${item.image_chat}</p>`
+
+            document.querySelector('.BorderImageChat').addEventListener('click', (event) => {
+                console.log(event.currentTarget.children[0].textContent)
+            })
 
             admin_chat.innerHTML+=`
                 <div class="UserChat" style="background: url(${item.image_chat}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
@@ -66,11 +170,56 @@ fetch(`/ChatName/${IdChat.textContent}`, {
 
                 .then((response) => {
                     response.json().then(res => (res.forEach(item => {
+                        console.log(item)
+
+                        if (item.status === 'Не в сети') {
+                            document.querySelector('.UsersChat').innerHTML+=`
+                                <div class="User">
+                                    <div class="ImageUser">
+                                        <div class="ImageProfile"><p>${item.image_user}</p></div>                                    
+                                        <div class="NotInLife"></div>
+                                    </div>
+                                    
+                                    <div class="UseName">${item.name}</div>
+                                </div>
+                            `
+                        }
+
+                        else {
+                            document.querySelector('.UsersChat').innerHTML+=`
+                                <div class="User">
+                                    <div class="ImageUser">
+                                        <div class="ImageProfile"><p>${item.image_user}</p></div>                                    
+                                        <div class="InLife"></div>
+                                    </div>
+                                    
+                                    <div class="UseName">${item.name}</div>
+                                </div>
+                            `
+                        }
+
+                        for (let UserItter of document.querySelectorAll('.User')) {
+                            UserItter.addEventListener('click', (event) => {
+                                console.log(event.currentTarget.children[1].textContent)
+                                window.open(`/chat/AccountPage/${event.currentTarget.children[1].textContent}`, '_self')
+                            })
+                        }
+
+                        for (let ImageProfileItter of document.querySelectorAll('.ImageProfile')) {
+                            ImageProfileItter.style.background=`url(${item.image_user}) no-repeat center`
+                            ImageProfileItter.style.backgroundSize='90%'
+                            ImageProfileItter.style.boxShadow='0 0 10px burlywood'
+                            ImageProfileItter.style.borderRadius='100%'
+                            ImageProfileItter.innerHTML=`<p class="ItemImageChat">${item.image_chat}</p>`
+                        }
+
+
+
                         if (res === 'null') {
                             list_users_open_settings.innerHTML=`Пользователей нет`
                         }
 
-                        if (item.name !== username) {
+                        if (item.name !== username.textContent) {
                             list_users_open_settings.innerHTML+=`
                                 <div class="UserDiv">
                                     <div class="UserChat" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
@@ -78,6 +227,7 @@ fetch(`/ChatName/${IdChat.textContent}`, {
                                 </div>
                             `
                         }
+
                         for (let UserDivItter of document.querySelectorAll('.UserDiv')) {
                             UserDivItter.addEventListener('click', (event) => {
                                 window.open(`AccountPage/${event.currentTarget.children[1].textContent}`, '_self')
@@ -840,6 +990,11 @@ btn_close_add_file.addEventListener('click', () => {
 })
 
 border_name_chat.addEventListener('click', () => {
+    document.querySelector('.ToolChat').classList.add('none')
+    document.querySelector('.FlexGroup').classList.remove('flex')
+    document.querySelector('.UsersChat').classList.add('none')
+    document.querySelector('.chats').classList.add('none')
+    document.querySelector('.close_window_2').classList.add('none')
     window_settings_chat.classList.add('visible')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
@@ -888,15 +1043,14 @@ border_name_chat.addEventListener('click', () => {
         })
             .then(response => response.json())
             .then((data) => {data.forEach(item => {
-                for (let UserChatNewItter of document.querySelectorAll('.UserChatNew')) {
-                    if (item.username !== document.querySelector('.username').textContent && item.username !== UserChatNewItter.textContent) {
-                        document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
+                console.log(item)
+                if (item.username !== document.querySelector('.username').textContent) {
+                    document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
                         <div class="user" id="user">
                             <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
                             <div class="name">${item.username}</div>
                         </div>
                     `
-                    }
                 }
 
                 let user = document.querySelectorAll('.user')
@@ -951,7 +1105,184 @@ border_name_chat.addEventListener('click', () => {
         })
             .then(response => response.json())
             .then((data) => {data.forEach(item => {
-                if (item.name !== document.querySelector('.UserChatName').textContent) {
+                console.log("DataLength - " + data.length)
+
+                if (data.length === null) {
+                    document.querySelector('.ListUsersEdit').innerHTML += `
+                        <p>Пользователей нет</p>
+                    `
+                }
+
+                else if (item.name !== document.querySelector('.UserChatName').textContent) {
+                    document.querySelector('.ListUsersEdit').innerHTML += `
+                        <div class="Username">
+                            <div class="user" id="user">
+                                <div class="id">${item.id}</div>
+                                <div class="user_image" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
+                                <div class="name">${item.name}</div>
+                            </div>
+                            
+                            <div class="DeleteBtn">Удалить</div>
+                        </div>
+                    `
+                }
+
+                let DeleteBtn = document.querySelectorAll('.DeleteBtn')
+                for (let DeleteBtnItter of DeleteBtn) {
+                    DeleteBtnItter.addEventListener('click', () => {
+                        let Username = document.querySelectorAll('.Username')
+                        for (let UsernameItter of Username) {
+                            UsernameItter.addEventListener('click', (event) => {
+                                fetch(`/DeleteUser/${event.currentTarget.children[0].children[0].textContent}`, {
+                                    headers: new Headers({
+                                        'Content-Type': 'application/json'
+                                    }),
+                                    mode: "cors",
+                                    method: 'DELETE'
+                                })
+                                    .then(() => alert('Пользователь удалён из чата'))
+                                    .then(() => window.location.reload())
+                            })
+                        }
+                    })
+                }
+            })})
+    })
+
+    CloseWindow4.addEventListener('click', () => {
+        window.location.reload()
+    })
+
+    CloseWindow5.addEventListener('click', () => {
+        window.location.reload()
+    })
+})
+
+document.querySelector('.BorderImageChat').addEventListener('click', () => {
+    document.querySelector('.ToolChat').classList.add('none')
+    document.querySelector('.FlexGroup').classList.remove('flex')
+    document.querySelector('.UsersChat').classList.add('none')
+    document.querySelector('.chats').classList.add('none')
+    document.querySelector('.close_window_2').classList.add('none')
+    window_settings_chat.classList.add('visible')
+    list_chat.classList.add('none')
+    flex_content_chat_top_tools.classList.add('none')
+    tools.classList.add('none')
+    height.classList.add('none')
+    let admin_chat = document.querySelector('.UserChatName').textContent
+
+    console.log(admin_chat)
+    console.log(username)
+
+    if (admin_chat === document.querySelector('.username').textContent) {
+        ToolsAdmin.classList.add('flex')
+        console.log(admin_chat)
+        console.log(username)
+        console.log('if')
+    }
+
+    else {
+        console.log('else')
+        ToolsAdmin.classList.remove('flex')
+    }
+
+    let WindowAddUsers = document.querySelector('.WindowAddUsers')
+    let WindowEditListUser = document.querySelector('.WindowEditListUser')
+    let CloseWindow4 = document.querySelector('.close_window_4')
+    let CloseWindow5 = document.querySelector('.close_window_5')
+
+    document.querySelector('.AddUsersBtn').addEventListener('click', () => {
+        CloseWindow4.classList.add('block')
+        window_settings_chat.classList.add('none')
+        WindowAddUsers.classList.add('block')
+        document.querySelector('.image_settings_open').classList.add('none')
+        document.querySelector('.H1BlockAdminChat').classList.add('none')
+        document.querySelector('.admin_chat').classList.add('none')
+        document.querySelector('.H1BlockUsersChat').classList.add('none')
+        document.querySelector('.ListUsersChat').classList.add('none')
+        document.querySelector('.close_window_3').classList.add('none')
+        document.querySelector('.H1BlockLinkChat').classList.add('none')
+        document.querySelector('.list_link_chat').classList.add('none')
+
+        fetch('/all_users', {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            mode: "cors"
+        })
+            .then(response => response.json())
+            .then((data) => {data.forEach(item => {
+                console.log(item)
+                if (item.username !== document.querySelector('.username').textContent) {
+                    document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
+                        <div class="user" id="user">
+                            <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
+                            <div class="name">${item.username}</div>
+                        </div>
+                    `
+                }
+
+                let user = document.querySelectorAll('.user')
+                for (let UserItter of user) {
+                    UserItter.addEventListener('click', (event) => {
+                        let NameUser = event.currentTarget.children[1].textContent
+                        let chat_name = document.querySelector('.border_name_chat').textContent
+                        let image_user = event.currentTarget.children[0].children[0].textContent
+                        let AddSaveBtnUserChat = document.querySelector('.AddSaveBtnUserChat')
+                        AddSaveBtnUserChat.classList.add('block')
+                        AddSaveBtnUserChat.addEventListener('click', () => {
+                            let FormData = {
+                                "name": NameUser,
+                                "image_user": image_user,
+                                "chat_name": chat_name
+                            }
+                            fetch('/AddUserChatAdmin', {
+                                headers: new Headers({
+                                    'Content-Type': 'application/json'
+                                }),
+                                mode: "cors",
+                                method: "POST",
+                                body: JSON.stringify(FormData)
+                            })
+                                .then(() => alert('Пользователь / пользователи добавлены'))
+                                .then(() => window.location.reload())
+                        })
+                    })
+                }
+            })})
+    })
+
+    document.querySelector('.EditChatUser').addEventListener('click', () => {
+        CloseWindow5.classList.add('block')
+        WindowEditListUser.classList.add('block')
+        window_settings_chat.classList.add('none')
+        document.querySelector('.close_window_3').classList.add('none')
+        document.querySelector('.image_settings_open').classList.add('none')
+        document.querySelector('.H1BlockAdminChat').classList.add('none')
+        document.querySelector('.admin_chat').classList.add('none')
+        document.querySelector('.H1BlockUsersChat').classList.add('none')
+        document.querySelector('.ListUsersChat').classList.add('none')
+        document.querySelector('.H1BlockLinkChat').classList.add('none')
+        document.querySelector('.list_link_chat').classList.add('none')
+        let chat_name = document.querySelector('.border_name_chat').textContent
+        fetch(`/Find/${chat_name}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            mode: "cors",
+            method: 'POST'
+        })
+            .then(response => response.json())
+            .then((data) => {data.forEach(item => {
+                console.log("DataLength - " + data.length)
+
+                if (data.length === null) {
+                    document.querySelector('.ListUsersEdit').innerHTML += `
+                        <p>Пользователей нет</p>
+                    `
+                }
+
+                else if (item.name !== document.querySelector('.UserChatName').textContent) {
                     document.querySelector('.ListUsersEdit').innerHTML += `
                         <div class="Username">
                             <div class="user" id="user">
@@ -997,6 +1328,11 @@ border_name_chat.addEventListener('click', () => {
 })
 
 close_window_3.addEventListener('click', () => {
+    document.querySelector('.ToolChat').classList.remove('none')
+    document.querySelector('.FlexGroup').classList.add('flex')
+    document.querySelector('.UsersChat').classList.remove('none')
+    document.querySelector('.chats').classList.remove('none')
+    document.querySelector('.close_window_2').classList.remove('none')
     window_settings_chat.classList.remove('visible')
     list_chat.classList.remove('none')
     flex_content_chat_top_tools.classList.remove('none')
@@ -1077,7 +1413,7 @@ function connect() {
 
         stompClient.connect({}, onConnected, ErrorSocket);
 
-        ErrorConnect.classList.remove('block')
+        ErrorConnect.classList.remove('flex')
     }
 }
 
@@ -1334,22 +1670,22 @@ function onMessageReceived(payload) {
         message.EventInvite = 'онлайн';
         let messageEventInvite = document.createTextNode(message.EventInvite)
         let messageEventSender = document.createTextNode(message.EventInviteSender)
-        ErrorConnect.classList.remove('block')
+        ErrorConnect.classList.remove('flex')
         UsernameP.appendChild(messageEventSender)
         PBlockTextOnline.appendChild(messageEventInvite)
         messageAreaNew.appendChild(messageElement);
         messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
-        let EventInvite = document.querySelector('.event-message')
-        EventInvite.innerHTML+=`
-            <div class="EventInvite">
-                <p>${message.sender} онлайн</p>
-            </div>
-        `
+        // let EventInvite = document.querySelector('.event-message')
+        // EventInvite.innerHTML+=`
+        //     <div class="EventInvite">
+        //         <p>${message.sender} онлайн</p>
+        //     </div>
+        // `
     }
 
     else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
-        ErrorConnect.classList.remove('block')
+        ErrorConnect.classList.remove('flex')
         messageElement.appendChild(textElementLogOut)
         messageAreaNew.appendChild(messageElement);
         messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
@@ -1358,11 +1694,11 @@ function onMessageReceived(payload) {
     }
 
     else if (message.type === 'SEND') {
-        ErrorConnect.classList.remove('block')
+        ErrorConnect.classList.remove('flex')
     }
 
     else if (message.type === 'Whoops! Lost connection to http://localhost:8080/ws') {
-        ErrorConnect.classList.add('block')
+        ErrorConnect.classList.add('flex')
     }
 
     let UserNameEventLink = document.querySelectorAll('.UserNameEventLink')
@@ -1671,7 +2007,7 @@ function sendMessage (event) {
                     let DateShort = new Date().getHours() + ':' + new Date().getMinutes();
 
                     let ErrorConnect = document.querySelector('.ErrorConnect')
-                    ErrorConnect.classList.remove('block')
+                    ErrorConnect.classList.remove('flex')
 
                     let chatMessage  = {
                         sender: item_id_user,
@@ -1708,13 +2044,13 @@ function ErrorSocket() {
         mode: "cors",
         method: 'GET'
     })
-        .catch(() => ErrorConnect.classList.add('block'))
+        .catch(() => ErrorConnect.classList.add('flex'))
         .then(res => res.json())
         .catch(() => console.log(`json isn't valid`))
         .then(data => (item => {
             console.log(item.ok)
             if (item === 'ok') {
-                ErrorConnect.classList.remove('block')
+                ErrorConnect.classList.remove('flex')
                 console.log('connect to server is success')
             }
         }))
@@ -1722,3 +2058,59 @@ function ErrorSocket() {
 
 connect()
 ErrorSocket()
+
+document.addEventListener("visibilitychange", function(){
+    if (document.hidden){
+        console.log('Вкладка не активна');
+        fetch(`/status/offline/${document.querySelector('.username').textContent}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+
+            mode: "cors"
+        })
+            .then(res => console.log(res.json()))
+            .then(data => console.log(data))
+    }
+
+    else {
+        console.log('Вкладка активна');
+        fetch(`/status/online/${document.querySelector('.username').textContent}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+
+            mode: "cors"
+        })
+            .then(res => console.log(res.json()))
+            .then(data => console.log(data))
+    }
+})
+
+window.addEventListener("visibilitychange", function(){
+    if (window.hidden){
+        console.log('Окно не активно');
+        fetch(`/status/offline/${document.querySelector('.username').textContent}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+
+            mode: "cors"
+        })
+            .then(res => console.log(res.json()))
+            .then(data => console.log(data))
+    }
+
+    // else {
+    //     console.log('Окно активно');
+    //     fetch(`/status/online/${document.querySelector('.username').textContent}`, {
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json'
+    //         }),
+    //
+    //         mode: "cors"
+    //     })
+    //         .then(res => console.log(res.json()))
+    //         .then((data) => console.log(data))
+    // }
+})

@@ -3,6 +3,7 @@
 package com.example.messanger.WebSocket.Controller;
 
 import com.example.messanger.WebSocket.model.ChatMessage;
+import com.example.messanger.WebSocket.model.UpdateMessage;
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.Messages.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
@@ -20,11 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -79,16 +78,18 @@ public class ChatController {
         return chatMessage;
     }
 
-    @MessageMapping("chat.updateMessage")
-    @SendTo("topic/public")
-    public ChatMessage updateMessage (@Payload ChatMessage chatMessage) {
-        System.out.println(chatMessage.getIDMessage());
-        System.out.println(chatMessage.getContent());
-        chatMessage.setContent(chatMessage.getContent());
-        chatMessage.setIDMessage(chatMessage.getIDMessage());
-        jdbcTemplate.update("update message set text=? where id_message=?", chatMessage.getContent(), chatMessage.getIDMessage());
-        return chatMessage;
-    }
+//    @MessageMapping("chat.updateMessage")
+//    @SendTo("topic/public")
+//    public UpdateMessage updateMessage (@Payload UpdateMessage chatMessage) {
+//        chatMessage.setIDMessage(chatMessage.getIDMessage());
+//        System.out.println(chatMessage.getIDMessage());
+//        System.out.println(chatMessage.getContent());
+//        System.out.println(chatMessage);
+//        chatMessage.setContent(chatMessage.getContent());
+//        chatMessage.setIDMessage(chatMessage.getIDMessage());
+//        jdbcTemplate.update("update message set text=? where id_message=?", chatMessage.getContent(), chatMessage.getIDMessage());
+//        return chatMessage;
+//    }
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
@@ -116,7 +117,7 @@ public class ChatController {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> FindUsersByChatName(@PathVariable String UserNameChat) {
-        return jdbcTemplate.queryForList("select * from public.users_chat where chat_nane=?", UserNameChat);
+        return jdbcTemplate.queryForList("select * from users_chat where chat_nane=?", UserNameChat);
     }
 
     @PostMapping("/Access")

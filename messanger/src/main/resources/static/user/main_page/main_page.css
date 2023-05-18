@@ -8,6 +8,10 @@ body {
     background: black;
 }
 
+.ErrorConnect {
+    display: none;
+}
+
 a {
     text-decoration: none;
 }
@@ -69,10 +73,33 @@ input {
     border: none;
 }
 
+.status {
+    width: 10px;
+    height: 10px;
+    background: #17ec13;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+    top: -15px;
+    left: 168px;
+    display: none;
+}
+
+.status1 {
+    width: max-content;
+    padding: 10px;
+    height: max-content;
+    color: blue;
+}
+
 .grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.block {
+    display: block;
 }
 
 @media (min-width: 768px) {
@@ -86,6 +113,12 @@ input {
     .logo {
         margin: 0;
         box-shadow: none;
+    }
+
+    .status1 {
+        display: flex;
+        justify-content: center;
+        margin: auto;
     }
 
     .grid {

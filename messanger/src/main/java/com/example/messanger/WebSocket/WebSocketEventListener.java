@@ -1,4 +1,4 @@
-// Прослушка websocket
+// РџСЂРѕСЃР»СѓС€РєР° websocket
 
 package com.example.messanger.WebSocket;
 
@@ -22,17 +22,19 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         System.out.println("Received a new web socket connection");
-        System.out.println(event.getMessage());
         System.out.println("event connect - " + event.getMessage());
     }
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+
         String username = (String) Objects.requireNonNull(headerAccessor.getSessionAttributes()).get("username");
+
         System.out.println("event disconnect - " + event);
+
         if (username != null) {
-            System.out.println("User Disconnected : " + username);
+            System.out.println("User Disconnected: " + username);
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);

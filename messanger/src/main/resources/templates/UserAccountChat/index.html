@@ -12,23 +12,25 @@
 </head>
 
 <body>
-<div class="body_js">
-    <div class="close_window"></div>
 
-    <div class="height"></div>
+    <div class="body_js">
+        <div class="close_window"></div>
 
-    <div class="flex">
-        <div class="ImageUser"></div>
+        <div class="height"></div>
 
-        <!--            <div class="BtnUpdateImage">Обновить</div>-->
+        <div class="flex">
+            <div class="ImageUser"></div>
+        </div>
+
+        <div class="flex">
+            <p class="UserName" th:text="${UserNameAccount}"></p>
+        </div>
     </div>
 
-    <div class="flex">
-        <p class="UserName" th:text="${UserNameAccount}"></p>
-    </div>
-</div>
-
-<script th:src="@{/user/returnBack.js}"></script>
-<script th:src="@{/user/AccountPageChat/script.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
+    <script th:src="@{/user/returnBack.js}"></script>
+    <script th:src="@{/user/AccountPageChat/script.js}"></script>
 </body>
 </html>

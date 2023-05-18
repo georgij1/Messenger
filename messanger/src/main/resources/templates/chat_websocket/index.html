@@ -15,6 +15,7 @@
         <div class="info_user">
             <div class="min_size_window"></div>
             <div class="image_profile"></div>
+            <div class="status"></div>
             <div class="username_div">
                 <p class="username" th:text="${username}"></p>
                 <div class="btn_up"></div>
@@ -54,6 +55,8 @@
                     <div class="text_create_chat">Создать новый чат</div>
                 </div>
             </div>
+
+            <div class="ErrorConnect">Соединение...</div>
 
             <div class="buttons_nav_chats">
                 <div class="btn_nav_chat all_chat">Все чаты</div>
@@ -100,7 +103,7 @@
 
             <div class="flex-group">
                 <label class="label_create_chat" for="desc_chat">Описание чата</label>
-                <input type="text" placeholder="Придумайте название чата" class="name_chat desc_chat_1" id="desc_chat" required>
+                <input type="text" placeholder="Придумайте описание чата" class="name_chat desc_chat_1" id="desc_chat" required>
             </div>
 
             <div class="flex-group">
@@ -112,6 +115,9 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
     <script th:src="@{/chat_websocket/js/get_image_profile.js}"></script>
     <script th:src="@{chat_websocket/js/HomePage/script.js}"></script>
     <script th:src="@{/chat_websocket/js/create_chat.js}"></script>

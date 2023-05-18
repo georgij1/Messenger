@@ -21,6 +21,10 @@
             <div class="ImageUser"></div>
         </div>
 
+        <div class="status1"></div>
+
+        <div class="ErrorConnect">Соединение...</div>
+
         <div class="flex AddFlexJs">
             <p class="UserName" th:text="${UserNameAccount}"></p>
 
@@ -47,6 +51,9 @@
         </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user/WebSocket/AccountPageWebsocket.js}"></script>
     <script th:src="@{/user/returnBack.js}"></script>
     <script th:src="@{/user/AccountPage/script.js}"></script>
     <script th:src="@{/user/AccountPage/YourOwnChatGroup.js}"></script>
