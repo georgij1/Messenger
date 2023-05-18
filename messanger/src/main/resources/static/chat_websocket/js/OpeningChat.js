@@ -1700,15 +1700,15 @@ function onMessageReceived(payload) {
         // `
     }
 
-    else if (message.type === 'LEAVE') {
-        messageElement.classList.add('event-message');
-        ErrorConnect.classList.remove('flex')
-        messageElement.appendChild(textElementLogOut)
-        messageAreaNew.appendChild(messageElement);
-        messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
-        let EventLogOut = document.querySelector('.EventLogOut')
-        EventLogOut.innerHTML=`${message.sender} офлайн`
-    }
+    // else if (message.type === 'LEAVE') {
+    //     messageElement.classList.add('event-message');
+    //     ErrorConnect.classList.remove('flex')
+    //     messageElement.appendChild(textElementLogOut)
+    //     messageAreaNew.appendChild(messageElement);
+    //     messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
+    //     let EventLogOut = document.querySelector('.EventLogOut')
+    //     EventLogOut.innerHTML=`${message.sender} офлайн`
+    // }
 
     else if (message.type === 'SEND') {
         ErrorConnect.classList.remove('flex')
