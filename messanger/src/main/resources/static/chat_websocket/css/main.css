@@ -722,8 +722,6 @@ li {
 .window_edit_message {
     justify-content: center;
     display: none;
-    box-shadow: 0 0 10px burlywood;
-    border-radius: 10px;
     align-items: center;
     margin: auto;
     flex-direction: column;
@@ -1192,7 +1190,7 @@ li {
     gap: 15px;
     cursor: default;
     margin: 20px 0 20px;
-    width: 70vh;
+    width: 47vh;
 }
 
 .ImageProfileMessage, .ImageProfileMessage1 {

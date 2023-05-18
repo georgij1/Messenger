@@ -753,6 +753,8 @@ fetch(`/chats/${IdChat.textContent}`, {
 
                     for (let edit_message_itter of edit_message) {
                         edit_message_itter.addEventListener('click', () => {
+                            document.querySelector('.close_window_2').classList.add('none')
+                            document.querySelector('.IconOpenList').classList.add('none')
                             height.classList.add('none')
                             list_chat.classList.add('none')
                             flex_content_chat_top_tools.classList.add('none')
@@ -774,6 +776,9 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 flex_content_chat_top_tools.classList.remove('none')
                                 height.classList.remove('none')
                                 tools.classList.remove('none')
+                                document.querySelector('.close_window_2').classList.remove('none')
+                                document.querySelector('.IconOpenList').classList.remove('none')
+                                document.querySelector('.cancel_edit_message').classList.remove('block')
                             })
 
                             save_edit_message.addEventListener('click', () => {
@@ -885,6 +890,8 @@ fetch(`/chats/${IdChat.textContent}`, {
     })
 
 btn_tools_chat.addEventListener('click', () => {
+    document.querySelector('.close_window').classList.add('none')
+    document.querySelector('.IconOpenList').classList.add('none')
     window_add_file.classList.add('flex')
     list_chat.classList.add('none')
     flex_content_chat_top_tools.classList.add('none')
@@ -982,6 +989,8 @@ file.onchange = () => {
 }
 
 btn_close_add_file.addEventListener('click', () => {
+    document.querySelector('.close_window').classList.remove('none')
+    document.querySelector('.IconOpenList').classList.remove('none')
     window_add_file.classList.remove('flex')
     list_chat.classList.remove('none')
     flex_content_chat_top_tools.classList.remove('none')
@@ -1557,6 +1566,8 @@ function onMessageReceived(payload) {
 
             for (let EditMessageItter of document.querySelectorAll('.edit_message')) {
                 EditMessageItter.addEventListener('click', () => {
+                    document.querySelector('.close_window_2').classList.add('none')
+                    document.querySelector('.IconOpenList').classList.add('none')
                     height.classList.add('none')
                     list_chat.classList.add('none')
                     flex_content_chat_top_tools.classList.add('none')
@@ -1578,6 +1589,9 @@ function onMessageReceived(payload) {
                         flex_content_chat_top_tools.classList.remove('none')
                         height.classList.remove('none')
                         tools.classList.remove('none')
+                        document.querySelector('.close_window_2').classList.remove('none')
+                        document.querySelector('.IconOpenList').classList.remove('none')
+                        document.querySelector('.cancel_edit_message').classList.remove('block')
                     })
 
                     save_edit_message.addEventListener('click', () => {
@@ -1618,6 +1632,9 @@ function onMessageReceived(payload) {
                 document.querySelector('.cancel_edit_message').classList.remove('block')
                 document.querySelector('.height').classList.remove('none')
                 document.querySelector('.window_edit_message').classList.remove('flex')
+                document.querySelector('.close_window_2').classList.remove('none')
+                document.querySelector('.IconOpenList').classList.remove('none')
+                document.querySelector('.cancel_edit_message').classList.remove('block')
             })
 
             event.currentTarget.children[3].children[0].addEventListener('click', () => {

@@ -43,7 +43,8 @@ public class CreateChat {
         for (String users_chat:formCreateChat.getUser_chat()) {
             System.out.println("Users_chat - " + users_chat);
             for (String ImageUser:formCreateChat.getImageUser()) {
-                jdbcTemplate.update("insert into public.users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
+                System.out.println(jdbcTemplate.queryForMap("select chat_nane from users_chat").get("chat_name"));
+                    jdbcTemplate.update("insert into public.users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
             }
         }
 
@@ -103,6 +104,7 @@ public class CreateChat {
     @ResponseBody
     public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
         jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)", addUserChat.getName(), addUserChat.getChat_name(), addUserChat.getImage_user());
+
         return jdbcTemplate.queryForList("select * from users_chat");
     }
 
