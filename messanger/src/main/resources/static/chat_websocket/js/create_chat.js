@@ -25,6 +25,8 @@ close_window.addEventListener('click', () => {
 
 let list_users = document.querySelector('.list_users')
 
+let users = [];
+
 fetch('/all_users', {
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -43,18 +45,26 @@ fetch('/all_users', {
             `
             let user = document.querySelectorAll('.user')
 
+            console.log('PRIVET', user)
+
             for (let user_itter of user) {
                 user_itter.addEventListener('click', () => {
+                    console.log(user_itter)
                     user_itter.classList.toggle('tick')
-                    let user_div_id = document.querySelectorAll('#user')
-                    for (let user_div_id_itter of user_div_id) {
-                        if (user_div_id_itter.classList.contains("tick")) {
-                            console.log(user_div_id_itter.classList.contains("tick"))
-                            user_chat.push(user_itter.childNodes[5].textContent)
-                            ImageUser.push(user_itter.childNodes[3].textContent)
-                            console.log(user_itter.childNodes[3].childNodes[0].textContent)
+
+                    const user = user_itter.childNodes[5].textContent;
+                    const image = user_itter.childNodes[3].textContent;
+
+                    let is_exists = -1;
+
+                    for (let i = 0; i < users.length; ++i) {
+                        if (users[i].user === user) {
+                            is_exists = i;
+                            break;
                         }
                     }
+
+                    (is_exists === -1 ? users.push({user: user, image: image}) : users.splice(is_exists, 1))
                 })
             }
     })})
@@ -78,10 +88,10 @@ create_chat.addEventListener('click', () => {
     const formData = {
         "name_chat": name_chat_div.value,
         "desc_chat": desc_chat.value,
-        "user_chat": user_chat,
+        "user_chat": users.map(item => item.user),
         "type": "group_chat",
         "owner": username_1,
-        "ImageUser": ImageUser
+        "ImageUser": users.map(item => item.image)
     }
 
     fetch('/create_chat', {
@@ -93,7 +103,7 @@ create_chat.addEventListener('click', () => {
         body: JSON.stringify(formData)
     })
         .then(() => {console.log(formData)})
-        .then(() => {window.location.reload()})
+        // .then(() => {window.location.reload()})
 
     console.log(formData)
 })

@@ -1167,6 +1167,8 @@ border_name_chat.addEventListener('click', () => {
     })
 })
 
+let users = [];
+
 document.querySelector('.BorderImageChat').addEventListener('click', () => {
     document.querySelector('.ToolChat').classList.add('none')
     document.querySelector('.FlexGroup').classList.remove('flex')
@@ -1224,7 +1226,7 @@ document.querySelector('.BorderImageChat').addEventListener('click', () => {
                 console.log(item)
                 if (item.username !== document.querySelector('.username').textContent) {
                     document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
-                        <div class="user" id="user">
+                        <div class="user">
                             <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
                             <div class="name">${item.username}</div>
                         </div>
@@ -1233,18 +1235,43 @@ document.querySelector('.BorderImageChat').addEventListener('click', () => {
 
                 let user = document.querySelectorAll('.user')
                 for (let UserItter of user) {
+                    console.log(UserItter)
                     UserItter.addEventListener('click', (event) => {
-                        let NameUser = event.currentTarget.children[1].textContent
-                        let chat_name = document.querySelector('.border_name_chat').textContent
-                        let image_user = event.currentTarget.children[0].children[0].textContent
+
+                        UserItter.classList.toggle('tick')
+
+                        const user = event.target.querySelector('.name').textContent;
+                        const image = event.target.querySelector('p').textContent
+
+                        let is_exists = -1;
+
+                        for (let i = 0; i < users.length; ++i) {
+                            if (users[i].user === user) {
+                                is_exists = i;
+                                break;
+                            }
+                        }
+
+                        (is_exists === -1 ? users.push({user: user, image: image}) : users.splice(is_exists, 1))
+
+                        // не то
+                        //let NameUser = event.currentTarget.children[1].textContent
+                        //let chat_name = document.querySelector('.border_name_chat').textContent
+                        //let image_user = event.currentTarget.children[0].children[0].textContent
+
                         let AddSaveBtnUserChat = document.querySelector('.AddSaveBtnUserChat')
                         AddSaveBtnUserChat.classList.add('block')
-                        AddSaveBtnUserChat.addEventListener('click', () => {
+                        AddSaveBtnUserChat.addEventListener('click', (event) => {
+                            // console.log(event.currentTarget)
+
                             let FormData = {
-                                "name": NameUser,
-                                "image_user": image_user,
-                                "chat_name": chat_name
+                                "name": document.querySelector('.border_name_chat').textContent,
+                                "image_user": users.map(item => item.image),
+                                "chat_name": users.map(item => item.user)
                             }
+
+                            console.log(FormData)
+
                             fetch('/AddUserChatAdmin', {
                                 headers: new Headers({
                                     'Content-Type': 'application/json'
@@ -1253,8 +1280,9 @@ document.querySelector('.BorderImageChat').addEventListener('click', () => {
                                 method: "POST",
                                 body: JSON.stringify(FormData)
                             })
-                                .then(() => alert('Пользователь / пользователи добавлены'))
-                                .then(() => window.location.reload())
+                                .then(res => res)
+                            // .then(() => alert('Пользователь / пользователи добавлены'))
+                            // .then(() => window.location.reload())
                         })
                     })
                 }

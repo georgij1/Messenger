@@ -34,20 +34,40 @@ public class CreateChat {
 
     @PostMapping("/create_chat")
     @CrossOrigin("*")
+//    bugs
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
 
         jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
 
         String getUserChat = String.join(" ", formCreateChat.getUser_chat());
 
+        for (int cursor = 0; cursor < formCreateChat.getUser_chat().size(); ++cursor) {
+            jdbcTemplate.update(
+                    "insert into users_chat(name, chat_nane, image_user) values (?, ?, ?)",
+                    formCreateChat.getUser_chat().get(cursor),
+                    formCreateChat.getName_chat(),
+                    formCreateChat.getImageUser().get(cursor));
+        }
+        /*
         for (String users_chat:formCreateChat.getUser_chat()) {
-            System.out.println("Users_chat - " + users_chat);
-            for (String ImageUser:formCreateChat.getImageUser()) {
-                System.out.println(jdbcTemplate.queryForMap("select chat_nane from users_chat").get("chat_name"));
-                    jdbcTemplate.update("insert into public.users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
+            if (Boolean.TRUE.equals(jdbcTemplate.queryForObject("select exists(select * from users_chat where chat_nane=? and name=?)", Boolean.class, formCreateChat.getName_chat(), users_chat))) {
+                System.out.println("str is exists");
+            }
+
+            else if (Objects.equals(users_chat, jdbcTemplate)) {
+                System.out.println("users_chat is exists");
+            }
+
+            else {
+                System.out.println("Users_chat - " + users_chat);
+                for (String ImageUser:formCreateChat.getImageUser()) {
+                    System.out.println("Image " + ImageUser);
+//                    System.out.println("NameChat" + formCreateChat.getName_chat());
+                    jdbcTemplate.update("insert into users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
+                }
             }
         }
-
+        */
         System.out.println(formCreateChat.getUser_chat());
         System.out.println("formCreateChat.getUser_chat().toArray().length - "+ formCreateChat.getUser_chat().toArray().length);
         System.out.println("getUserChat - " + getUserChat);
@@ -95,6 +115,7 @@ public class CreateChat {
     @ResponseBody
     public List<Map<String, Object>> DeleteChat_1(@PathVariable String StringId, @PathVariable int IntegerId) {
         jdbcTemplate.update("delete from public.message where chat_id=?", StringId);
+        jdbcTemplate.update("delete from public.users_chat where chat_nane=?", jdbcTemplate.queryForMap("select name from chat where id=?", IntegerId).get("name"));
         jdbcTemplate.update("delete from public.chat where id=?", IntegerId);
         return jdbcTemplate.queryForList("select * from chat");
     }
@@ -102,8 +123,11 @@ public class CreateChat {
     @PostMapping("/AddUserChatAdmin")
     @CrossOrigin("*")
     @ResponseBody
+//    bugs
     public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
-        jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)", addUserChat.getName(), addUserChat.getChat_name(), addUserChat.getImage_user());
+        for (int cursor = 0; cursor < addUserChat.getChat_name().size(); ++cursor) {
+            jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)", addUserChat.getName(), addUserChat.getChat_name(), addUserChat.getImage_user());
+        }
 
         return jdbcTemplate.queryForList("select * from users_chat");
     }
