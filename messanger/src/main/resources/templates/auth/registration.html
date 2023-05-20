@@ -52,7 +52,18 @@
                 <p>В файле не должно быть пробелов</p>
             </div>
         </div>
-    
+
+        <div class="OR">Или</div>
+
+        <div class="border BorderImage">
+            <div class="user">
+                <div class="image"></div>
+                <div class="status"></div>
+            </div>
+
+            <div class="username">Имя</div>
+        </div>
+
         <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
     </form>
 
@@ -121,7 +132,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
+    <script th:src="@{/user/WebSocket/WebSocketRegistration.js}"></script>
     <script th:src="@{registration/registration.js}"></script>
     <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </body>

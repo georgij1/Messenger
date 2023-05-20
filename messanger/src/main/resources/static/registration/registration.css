@@ -110,7 +110,7 @@
 .BtnShowGenerator, .BtnCloseGenerator {
     padding: 10px;
     background: aliceblue;
-    width: 296.8px;
+    width: 276.8px;
     border: 2px solid bisque;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
@@ -229,20 +229,16 @@ input {
 .icon_profile {
     display: flex;
     flex-direction: column;
-    margin: auto;
     text-align: center;
     gap: 15px;
-    margin-top: 20px;
+    margin: 20px auto auto;
 }
 
 .warning {
     text-align: center;
 }
 
-/* Стили для range */
-
-input,
-output {
+input, output {
     display: inline-block;
     vertical-align: middle;
     font-size: 1em;
@@ -313,7 +309,6 @@ input[type="range"] {
     box-shadow: none;
 }
 
-/* Input Thumb */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 20px;
@@ -359,7 +354,6 @@ input[type="range"]::-ms-thumb:hover {
     background: #ff0200;
 }
 
-/* Input Track */
 input[type=range]::-webkit-slider-runnable-track  {
     -webkit-appearance: none;
     box-shadow: none;
@@ -380,10 +374,6 @@ input[type="range"]::-ms-track {
     border: none;
     background: transparent;
 }
-
-/* стили для range закончились */
-
-/*Input CheckBox*/
 
 .ToggleLabel {
     margin: 2em;
@@ -484,11 +474,10 @@ input[type="range"]::-ms-track {
     width: 200px;
 }
 
-.Toggle:checked+.ToggleLabel::before, .ToggleNumbers:checked+.ToggleLabel::before {
+.Toggle:checked+.ToggleLabel::before,
+.ToggleNumbers:checked+.ToggleLabel::before {
     color: #fff;
 }
-
-/*finished*/
 
 .send_icon_profile:hover {
     box-shadow: 0 0 10px bisque;
@@ -510,6 +499,54 @@ input[type="range"]::-ms-track {
     text-decoration: none;
 }
 
+.OR {
+    padding: 10px;
+    background: antiquewhite;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 276.8px;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    background: url("../image/settings/icon_profile.png") no-repeat;
+    background-size: 210px;
+    border: 2px solid bisque;
+    box-shadow: 0 0 10px bisque;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+.BorderImage {
+    padding-top: 5px;
+}
+
+.username {
+    text-align: center;
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 200px;
+    margin: auto;
+    box-shadow: 0 0 10px bisque;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    background: #17ec13;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+    top: -30px;
+    left: 244px;
+    display: none;
+}
+
 .none {
     display: none;
 }
@@ -519,8 +556,17 @@ input[type="range"]::-ms-track {
 }
 
 @media (min-width: 700px) {
-    .border, .result-container, .input-group {
+     .border, .result-container, .input-group {
         width: 700px;
+    }
+
+    .BorderImage {
+        display: flex;
+        justify-content: center;
+    }
+
+    .image {
+        margin: 20px auto auto 70px;
     }
 
     input, .send_icon_profile {
@@ -537,10 +583,6 @@ input[type="range"]::-ms-track {
 
     .GeneratePasswordContent h2 {
         width: 696.8px;
-    }
-
-    .BtnShowGenerator, .BtnCloseGenerator {
-        margin: 10px 33px 20px;
     }
 
     .generate-btn {
@@ -562,7 +604,12 @@ input[type="range"]::-ms-track {
     }
 
     .BtnShowGenerator, .BtnCloseGenerator {
-        margin: 10px 33px 20px auto;
+        width: 680px;
+    }
+
+    .status {
+        top: -9px;
+        left: 263px;
     }
 }
 
@@ -594,11 +641,16 @@ input[type="range"]::-ms-track {
 
     .BtnShowGenerator, .BtnCloseGenerator {
         margin: 20px auto;
-        width: 700px;
+        width: 979.8px;
     }
 
     .info_auth {
-        width: 96vW;
+        width: 979.8px;
         margin: 20px auto 20px;
+    }
+
+    .status {
+        left: 266px;
+        top: -10px;
     }
 }
