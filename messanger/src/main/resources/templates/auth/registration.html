@@ -21,29 +21,31 @@
         <div class="border">
             <div class="login_div_flex">
                 <label class="label_input" for="login">Логин</label>
-                <input id="login" placeholder="Придумайте логин" type="text" class="login" name="login">
+                <input id="login" readonly onfocus="this.removeAttribute('readonly');" placeholder="Придумайте логин" type="text" class="login" name="login">
             </div>
         </div>
 
         <div class="border">
             <div class="password_div_flex">
                 <label class="label_input" for="password">Пароль</label>
-                <input id="password" type="password" placeholder="Придумайте пароль свой пароль" class="password" name="password" required>
+                <input id="password" readonly onfocus="this.removeAttribute('readonly');" type="password" placeholder="Придумайте пароль свой пароль" class="password" name="password" required>
+                <a class="GeneratePasswordLink" href="#GeneratePassword">Генератор паролей</a>
             </div>
         </div>
 
         <div class="border">
             <div class="repeatePassword_div_flex">
                 <label class="label_input" for="repeat_password">Повторите пароль</label>
-                <input id="repeat_password" type="password" placeholder="Повторите придуманный пароль" class="repeat_password" name="RepeatPassword" required>
+                <input id="repeat_password" readonly onfocus="this.removeAttribute('readonly');" type="password" placeholder="Повторите придуманный пароль" class="repeat_password" name="RepeatPassword" required>
+                <a class="GeneratePasswordLink" href="#GeneratePassword">Генератор паролей</a>
             </div>
         </div>
 
         <div class="border">
             <div class="form-group">
-                <div class="label_input">Аватарка</div>
+                <label for="ava_profile" class="label_input">Аватарка</label>
                 <label for="ava_profile" class="send_icon_profile">Прикрепить аватарку</label>
-                <input id="ava_profile" type="file" name="avatar" accept="image/*" class="form-control-file">
+                <input id="ava_profile" readonly onfocus="this.removeAttribute('readonly');" type="file" name="avatar" accept="image/*" class="form-control-file">
             </div>
             <div class="icon_profile"></div>
             <div class="warning">
@@ -54,12 +56,73 @@
         <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
     </form>
 
-    <p class="info_auth">Если вы уже имеете аккаунт <a th:href="login">авторизуйтесь</a></p>
+    <div class="GeneratePasswordContent">
+        <h2 id="GeneratePassword">Генератор пароля</h2>
+
+        <div class="BtnShowGenerator">Показать</div>
+
+        <div class="BtnCloseGenerator">Скрыть</div>
+
+        <div class="result-container">
+            <label for="result" class="LabelResult">Результат</label>
+
+            <input type="text" id="result" class="ResultInput">
+
+            <button class="copy-result" id="copy">
+                Скопировать
+            </button>
+        </div>
+        <div class="settings">
+            <div class="input-group">
+                <label for="length" class="label_length">Длина пароля (8-22)</label>
+
+                <input type="range" id="length" min='8' max='22' step="1"/>
+
+
+                <div class="FlexLengthPassword">
+                    <div class="LabelLengthPassword">Длина пароля:</div>
+                    <span id="length-result">10</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="numbers" class="label_length">Цифры</label>
+
+                <div class="FlexSymbol">
+                    <div class="label_number">Цифры в пароле</div>
+                    <input type="checkbox" class="ToggleNumbers" id="numbers" checked>
+                    <label for="numbers" class="ToggleNumbers ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="symbols" class="label_length">Символы</label>
+
+                <div class="FlexSymbol">
+                    <div class="label_symbols">Символы в пароле</div>
+                    <input type="checkbox" class="Toggle" id="symbols" checked>
+                    <label for="symbols" class="Toggle ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generate">Сгенерировать</button>
+        </div>
+    </div>
+
+    <div class="WindowCopiedSuccess">
+        <div class="ContentWindowCopied">
+            <p>Пароль успешно скопирован</p>
+        </div>
+
+        <div class="Info">Окно автоматически закроется через 5 секунд</div>
+    </div>
+
+    <p class="info_auth">Если вы уже имеете аккаунт <a th:href="login" class="AuthLink">авторизуйтесь</a></p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
-    <script th:src="@{user/registration.js}"></script>
+    <script th:src="@{registration/registration.js}"></script>
     <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </body>
 </html>
