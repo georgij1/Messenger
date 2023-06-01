@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -21,6 +21,7 @@
         <div class="border">
             <div class="login_div_flex">
                 <label class="label_input" for="login">Логин</label>
+
                 <input id="login" readonly onfocus="this.removeAttribute('readonly');" placeholder="Придумайте логин" type="text" class="login" name="login">
             </div>
         </div>
@@ -28,7 +29,9 @@
         <div class="border">
             <div class="password_div_flex">
                 <label class="label_input" for="password">Пароль</label>
+
                 <input id="password" readonly onfocus="this.removeAttribute('readonly');" type="password" placeholder="Придумайте пароль свой пароль" class="password" name="password" required>
+
                 <a class="GeneratePasswordLink" href="#GeneratePassword">Генератор паролей</a>
             </div>
         </div>
@@ -36,7 +39,9 @@
         <div class="border">
             <div class="repeatePassword_div_flex">
                 <label class="label_input" for="repeat_password">Повторите пароль</label>
+
                 <input id="repeat_password" readonly onfocus="this.removeAttribute('readonly');" type="password" placeholder="Повторите придуманный пароль" class="repeat_password" name="RepeatPassword" required>
+
                 <a class="GeneratePasswordLink" href="#GeneratePassword">Генератор паролей</a>
             </div>
         </div>
@@ -44,13 +49,13 @@
         <div class="border">
             <div class="form-group">
                 <label for="ava_profile" class="label_input">Аватарка</label>
+
                 <label for="ava_profile" class="send_icon_profile">Прикрепить аватарку</label>
+
                 <input id="ava_profile" readonly onfocus="this.removeAttribute('readonly');" type="file" name="avatar" accept="image/*" class="form-control-file">
             </div>
+
             <div class="icon_profile"></div>
-            <div class="warning">
-                <p>В файле не должно быть пробелов</p>
-            </div>
         </div>
 
         <div class="OR">Или</div>
@@ -58,6 +63,7 @@
         <div class="border BorderImage">
             <div class="user">
                 <div class="image"></div>
+
                 <div class="status"></div>
             </div>
 
@@ -79,9 +85,7 @@
 
             <input type="text" id="result" class="ResultInput">
 
-            <button class="copy-result" id="copy">
-                Скопировать
-            </button>
+            <button class="copy-result" id="copy">Скопировать</button>
         </div>
         <div class="settings">
             <div class="input-group">
@@ -92,6 +96,7 @@
 
                 <div class="FlexLengthPassword">
                     <div class="LabelLengthPassword">Длина пароля:</div>
+
                     <span id="length-result">10</span>
                 </div>
             </div>
@@ -101,7 +106,9 @@
 
                 <div class="FlexSymbol">
                     <div class="label_number">Цифры в пароле</div>
+
                     <input type="checkbox" class="ToggleNumbers" id="numbers" checked>
+
                     <label for="numbers" class="ToggleNumbers ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
                 </div>
             </div>
@@ -111,7 +118,9 @@
 
                 <div class="FlexSymbol">
                     <div class="label_symbols">Символы в пароле</div>
+
                     <input type="checkbox" class="Toggle" id="symbols" checked>
+
                     <label for="symbols" class="Toggle ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
                 </div>
             </div>
@@ -130,8 +139,8 @@
 
     <p class="info_auth">Если вы уже имеете аккаунт <a th:href="login" class="AuthLink">авторизуйтесь</a></p>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
+    <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
     <script th:src="@{/user/WebSocket/WebSocketRegistration.js}"></script>
     <script th:src="@{registration/registration.js}"></script>
     <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

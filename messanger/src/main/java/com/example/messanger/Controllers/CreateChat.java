@@ -1,24 +1,19 @@
 // Контроллер для создания группового чата (3 и более человек)
-
 package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
-import com.example.messanger.auth.forms.chat_form.AccessChat;
 import com.example.messanger.auth.forms.chat_form.AddUserChat;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
+import com.example.messanger.auth.forms.chat_form.UpdateDescChat;
 import com.example.messanger.auth.forms.chat_form.UpdateNameChat;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping
@@ -34,7 +29,6 @@ public class CreateChat {
 
     @PostMapping("/create_chat")
     @CrossOrigin("*")
-//    bugs
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
 
         jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
@@ -48,31 +42,41 @@ public class CreateChat {
                     formCreateChat.getName_chat(),
                     formCreateChat.getImageUser().get(cursor));
         }
-        /*
-        for (String users_chat:formCreateChat.getUser_chat()) {
-            if (Boolean.TRUE.equals(jdbcTemplate.queryForObject("select exists(select * from users_chat where chat_nane=? and name=?)", Boolean.class, formCreateChat.getName_chat(), users_chat))) {
-                System.out.println("str is exists");
-            }
 
-            else if (Objects.equals(users_chat, jdbcTemplate)) {
-                System.out.println("users_chat is exists");
-            }
-
-            else {
-                System.out.println("Users_chat - " + users_chat);
-                for (String ImageUser:formCreateChat.getImageUser()) {
-                    System.out.println("Image " + ImageUser);
-//                    System.out.println("NameChat" + formCreateChat.getName_chat());
-                    jdbcTemplate.update("insert into users_chat(name, chat_nane, image_user) values (?, ?, ?)", users_chat, formCreateChat.getName_chat(), ImageUser);
-                }
-            }
-        }
-        */
         System.out.println(formCreateChat.getUser_chat());
         System.out.println("formCreateChat.getUser_chat().toArray().length - "+ formCreateChat.getUser_chat().toArray().length);
         System.out.println("getUserChat - " + getUserChat);
 
         return "chat_websocket/index";
+    }
+
+    @PostMapping("/AddUserChatAdmin")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
+        System.out.println("ChatName - " + addUserChat.getChat_name());
+        System.out.println("NameUser - " + addUserChat.getName());
+        System.out.println("ImageUser - " + addUserChat.getImage_user());
+
+        for (int cursor = 0; cursor < addUserChat.getName().size(); ++cursor) {
+            System.out.println("for is running");
+
+            var isExists = jdbcTemplate.queryForObject("select exists(select name from users_chat where name=? and chat_nane=?)", Boolean.class, addUserChat.getName().get(cursor), addUserChat.getChat_name());
+
+            if (Boolean.TRUE.equals(isExists)) {
+                System.out.println("The same Object");
+            }
+
+            else {
+                System.out.println("The Object is not same");
+                jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)",
+                        addUserChat.getName().get(cursor),
+                        addUserChat.getChat_name(),
+                        addUserChat.getImage_user().get(cursor));
+            }
+        }
+
+        return jdbcTemplate.queryForList("select * from users_chat");
     }
 
     @PostMapping("/users/{chat_id}")
@@ -92,7 +96,7 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> MyChats(@PathVariable String owner_chat) {
-        return jdbcTemplate.queryForList("select * from chat where owner=?", owner_chat);
+        return jdbcTemplate.queryForList("select * from chat join users_chat m on chat.owner = m.name where m.name=? and owner=?", owner_chat, owner_chat);
     }
 
     @PostMapping("/ChatName/{IdChat}")
@@ -110,6 +114,14 @@ public class CreateChat {
         return jdbcTemplate.queryForList("select * from chat");
     }
 
+    @PostMapping("/EditDescChat/{id}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> EditDescChat(@PathVariable int id, @RequestBody UpdateDescChat updateDescChat) {
+        jdbcTemplate.update("update chat set desc_chat=? where id=?", updateDescChat.getNewNameDescChat(), id);
+        return jdbcTemplate.queryForList("select * from chat");
+    }
+
     @DeleteMapping("/delete_chat/{StringId}/{IntegerId}")
     @CrossOrigin("*")
     @ResponseBody
@@ -120,23 +132,19 @@ public class CreateChat {
         return jdbcTemplate.queryForList("select * from chat");
     }
 
-    @PostMapping("/AddUserChatAdmin")
-    @CrossOrigin("*")
-    @ResponseBody
-//    bugs
-    public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
-        for (int cursor = 0; cursor < addUserChat.getChat_name().size(); ++cursor) {
-            jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)", addUserChat.getName(), addUserChat.getChat_name(), addUserChat.getImage_user());
-        }
-
-        return jdbcTemplate.queryForList("select * from users_chat");
-    }
-
     @DeleteMapping("/DeleteUser/{ChatId}")
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> EditUserChatAdmin(@PathVariable int ChatId) {
         jdbcTemplate.update("delete from users_chat where id=?", ChatId);
+        return jdbcTemplate.queryForList("select * from users_chat");
+    }
+
+    @DeleteMapping("/DeleteUser/{UserName}/{NameChat}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> LogOutUserChat(@PathVariable String UserName, @PathVariable String NameChat) {
+        jdbcTemplate.update("delete from users_chat where name=? and chat_nane=?", UserName, NameChat);
         return jdbcTemplate.queryForList("select * from users_chat");
     }
 
@@ -163,5 +171,12 @@ public class CreateChat {
     public List<Map<String, Object>> delete_message(@PathVariable int id) {
         jdbcTemplate.update("delete from message where id_message=?", id);
         return jdbcTemplate.queryForList("select * from message");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("find/by/NameChat/{ChatName}")
+    public List<Map<String, Object>> FindByChatName(@PathVariable String ChatName) {
+        return jdbcTemplate.queryForList("select * from chat where name like ?", ChatName + '%');
     }
 }

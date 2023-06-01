@@ -69,6 +69,11 @@ public class LoginConroller {
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 System.out.println("form_login is null" + "or is " + form.getLogin());
+                return "/auth/ErrorsPage/error_login";
+            }
+
+            else if (Objects.equals(form.getPassword(), "")) {
+                return "/auth/ErrorsPage/password_not_correct";
             }
 
             else {

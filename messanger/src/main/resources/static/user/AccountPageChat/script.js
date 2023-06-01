@@ -14,5 +14,12 @@ fetch(`/GetIdPerson/${UserName}`, {
     .then(response => response.json())
     .then((data) => (data.forEach((item) => {
         let ImageUser = document.querySelector('.ImageUser')
-        ImageUser.innerHTML+=`<img src="/${item.image}" alt="">`
+
+        if (item.id_image === 'DefaultAva') {
+            ImageUser.innerHTML+=`<img src="/image/settings/icon_profile.png" alt="">`
+        }
+
+        else {
+            ImageUser.innerHTML+=`<img src="/AvatarImage/${document.querySelector('.UserName').textContent}/${item.id_image}" alt="">`
+        }
     })))

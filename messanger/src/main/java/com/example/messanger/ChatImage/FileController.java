@@ -1,7 +1,6 @@
 package com.example.messanger.ChatImage;
 
 import com.example.messanger.ChatImage.model.FileDB;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,19 +24,19 @@ public class FileController {
     // размер изображения ограничен до 3 mb
     // Поэтому нет проблем с загрузкой изображения в db
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, FileDB formsGetTimeStamp) {
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, FileDB formsGetTimeStamp) {
         System.out.println(file);
         String message;
 
         try {
             storageService.store(file, formsGetTimeStamp.getTime_stamp_short(), formsGetTimeStamp.getTime_stamp_long(), formsGetTimeStamp.getChat_id(), formsGetTimeStamp.getSender_id(), formsGetTimeStamp.getText());
             message = "Файл успешно загружен: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            return ResponseEntity.status(HttpStatus.OK).body((message));
         }
 
         catch (Exception e) {
             message = "Не можем загрузить файл: " + file.getOriginalFilename() + "!" + " С такими данными - " + formsGetTimeStamp.getTime_stamp_short() + formsGetTimeStamp.getTime_stamp_long() + formsGetTimeStamp.getChat_id() + formsGetTimeStamp.getSender_id() + " " + e;
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body((message));
         }
     }
 

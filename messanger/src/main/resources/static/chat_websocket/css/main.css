@@ -28,8 +28,16 @@
 }
 
 .btn_create_chat:hover {
-    background: #FFF;
-    color: black;
+    background: #b76dff;
+    color: #FFF;
+}
+
+.admin_this, .user_this {
+    height: max-content;
+    position: relative;
+    left: 20px;
+    color: blue;
+    bottom: -33px;
 }
 
 .text_create_chat {
@@ -47,10 +55,19 @@
 .image_plus {
     width: 24px;
     height: 24px;
-    background: url("../image/plus.png") no-repeat, black;
+    background: url("../image/plus.png") no-repeat;
     background-size: 24px;
     border-radius: 5px;
-    box-shadow: 0 0 10px;
+}
+
+.LogOutChat {
+    padding: 10px;
+    text-align: center;
+    background: darkgoldenrod;
+    border: 2px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 10px red;
+    color: #FFF;
 }
 
 .flex-content {
@@ -70,9 +87,22 @@
     outline: none;
 }
 
-.close_window {
-    width: 70px;
-    height: 43px;
+.close_window_storage_image {
+    display: none;
+}
+
+.window_storage_image {
+    padding: 10px;
+    background: aliceblue;
+    margin-top: 25px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px antiquewhite;
+}
+
+.close_window, .close_edit_name_chat, .close_window_storage_image {
+    width: 50px;
+    height: 50px;
     background: url("../../image/main_page/open_min_window.png") no-repeat center, #FFF;
     background-size: 40px;
     box-shadow: 0 0 10px burlywood;
@@ -81,9 +111,27 @@
     cursor: pointer;
 }
 
+.tools_edit_name_chat {
+    display: flex;
+    padding-right: 13px;
+    gap: 20px;
+}
+
+.close_edit_name_chat {
+    width: 35px;
+    height: 35px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat center, powderblue;
+    background-size: 30px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 100%;
+    border: 3px solid bisque;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
 .close_window_3 {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: url("../../image/main_page/open_min_window.png") no-repeat center, #FFF;
     background-size: 40px;
     box-shadow: 0 0 10px burlywood;
@@ -171,6 +219,7 @@
 
 .list_chat {
     margin-bottom: 70px;
+    margin-top: 25px;
 }
 
 .delete_message_image {
@@ -252,6 +301,15 @@
     box-shadow: 0 0 10px blanchedalmond;
 }
 
+.name_chat_min_window {
+    display: none;
+    border: 2px solid blanchedalmond;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px blanchedalmond;
+    margin-top: 30px;
+}
+
 .name_chat:hover {
     box-shadow: none;
 }
@@ -312,6 +370,35 @@ label {
     overflow-y: scroll;
     height: 190px;
     padding: 10px;
+}
+
+.ChangeNameChat {
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    margin-bottom: 20px;
+}
+
+.ChangeNameChat:hover {
+    box-shadow: none;
+}
+
+.ChangeDescChat {
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.ChangeDescChat:hover {
+    box-shadow: none;
 }
 
 .user_image p {
@@ -382,8 +469,7 @@ input {
     border-radius: 10px;
     background: url("../image/plus.png") no-repeat center, linear-gradient(325.78deg, #2A8BF2 14.76%, #7CB8F7 87.3%);
     cursor: pointer;
-    box-shadow: 0 0 10px brown;
-    border: 2px solid #7CB8F7;
+    border: 2px solid #63afff;
 }
 
 .btn_tools_chat:hover {
@@ -445,6 +531,7 @@ input {
     border: 2px solid bisque;
     width: 100%;
     height: 30px;
+    cursor: pointer;
 }
 
 .border_name_chat {
@@ -550,7 +637,21 @@ li {
 }
 
 .height {
-    height: 70px;
+    height: 50px;
+}
+
+.DeleteChat {
+    padding: 10px;
+    text-align: center;
+    background: antiquewhite;
+    border: 2px solid antiquewhite;
+    border-radius: 10px;
+    box-shadow: 0 0 10px antiquewhite;
+    cursor: pointer;
+}
+
+.DeleteChat:hover {
+    background: #FFF;
 }
 
 #messageForm {
@@ -664,11 +765,39 @@ li {
     box-shadow: 0 0 10px burlywood;
     border-radius: 10px;
     padding: 10px;
+    margin-top: 30px;
 }
 
 .TextLink {
     margin: 0;
     overflow-x: scroll;
+    cursor: pointer;
+}
+
+.MessageInfo, .MessageInfoCopyText, .MessageWarningCopyText, .status_change_name_chat, .status_change_desc_chat {
+    display: none;
+    position: fixed;
+    right: 20px;
+    background: antiquewhite;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    bottom: 15px;
+}
+
+.close_window_storage_image {
+    width: 50px;
+    height: 50px;
+}
+
+.close_add_users {
+    width: 50px;
+    height: 50px;
+}
+
+.close_window {
+    width: 57px;
+    height: 45px;
 }
 
 .border_name_chat {
@@ -677,6 +806,38 @@ li {
 
 .border_name_chat:hover {
     box-shadow: none;
+}
+
+.window_change_chat_name, .window_change_desc_chat {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    padding: 25px 0;
+    background: bisque;
+    width: 100%;
+    flex-direction: column;
+    gap: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.InputChangeName {
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    width: 85%;
+    margin: auto;
+}
+
+.InputBtnSaveChangeNameChat {
+    padding: 10px;
+    background: cornsilk;
+    box-shadow: 0 0 10px bisque;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 85%;
+    margin-left: 14px;
 }
 
 .window_settings_chat {
@@ -926,11 +1087,10 @@ li {
     box-shadow: 0 0 10px bisque;
     border: 2px solid beige;
     color: blue;
-    cursor: pointer;
     width: 84vW;
 }
 
-.LinkChat:hover {
+.TextLink:hover {
     text-decoration: 2px solid blue underline;
 }
 
@@ -944,16 +1104,14 @@ li {
 }
 
 .CopyBtnChat {
-    padding: 10px;
-    background: powderblue;
-    width: max-content;
-    padding-left: 15px;
-    padding-right: 15px;
+    background: #ded48063;
+    padding: 10px 15px;
     border: 2px solid bisque;
     border-radius: 10px;
-    margin: 30px auto;
     cursor: pointer;
     box-shadow: 0 0 10px burlywood;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .CopyBtnChat:hover {
@@ -1323,8 +1481,6 @@ li {
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
     cursor: pointer;
-    width: max-content;
-    margin: auto;
 }
 
 .AddUsersBtn:hover, .EditChatUser:hover {
@@ -1465,6 +1621,44 @@ li {
     box-shadow: 0 0 10px bisque;
 }
 
+.desc_chat_min_window {
+    display: none;
+    padding: 10px;
+    border: 2px solid bisque;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+}
+
+.ImageCount {
+    display: none;
+    padding: 10px;
+    background: #FFF;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.WindowStorageImage {
+    display: none;
+}
+
+.ImageCount:hover {
+    box-shadow: none;
+}
+
+.ImageStorage {
+    width: 50px;
+    height: 50px;
+    background: url("../../chat_websocket/image/image_storage.png") no-repeat;
+    background-size: 50px;
+}
+
 .ListMessage {
     flex-direction: column-reverse;
 }
@@ -1493,6 +1687,27 @@ li {
     box-shadow: none;
 }
 
+.close_window_storage_image:hover {
+    box-shadow: none;
+}
+
+.image_from_chat img {
+    width: 100%;
+}
+
+.image_from_chat {
+    padding: 10px;
+    border: 2px solid bisque;
+    box-shadow: 0 0 10px bisque;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.list_images {
+    margin-top: 25px;
+    margin-bottom: 70px;
+}
+
 .link_image:hover {
     padding: 0;
     box-shadow: none;
@@ -1509,6 +1724,25 @@ li {
     left: 50px;
 }
 
+.list_link_chat {
+    margin-top: 20px;
+}
+
+.CloseMessageInfo {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat center, #FFF;
+    background-size: 40px;
+    box-shadow: 0 0 10px burlywood;
+    border-radius: 10px;
+    border: 3px solid bisque;
+    cursor: pointer;
+}
+
+.ImagePath {
+    display: none;
+}
+
 .owner {
     display: none;
 }
@@ -1517,8 +1751,69 @@ li {
     display: none;
     width: 350px;
     padding: 10px;
-    background: antiquewhite;
     align-items: center;
+}
+
+.error_content {
+    width: 70%;
+}
+
+.BtnEditNameChat {
+    padding: 10px;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.BtnEditDescChat {
+    padding: 10px;
+    text-align: center;
+    background: blanchedalmond;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.EditListUser {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: antiquewhite;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    text-align: center;
+    cursor: pointer;
+}
+
+.BtnDeleteChat {
+    margin-top: 20px;
+}
+
+.DeleteUser, .BtnDeleteChat {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: #ff8a8a;
+    border: 2px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 1px red;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.AddUser {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: antiquewhite;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
 }
 
 .close_window_4, .close_window_5 {
@@ -1545,11 +1840,23 @@ li {
     display: none;
 }
 
+.IconOpenList {
+    display: none;
+}
+
 .BorderOptionFile {
     display: none;
 }
 
 .PermissionDenied {
+    display: none;
+}
+
+.ToolChat {
+    display: none;
+}
+
+.OwnerChat {
     display: none;
 }
 
@@ -1572,11 +1879,12 @@ li {
 @media (min-width: 768px) {
     .close_window, .close_add_users {
         width: 50px;
-        height: 43px;
+        height: 44px;
     }
 
     .ListMessage {
         gap: 20px;
+        flex-direction: row;
     }
 
     .ToolsTick {
@@ -1593,22 +1901,62 @@ li {
         width: 505px;
     }
 
+    .InputChangeName {
+        width: 93%;
+    }
+
+    .IconOpenList {
+        display: block;
+    }
+
+    .ImageProfileMessage, .ImageProfileMessage1 {
+        width: 71px;
+        height: 50px;
+    }
+
+    .ErrorConnect {
+        align-items: center;
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+
+    .name_chat_min_window {
+        margin-top: 0;
+    }
+
     .border_name_chat {
         width: 100%;
     }
 
+    .error_content {
+        width: 100%;
+    }
+
     .OverflowScroll {
-        overflow-x: scroll;
+        overflow-y: scroll;
         padding: 10px;
         border: 2px solid bisque;
         border-radius: 10px;
         box-shadow: 0 0 10px bisque;
-        height: max-content;
+        height: 444px;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .chats {
         justify-content: left;
         width: 222px;
+        margin-top: 0;
+    }
+
+    .ToolChat {
+        height: 444px;
+        overflow-y: scroll;
+        padding: 10px;
+        background: aliceblue;
+        border: 2px solid bisque;
+        border-radius: 10px;
+        box-shadow: 0 0 10px bisque;
     }
 
     .Chat {
@@ -1619,7 +1967,6 @@ li {
         margin-top: 20px;
         height: max-content;
         overflow: auto;
-        margin-bottom: 50px;
     }
 
     .User {
@@ -1640,6 +1987,8 @@ li {
 
     .TextLink {
         overflow-x: auto;
+        text-align: center;
+        margin: auto;
     }
 
     .image_settings_open {
@@ -1659,7 +2008,6 @@ li {
 
     .flex {
         margin-bottom: 0;
-        flex-direction: row;
     }
 
     .window_create_chat {
@@ -1775,7 +2123,6 @@ li {
     }
 
     .tools {
-        /*justify-content: space-between;*/
         gap: 20px;
     }
 
@@ -1829,6 +2176,25 @@ li {
         margin: 0;
     }
 
+    .CopyBtnChat {
+        position: inherit;
+    }
+
+    .OverflowScroll .MessageMainImageDesc .ImageBorderImageDesc .ImageChat_1 .ImageChat {
+        width: 215px;
+        height: 222px;
+    }
+
+    .window_settings_chat {
+        padding-bottom: 0;
+    }
+
+    .list_images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
     .none {
         display: none;
     }
@@ -1864,6 +2230,10 @@ li {
         align-items: center;
         width: 47vW;
         margin: auto;
+    }
+
+    .list_images {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .chats {
@@ -1908,6 +2278,18 @@ li {
         width: 90%;
     }
 
+    .ToolChat, .OverflowScroll {
+        height: 444px;
+    }
+
+    .ImageProfileMessage, .ImageProfileMessage1 {
+        width: 0;
+    }
+
+    .OverflowScroll {
+        width: 100vW;
+    }
+
     .none {
         display: none;
     }
@@ -1927,7 +2309,15 @@ li {
     }
 
     .chats {
-        width: 40vW;
+        width: 160px;
+    }
+
+    .ImageStorage {
+        width: 100px;
+    }
+
+    .ToolChat, .OverflowScroll {
+        height: 550px;
     }
 }
 
@@ -1941,6 +2331,10 @@ li {
     }
 
     .chats {
-        width: 47vW;
+        width: 7vW;
+    }
+
+    .ToolChat, .OverflowScroll {
+        height: 47vW;
     }
 }

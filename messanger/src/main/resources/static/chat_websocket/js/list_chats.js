@@ -35,11 +35,6 @@ for (let list_my_chat_itter of list_my_chats) {
                                     <div class="name">${item.name}</div>
                                 </div>
                             </div>
-                        
-                            <div class="tools_start">
-                                <div class="btn_delete_chat">Удалить чат</div>
-                                <div class="btn_change_name_chat">Изменить имя чата</div>
-                            </div>
                         </div>
                     `
                 let image_user_1 = document.querySelectorAll('.image');
@@ -127,16 +122,6 @@ for (let list_my_chat_itter of list_my_chats) {
         })
 }
 
-all_chat.addEventListener('click', () => {
-    content_all_chat.classList.add('visible')
-    content_all_my_chat.classList.remove('visible')
-})
-
-all_my_chat.addEventListener('click', () => {
-    content_all_my_chat.classList.add('visible')
-    content_all_chat.classList.remove('visible')
-})
-
 for (let list_chat_itter of list_chats) {
     fetch('/list_chats', {
         headers: new Headers({
@@ -152,10 +137,8 @@ for (let list_chat_itter of list_chats) {
                         <div class="chat">
                             <div class="id">${item.id}</div>
                             <div class="image"></div>
-                            <div class="about_chat">
-                                <div class="name">${item.name}</div>
-                                <div class="owner">${item.owner}</div>
-                            </div>
+                            <div class="name">${item.name}</div>
+                            <div class="owner">${item.owner}</div>
                         </div>
                     `
                 let image_user_1 = document.querySelectorAll('.image');
@@ -173,17 +156,17 @@ for (let list_chat_itter of list_chats) {
             for (let chat_itter of chat) {
                 chat_itter.addEventListener('click', (event) => {
                     console.log(event.currentTarget.children[0].textContent)
-                    console.log(event.currentTarget.children[2].children[0].textContent)
+                    console.log(event.currentTarget.children[2].textContent)
 
                     let UsernameNew = document.querySelector('.username').textContent
                     console.log(UsernameNew)
-                    let ChatName = event.currentTarget.children[2].children[0].textContent
-                    let AdminChat = event.currentTarget.children[2].children[1].textContent
+                    let ChatName = event.currentTarget.children[2].textContent
+                    let AdminChat = event.currentTarget.children[3].textContent
                     console.log(AdminChat)
                     console.log(event.currentTarget)
 
                     const formData = {
-                        "NameChat": event.currentTarget.children[2].children[0].textContent,
+                        "NameChat": event.currentTarget.children[2].textContent,
                         "username": UsernameNew
                     }
 
@@ -213,7 +196,20 @@ for (let list_chat_itter of list_chats) {
                             if (item.status === "success") {
                                 console.log("success")
                                 console.log(event.currentTarget)
-                                window.open(`chat/${IDChat}#BottomPage`, '_self')
+                                // console.log(event.currentTarget.querySelector('.name'))
+                                console.log(event.target)
+                                console.log(event.target.querySelector('.name'))
+                                console.log(event.target.children[0])
+
+                                if (event.currentTarget === null) {
+                                    console.log('this method not working')
+                                    window.open(`/chat/${IDChat}/${document.querySelector('.username').textContent}/${event.target.textContent}#BottomPage`, '_self')
+                                }
+
+                                else {
+                                    window.open(`/chat/${IDChat}/${document.querySelector('.username').textContent}/${event.target.querySelector('.name').textContent}#BottomPage`, '_self')
+                                }
+
                                 PermissionDenied.classList.remove('visible')
                                 list_chats.classList.remove('none')
                                 flex_content.classList.remove('none')
@@ -273,3 +269,108 @@ for (let list_chat_itter of list_chats) {
         })
     })
 }
+
+document.querySelector('.Find').addEventListener('click', () => {
+    document.querySelector('.window_find_chat').classList.add('flex')
+    document.querySelector('.list_chats').classList.add('none')
+    document.querySelector('.buttons_nav_chats').classList.add('none')
+    document.querySelector('.flex-content').classList.add('none')
+    document.querySelector('.burger_menu').classList.add('none')
+    document.querySelector('.close_window_find_chat').classList.add('block')
+})
+
+document.querySelector('.filter').addEventListener('click', () => {
+    console.log('open window filter list chat')
+    document.querySelector('.window_filter_chat').classList.add('flex')
+    document.querySelector('.list_chats').classList.add('none')
+    document.querySelector('.buttons_nav_chats').classList.add('none')
+    document.querySelector('.flex-content').classList.add('none')
+    document.querySelector('.burger_menu').classList.add('none')
+    document.querySelector('.close_window_filter_chat').classList.add('block')
+})
+
+document.querySelector('.close_window_filter_chat').addEventListener('click', () => {
+    document.querySelector('.window_filter_chat').classList.remove('flex')
+    document.querySelector('.list_chats').classList.remove('none')
+    document.querySelector('.buttons_nav_chats').classList.remove('none')
+    document.querySelector('.flex-content').classList.remove('none')
+    document.querySelector('.burger_menu').classList.remove('none')
+    document.querySelector('.close_window_filter_chat').classList.remove('block')
+})
+
+document.querySelector('.ToggleLabel').addEventListener('click', () => {
+    console.log(document.querySelector('.ToggleLabel').checked)
+    console.log(document.querySelector('#symbols').checked)
+
+    if (document.querySelector('#symbols').checked === false) {
+        console.log('tools filter by name click ob input checked is checked')
+    }
+})
+
+document.querySelector('.label_length').addEventListener('click', () => {
+    console.log(document.querySelector('.ToggleLabel').checked)
+    console.log(document.querySelector('#symbols').checked)
+
+    if (document.querySelector('#symbols').checked === false) {
+        console.log('tools filter by name click ob label is checked')
+    }
+})
+
+document.querySelector('.ToggleLabel').addEventListener('click', () => {
+    console.log(document.querySelector('.ToggleLabel').checked)
+    console.log(document.querySelector('#number').checked)
+
+    if (document.querySelector('#number').checked === false) {
+        console.log('tools filter by date click ob input checked is checked')
+    }
+})
+
+document.querySelector('.label_length').addEventListener('click', () => {
+    console.log(document.querySelector('.ToggleLabel').checked)
+    console.log(document.querySelector('#number').checked)
+
+    if (document.querySelector('#number').checked === false) {
+        console.log('tools filter by date click ob label is checked')
+    }
+})
+
+let i = 0
+
+document.querySelector('.btn_search').addEventListener('click', () => {
+    console.log(document.querySelector('.InputSearch').value)
+    i++
+    console.log("i - ", i)
+    fetch(`find/by/NameChat/${document.querySelector('.InputSearch').value}`, {
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        mode: "cors"
+    })
+        .then((res) => res.json())
+        .then(data => data.forEach(item => {
+            console.log(item)
+            document.querySelector('.list_found_chat').innerHTML+=`
+                <div class="FoundChat">
+                    <div class="chat_id">${item.id}</div>
+                    <img src="${item.image_chat}" class="chat_image" alt="ImageChat">
+                    <div class="chat_name">${item.name}</div>
+                </div>
+            `
+
+            for (let FoundChatItter of document.querySelectorAll('.FoundChat')) {
+                FoundChatItter.addEventListener('click', (event) => {
+                    console.log(event.currentTarget.querySelector('.chat_id'))
+                    window.open(`/chat/${event.currentTarget.querySelector('.chat_id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.chat_name').textContent}#BottomPage`, '_self')
+                })
+            }
+        }))
+})
+
+document.querySelector('.close_window_find_chat').addEventListener('click', () => {
+    document.querySelector('.window_find_chat').classList.remove('flex')
+    document.querySelector('.list_chats').classList.remove('none')
+    document.querySelector('.buttons_nav_chats').classList.remove('none')
+    document.querySelector('.flex-content').classList.remove('none')
+    document.querySelector('.burger_menu').classList.remove('none')
+    document.querySelector('.close_window_find_chat').classList.remove('block')
+})

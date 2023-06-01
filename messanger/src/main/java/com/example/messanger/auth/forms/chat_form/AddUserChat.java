@@ -14,5 +14,5 @@ public class AddUserChat {
     @JsonProperty("image_user")
     public ArrayList<String> image_user;
     @JsonProperty("chat_name")
-    public ArrayList<String> chat_name;
+    public String chat_name;
 }

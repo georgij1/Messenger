@@ -1,5 +1,6 @@
 function IsDesktop() {
     console.log('ПК');
+    console.log(navigator)
 }
 
 function IsTablet() {

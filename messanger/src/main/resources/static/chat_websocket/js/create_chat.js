@@ -36,13 +36,24 @@ fetch('/all_users', {
         .then(response => response.json())
         .then((data) => {data.forEach(item => {
             console.log(item)
-            list_users.innerHTML+=`
-                <div class="user" id="user">
-                    <!--<div class="id"></div>-->
-                    <div class="user_image" style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
-                    <div class="name">${item.username}</div>
-                </div>
-            `
+            if (item.id_image === 'DefaultAva') {
+                list_users.innerHTML+=`
+                    <div class="user" id="user">
+                        <div class="user_image" style="background: url('/image/settings/icon_profile.png') no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/image/settings/icon_profile.png</p></div>
+                        <div class="name">${item.username}</div>
+                    </div>
+                `
+            }
+
+            else {
+                list_users.innerHTML+=`
+                    <div class="user" id="user">
+                        <div class="user_image" style="background: url(/AvatarImage/${item.username}/${item.id_image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/AvatarImage/${item.username}/${item.id_image}</p></div>
+                        <div class="name">${item.username}</div>
+                    </div>
+                `
+            }
+
             let user = document.querySelectorAll('.user')
 
             console.log('PRIVET', user)
@@ -52,8 +63,10 @@ fetch('/all_users', {
                     console.log(user_itter)
                     user_itter.classList.toggle('tick')
 
-                    const user = user_itter.childNodes[5].textContent;
-                    const image = user_itter.childNodes[3].textContent;
+                    console.log(user_itter.childNodes)
+
+                    const user = user_itter.childNodes[3].textContent;
+                    const image = user_itter.childNodes[1].textContent;
 
                     let is_exists = -1;
 

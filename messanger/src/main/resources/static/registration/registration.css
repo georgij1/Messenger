@@ -271,6 +271,10 @@ input[type="range"] {
     cursor: e-resize;
 }
 
+input[type="range"]:hover {
+    box-shadow: none;
+}
+
 .SymbolText {
     padding: 10px;
     background: aliceblue;
@@ -461,8 +465,9 @@ input[type="range"]::-ms-track {
       background-color: #f7f7f7;
 }
 
-.Toggle+.ToggleLabel {
+.Toggle+.ToggleLabel, .ToggleNumbers+.ToggleLabel {
     background-color: #ccc;
+    width: 212px;
 }
 
 .Toggle+.ToggleLabel::before {
@@ -493,6 +498,7 @@ input[type="range"]::-ms-track {
 
 .AuthLink {
     text-decoration: 2px solid underline blue;
+    color: blue;
 }
 
 .AuthLink:hover {
@@ -610,6 +616,11 @@ input[type="range"]::-ms-track {
     .status {
         top: -9px;
         left: 263px;
+    }
+
+    .Toggle+.ToggleLabel, .ToggleNumbers+.ToggleLabel {
+        background-color: #ccc;
+        width: 108px;
     }
 }
 

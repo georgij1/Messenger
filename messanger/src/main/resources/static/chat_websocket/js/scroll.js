@@ -19,12 +19,31 @@ function onScroll() {
         btn_down_1.classList.remove('none')
     }
 
-    if (document.body.clientHeight === Math.round(pageYOffset + 714)) {
+    if (document.body.clientHeight === screen.height-6) {
         arrowBottom.hidden = true
         console.log('1')
     }
 
+    document.addEventListener('scroll', (event) => {
+        // console.log('Позиция x относительно документа', event.pageX)
+        // console.log('Позиция y относительно документа', event.pageY)
+
+        // console.log('Позиция x относительно экрана', event.clientX)
+        // console.log('Позиция y относительно экрана', event.clientY)
+        // console.log("pageYOffset - ", pageYOffset)
+    }, false)
+
     scroll = top;
+
+    // общая ширина/высота
+    // console.log( screen.width + ' x ' + screen.height);
+
+    // доступная ширина/высота (за вычетом таскбара и т.п.)
+    // console.log(screen.availWidth + ' x ' + screen.availHeight);
+
+    // есть и ряд других свойств screen (см. документацию)
+
+    // console.log(document.body.clientHeight, " - document.body.clientHeight")
 }
 
 arrowBottom.hidden = true

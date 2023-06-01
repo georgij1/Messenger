@@ -9,165 +9,215 @@
     <link rel="stylesheet" th:href="@{/user/main_page/main_page.css}">
     <link rel="stylesheet" th:href="@{/chat_websocket/css/main.css}" />
 </head>
+
 <body>
-    <div th:text="${IdChat}" class="IdChat"></div>
-
-    <div class="body_chat">
-        <div id="arrowBottom" class="btn_down_1"></div>
-
-        <div class="flex FlexGroup">
-            <div class="close_window close_window_2"></div>
-
-            <div class="flex_content_chat_top_tools">
-                <div class="ErrorConnect">Соединение с сервером...</div>
-                <div class="BorderImageChat"></div>
-                <div class="border_name_chat"></div>
-            </div>
-
-            <div class="IconOpenList"></div>
+    <div class="body_load">
+        <div class="window_load">
+            <p>Загрузка...</p>
         </div>
+    </div>
 
-        <div class="height"></div>
+    <div class="content_not_for_loading">
+        <div th:text="${IdChat}" class="IdChat"></div>
 
-        <div class="ListMessage">
-            <div class="list_chat">
-                <div id="BottomPage"></div>
-            </div>
-            <div class="ToolChat">
-                <div class="chats"></div>
+        <div class="body_chat">
+            <div id="arrowBottom" class="btn_down_1"></div>
 
-                <div class="UsersChat"></div>
-            </div>
-        </div>
+            <div class="flex FlexGroup">
+                <div class="close_window close_window_2"></div>
 
-        <div class="window_add_file">
-            <div class="btn_close_add_file"></div>
+                <div class="close_window_storage_image"></div>
 
-            <label for="FileInput" class="LabelFileInput">Прикрепить файл</label>
-            <input id="FileInput" type="file" class="file" name="file">
-
-
-            <div class="BorderOptionFile">
-                <div class="DescNameFile">Имя файла</div>
-                <div class="DIVNameFile">
-                    <p class="NameFile"></p>
+                <div class="flex_content_chat_top_tools">
+                    <div class="ErrorConnect">Соединение с сервером...</div>
+                    <div class="BorderImageChat"></div>
+                    <div class="border_name_chat"></div>
                 </div>
+
+                <div class="IconOpenList"></div>
             </div>
 
-            <div class="BorderOptionFile">
-                <div class="DescSizeFile">Размер файла</div>
-                <p class="size"></p>
-            </div>
+            <div class="height"></div>
 
-            <div class="WarningSizeFile">
-                <p>Файл не должен быть более 3 мб</p>
-            </div>
+            <div class="ListMessage">
+                <div class="list_chat">
+                    <div id="BottomPage"></div>
+                </div>
 
-            <div class="BorderOptionFile">
-                <div class="DescTypeFile">Тип файла</div>
-                <p class="type"></p>
-            </div>
+                <div class="ToolChat">
+                    <div class="AboutChat"></div>
 
-            <div class="BorderOptionFile">
-                <div class="DescLastModifiedDate">Дата последнего редактирования</div>
-                <p class="lastModifiedDate"></p>
-            </div>
+                    <div class="AdminChangeChat_0"></div>
 
-            <div class="PlaceHolderBlock">
-                <label for="PlaceHolderImage">Подпись</label>
-                <input id="PlaceHolderImage" class="PlaceHolderImageInput" type="text" placeholder="Введите подпись под изображением...">
-            </div>
-
-            <input type="submit" class="BtnSendFile">
-
-            <div class="CountFilesChatBorder">
-                <p>Колл-во файлов в чате: </p>
-                <div class="CountFilesChat"></div>
-            </div>
-
-            <div class="ListUploadedImage"></div>
-        </div>
-
-        <div class="cancel_edit_message"></div>
-        <div class="window_edit_message"></div>
-
-        <div class="window_settings_chat">
-            <div class="close_window close_window_3"></div>
-
-            <div class="image_settings_open">
-                <div class="height"></div>
-
-                <div class="image_chat_open_settings"></div>
-
-                <div class="AdminPanel">
-                    <div class="BorderNameChat">
-
+                    <div class="ImageCount">
+                        <div class="ImageStorage"></div>
+                        <div class="TitleImageCount">Изображения</div>
                     </div>
 
-                    <div class="BorderDescriptionChat"></div>
+                    <div class="UsersChat"></div>
 
-                    <h1 class="H1BlockAdminChat">Админ чата</h1>
+                    <div class="AdminChangeChat_1"></div>
 
-                    <div class="admin_chat"></div>
+                    <div class="chats"></div>
                 </div>
             </div>
 
-            <h1 class="H1BlockUsersChat">Список пользователей</h1>
-
-            <div class="ListUsersChat">
-                <div class="list_users_open_settings"></div>
-                <div class="ToolsAdmin">
-                    <div class="AddUsersBtn">Добавить участников</div>
-                    <div class="EditChatUser">Редактировать список участников</div>
-                </div>
+            <div class="WindowStorageImage">
+                <div class="list_images"></div>
             </div>
 
-            <h1 class="H1BlockLinkChat">Ссылка на чат</h1>
+            <div class="window_add_file">
+                <div class="btn_close_add_file"></div>
 
-            <div class="list_link_chat"></div>
+                <label for="FileInput" class="LabelFileInput">Прикрепить файл</label>
+                <input id="FileInput" type="file" class="file" name="file">
+
+
+                <div class="BorderOptionFile">
+                    <div class="DescNameFile">Имя файла</div>
+                    <div class="DIVNameFile">
+                        <p class="NameFile"></p>
+                    </div>
+                </div>
+
+                <div class="BorderOptionFile">
+                    <div class="DescSizeFile">Размер файла</div>
+                    <p class="size"></p>
+                </div>
+
+                <div class="WarningSizeFile">
+                    <p>Файл не должен быть более 3 мб</p>
+                </div>
+
+                <div class="BorderOptionFile">
+                    <div class="DescTypeFile">Тип файла</div>
+                    <p class="type"></p>
+                </div>
+
+                <div class="BorderOptionFile">
+                    <div class="DescLastModifiedDate">Дата последнего редактирования</div>
+                    <p class="lastModifiedDate"></p>
+                </div>
+
+                <div class="PlaceHolderBlock">
+                    <label for="PlaceHolderImage">Подпись</label>
+                    <input id="PlaceHolderImage" class="PlaceHolderImageInput" type="text" placeholder="Введите подпись под изображением...">
+                </div>
+
+                <input type="submit" class="BtnSendFile">
+
+                <div class="CountFilesChatBorder">
+                    <p>Колл-во файлов в чате: </p>
+                    <div class="CountFilesChat"></div>
+                </div>
+
+                <div class="ListUploadedImage"></div>
+            </div>
+
+            <div class="cancel_edit_message"></div>
+            <div class="window_edit_message"></div>
+
+            <div class="window_settings_chat">
+                <div class="close_window close_window_3"></div>
+
+                <div class="image_settings_open">
+                    <div class="height"></div>
+
+                    <div class="image_chat_open_settings"></div>
+
+                    <div class="AdminPanel">
+                        <div class="BorderNameChat"></div>
+
+                        <div class="BorderDescriptionChat"></div>
+
+                        <div class="ToolsEditNameDescChat"></div>
+
+                        <div class="admin_chat"></div>
+                    </div>
+                </div>
+
+                <div class="ListUsersChat">
+                    <div class="list_users_open_settings"></div>
+                    <div class="ToolsAdmin"></div>
+                </div>
+
+                <div class="list_link_chat"></div>
+            </div>
+
+            <div class="WindowAddUsers">
+                <div class="close_window_4"></div>
+                <h1>Выберите из списка</h1>
+                <div class="ListUsersAddNewUserChat"></div>
+                <div class="AddSaveBtnUserChat">Добавить</div>
+            </div>
+
+            <div class="WindowEditListUser">
+                <div class="close_window_5"></div>
+                <h1>Выберите из списка</h1>
+                <div class="ListUsersEdit"></div>
+            </div>
         </div>
 
-        <div class="WindowAddUsers">
-            <div class="close_window_4"></div>
-            <h1>Выберите из списка</h1>
-            <div class="ListUsersAddNewUserChat"></div>
-            <div class="AddSaveBtnUserChat">Добавить</div>
+        <div class="tools">
+            <div class="btn_tools_chat"></div>
+
+            <form id="messageForm" enctype="multipart/form-data" name="messageForm">
+                <label for="message" class="message_input"></label>
+                <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
+                <button type="submit" class="send_message primary"></button>
+            </form>
         </div>
 
-        <div class="WindowEditListUser">
-            <div class="close_window_5"></div>
-            <h1>Выберите из списка</h1>
-            <div class="ListUsersEdit"></div>
+        <div class="IdUser" style="display: none"></div>
+        <div class="username" style="display: none" th:text="${username}"></div>
+
+        <div class="PermissionDenied">
+            <h1>Доступ запрещён</h1>
         </div>
+
+        <div class="MessageInfo">
+            <div class="ThisPage">Вы уже на этой странице</div>
+        </div>
+
+        <div class="MessageInfoCopyText">
+            <div class="StatusCopy"></div>
+        </div>
+
+        <div class="MessageWarningCopyText">
+            <div class="StatusCopyWarning"></div>
+        </div>
+
+        <div class="window_change_chat_name"></div>
+
+        <div class="window_change_desc_chat"></div>
+
+        <div class="status_change_name_chat"></div>
+
+        <div class="status_change_desc_chat"></div>
     </div>
 
-    <div class="tools">
-        <div class="btn_tools_chat"></div>
-
-        <form id="messageForm" enctype="multipart/form-data" name="messageForm">
-            <label for="message" class="message_input"></label>
-            <input type="text" id="message" autocomplete="off" placeholder="Сообщение.." class="input_message form-control">
-            <button type="submit" class="send_message primary"></button>
-        </form>
-    </div>
-
-    <div class="IdUser" style="display: none"></div>
-    <div class="username" style="display: none" th:text="${username}"></div>
-
-    <div class="window_load">
-        <p>Загрузка...</p>
-    </div>
-
-    <div class="PermissionDenied">
-        <h1>Доступ запрещён</h1>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/chat_websocket/js/User/WebSocket/ErrorSocket.js}"></script>
+    <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
+    <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
     <script th:src="@{/chat_websocket/js/close_chat.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat1.js}"></script>
     <script th:src="@{/chat_websocket/js/OpeningChat.js}"></script>
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
     <script th:src="@{/chat_websocket/js/UploadFile.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsChatOpenChat.js}"></script>
+    <script th:src="@{/chat_websocket/js/click/ClickOnClose__window_5.js}"></script>
+    <script th:src="@{/chat_websocket/js/click/ClickBtnDeleteAdminPanelStart.js}"></script>
+    <script th:src="@{/chat_websocket/js/AdminPanelInnerHtml/InnerHtmlAdminPanel.js}"></script>
+    <script th:src="@{/chat_websocket/js/click/ClickBtnAddUser.js}"></script>
+    <script th:src="@{/chat_websocket/js/click/ClickOnClose__window_4.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsAdmin/EditDescChat.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsAdmin/BtnDeleteChat.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsAdmin/BtnAdminNameChat.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsAdmin/User/AddUser.js}"></script>
+    <script th:src="@{/chat_websocket/js/ToolsAdmin/User/DeleteUser.js}"></script>
+    <script th:src="@{/chat_websocket/js/User/Status/Offline.js}"></script>
+    <script th:src="@{/chat_websocket/js/User/Status/Online.js}"></script>
+    <script th:src="@{/chat_websocket/js/LoadingContent/LoadingContent.js}"></script>
+    <script th:src="@{/chat_websocket/js/User/Status/visibilitychange.js}"></script>
 </body>
 </html>

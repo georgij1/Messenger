@@ -1,5 +1,8 @@
-package com.example.messanger.auth.Controllers;
+package com.example.messanger.auth.Controllers.Registration;
 
+import com.example.messanger.auth.Controllers.Registration.models.ModelUser;
+import com.example.messanger.auth.User.AvatarCrudRepo;
+import com.example.messanger.auth.User.CrudRepository;
 import com.example.messanger.auth.User.UserRepo;
 import com.example.messanger.auth.forms.AuthForm.RegistrationForm;
 import jakarta.servlet.http.Cookie;
@@ -14,11 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 @Controller
@@ -27,6 +27,7 @@ import java.util.Objects;
 public class RegistrationController {
     public UserRepo userRepo;
     public JdbcTemplate jdbcTemplate;
+    public AvatarCrudRepo crudRepository;
 
     //  Контроллер для отображения страницы /auth/registration в браузере
     @GetMapping("registration")
@@ -53,47 +54,32 @@ public class RegistrationController {
         return "/auth/registration";
     }
 
+    private ImageStorageService storageServiceImage;
+
     @PostMapping("registration")
-    public String registration_user(RegistrationForm registrationForm, Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam("avatar") MultipartFile file) throws IOException {
+    public String registration_user(RegistrationForm registrationForm, Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam("avatar") MultipartFile file, ModelUser modelUser) throws IOException {
         if ((Objects.equals(registrationForm.getPassword(), "😩🍆💦💦💦")) && (Objects.equals(registrationForm.getRepeatPassword(), "😩🍆💦💦💦"))) {
             response.sendError(400);
         }
 
         else if ((registrationForm.getLogin().length() > 0 && registrationForm.getPassword().length() >= 8 && registrationForm.getRepeatPassword().length() >= 8)) {
+//            System.out.println(jdbcTemplate.queryForMap("select username from users where username=?", registrationForm.getLogin()).get("username"));
+//            .get("username")
+            System.out.println(crudRepository.findById(registrationForm.getLogin()));
             if ((Objects.equals(registrationForm.getPassword(), registrationForm.getRepeatPassword()))) {
-                    if (Objects.equals(file.getOriginalFilename(), "")) {
-                            String DirectoryPath = "../messanger/src/main/resources/static/uploads" + "/" + registrationForm.getLogin();
-                            File directory = new File(DirectoryPath);
-                            if (!directory.exists()) {
-                                boolean result = directory.mkdir();
+                if (Boolean.TRUE.equals(jdbcTemplate.queryForObject("select exists(select username from users where username=?)", Boolean.class, registrationForm.getLogin()))) {
+                    System.out.println("This user is exists");
+                    return "/auth/ErrorsPage/error_name";
+                }
 
-                                if (result) {
-                                    userRepo.create(registrationForm, model, "../image/settings/icon_profile.png");
-                                    return "/auth/ErrorsPage/success_create_account";
-                                }
+                else if (Objects.equals(file.getOriginalFilename(), "")) {
+                    userRepo.create(registrationForm, model);
+                }
 
-                                else {
-                                    return "/auth/ErrorsPage/error_register";
-                                }
-                            }
+                else {
+                    storageServiceImage.SaveUserWithAvatar(file.getContentType(), file.getBytes(), registrationForm.getLogin(), registrationForm.getPassword(), "NameAvatarFile");
+                }
 
-                            else {
-                                return "/auth/ErrorsPage/error_name";
-                            }
-                    }
-
-                    else {
-                        new File("../messanger/src/main/resources/static/uploads/" + registrationForm.getLogin()).mkdirs();
-                        String fileName = "../messanger/src/main/resources/static/uploads/" + registrationForm.getLogin() + "/" + file.getOriginalFilename();
-                        String filePathDB = "/uploads/" + registrationForm.getLogin() + "/" + file.getOriginalFilename();
-                        userRepo.create(registrationForm, model, filePathDB);
-                        response.setStatus(HttpServletResponse.SC_SEE_OTHER);
-                        StringBuilder fileNames = new StringBuilder();
-                        Path fileNameAndPath = Paths.get(fileName);
-                        fileNames.append(file.getOriginalFilename());
-                        Files.write(fileNameAndPath, file.getBytes());
-                        System.out.println("Мы делаем новый способ сохранения авы");
-                    }
                 return "redirect:login";
             }
 

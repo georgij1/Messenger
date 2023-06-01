@@ -1,13 +1,41 @@
-let icon_profile = document.querySelector('#ava_profile')
-icon_profile.addEventListener('change', () => {
-    let name_file = icon_profile.files[0].name
-    let type_file = icon_profile.files[0].type
-    let list_file = document.querySelector('.icon_profile')
-    console.log(name_file)
-    console.log(type_file)
-    list_file.innerHTML=`
-                <div class="name_file">Имя файла - ${name_file}</div>
-            `
+document.querySelector('#ava_profile').addEventListener('change', () => {
+    for (let File of document.querySelector('#ava_profile').files) {
+        let name_file = File.name
+        let type_file = File.type
+        let list_file = document.querySelector('.icon_profile')
+
+        console.log(File)
+
+        console.log(File.lastModifiedDate)
+        console.log(File.name)
+        console.log(File.size)
+        console.log(File.type)
+
+        console.log(name_file)
+        console.log(type_file)
+
+        list_file.innerHTML=`
+            <div class="name_file">Имя файла - ${File.lastModifiedDate}</div>
+            <div class="name_file">Имя файла - ${File.name}</div>
+            <div class="name_file">Имя файла - ${File.size}</div>
+            <div class="name_file">Имя файла - ${File.type}</div>
+            <div class="cancel_file">Отмена</div>
+        `
+
+        console.log(document.querySelector('input').value)
+
+        document.querySelector('.cancel_file').addEventListener('click', () => {
+            for (let NameFiles of document.querySelectorAll('.name_file')) {
+                list_file.removeChild(NameFiles)
+            }
+
+            File.value=''
+
+            console.log(document.querySelector('input').files)
+
+            list_file.removeChild(document.querySelector('.cancel_file'))
+        })
+    }
 })
 
 document.querySelector('.BtnShowGenerator').addEventListener('click', () => {
@@ -39,8 +67,6 @@ const includeSymbols = document.querySelector('#symbols');
 const generateBtn = document.querySelector('#generate');
 const copyPass = document.querySelector('#copy');
 
-
-// Set default password length 20 max on load
 document.addEventListener('DOMContentLoaded', () => {
     passLength.value = 20
     passLengthResult.innerText = 20
@@ -48,15 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let onLoadLength = passLength.value
     let onLoadNumbers = includeNumbers.checked
     let onLoadSymbols = includeSymbols.checked
+
     result.value = generatePassword(onLoadNumbers, onLoadSymbols, onLoadLength)
 })
 
-// Listen for password range change
 passLength.addEventListener('change', (event) => {
     passLengthResult.innerText  = event.target.value
 })
 
-// Listen for copy button
 copyPass.addEventListener('click', () => {
     copy(result.value)
 })
@@ -65,6 +90,7 @@ generateBtn.addEventListener('click', () => {
     const length = passLength.value
     const numbers = includeNumbers.checked
     const symbols = includeSymbols.checked
+
     result.value = generatePassword(numbers, symbols, length)
 })
 
@@ -76,15 +102,15 @@ function generatePassword(number, symbol, length) {
         if (number) {
             generatedPassword += getRandomNumber()
         }
+
         if (symbol) {
             generatedPassword += getRandomSymbol()
         }
+
         generatedPassword += getRandomLower()
     }
 
-    const finalPassword = generatedPassword.slice(0, length);
-
-    return finalPassword;
+    return generatedPassword.slice(0, length);
 }
 
 function getRandomLower() {
@@ -100,13 +126,12 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-// Copy generated password in more secure way
 function copy(text) {
     const input = document.createElement('input');
     input.setAttribute('value', text);
     document.body.appendChild(input);
     input.select();
-    let copiedResult = document.execCommand('copy');
+    document.execCommand('copy');
     document.body.removeChild(input);
 
     document.querySelector('form').classList.add('none')

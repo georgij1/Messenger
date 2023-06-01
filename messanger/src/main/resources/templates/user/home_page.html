@@ -99,11 +99,11 @@
         <a href="/websocket_chat" class="btn_start_message">Начать общаться</a>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/user/home_page/home_pageNewStartPage.js}"></script>
+    <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
+    <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
     <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script th:src="@{/user/home_page/home_pageNewStartPage.js}"></script>
     <script th:src="@{/user/home_page/mini_calendar.js}"></script>
 </body>
 </html>
