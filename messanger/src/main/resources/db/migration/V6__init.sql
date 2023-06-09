@@ -3,8 +3,11 @@ create table users
     id serial primary key,
     username text not null unique,
     password_hash text not null,
-    image text default '../image/settings/icon_profile.png',
-    status text default 'Не в сети'
+    status text default 'Не в сети',
+    id_image text,
+    data integer,
+    type text,
+    name_image text
 );
 
 insert into users

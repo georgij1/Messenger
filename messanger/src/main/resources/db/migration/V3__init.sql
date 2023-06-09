@@ -6,7 +6,7 @@ create table message
     chat_id text,
     time_stamp_short text,
     time_stamp_long text,
-    id_image text,
+    id_image_message text,
     image_name text,
     data integer,
     type text,
@@ -20,7 +20,7 @@ insert into message (
     chat_id,
     time_stamp_short,
     time_stamp_long,
-    id_image,
+    id_image_message,
     image_name,
     data,
     type

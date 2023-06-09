@@ -1,8 +1,8 @@
 create table users_chat
 (
     id serial primary key,
-    name text,
-    chat_nane text,
+    name text references users (username),
+    chat_nane  text,
     image_user text default '../image/settings/icon_profile.png',
     status text default 'Не в сети'
 );
