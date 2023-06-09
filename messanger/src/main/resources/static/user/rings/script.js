@@ -41,8 +41,6 @@ fetch('/rings/AllRequestAccessChat', {
                     <div class="Info">${item.chat_name}</div>
                     <div class="Info">${item.usernametosent}</div>
                 </div>
-                
-                <div class="BtnDeleteRequest">Удалить запрос</div>
             `
     }))
 
@@ -230,7 +228,6 @@ fetch('/rings/RequestAccessChatNotChecked', {
                                 body: JSON.stringify(FormDataTrueAccess)
                             })
                                 .then(() => console.log('run'))
-                                // .then(() => window.location.reload())
                         })
                     }
                 })

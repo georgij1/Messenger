@@ -4,6 +4,7 @@ package com.example.messanger.WebSocket.Controller;
 
 import com.auth0.jwt.JWT;
 import com.example.messanger.WebSocket.model.ChatMessage;
+import com.example.messanger.WebSocket.model.GetOnlineChatUsers;
 import com.example.messanger.auth.forms.Messages.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.Cookie;
@@ -83,7 +84,7 @@ public class ChatController {
     @ResponseBody
     @CrossOrigin("*")
     public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
-        jdbcTemplate.update("update message set text=? where id_message=?", formEditMessage.getMessage(), id);
+        jdbcTemplate.update("update message set text=?, time_stamp_short=?, time_stamp_long=? where id_message=?", formEditMessage.getMessage(), formEditMessage.getTime_stamp_short(), formEditMessage.getTime_stamp_long(), id);
         return jdbcTemplate.queryForList("select * from message where id_message=?", id);
     }
 

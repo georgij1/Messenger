@@ -44,12 +44,9 @@ btn_up.addEventListener('click', () => {
     delete_account.classList.toggle('block')
 })
 
-let hello = document.querySelector('.hello')
 let flex = document.querySelector('.flex')
-let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
+let buttons_nav_chats = document.querySelector('.content')
 let h1 = document.querySelectorAll('h1')
-
-console.log(hello)
 
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
@@ -58,6 +55,7 @@ for (let min_size_windo of min_size_window) {
                 H1Itter.classList.remove('h1HeaderOpened')
             }
             buttons_nav_chats.classList.remove('ButtonsNavChatsHeaderOpened')
+            document.querySelector('.window_find_chat').classList.remove('window_find_chat_header_open')
             min_size_windo.classList.toggle('none')
             head.classList.toggle('visible')
             for (let body of body_class) {
@@ -91,6 +89,7 @@ for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
         for (let head of header) {
             buttons_nav_chats.classList.add('ButtonsNavChatsHeaderOpened')
+            document.querySelector('.window_find_chat').classList.add('window_find_chat_header_open')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
             for (let H1Itter of h1) {

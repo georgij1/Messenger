@@ -36,6 +36,7 @@ document.querySelector('.IconOpenList').addEventListener('click', () => {
     document.querySelector('.desc_chat_min_window').classList.toggle('block')
     document.querySelector('.ImageCount').classList.toggle('flex')
     document.querySelector('.ToolChat').classList.toggle('block')
+    document.querySelector('.time_creator_info').classList.toggle('none')
 })
 
 document.querySelector('.ImageCount').addEventListener('click', () => {
@@ -167,6 +168,9 @@ fetch(`/ChatName/${IdChat.textContent}`, {
 })
     .then((response) => {
         response.json().then(res => res.forEach(item => {
+            document.querySelector('.InfoMessage').innerHTML=`
+                <div class="time_creator_info">Чат создан ${item.time_creator}</div>
+            `
             border_name_chat.innerText=`${item.name}`
             title.innerText=`${item.name}`
 
@@ -175,8 +179,27 @@ fetch(`/ChatName/${IdChat.textContent}`, {
                 <div class="desc_chat_min_window">${item.desc_chat}</div>
             `
 
-            document.querySelector('.BorderNameChat').innerText=`${item.name}`
-            document.querySelector('.BorderDescriptionChat').innerText=`${item.desc_chat}`
+            if (document.querySelector('.username').textContent === item.owner) {
+                document.querySelector('.BorderNameChat').innerHTML=`
+                    <div class="NameChatItem">${item.name}</div>
+                    <div class="edit_chat_name_item"></div>
+                `
+
+                document.querySelector('.BorderDescriptionChat').innerHTML=`
+                    <div class="DescChatItem">${item.desc_chat}</div>
+                    <div class="edit_desc_chat_item"></div>
+                `
+            }
+
+            else {
+                document.querySelector('.BorderNameChat').innerHTML=`
+                    <div class="NameChatItem">${item.name}</div>
+                `
+
+                document.querySelector('.BorderDescriptionChat').innerHTML=`
+                    <div class="DescChatItem">${item.desc_chat}</div>
+                `
+            }
 
             image_chat_open_settings.style.background=`url(/${item.image_chat}) no-repeat center`
             image_chat_open_settings.style.backgroundSize='90%'
@@ -193,7 +216,7 @@ fetch(`/ChatName/${IdChat.textContent}`, {
             })
 
             admin_chat.innerHTML+=`
-                <div class="UserChat" style="background: url(/${item.image_chat}) no-repeat; background-size: 71px; height: 60px; width: 70px"></div>
+                <div class="UserChat image_user_chat_admin" style="background: url(/${item.image_chat}) no-repeat; background-size: 71px;"></div>
                 <div class="UserChat UserChatName">${item.owner}</div>
                 <div class="admin_this">Админ</div>
             `
@@ -348,10 +371,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="share_message"></div>
                             </div>
                             
-                            <div class="ToolsTick">
-                                <div class="ReadMessage">Прочитано</div>
-                            </div>
-                            
                             <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                         </div>
                     </div>
@@ -458,10 +477,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                                     <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
                                 </div>
                             
-                                <div class="ToolsTick">
-                                    <div class="ReadMessageImage">Прочитано</div>
-                                </div>
-                            
                                 <div class="IdMessage">${item.id_message}</div>
                                 
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
@@ -516,10 +531,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="ImageChat_1">
                                     <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
                                     <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
-                                </div>
-                                
-                                <div class="ToolsTick">
-                                    <div class="ReadMessageImage">Прочитано</div>
                                 </div>
                                
                                 <div class="IdMessage">${item.id_message}</div>
@@ -578,10 +589,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                             
                                 <div class="TextImage">${item.text}</div>
                                 
-                                <div class="ToolsTick">
-                                    <div class="ReadMessageImage">Прочитано</div>
-                                </div>
-                                
                                 <div class="IdMessage">${item.id_message}</div>
                                 
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
@@ -637,10 +644,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                             </div>
                             
                             <div class="TextImage">${item.text}</div>
-                            
-                            <div class="ToolsTick">
-                                <div class="ReadMessageImage">Прочитано</div>
-                            </div>
                             
                             <div class="IdMessage">${item.id_message}</div>
                             
@@ -753,6 +756,65 @@ fetch(`/chats/${IdChat.textContent}`, {
                     ImageBorderItter.classList.toggle('ImageBorderClick')
                     console.log(event.currentTarget)
                 })
+
+                let visibleImageMessage = (target) => {
+                    let targetPosition = {
+                        top: window.pageYOffset + target.getBoundingClientRect().top,
+                        left: window.pageXOffset + target.getBoundingClientRect().left,
+                        right: window.pageXOffset + target.getBoundingClientRect().right,
+                        bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+                    }
+
+                    let getWindowPosition = {
+                        top: window.pageYOffset,
+                        left: window.pageXOffset,
+                        right: window.pageXOffset + document.documentElement.clientWidth,
+                        bottom: window.pageYOffset + document.documentElement.clientHeight
+                    }
+
+                    if (targetPosition.bottom > getWindowPosition.top && // Если позиция нижней части элемента больше позиции верхней чаcти окна, то элемент виден сверху
+                        targetPosition.top < getWindowPosition.bottom && // Если позиция верхней части элемента меньше позиции нижней чаcти окна, то элемент виден снизу
+                        targetPosition.right > getWindowPosition.left && // Если позиция правой стороны элемента больше позиции левой части окна, то элемент виден слева
+                        targetPosition.left < getWindowPosition.right) { // Если позиция левой стороны элемента меньше позиции правой чаcти окна, то элемент виден справа
+                        // Если элемент полностью видно, то запускаем следующий код
+                        // console.clear();
+                        console.log(target.querySelector('.IdMessage').textContent);
+
+                        console.log(target.querySelector('.ItemUsername').textContent)
+
+                        console.log(target.querySelector('.ItemUsername').textContent === document.querySelector('.username').textContent)
+
+                        if (target.querySelector('.ItemUsername').textContent === document.querySelector('.username').textContent) {
+                            console.log('Вы владелец этого сообщения вы не можете его прочитать')
+                        }
+
+                        else {
+                            console.log('fetch as read image message')
+                            fetch(`/chat/read/${target.querySelector('.IdMessage').textContent}`, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                mode: "cors",
+                                method: 'POST'
+                            })
+                                .then(res => res.json())
+                                .then(data => data.forEach(item => {
+                                    console.log(item)
+                                }))
+                        }
+                    }
+
+                    else {
+                        // Если элемент не видно, то запускаем этот код
+                        // console.clear();
+                    }
+                }
+
+                visibleImageMessage(ImageBorderItter)
+
+                window.addEventListener('scroll', () => {
+                    visibleImageMessage(ImageBorderItter)
+                })
             }
 
             for (let ImageChatItter of ImageChat) {
@@ -769,13 +831,76 @@ fetch(`/chats/${IdChat.textContent}`, {
 
             for (let message of document.querySelectorAll('.message')) {
                 console.log(message)
+
+                let visibleTextMessage = (target) => {
+                    let targetPosition = {
+                        top: window.pageYOffset + target.getBoundingClientRect().top,
+                        left: window.pageXOffset + target.getBoundingClientRect().left,
+                        right: window.pageXOffset + target.getBoundingClientRect().right,
+                        bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+                    }
+
+                    let getWindowPosition = {
+                        top: window.pageYOffset,
+                        left: window.pageXOffset,
+                        right: window.pageXOffset + document.documentElement.clientWidth,
+                        bottom: window.pageYOffset + document.documentElement.clientHeight
+                    }
+
+                    if (targetPosition.bottom > getWindowPosition.top && // Если позиция нижней части элемента больше позиции верхней чаcти окна, то элемент виден сверху
+                        targetPosition.top < getWindowPosition.bottom && // Если позиция верхней части элемента меньше позиции нижней чаcти окна, то элемент виден снизу
+                        targetPosition.right > getWindowPosition.left && // Если позиция правой стороны элемента больше позиции левой части окна, то элемент виден слева
+                        targetPosition.left < getWindowPosition.right) { // Если позиция левой стороны элемента меньше позиции правой чаcти окна, то элемент виден справа
+                        // Если элемент полностью видно, то запускаем следующий код
+                        // console.clear();
+                        console.log(target.querySelector('.id').textContent);
+
+                        if (target.querySelector('.ItemUsername').textContent === document.querySelector('.username').textContent) {
+                            console.log('Вы владелец этого сообщения вы не можете его прочитать')
+                        }
+
+                        else {
+                            fetch(`/chat/read/${target.querySelector('.id').textContent}`, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                mode: "cors",
+                                method: 'POST'
+                            })
+                                .then(res => res.json())
+                                .then(data => data.forEach(item => {
+                                    console.log(item)
+                                }))
+                        }
+                    }
+
+                    else {
+                        // Если элемент не видно, то запускаем этот код
+                        // console.clear();
+                    }
+                }
+
+                window.addEventListener('scroll', function() {
+                    visibleTextMessage(message)
+                });
+
+                window.addEventListener('scrollend', function() {
+                    console.log('end scroll')
+                });
+
+                visibleTextMessage(message)
+
                 message.addEventListener('click', (event) => {
+                    message.classList.toggle('message_click')
+
                     console.log(message)
+
                     event.currentTarget.children[3].classList.toggle('flex')
                     event.currentTarget.children[4].classList.toggle('flex')
 
                     let EventIDMessage = event.currentTarget.children[1]
                     let EventText = event.currentTarget.children[2]
+                    let EventTimeStamp = event.currentTarget.querySelector('.TimeStampShort')
 
                     for (let ShareMessageItter of document.querySelectorAll('.share_message')) {
                         ShareMessageItter.addEventListener('click', () => {
@@ -816,6 +941,8 @@ fetch(`/chats/${IdChat.textContent}`, {
                             cancel_edit_message.classList.add('block')
                             tools.classList.add('none')
 
+                            document.querySelector('.time_creator_info').classList.add('none')
+
                             window_edit_message.innerHTML=`
                                 <textarea class="input_edit_message" name="message">${EventText.textContent}</textarea>
                                 <input type="submit" class="save_edit_message" value="Сохранить">
@@ -833,18 +960,90 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 document.querySelector('.close_window_2').classList.remove('none')
                                 document.querySelector('.IconOpenList').classList.remove('none')
                                 document.querySelector('.cancel_edit_message').classList.remove('block')
+                                document.querySelector('.time_creator_info').classList.remove('none')
                             })
 
                             save_edit_message.addEventListener('click', () => {
+                                console.log('save edit click')
                                 window_edit_message.classList.remove('flex')
                                 list_chat.classList.remove('none')
                                 flex_content_chat_top_tools.classList.remove('none')
+                                document.querySelector('.time_creator_info').classList.add('none')
+
+                                let MonthString
+                                let MonthInt = new Date().getMonth() + 1
+
+                                if (MonthInt === 1) {
+                                    MonthString = 'Января'
+                                    console.log('Января')
+                                }
+
+                                else if (MonthInt === 2) {
+                                    MonthString = 'Февраля'
+                                    console.log('Февраля')
+                                }
+
+                                else if (MonthInt === 3) {
+                                    MonthString = 'Марта'
+                                    console.log('Марта')
+                                }
+
+                                else if (MonthInt === 4) {
+                                    MonthString = 'Апреля'
+                                    console.log('Апреля')
+                                }
+
+                                else if (MonthInt === 5) {
+                                    MonthString = 'Мая'
+                                    console.log('Мая')
+                                }
+
+                                else if (MonthInt === 6) {
+                                    MonthString = 'Июня'
+                                    console.log('Июня')
+                                }
+
+                                else if (MonthInt === 7) {
+                                    MonthString = 'Июля'
+                                    console.log('Июля')
+                                }
+
+                                else if (MonthInt === 8) {
+                                    MonthString = 'Августа'
+                                    console.log('Августа')
+                                }
+
+                                else if (MonthInt === 9) {
+                                    MonthString = 'Сентября'
+                                    console.log('Сентября')
+                                }
+
+                                else if (MonthInt === 10) {
+                                    MonthString = 'Октября'
+                                    console.log('Октября')
+                                }
+
+                                else if (MonthInt === 11) {
+                                    MonthString = 'Ноября'
+                                    console.log('Ноября')
+                                }
+
+                                else if (MonthInt === 12) {
+                                    MonthString = 'Декабря'
+                                    console.log('Декабря')
+                                }
+
+                                let DateLong = new Date().getDate() + ' ' + MonthString + ' ' + new Date().getFullYear() + 'г.' + ' ' + new Date().getHours() + ':' + new Date().getMinutes()+ ':' + new Date().getSeconds()
+                                let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
 
                                 const formData = {
-                                    "message": input_edit_message.value
+                                    "message": input_edit_message.value,
+                                    "time_stamp_short": DateShort,
+                                    "time_stamp_long": DateLong
                                 }
 
                                 if (input_edit_message.value.length > 0 && input_edit_message.value !== item.text) {
+                                    console.log('if on check length of input')
                                     fetch(`/edit_message/${EventIDMessage.textContent}`, {
                                         method: 'POST',
                                         headers: {
@@ -854,7 +1053,19 @@ fetch(`/chats/${IdChat.textContent}`, {
                                         body: JSON.stringify(formData)
                                     })
                                         .then(() => {
-                                            window.location.reload()
+                                            console.log('edit is running')
+                                            document.querySelector('.cancel_edit_message').classList.remove('block')
+                                            document.querySelector('.tools').classList.remove('none')
+                                            document.querySelector('.time_creator_info').classList.remove('none')
+
+                                            window_edit_message.classList.remove('flex')
+                                            list_chat.classList.remove('none')
+                                            flex_content_chat_top_tools.classList.remove('none')
+                                            height.classList.remove('none')
+                                            tools.classList.remove('none')
+                                            document.querySelector('.close_window_2').classList.remove('none')
+                                            EventText.textContent = formData.message
+                                            EventTimeStamp.textContent = new Date().getHours() + ':' + new Date().getMinutes()
                                         })
                                 }
 
@@ -955,6 +1166,7 @@ fetch(`/chats/${IdChat.textContent}`, {
     })
 
 btn_tools_chat.addEventListener('click', () => {
+    document.querySelector('.time_creator_info').classList.add('none')
     document.querySelector('.ListMessage').classList.remove('flex')
     document.querySelector('.ListMessage').classList.add('none')
     document.querySelector('.close_window').classList.add('none')
@@ -1056,6 +1268,7 @@ file.onchange = () => {
 }
 
 btn_close_add_file.addEventListener('click', () => {
+    document.querySelector('.time_creator_info').classList.remove('none')
     document.querySelector('.close_window').classList.remove('none')
     document.querySelector('.IconOpenList').classList.remove('none')
     window_add_file.classList.remove('flex')
@@ -1069,6 +1282,7 @@ btn_close_add_file.addEventListener('click', () => {
 let users = [];
 
 document.querySelector('.flex_content_chat_top_tools').addEventListener('click', () => {
+    document.querySelector('.time_creator_info').classList.add('none')
     document.querySelector('.ToolChat').classList.add('none')
     document.querySelector('.FlexGroup').classList.remove('flex')
     document.querySelector('.UsersChat').classList.add('none')
@@ -1090,8 +1304,14 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
         console.log(username)
         console.log('if')
 
-        document.querySelector('.ToolsEditNameDescChat').innerHTML+=`
+        console.log(document.querySelector('.BtnEditNameChat'))
+        console.log(document.querySelector('.BtnEditDescChat'))
+
+        document.querySelector('.BtnEditNameChat').innerHTML=`
             <div class="ChangeNameChat">Изменить название чата</div>
+        `
+
+        document.querySelector('.BtnEditDescChat').innerHTML=`
             <div class="ChangeDescChat">Изменить описание чата</div>
         `
 
@@ -1102,6 +1322,62 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
 
             document.querySelector('.window_change_desc_chat').innerHTML+=`
                 <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.BorderDescriptionChat').textContent}">
+                
+                <div class="tools_edit_name_chat">
+                    <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
+                    <div class="close_edit_name_chat"></div>
+                </div>
+            `
+
+            document.querySelector('.close_edit_name_chat').addEventListener('click', () => {
+                document.querySelector('.window_change_desc_chat').removeChild(document.querySelector('.InputChangeName'))
+                document.querySelector('.window_change_desc_chat').removeChild(document.querySelector('.tools_edit_name_chat'))
+                document.querySelector('.window_change_desc_chat').classList.remove('flex')
+            })
+
+            document.querySelector('.InputBtnSaveChangeNameChat').addEventListener('click', () => {
+                console.log('saved change of desc chat')
+
+                console.log(document.querySelector('.InputChangeName').value)
+
+                let formData = {
+                    "NewNameDescChat": document.querySelector('.InputChangeName').value
+                }
+
+                let id = document.querySelector('.IdChat').textContent
+
+                fetch(`/EditDescChat/${id}`,  {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                    .then(() => {console.log(formData)})
+                    .then(() => {
+                        document.querySelector('.status_change_desc_chat').classList.add('block')
+                        document.querySelector('.status_change_desc_chat').innerHTML+=`
+                            <div class="title_status">Имя чата изменено</div>
+                        `
+                        setTimeout(function () {
+                            document.querySelector('.status_change_desc_chat').classList.remove('block')
+                            document.querySelector('.status_change_desc_chat').removeChild(document.querySelector('.title_status'))
+                            document.querySelector('.window_change_desc_chat').classList.remove('flex')
+                        }, 1000)
+
+                        document.querySelector('.BorderDescriptionChat').textContent=`${formData.NewNameDescChat}`
+                    })
+            })
+        })
+
+        document.querySelector('.edit_desc_chat_item').addEventListener('click', () => {
+            console.log('open window edit desc chat')
+
+            document.querySelector('.window_change_desc_chat').classList.add('flex')
+
+            document.querySelector('.window_change_desc_chat').innerHTML+=`
+                <input type="text" class="InputChangeName" placeholder="Введите новое описание чата" value="${document.querySelector('.DescChatItem').textContent}">
                 
                 <div class="tools_edit_name_chat">
                     <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
@@ -1141,11 +1417,11 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
                         `
                         setTimeout(function () {
                             document.querySelector('.status_change_desc_chat').classList.remove('block')
-                            document.querySelector('.status_change_desc_chat').removeChild(document.querySelector('.title_status'))
                             document.querySelector('.window_change_desc_chat').classList.remove('flex')
                         }, 1000)
 
-                        document.querySelector('.BorderDescriptionChat').textContent=`${formData.NewNameDescChat}`
+                        document.querySelector('.DescChatItem').textContent=`${formData.NewNameDescChat}`
+                        document.querySelector('.desc_chat_min_window').textContent=`${formData.NewNameDescChat}`
                     })
             })
         })
@@ -1195,7 +1471,6 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
                         `
                         setTimeout(function () {
                             document.querySelector('.status_change_name_chat').classList.remove('block')
-                            document.querySelector('.status_change_name_chat').removeChild(document.querySelector('.title_status'))
                             document.querySelector('.window_change_chat_name').classList.remove('flex')
                         }, 1000)
 
@@ -1204,10 +1479,72 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
             })
         })
 
-        ToolsAdmin.innerHTML+=`
-            <div class="AddUsersBtn">Добавить участников</div>
-            <div class="EditChatUser">Редактировать список участников</div>
-            <div class="DeleteChat">Удалить чат</div>
+        document.querySelector('.edit_chat_name_item').addEventListener('click', () => {
+            console.log('open window edit chat name')
+
+            document.querySelector('.window_change_chat_name').classList.add('flex')
+
+            document.querySelector('.window_change_chat_name').innerHTML+=`
+                <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.NameChatItem').textContent}">
+                
+                <div class="tools_edit_name_chat">
+                    <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
+                    <div class="close_edit_name_chat"></div>
+                </div>
+            `
+
+            document.querySelector('.close_edit_name_chat').addEventListener('click', () => {
+                document.querySelector('.window_change_chat_name').classList.remove('flex')
+            })
+
+            document.querySelector('.InputBtnSaveChangeNameChat').addEventListener('click', () => {
+                console.log('save changed name chat')
+
+                let formData = {
+                    "NewNameChat": document.querySelector('.InputChangeName').value
+                }
+
+                let id = document.querySelector('.IdChat').textContent
+
+                fetch(`/EditNameChat/${id}`,  {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                    .then(() => {console.log(formData)})
+                    .then(() => {
+                        document.querySelector('.status_change_name_chat').innerHTML+=`
+                            <div class="title_status">Имя чата изменено</div>
+                        `
+                        setTimeout(function () {
+                            document.querySelector('.window_change_chat_name').classList.remove('flex')
+                        }, 1000)
+
+                        document.querySelector('.NameChatItem').textContent=`${formData.NewNameChat}`
+                        document.querySelector('.border_name_chat').textContent=`${formData.NewNameChat}`
+                        document.querySelector('.name_chat_min_window').textContent=`${formData.NewNameChat}`
+                    })
+            })
+        })
+
+        document.querySelector('.tools_add_user').innerHTML+=`
+            <div class="AddUsersBtn">
+                <div class="image_add_user"></div>
+            </div>
+            
+            <div class="EditChatUser">
+                <div class="image_delete_user"></div>
+            </div>
+        `
+
+        ToolsAdmin.innerHTML+=`           
+            <div class="DeleteChatFlex">
+                <div class="image_delete_chat"></div>
+                <div class="DeleteChat">Удалить чат</div>
+            </div>
         `
     }
 
@@ -1263,98 +1600,6 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
     let CloseWindow4 = document.querySelector('.close_window_4')
     let CloseWindow5 = document.querySelector('.close_window_5')
 
-    fetch('/all_users', {
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        mode: "cors"
-    })
-        .then(response => response.json())
-        .then((data) => {data.forEach(item => {
-            console.log(item)
-
-            if (item.username !== document.querySelector('.username').textContent) {
-                if (item.id_image === 'DefaultAva') {
-                    console.log('if is running')
-
-                    document.querySelector('.ListUsersAddNewUserChat').innerHTML=`
-                            <div class="user">
-                                <div class="user_image" style="background: url(/image/settings/icon_profile.png) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/image/settings/icon_profile.png</p></div>
-                                <div class="name">${item.username}</div>
-                            </div>
-                        `
-                }
-
-                else {
-                    console.log('else')
-
-                    document.querySelector('.ListUsersAddNewUserChat').innerHTML=`
-                            <div class="user">
-                                <div class="user_image" style="background: url('/AvatarImage/${item.username}/${item.id_image}') no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/AvatarImage/${item.username}/${item.id_image}</p></div>
-                                <div class="name">${item.username}</div>
-                            </div>
-                        `
-                }
-            }
-
-            for (let UserItter of document.querySelectorAll('.user')) {
-                UserItter.addEventListener('click', (event) => {
-                    console.log('click on - user - ', UserItter)
-                    console.log(event.currentTarget)
-                    console.log(event.currentTarget.querySelector('.name'))
-
-                    const user = event.currentTarget.querySelector('.name').textContent;
-                    const image = event.currentTarget.querySelector('p').textContent
-
-                    let is_exists = -1;
-
-                    for (let i = 0; i < users.length; ++i) {
-                        if (users[i].user === user) {
-                            is_exists = i;
-                            break;
-                        }
-                    }
-
-                    (is_exists === -1 ? users.push({user: user, image: image}) : users.splice(is_exists, 1))
-
-                    let AddSaveBtnUserChat = document.querySelector('.AddSaveBtnUserChat')
-
-                    UserItter.classList.toggle('tick')
-
-                    let FormData = {
-                        "chat_name": document.querySelector('.border_name_chat').textContent,
-                        "image_user": users.map(item => item.image),
-                        "name": users.map(item => item.user)
-                    }
-
-                    console.log(FormData)
-                    console.log(typeof FormData.name)
-                    console.log(typeof FormData.image_user)
-                    console.log(typeof FormData.chat_name)
-
-                    if (FormData.chat_name.length > 0) {
-                        AddSaveBtnUserChat.classList.add('block')
-                    }
-
-                    else {
-                        AddSaveBtnUserChat.classList.remove('block')
-                    }
-
-                    AddSaveBtnUserChat.addEventListener('click', () => {
-                        fetch('/AddUserChatAdmin', {
-                            headers: new Headers({
-                                'Content-Type': 'application/json'
-                            }),
-                            mode: "cors",
-                            method: "POST",
-                            body: JSON.stringify(FormData)
-                        })
-                            .then(res => res)
-                    })
-                })
-            }
-        })})
-
     if (document.querySelector('.AddUsersBtn') === null) {
         console.log('you are not admin')
     }
@@ -1408,16 +1653,15 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
 
                     else if (item.name !== document.querySelector('.UserChatName').textContent) {
                         document.querySelector('.ListUsersEdit').innerHTML += `
-                        <div class="Username">
-                            <div class="user" id="user">
-                                <div class="id">${item.id}</div>
-                                <div class="user_image" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
-                                <div class="name">${item.name}</div>
+                            <div class="Username">
+                                <div class="user_delete" id="user">
+                                    <div class="id">${item.id}</div>
+                                    <div class="user_image" style="background: url(${item.image_user}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>${item.image}</p></div>
+                                    <div class="name">${item.name}</div>
+                                    <div class="DeleteBtn"></div>
+                                </div>
                             </div>
-                            
-                            <div class="DeleteBtn">Удалить</div>
-                        </div>
-                    `
+                        `
                     }
 
                     let DeleteBtn = document.querySelectorAll('.DeleteBtn')
@@ -1433,8 +1677,14 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
                                         mode: "cors",
                                         method: 'DELETE'
                                     })
-                                        .then(() => alert('Пользователь удалён из чата'))
-                                        .then(() => window.location.reload())
+                                        .then(() => {
+                                            document.querySelector('.user_delete_chat').classList.add('block')
+
+                                            setTimeout(function () {
+                                                document.querySelector('.user_delete_chat').classList.remove('block')
+                                                window.location.reload()
+                                            }, 1000)
+                                        })
                                 })
                             }
                         })
@@ -1453,6 +1703,7 @@ document.querySelector('.flex_content_chat_top_tools').addEventListener('click',
 })
 
 close_window_3.addEventListener('click', () => {
+    document.querySelector('.time_creator_info').classList.remove('none')
     document.querySelector('.ToolChat').classList.remove('none')
     document.querySelector('.FlexGroup').classList.add('flex')
     document.querySelector('.UsersChat').classList.remove('none')
@@ -1480,6 +1731,20 @@ send_message.addEventListener('click', () => {
     else {
         input_message.classList.add('red')
     }
+
+    input_message.addEventListener('input', () => {
+        if (input_message.value.length === 0) {
+            input_message.classList.add('red')
+        }
+
+        else if (input_message.value.length > 0) {
+            input_message.classList.remove('red')
+        }
+
+        else {
+            input_message.classList.add('red')
+        }
+    })
 })
 
 document.querySelector('.list_link_chat').innerHTML=`
@@ -1578,7 +1843,34 @@ function onMessageReceived(payload) {
     console.log(JSON.parse(payload.body).sender)
 
     if (JSON.parse(payload.body).content !== null) {
-        list_chat.innerHTML += `
+        if (JSON.parse(payload.body).getMessage === "true") {
+            list_chat.innerHTML += `
+            <div class="MessageMain">
+                <div class="ImageProfileMessage1"><p>${JSON.parse(payload.body).sender}</p></div>
+                    <div class="message">
+                        <div class="ItemUsername">${JSON.parse(payload.body).sender}</div>
+                        
+                        <div class="id">${JSON.parse(payload.body).idmessage}</div>
+                        
+                        <div class="text">${JSON.parse(payload.body).content}</div>
+                        
+                        <div class="tools_message">
+                            <div class="delete_message"></div>
+                            <div class="edit_message"></div>
+                            <div class="share_message"></div>
+                        </div>
+                            
+                        <div class="BlockTicketTimeStamp">                        
+                            <div title="${JSON.parse(payload.body).TimeStampLong}" class="TimeStampShort">${JSON.parse(payload.body).TimeStampShort}</div>
+                            <div class="TickAsRead"></div>
+                        </div>
+                </div>
+            </div>
+            `
+        }
+
+        else {
+            list_chat.innerHTML += `
             <div class="MessageMain">
                 <div class="ImageProfileMessage1"><p>${JSON.parse(payload.body).sender}</p></div>
                     <div class="message">
@@ -1598,6 +1890,7 @@ function onMessageReceived(payload) {
                 </div>
             </div>
         `
+        }
 
         for (let MessageItter of document.querySelectorAll('.message')) {
             MessageItter.addEventListener('click', (event) => {
@@ -1620,19 +1913,159 @@ function onMessageReceived(payload) {
                     })
                 }
 
-                for (let BtnDeleteMessage of document.querySelectorAll('.delete_message')) {
-                    BtnDeleteMessage.addEventListener('click', () => {
-                        console.log('delete message')
-                        let chatMessage  = {
-                            IDMessage: EventIdMessage.textContent
-                        };
+                let IdDeleteMessage = event.currentTarget.querySelector('.id')
+                let delete_message = document.querySelectorAll('.delete_message')
+                let EventText = event.currentTarget.querySelector('.text')
+                let EventTimeStamp = event.currentTarget.querySelector('.TimeStampShort')
 
-                        stompClient.send("/app/chat.deleteMessage", {}, JSON.stringify(chatMessage));
+                console.log(IdDeleteMessage)
+
+                for (let edit_message_itter of document.querySelectorAll('.edit_message')) {
+                    edit_message_itter.addEventListener('click', () => {
+                        document.querySelector('.close_window_2').classList.add('none')
+                        document.querySelector('.IconOpenList').classList.add('none')
+                        height.classList.add('none')
+                        list_chat.classList.add('none')
+                        flex_content_chat_top_tools.classList.add('none')
+                        document.querySelector('.window_edit_message').classList.add('flex')
+                        document.querySelector('.cancel_edit_message').classList.add('block')
+                        tools.classList.add('none')
+
+                        document.querySelector('.time_creator_info').classList.add('none')
+
+                        document.querySelector('.window_edit_message').innerHTML=`
+                                <textarea class="input_edit_message" name="message">${EventText.textContent}</textarea>
+                                <input type="submit" class="save_edit_message" value="Сохранить">
+                            `
+
+                        const save_edit_message = document.querySelector('.save_edit_message')
+                        const input_edit_message = document.querySelector('.input_edit_message')
+
+                        document.querySelector('.cancel_edit_message').addEventListener('click', () => {
+                            document.querySelector('.window_edit_message').classList.remove('flex')
+                            list_chat.classList.remove('none')
+                            flex_content_chat_top_tools.classList.remove('none')
+                            height.classList.remove('none')
+                            tools.classList.remove('none')
+                            document.querySelector('.close_window_2').classList.remove('none')
+                            document.querySelector('.IconOpenList').classList.remove('none')
+                            document.querySelector('.cancel_edit_message').classList.remove('block')
+                            document.querySelector('.time_creator_info').classList.remove('none')
+                        })
+
+                        save_edit_message.addEventListener('click', () => {
+                            console.log('save edit click')
+                            document.querySelector('.window_edit_message').classList.remove('flex')
+                            list_chat.classList.remove('none')
+                            flex_content_chat_top_tools.classList.remove('none')
+                            document.querySelector('.time_creator_info').classList.add('none')
+
+                            let MonthString
+                            let MonthInt = new Date().getMonth() + 1
+
+                            if (MonthInt === 1) {
+                                MonthString = 'Января'
+                                console.log('Января')
+                            }
+
+                            else if (MonthInt === 2) {
+                                MonthString = 'Февраля'
+                                console.log('Февраля')
+                            }
+
+                            else if (MonthInt === 3) {
+                                MonthString = 'Марта'
+                                console.log('Марта')
+                            }
+
+                            else if (MonthInt === 4) {
+                                MonthString = 'Апреля'
+                                console.log('Апреля')
+                            }
+
+                            else if (MonthInt === 5) {
+                                MonthString = 'Мая'
+                                console.log('Мая')
+                            }
+
+                            else if (MonthInt === 6) {
+                                MonthString = 'Июня'
+                                console.log('Июня')
+                            }
+
+                            else if (MonthInt === 7) {
+                                MonthString = 'Июля'
+                                console.log('Июля')
+                            }
+
+                            else if (MonthInt === 8) {
+                                MonthString = 'Августа'
+                                console.log('Августа')
+                            }
+
+                            else if (MonthInt === 9) {
+                                MonthString = 'Сентября'
+                                console.log('Сентября')
+                            }
+
+                            else if (MonthInt === 10) {
+                                MonthString = 'Октября'
+                                console.log('Октября')
+                            }
+
+                            else if (MonthInt === 11) {
+                                MonthString = 'Ноября'
+                                console.log('Ноября')
+                            }
+
+                            else if (MonthInt === 12) {
+                                MonthString = 'Декабря'
+                                console.log('Декабря')
+                            }
+
+                            let DateLong = new Date().getDate() + ' ' + MonthString + ' ' + new Date().getFullYear() + 'г.' + ' ' + new Date().getHours() + ':' + new Date().getMinutes()+ ':' + new Date().getSeconds()
+                            let DateShort = new Date().getHours() + ':' + new Date().getMinutes()
+
+                            const formData = {
+                                "message": input_edit_message.value,
+                                "time_stamp_short": DateShort,
+                                "time_stamp_long": DateLong
+                            }
+
+                            if (input_edit_message.value.length > 0) {
+                                console.log('if on check length of input')
+                                fetch(`/edit_message/${EventIdMessage.textContent}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(formData)
+                                })
+                                    .then(() => {
+                                        console.log('edit is running')
+                                        document.querySelector('.cancel_edit_message').classList.remove('block')
+                                        document.querySelector('.tools').classList.remove('none')
+                                        document.querySelector('.time_creator_info').classList.remove('none')
+
+                                        document.querySelector('.window_edit_message').classList.remove('flex')
+                                        list_chat.classList.remove('none')
+                                        flex_content_chat_top_tools.classList.remove('none')
+                                        height.classList.remove('none')
+                                        tools.classList.remove('none')
+                                        document.querySelector('.close_window_2').classList.remove('none')
+                                        EventText.textContent = formData.message
+                                        EventTimeStamp.textContent = new Date().getHours() + ':' + new Date().getMinutes()
+                                    })
+                            }
+
+                            else {
+                                alert('Сообщение не обновлено так как оно пустое или такой же контент')
+                            }
+                        })
                     })
                 }
 
-                let IdDeleteMessage = event.currentTarget
-                let delete_message = document.querySelectorAll('.delete_message')
 
                 for (let delete_message_itter of delete_message) {
                     delete_message_itter.addEventListener('click', () => {
@@ -1685,8 +2118,6 @@ function onMessageReceived(payload) {
     }
 
     if (message.type === 'JOIN') {
-        message.EventInviteSender = message.sender;
-        message.EventInvite = 'онлайн';
         ErrorConnect.classList.remove('flex')
         messageAreaNew.scrollMarginBottom = messageAreaNew.scrollHeight;
     }
@@ -1735,51 +2166,51 @@ function sendMessage (event) {
                     let GetMonth
 
                     if (new Date().getMonth() +1 === 1) {
-                        GetMonth = 'Январь'
+                        GetMonth = 'Января'
                     }
 
                     else if (new Date().getMonth() +1 === 2) {
-                        GetMonth = 'Февраль'
+                        GetMonth = 'Февраля'
                     }
 
                     else if (new Date().getMonth() +1 === 3) {
-                        GetMonth = 'Март'
+                        GetMonth = 'Марта'
                     }
 
                     else if (new Date().getMonth() +1 === 4) {
-                        GetMonth = 'Апрель'
+                        GetMonth = 'Апреля'
                     }
 
                     else if (new Date().getMonth() +1 === 5) {
-                        GetMonth = 'Май'
+                        GetMonth = 'Мая'
                     }
 
                     else if (new Date().getMonth() +1 === 6) {
-                        GetMonth = 'Июнь'
+                        GetMonth = 'Июня'
                     }
 
                     else if (new Date().getMonth() +1 === 7) {
-                        GetMonth = 'Июль'
+                        GetMonth = 'Июля'
                     }
 
                     else if (new Date().getMonth() +1 === 8) {
-                        GetMonth = 'Август'
+                        GetMonth = 'Августа'
                     }
 
                     else if (new Date().getMonth() +1 === 9) {
-                        GetMonth = 'Сентябрь'
+                        GetMonth = 'Сентября'
                     }
 
                     else if (new Date().getMonth() +1 === 10) {
-                        GetMonth = 'Октябрь'
+                        GetMonth = 'Октября'
                     }
 
                     else if (new Date().getMonth() +1 === 11) {
-                        GetMonth = 'Ноябрь'
+                        GetMonth = 'Ноября'
                     }
 
                     else if (new Date().getMonth() +1 === 12) {
-                        GetMonth = 'Декабрь'
+                        GetMonth = 'Декабря'
                     }
 
                     else {
@@ -1816,3 +2247,121 @@ messageForm.addEventListener('submit', sendMessage, true)
 connect()
 
 new ErrorSocket()
+
+
+fetch('/all_users', {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors"
+})
+    .then(response => response.json())
+    .then((data) => {data.forEach(item => {
+        console.log(item)
+
+        if (item.id_image === 'DefaultAva' && item.username !== document.querySelector('.UserChatName').textContent && item.username !== document.querySelector('.UserChatName').textContent) {
+            console.log('if is running')
+
+            document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
+                        <div class="user">
+                            <div class="user_image" style="background: url(/image/settings/icon_profile.png) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/image/settings/icon_profile.png</p></div>
+                            <div class="name">${item.username}</div>
+                            <div class="click_choice"></div>
+                        </div>
+                    `
+        }
+
+        else if (item.username !== document.querySelector('.UserChatName').textContent && item.username !== document.querySelector('.UserChatName').textContent) {
+            console.log('else')
+
+            document.querySelector('.ListUsersAddNewUserChat').innerHTML+=`
+                        <div class="user">
+                            <div class="user_image" style="background: url('/AvatarImage/${item.username}/${item.id_image}') no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/AvatarImage/${item.username}/${item.id_image}</p></div>
+                            <div class="name">${item.username}</div>
+                            <div class="click_choice"></div>
+                        </div>
+                    `
+        }
+
+        for (let UserItter of document.querySelectorAll('.user')) {
+            UserItter.addEventListener('click', (event) => {
+                document.querySelector('.AddSaveBtnUserChat').classList.add('block')
+
+                console.log(event.currentTarget)
+
+                console.log(event.currentTarget.querySelector('.name'))
+
+                const user = event.currentTarget.querySelector('.name').textContent;
+                const image = event.currentTarget.querySelector('p').textContent
+
+                console.log("user - ", user)
+                console.log("image - ", image)
+
+                let is_exists = -1;
+
+                for (let i = 0; i < users.length; ++i) {
+                    if (users[i].user === user) {
+                        is_exists = i;
+                        console.log("users[i].username - ", users[i].username)
+                        console.log('user - ', user, 'is exist')
+                        break;
+                    }
+                }
+
+                (is_exists === -1 ? users.push({user: user, image: image}) : users.splice(is_exists, 1))
+
+                console.log(users)
+
+                let AddSaveBtnUserChat = document.querySelector('.AddSaveBtnUserChat')
+
+                UserItter.classList.toggle('tick')
+
+                let FormData = {
+                    "chat_name": document.querySelector('.border_name_chat').textContent,
+                    "image_user": users.map(item => item.image),
+                    "name": users.map(item => item.user)
+                }
+
+                console.log(FormData)
+
+                console.log(typeof FormData.name)
+                console.log(typeof FormData.image_user)
+                console.log(typeof FormData.chat_name)
+
+                console.log(FormData.name)
+                console.log(FormData.image_user)
+                console.log(FormData.chat_name)
+
+                if (FormData.name.length > 0) {
+                    document.querySelector('.FlexCountChoice').classList.add('flex')
+                    document.querySelector('.CountChoice').innerText=`${FormData.name.length}`
+                    AddSaveBtnUserChat.classList.add('block')
+                }
+
+                else {
+                    document.querySelector('.FlexCountChoice').classList.remove('flex')
+                    AddSaveBtnUserChat.classList.remove('block')
+                }
+
+                AddSaveBtnUserChat.addEventListener('click', () => {
+                    fetch('/AddUserChatAdmin', {
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        mode: "cors",
+                        method: "POST",
+                        body: JSON.stringify(FormData)
+                    })
+                        .then(res => console.log(res))
+                        .then(() => {
+                            document.querySelector('.user_add_chat').classList.add('block')
+
+                            setTimeout(function () {
+                                document.querySelector('.user_add_chat').classList.remove('block')
+                                window.location.reload()
+                            }, 1000)
+                        })
+                })
+            })
+        }
+    })})

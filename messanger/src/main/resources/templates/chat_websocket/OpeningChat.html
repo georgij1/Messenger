@@ -39,6 +39,8 @@
 
             <div class="height"></div>
 
+            <div class="InfoMessage"></div>
+
             <div class="ListMessage">
                 <div class="list_chat">
                     <div id="BottomPage"></div>
@@ -126,17 +128,20 @@
                     <div class="image_chat_open_settings"></div>
 
                     <div class="AdminPanel">
-                        <div class="BorderNameChat"></div>
+                        <div class="NameChat">
+                            <div class="BorderNameChat"></div>
+                        </div>
 
-                        <div class="BorderDescriptionChat"></div>
-
-                        <div class="ToolsEditNameDescChat"></div>
+                        <div class="DescChat">
+                            <div class="BorderDescriptionChat"></div>
+                        </div>
 
                         <div class="admin_chat"></div>
                     </div>
                 </div>
 
                 <div class="ListUsersChat">
+                    <div class="tools_add_user"></div>
                     <div class="list_users_open_settings"></div>
                     <div class="ToolsAdmin"></div>
                 </div>
@@ -146,14 +151,18 @@
 
             <div class="WindowAddUsers">
                 <div class="close_window_4"></div>
-                <h1>Выберите из списка</h1>
+
+                <div class="FlexCountChoice">
+                    <div class="title_count_choice">Колл-во выбранных</div>
+                    <div class="CountChoice"></div>
+                </div>
+
                 <div class="ListUsersAddNewUserChat"></div>
                 <div class="AddSaveBtnUserChat">Добавить</div>
             </div>
 
             <div class="WindowEditListUser">
                 <div class="close_window_5"></div>
-                <h1>Выберите из списка</h1>
                 <div class="ListUsersEdit"></div>
             </div>
         </div>
@@ -194,6 +203,10 @@
         <div class="status_change_name_chat"></div>
 
         <div class="status_change_desc_chat"></div>
+
+        <div class="user_delete_chat">Пользователь удалён из чата</div>
+
+        <div class="user_add_chat">Пользователь добавлен</div>
     </div>
 
     <script th:src="@{/chat_websocket/js/User/WebSocket/ErrorSocket.js}"></script>

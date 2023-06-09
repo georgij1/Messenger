@@ -12,7 +12,7 @@ class EditDescChat {
                 <div class="tools_edit_name_chat">
                     <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
                 </div>
-                `
+            `
 
             for (let CloseEditNameChat of document.querySelectorAll('.close_edit_name_chat')) {
                 CloseEditNameChat.addEventListener('click', () => {

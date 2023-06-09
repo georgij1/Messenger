@@ -24,6 +24,12 @@ class AddUser {
                             if (item.id_image === 'DefaultAva') {
                                 console.log('if is running')
 
+                                console.log('27')
+
+                                for (let UserChatNew of document.querySelectorAll('.UserChatNew')) {
+                                    console.log(UserChatNew)
+                                }
+
                                 document.querySelector('.ListUsersAddNewUserChat').innerHTML += `
                                         <div class="user">
                                             <div class="user_image" style="background: url(/image/settings/icon_profile.png) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/image/settings/icon_profile.png</p></div>
@@ -34,6 +40,11 @@ class AddUser {
 
                             else {
                                 console.log('else')
+
+                                for (let UserChatNew of document.querySelectorAll('.UserChatNew')) {
+                                    console.log(UserChatNew)
+                                    console.log('44')
+                                }
 
                                 document.querySelector('.ListUsersAddNewUserChat').innerHTML += `
                                         <div class="user">

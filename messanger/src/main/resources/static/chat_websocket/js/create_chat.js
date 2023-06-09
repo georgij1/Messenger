@@ -98,25 +98,67 @@ create_chat.addEventListener('click', () => {
 
     let username_1 = document.querySelector('.username').textContent
 
-    const formData = {
-        "name_chat": name_chat_div.value,
-        "desc_chat": desc_chat.value,
-        "user_chat": users.map(item => item.user),
-        "type": "group_chat",
-        "owner": username_1,
-        "ImageUser": users.map(item => item.image)
+    console.log('data create on default from new Date()')
+
+    if (new Date().getMonth() === 1 || new Date().getMonth() === 2 || new Date().getMonth() === 3 || new Date().getMonth() === 4 || new Date().getMonth() === 5 || new Date().getMonth() === 6 || new Date().getMonth() === 7 || new Date().getMonth() === 8 || new Date().getMonth() === 9) {
+        const formData = {
+            "name_chat": name_chat_div.value,
+            "desc_chat": desc_chat.value,
+            "user_chat": users.map(item => item.user),
+            "type": "group_chat",
+            "owner": username_1,
+            "ImageUser": users.map(item => item.image),
+            "time_creator": new Date().getDay() + '.0' + new Date().getMonth() + '.' + new Date().getFullYear() + ' ' + new Date().getHours() + ':' + new Date().getMinutes()
+        }
+
+        if (formData.name_chat !== '' && formData.desc_chat !== '') {
+            fetch('/create_chat', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(() => {console.log(formData)})
+            // .then(() => {window.location.reload()})
+        }
+
+        else {
+            console.log('valid is not access')
+        }
+
+        console.log(formData)
     }
 
-    fetch('/create_chat', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-        .then(() => {console.log(formData)})
-        // .then(() => {window.location.reload()})
+    else {
+        const formData = {
+            "name_chat": name_chat_div.value,
+            "desc_chat": desc_chat.value,
+            "user_chat": users.map(item => item.user),
+            "type": "group_chat",
+            "owner": username_1,
+            "ImageUser": users.map(item => item.image),
+            "time_creator": new Date().getDay() + '.' + new Date().getMonth() + '.' + new Date().getFullYear() + new Date().getHours() + ':' + new Date().getMinutes()
+        }
 
-    console.log(formData)
+        if (formData.name_chat !== '' && formData.desc_chat !== '') {
+            fetch('/create_chat', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(() => {console.log(formData)})
+            // .then(() => {window.location.reload()})
+        }
+
+        else {
+            console.log('valid is not access')
+        }
+
+        console.log(formData)
+    }
 })

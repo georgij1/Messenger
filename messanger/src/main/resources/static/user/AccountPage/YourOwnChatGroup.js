@@ -44,8 +44,6 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
                 for (let image_user_new of image_user_1) {
                     image_user_new.style.background = `url(${item.image_chat})` + 'center no-repeat'
                     image_user_new.style.backgroundSize = `80%`
-                    image_user_new.style.borderRadius = `50px`
-                    image_user_new.style.boxShadow = '0 0 10px bisque'
                 }
 
                 let btn_change_name_chat = document.querySelectorAll('.btn_change_name_chat')

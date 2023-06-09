@@ -12,8 +12,8 @@
 }
 
 .btn_create_chat {
-    width: max-content;
-    height: 60px;
+    width: 33.2px;
+    height: 53.2px;
     background: linear-gradient(92.68deg, #7CB8F7 0%, #2A8BF2 100%);
     box-shadow: 6px 6px 25px rgba(42, 139, 242, 0.15), 4px 4px 25px rgba(42, 139, 242, 0.05), 10px 6px 25px rgba(42, 139, 242, 0.15);
     border-radius: 6px;
@@ -25,6 +25,10 @@
     padding-right: 10px;
     cursor: pointer;
     color: #FFF;
+    margin-left: auto;
+    position: fixed;
+    right: 10px;
+    top: 10px;
 }
 
 .btn_create_chat:hover {
@@ -33,11 +37,18 @@
 }
 
 .admin_this, .user_this {
-    height: max-content;
-    position: relative;
-    left: 20px;
     color: blue;
-    bottom: -33px;
+    display: flex;
+    height: 58px;
+    align-items: end;
+    width: 100vW;
+    text-align: right;
+    justify-content: end;
+}
+
+.image_user_chat_admin {
+    width: 100%;
+    height: 60px;
 }
 
 .text_create_chat {
@@ -107,8 +118,17 @@
     background-size: 40px;
     box-shadow: 0 0 10px burlywood;
     border-radius: 10px;
-    border: 3px solid bisque;
+    border: 2px solid bisque;
     cursor: pointer;
+}
+
+.auto_time {
+    padding: 10px;
+    text-align: center;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .tools_edit_name_chat {
@@ -261,13 +281,30 @@
     display: none;
 }
 
-.window_create_chat, .border_users {
+.ImageBorderImageDesc:hover {
+    background: #FFF;
+}
+
+.border_users {
     display: none;
     box-shadow: 0 0 10px blue;
     margin: 30px auto 0;
     border-radius: 30px;
     width: 85vW;
     padding: 15px;
+}
+
+.window_create_chat {
+    display: none;
+    box-shadow: 0 0 10px aqua;
+    border-radius: 10px;
+    width: 92%;
+    padding: 10px;
+    margin: 70px 0 auto 0;
+}
+
+.body_window_create_chat {
+    width: 100%;
 }
 
 .Border {
@@ -299,6 +336,8 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px blanchedalmond;
+    resize: none;
+    cursor: pointer;
 }
 
 .name_chat_min_window {
@@ -325,8 +364,16 @@
 .create_chat {
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 10px aqua;
+    box-shadow: 0 0 10px antiquewhite;
     margin: 10px auto;
+}
+
+.choice_time_input, .choice_date_input {
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .create_chat:hover {
@@ -357,6 +404,16 @@ label {
     margin-bottom: 20px;
 }
 
+.user_delete {
+    display: flex;
+    box-shadow: 0 0 5px blueviolet;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 15px;
+    border: 2px solid blue;
+    margin-bottom: 20px;
+}
+
 .id {
     width: max-content;
     padding-left: 10px;
@@ -370,6 +427,10 @@ label {
     overflow-y: scroll;
     height: 190px;
     padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .ChangeNameChat {
@@ -418,13 +479,15 @@ input {
     align-items: center;
 }
 
-.chat {
-    box-shadow: 0 0 10px blueviolet;
+.chat, .FoundChat {
+    box-shadow: 0 0 10px bisque;
     border-radius: 10px;
     display: flex;
     padding: 10px;
-    gap: 10%;
+    gap: 30px;
     width: 88vW;
+    border: 2px solid bisque;
+    cursor: pointer;
 }
 
 .list_chats, .list_my_chats {
@@ -617,7 +680,6 @@ input {
     justify-content: start;
     gap: 5%;
     margin-top: 20px;
-    margin-bottom: 20px;
     display: none;
 }
 
@@ -640,18 +702,51 @@ li {
     height: 50px;
 }
 
-.DeleteChat {
-    padding: 10px;
-    text-align: center;
-    background: antiquewhite;
-    border: 2px solid antiquewhite;
+.DeleteChatFlex {
+    margin-bottom: 20px;
+    background: #ff8a8a;
+    border: 2px solid red;
     border-radius: 10px;
-    box-shadow: 0 0 10px antiquewhite;
+    box-shadow: 0 0 1px red;
+    display: flex;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    gap: 20px;
+}
+
+.DeleteChatFlex:hover {
+    box-shadow: none;
+    background: #FFF;
+    color: black;
+}
+
+.user_delete_chat {
+    padding: 10px;
+    background: red;
+    width: max-content;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 10px;
+    color: #FFF;
+    box-shadow: 0 0 10px red;
+    border: 2px solid red;
+    display: none;
+}
+
+.tools_add_user {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .DeleteChat:hover {
-    background: #FFF;
+    box-shadow: none;
 }
 
 #messageForm {
@@ -661,13 +756,9 @@ li {
     justify-content: space-evenly;
 }
 
-.chat {
-    cursor: pointer;
-}
-
-.chat:hover {
-    box-shadow: 0 0 8px blueviolet;
-    border: 2px solid blueviolet;
+.chat:hover, .FoundChat:hover {
+    box-shadow: none;
+    border: 2px solid bisque;
 }
 
 .ItemImageChat {
@@ -721,7 +812,7 @@ li {
 
 .buttons_nav_chats {
     display: flex;
-    margin-top: 33px;
+    margin-top: 80px;
     justify-content: space-around;
     gap: 10px;
 }
@@ -847,6 +938,7 @@ li {
 .close_window_3 {
     margin-bottom: 30px;
     position: fixed;
+    width: 45px;
 }
 
 .btn_change_icon {
@@ -916,7 +1008,6 @@ li {
     border-radius: 10px;
     border: 3px solid bisque;
     cursor: pointer;
-    margin-bottom: 30px;
     display: none;
 }
 
@@ -968,7 +1059,7 @@ li {
     background-size: 50px;
     box-shadow: 0 0 10px burlywood;
     border-radius: 10px;
-    border: 3px solid bisque;
+    border: 2px solid bisque;
     cursor: pointer;
 }
 
@@ -1321,7 +1412,7 @@ li {
     background: transparent;
 }
 
-.ImageBorder:hover, .ImageBorderImageDesc:hover {
+.ImageBorder:hover, .ImageBorderImageDesc:active {
     background: #eaebef;
     border-radius: 20px;
     box-shadow: 0 0 10px bisque;
@@ -1353,7 +1444,7 @@ li {
 
 .ImageProfileMessage, .ImageProfileMessage1 {
     width: 51.0px;
-    height: 46.8px;
+    height: 50px;
     box-shadow: 0 0 10px beige;
     border: 2px solid aqua;
     border-radius: 54px;
@@ -1473,14 +1564,48 @@ li {
     box-shadow: none;
 }
 
-.AddUsersBtn, .EditChatUser {
-    padding: 10px;
-    text-align: center;
-    background: aliceblue;
+.image_add_user {
+    width: 50px;
+    height: 40px;
+    background: url("../image/BtnAddUser.png") no-repeat center;
+    background-size: 25px;
+}
+
+.image_delete_user {
+    width: 50px;
+    height: 40px;
+    background: url("../image/BtnDeleteUser.png") no-repeat center;
+    background-size: 25px;
+}
+
+.image_delete_chat {
+    width: 40px;
+    height: 55px;
+    background: url("../image/BtnDeleteChat.png") no-repeat center;
+    background-size: 40px;
+    align-items: center;
+    display: flex;
+    color: #FFF;
+    justify-content: flex-end;
+}
+
+.AddUsersBtn {
     border: 2px solid bisque;
     border-radius: 10px;
+    width: max-content;
+    background: antiquewhite;
     box-shadow: 0 0 10px bisque;
     cursor: pointer;
+    height: max-content;
+}
+
+.EditChatUser {
+    width: max-content;
+    cursor: pointer;
+    background: #ff8a8a;
+    border: 2px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 1px red;
 }
 
 .AddUsersBtn:hover, .EditChatUser:hover {
@@ -1490,41 +1615,127 @@ li {
 .ListUsersAddNewUserChat {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    margin-top: 20px;
+}
+
+.BtnChoice, .BtnChoiceEditListUser {
+    padding: 10px;
+    margin-top: 20px;
+    background: lavenderblush;
+    border: 2px solid beige;
+    border-radius: 10px;
+    width: max-content;
+    cursor: pointer;
+    box-shadow: 0 0 10px bisque;
+}
+
+.BtnChoice:hover, .BtnChoiceEditListUser:hover {
+    box-shadow: none;
+}
+
+.FlexCountChoice {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background: aliceblue;
+    justify-content: center;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    gap: 10px;
+}
+
+.time_creator_info {
+    padding: 10px;
+    margin-top: 20px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.click_choice {
+    width: 20px;
+    height: 20px;
+    background: gray;
+    border-radius: 100%;
+    box-shadow: 0 0 10px aqua;
+    cursor: pointer;
+    position: absolute;
+    display: none;
+    margin-top: 60px;
+    margin-left: -4px;
+    border: 2px solid bisque;
+}
+
+.choices {
+    width: 20px;
+    height: 20px;
+    background: url("../image/icon_tick.png") no-repeat center, #FFF;
+    background-size: 15px;
+}
+
+.no_drop {
+    cursor: no-drop;
+}
+
+.BtnChoiceCancel, .BtnChoiceCancelEditListUser {
+    display: none;
+    margin-top: 20px;
+    background: lightcyan;
+    padding: 10px;
+    width: max-content;
+    border: 2px solid beige;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
 }
 
 .AddSaveBtnUserChat {
     display: none;
     padding: 10px;
     background: aliceblue;
-    margin-top: 22px;
     border: 2px solid bisque;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+}
+
+.user:hover {
+    box-shadow: 0 0 10px blue;
+}
+
+.tick:hover {
+    box-shadow: none;
+}
+
+.AddSaveBtnUserChat:hover {
+    box-shadow: none;
 }
 
 .ListUsersEdit {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    margin-top: 20px;
 }
 
 .DeleteBtn {
-    padding: 10px;
-    background: red;
-    color: #FFF;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px red;
-    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: url("../image/BtnDeleteChat.png") no-repeat;
+    background-size: 40px;
+    display: flex;
+    position: absolute;
+    right: 20px;
     border: 2px solid red;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
 .DeleteBtn:hover {
     box-shadow: none;
-    background: #FFF;
-    color: black;
+    border: none;
 }
 
 .ReadMessage, .GetMessage, .ReadMessageImage {
@@ -1610,7 +1821,10 @@ li {
     border: 2px solid bisque;
     margin: 20px auto;
     border-radius: 10px;
+    display: flex;
     box-shadow: 0 0 10px bisque;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .BorderDescriptionChat {
@@ -1619,6 +1833,24 @@ li {
     margin: 20px auto;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit_chat_name_item, .edit_desc_chat_item {
+    width: 23px;
+    height: 23px;
+    background: url("../image/EditFields.png") no-repeat;
+    background-size: 24px;
+    cursor: pointer;
+    border: 2px solid bisque;
+    border-radius: 100%;
+    box-shadow: 0 0 10px burlywood;
+}
+
+.edit_chat_name_item:hover, .edit_desc_chat_item:hover {
+    box-shadow: none;
 }
 
 .desc_chat_min_window {
@@ -1724,6 +1956,10 @@ li {
     left: 50px;
 }
 
+.user_add_chat {
+    display: none;
+}
+
 .list_link_chat {
     margin-top: 20px;
 }
@@ -1816,6 +2052,21 @@ li {
     cursor: pointer;
 }
 
+.close_window_new {
+    width: 45.2px;
+    height: 45.2px;
+    position: fixed;
+}
+
+.message:active, .message_click {
+    background: #eaebef;
+    box-shadow: 0 0 10px bisque;
+}
+
+.message_click:hover {
+    background: #FFF;
+}
+
 .close_window_4, .close_window_5 {
     width: 50px;
     height: 50px;
@@ -1823,7 +2074,7 @@ li {
     background-size: 50px;
     box-shadow: 0 0 10px burlywood;
     border-radius: 10px;
-    border: 3px solid bisque;
+    border: 2px solid bisque;
     cursor: pointer;
     display: none;
 }
@@ -1882,9 +2133,23 @@ li {
         height: 44px;
     }
 
+    .ImageBorderImageDesc:hover {
+        background: #FFF;
+    }
+
+    .close_window_new {
+        width: 45.2px;
+        height: 45.2px;
+        position: fixed;
+    }
+
     .ListMessage {
         gap: 20px;
         flex-direction: row;
+    }
+
+    .image_user_chat_admin {
+        width: 200%;
     }
 
     .ToolsTick {
@@ -1918,6 +2183,21 @@ li {
         align-items: center;
         margin-top: 0;
         justify-content: flex-start;
+    }
+
+    .ImageBorderImageDesc:hover {
+        background: #eaebef;
+        border-radius: 20px;
+        box-shadow: 0 0 10px bisque;
+        color: cadetblue;
+    }
+
+    .tick:hover {
+        box-shadow: none;
+    }
+
+    .ImageBorderClick:hover {
+        background: #FFF;
     }
 
     .name_chat_min_window {
@@ -2011,11 +2291,9 @@ li {
     }
 
     .window_create_chat {
-        box-shadow: 0 0 10px blue;
-        margin: 30px auto 0;
-        border-radius: 30px;
+        border-radius: 10px;
         padding: 15px;
-        width: 93vW;
+        width: 97%;
     }
 
     .border_users {
@@ -2083,10 +2361,6 @@ li {
         width: 97vW;
     }
 
-    .btn_create_chat {
-        width: 35vW;
-    }
-
     .content {
         width: max-content;
         margin-left: 30px;
@@ -2097,13 +2371,13 @@ li {
     }
 
     .header_list_chats_burger_open {
-        width: 94vW;
+        width: 53vW;
         justify-content: flex-end;
         grid-template-columns: repeat(1, 0fr);
     }
 
     .chat_burger_open {
-        width: 52vW;
+        width: 49vW;
     }
 
     .input_message {
@@ -2136,7 +2410,7 @@ li {
         margin-top: 33px;
         justify-content: space-evenly;
         gap: 10px;
-        margin-left: 180px;
+        margin-left: 333px;
     }
 
     .h1HeaderOpened {
@@ -2163,6 +2437,7 @@ li {
 
     .window_add_file {
         flex-direction: column;
+        margin-top: 0;
     }
 
     .ListUploadedImage {
@@ -2216,12 +2491,13 @@ li {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .image_user_chat_admin {
+        width: 380px;
+    }
+
     .window_create_chat {
-        box-shadow: 0 0 10px blue;
-        margin: 30px auto 0;
-        border-radius: 30px;
         padding: 15px;
-        margin-left: 333px;
+        margin: 70px auto 0 333px;
         width: 62vW;
     }
 
@@ -2237,7 +2513,7 @@ li {
     }
 
     .chats {
-        width: 344px;
+        width: 89%;
     }
 
     .content {
@@ -2283,7 +2559,7 @@ li {
     }
 
     .ImageProfileMessage, .ImageProfileMessage1 {
-        width: 0;
+        width: 64.3px;
     }
 
     .OverflowScroll {
@@ -2317,7 +2593,7 @@ li {
     }
 
     .ToolChat, .OverflowScroll {
-        height: 550px;
+        height: 500px;
     }
 }
 

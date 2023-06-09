@@ -6,12 +6,21 @@ import com.example.messanger.auth.forms.chat_form.AddUserChat;
 import com.example.messanger.auth.forms.chat_form.FormCreateChat;
 import com.example.messanger.auth.forms.chat_form.UpdateDescChat;
 import com.example.messanger.auth.forms.chat_form.UpdateNameChat;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.parser.Parser;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +31,7 @@ public class CreateChat {
     public JdbcTemplate jdbcTemplate;
 
     @AuthorizedUser
-    @GetMapping("websocket_chat")
+    @GetMapping("/websocket_chat")
     public String chat(HttpServletRequest request, Model model) {
         return "chat_websocket/index";
     }
@@ -31,9 +40,7 @@ public class CreateChat {
     @CrossOrigin("*")
     public String CreateChat_1(@RequestBody FormCreateChat formCreateChat, HttpServletRequest request, Model model) {
 
-        jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner) values (?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner());
-
-        String getUserChat = String.join(" ", formCreateChat.getUser_chat());
+        jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(), formCreateChat.getTime_creator());
 
         for (int cursor = 0; cursor < formCreateChat.getUser_chat().size(); ++cursor) {
             jdbcTemplate.update(
@@ -43,10 +50,6 @@ public class CreateChat {
                     formCreateChat.getImageUser().get(cursor));
         }
 
-        System.out.println(formCreateChat.getUser_chat());
-        System.out.println("formCreateChat.getUser_chat().toArray().length - "+ formCreateChat.getUser_chat().toArray().length);
-        System.out.println("getUserChat - " + getUserChat);
-
         return "chat_websocket/index";
     }
 
@@ -54,21 +57,24 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> AddUserChatAdmin(@RequestBody AddUserChat addUserChat) {
-        System.out.println("ChatName - " + addUserChat.getChat_name());
-        System.out.println("NameUser - " + addUserChat.getName());
-        System.out.println("ImageUser - " + addUserChat.getImage_user());
-
         for (int cursor = 0; cursor < addUserChat.getName().size(); ++cursor) {
             System.out.println("for is running");
 
-            var isExists = jdbcTemplate.queryForObject("select exists(select name from users_chat where name=? and chat_nane=?)", Boolean.class, addUserChat.getName().get(cursor), addUserChat.getChat_name());
+            var isExistsUsers = jdbcTemplate.queryForObject("select exists(select name from users_chat where name=? and chat_nane=?)", Boolean.class, addUserChat.getName().get(cursor), addUserChat.getChat_name());
+            var isExistsAdmin = jdbcTemplate.queryForObject("select exists(select owner from chat where owner=? and name=?)", Boolean.class, addUserChat.getName().get(cursor), addUserChat.getChat_name());
 
-            if (Boolean.TRUE.equals(isExists)) {
-                System.out.println("The same Object");
+            System.out.println(isExistsAdmin);
+            System.out.println(isExistsUsers);
+
+            if (Boolean.TRUE.equals(isExistsAdmin)) {
+                System.out.println("The same Object Admin if");
             }
 
+            else if (Boolean.TRUE.equals(isExistsUsers)) {
+                System.out.println("The same Object user if");
+            }
             else {
-                System.out.println("The Object is not same");
+                System.out.println("The Object is not same else");
                 jdbcTemplate.update("insert into users_chat (name, chat_nane, image_user) values (?, ?, ?)",
                         addUserChat.getName().get(cursor),
                         addUserChat.getChat_name(),
@@ -175,8 +181,62 @@ public class CreateChat {
 
     @ResponseBody
     @CrossOrigin("*")
-    @GetMapping("find/by/NameChat/{ChatName}")
-    public List<Map<String, Object>> FindByChatName(@PathVariable String ChatName) {
-        return jdbcTemplate.queryForList("select * from chat where name like ?", ChatName + '%');
+    @GetMapping("find/by/NameChat/{UserNameQuery}/{ChatName}")
+    public List<Map<String, Object>> FindByChatName(@PathVariable String UserNameQuery, @PathVariable String ChatName) throws IOException {
+        var isFound = jdbcTemplate.queryForObject("select exists(select * from chat where name like ?)", Boolean.class,ChatName + '%');
+
+        jdbcTemplate.update("insert into query_history_find_chat (username, query) values (?, ?)", UserNameQuery, ChatName);
+
+        if (Boolean.TRUE.equals(isFound)) {
+            return jdbcTemplate.queryForList("select * from chat where name like ?", ChatName + '%');
+        }
+
+        else {
+            return jdbcTemplate.queryForList("select exists(select * from chat where name like ?)", ChatName + '%');
+        }
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("find/history_query/{username}/pagination/offset/{count_element}/limit/{count_element1}")
+    public List<Map<String, Object>> GetAllQueryUsernamePagination(@PathVariable int count_element, @PathVariable int count_element1, @PathVariable String username) {
+        System.out.println(jdbcTemplate.queryForList("select count(*) from query_history_find_chat where username=?", username));
+        return jdbcTemplate.queryForList("select * from query_history_find_chat where username=? offset ? limit ?", username, count_element, count_element1);
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("count/list/{username}/history/query/find/chat")
+    public List<Map<String, Object>> count_history(@PathVariable String username) {
+        return jdbcTemplate.queryForList("select count(*) from query_history_find_chat where username=?", username);
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @DeleteMapping("/clear/query/history/{username}")
+    public List<Map<String, Object>> DeleteByUserNameHistoryQuery(@PathVariable String username) {
+        jdbcTemplate.update("delete from query_history_find_chat where username=?", username);
+        return jdbcTemplate.queryForList("select * from query_history_find_chat");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("/filter/asc/order/name")
+    public List<Map<String, Object>> AscOrderByName() {
+        return jdbcTemplate.queryForList("select * from chat where type='group_chat' order by name");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("/filter/desc/order/name")
+    public List<Map<String, Object>> DescOrderByName() {
+        return jdbcTemplate.queryForList("select * from chat where type='group_chat' order by name desc");
+    }
+
+    @ResponseBody
+    @CrossOrigin("*")
+    @GetMapping("/filter/time/order/time")
+    public List<Map<String, Object>> OrderByTime() {
+        return jdbcTemplate.queryForList("select * from chat order by time_creator");
     }
 }
