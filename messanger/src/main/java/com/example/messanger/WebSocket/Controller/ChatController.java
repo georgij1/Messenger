@@ -3,8 +3,8 @@
 package com.example.messanger.WebSocket.Controller;
 
 import com.auth0.jwt.JWT;
+import com.example.messanger.WebSocket.WebSocketForm.GetStatusUser;
 import com.example.messanger.WebSocket.model.ChatMessage;
-import com.example.messanger.WebSocket.model.GetOnlineChatUsers;
 import com.example.messanger.auth.forms.Messages.FormEditMessage;
 import com.example.messanger.auth.forms.chat_form.AccessChat;
 import jakarta.servlet.http.Cookie;
@@ -33,6 +33,77 @@ import java.util.*;
 public class ChatController {
     public JdbcTemplate jdbcTemplate;
 
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username", chatMessage.getSender());
+        return chatMessage;
+    }
+
+    @PostMapping("/edit_message/{id}")
+    @ResponseBody
+    @CrossOrigin("*")
+    public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
+        jdbcTemplate.update("update message set text=?, time_stamp_short=?, time_stamp_long=? where id_message=?", formEditMessage.getMessage(), formEditMessage.getTime_stamp_short(), formEditMessage.getTime_stamp_long(), id);
+        return jdbcTemplate.queryForList("select * from message where id_message=?", id);
+    }
+
+    @GetMapping("/chat/{id}/{Username}/{ChatName}")
+    public String OpenChat(@PathVariable int id, @PathVariable String Username, @PathVariable String ChatName, Model model, HttpServletRequest request) {
+        var ChatIdGetDB = jdbcTemplate.queryForObject("select exists(select id from chat where id=?)", Boolean.class, id);
+        var isUserNameExists = jdbcTemplate.queryForObject("select exists(select name from users_chat where name=? and chat_nane=?)", Boolean.class, Username, ChatName);
+        var isAdminNameExists = jdbcTemplate.queryForObject("select exists(select owner from chat where owner=? and name=?)", Boolean.class, Username, ChatName);
+        var cookies = request.getCookies();
+
+        if (cookies == null) {
+            return "redirect:/login";
+        }
+
+        String token = null;
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("auth_token")) {
+                token = cookie.getValue();
+                break;
+            }
+        }
+
+        try {
+            var json = JWT.decode(token.formatted("utf-8")).getSubject();
+            model.addAttribute("username", json);
+
+            System.out.println(isUserNameExists + " " + ChatIdGetDB + " " + isAdminNameExists);
+
+            if (Boolean.TRUE.equals(ChatIdGetDB) && Boolean.TRUE.equals(isAdminNameExists)) {
+                System.out.println("chat is exist and admin exist in chat");
+                model.addAttribute("IdChat", id);
+                return "chat_websocket/OpeningChat";
+            }
+
+            else if (Boolean.TRUE.equals(ChatIdGetDB) && Boolean.TRUE.equals(isUserNameExists)) {
+                System.out.println("chat is exist and username exist in chat");
+                model.addAttribute("IdChat", id);
+                return "chat_websocket/OpeningChat";
+            }
+
+            else {
+                System.out.println("else run no boolean if");
+                return "chat_websocket/not_valid_chat_url";
+            }
+        }
+
+        catch (org.springframework.dao.DataIntegrityViolationException exception) {
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/Find/{UserNameChat}")
+    @CrossOrigin("*")
+    @ResponseBody
+    public List<Map<String, Object>> FindUsersByChatName(@PathVariable String UserNameChat) {
+        return jdbcTemplate.queryForList("select * from users_chat where chat_nane=?", UserNameChat);
+    }
+
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage (@Payload ChatMessage chatMessage) {
@@ -55,87 +126,24 @@ public class ChatController {
 
         chatMessage.setIDMessage(Objects.requireNonNull(keyHolder.getKey()).toString());
 
-        System.out.println(keyHolder.getKey());
-
-        System.out.println(sender_id);
-
-        System.out.println("IdImage" + jdbcTemplate.queryForMap("select id_image from users where id=?", sender_id).get("id_image"));
-
-        System.out.println(jdbcTemplate.queryForList("select username from users where id=?", sender_id));
         chatMessage.setSender((String) jdbcTemplate.queryForMap("select username from users where id=?", sender_id).get("username"));
         chatMessage.setImage((String) jdbcTemplate.queryForMap("select id_image from users where id=?", sender_id).get("id_image"));
         chatMessage.setGetMessage(jdbcTemplate.queryForMap("select get from message where id_message=?", keyHolder.getKey()).get("get").toString());
         chatMessage.setReadMessage(jdbcTemplate.queryForMap("select read from message where id_message=?", keyHolder.getKey()).get("read").toString());
 
-        System.out.println("Read" + jdbcTemplate.queryForList("select read from message"));
-        System.out.println("Get" + jdbcTemplate.queryForList("select get from message"));
-
         return chatMessage;
     }
 
-    @MessageMapping("/chat.addUser")
+    @MessageMapping("/statusUser")
     @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username", chatMessage.getSender());
-        return chatMessage;
-    }
-
-    @PostMapping("/edit_message/{id}")
-    @ResponseBody
-    @CrossOrigin("*")
-    public List<Map<String, Object>> EditMessage(@PathVariable int id, @RequestBody FormEditMessage formEditMessage) {
-        jdbcTemplate.update("update message set text=?, time_stamp_short=?, time_stamp_long=? where id_message=?", formEditMessage.getMessage(), formEditMessage.getTime_stamp_short(), formEditMessage.getTime_stamp_long(), id);
-        return jdbcTemplate.queryForList("select * from message where id_message=?", id);
-    }
-
-    @GetMapping("/chat/{id}/{Username}/{ChatName}")
-    public String OpenChat(@PathVariable int id, @PathVariable String Username, @PathVariable String ChatName, Model model, HttpServletRequest request) {
-        var ChatIdGetDB = jdbcTemplate.queryForObject("select exists(select id from chat where id=?)", Boolean.class, id);
-        var isUserNameExists = jdbcTemplate.queryForObject("select exists(select name from users_chat where name=? and chat_nane=?)", Boolean.class, Username, ChatName);
-        var isAdminNameExists = jdbcTemplate.queryForObject("select exists(select owner from chat where owner=?)", Boolean.class, Username);
-        var cookies = request.getCookies();
-
-        if (cookies == null) {
-            return "redirect:/login";
-        }
-
-        String token = null;
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("auth_token")) {
-                token = cookie.getValue();
-                break;
-            }
-        }
-
-        try {
-            var json = JWT.decode(token.formatted("utf-8")).getSubject();
-            model.addAttribute("username", json);
-
-            System.out.println(isUserNameExists + " " + ChatIdGetDB + " " + isAdminNameExists);
-
-            if ((Boolean.TRUE.equals(isUserNameExists) || Boolean.TRUE.equals(isAdminNameExists)) && Boolean.TRUE.equals(ChatIdGetDB)) {
-                System.out.println("if run two boolean if");
-                model.addAttribute("IdChat", id);
-                return "chat_websocket/OpeningChat";
-            }
-
-            else {
-                System.out.println("else run no boolean if");
-                return "chat_websocket/not_valid_chat_url";
-            }
-        }
-
-        catch (org.springframework.dao.DataIntegrityViolationException exception) {
-            return "redirect:/login";
-        }
-    }
-
-    @PostMapping("/Find/{UserNameChat}")
     @CrossOrigin("*")
     @ResponseBody
-    public List<Map<String, Object>> FindUsersByChatName(@PathVariable String UserNameChat) {
-        return jdbcTemplate.queryForList("select * from users_chat where chat_nane=?", UserNameChat);
+    public GetStatusUser  FindUserOffOnLine(@Payload GetStatusUser getStatusUser) {
+        getStatusUser.setList_ONOFLineUser(
+                jdbcTemplate.queryForList("select * from users_chat where chat_nane=?", getStatusUser.getNameChat())
+        );
+
+        return getStatusUser;
     }
 
     @PostMapping("/Access")

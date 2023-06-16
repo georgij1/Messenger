@@ -10,7 +10,9 @@ let FormEditUserName = document.querySelector('.FormEditUserName')
 close_window.addEventListener('click', () => {
     return history.back()
 })
+
 BtnEditUsername.addEventListener('click', () => {
+    document.querySelector('.status1').classList.add('none')
     ImageUser.classList.add('none')
     document.querySelector('.UserName').classList.add('none')
     BtnEditUsername.classList.add('none')
@@ -22,7 +24,9 @@ BtnEditUsername.addEventListener('click', () => {
         FlexItter.classList.remove('flex')
     }
 })
+
 close_window_1.addEventListener('click', () => {
+    document.querySelector('.status1').classList.add('none')
     ImageUser.classList.remove('none')
     document.querySelector('.UserName').classList.remove('none')
     BtnEditUsername.classList.remove('none')

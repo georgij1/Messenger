@@ -1,5 +1,5 @@
 class Offline {
-    get_offline_user () {
+    static get_offline_user () {
         fetch(`/status/offline/${document.querySelector('.username').textContent}`, {
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -7,11 +7,6 @@ class Offline {
 
             mode: "cors"
         })
-            .then(res => console.log(res.json()))
-            .then(data => console.log(data))
-    }
-
-    constructor() {
-        this.get_offline_user()
+            .then(res => res)
     }
 }

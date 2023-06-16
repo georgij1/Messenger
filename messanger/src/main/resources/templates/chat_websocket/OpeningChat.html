@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title class="title"></title>
@@ -74,6 +75,7 @@
                 <label for="FileInput" class="LabelFileInput">Прикрепить файл</label>
                 <input id="FileInput" type="file" class="file" name="file">
 
+                <div class="height_gap_file_add"></div>
 
                 <div class="BorderOptionFile">
                     <div class="DescNameFile">Имя файла</div>
@@ -207,6 +209,28 @@
         <div class="user_delete_chat">Пользователь удалён из чата</div>
 
         <div class="user_add_chat">Пользователь добавлен</div>
+
+        <div class="user_add_exists">Пользователь уже существует в чате</div>
+
+        <div class="admin_add_exists">Вы пытаетесь добавить самого себя</div>
+
+        <div class="user_not_exist_chat">Пользователь не существует в чате</div>
+
+        <div class="problem_delete_user">Произошли какие-то неизвестные ошибки при удалении</div>
+
+        <div class="text_in_edit">Завершите редактирование или закройте окно редактирования</div>
+
+        <div class="chat_name_exist">Такое имя чата уже существует</div>
+
+        <div class="problem_update_name_chat">Произошли какие-то неизвестные ошибки при обновлении имени чата</div>
+
+        <div class="success_update_name_chat">Имя чата изменено</div>
+
+        <div class="WindowAddUsersPanel">
+            <div class="close_window_4_panel"></div>
+
+            <div class="ListUsersAddNewUserChatPanel"></div>
+        </div>
     </div>
 
     <script th:src="@{/chat_websocket/js/User/WebSocket/ErrorSocket.js}"></script>
@@ -218,11 +242,7 @@
     <script th:src="@{/chat_websocket/js/scroll.js}"></script>
     <script th:src="@{/chat_websocket/js/UploadFile.js}"></script>
     <script th:src="@{/chat_websocket/js/ToolsChatOpenChat.js}"></script>
-    <script th:src="@{/chat_websocket/js/click/ClickOnClose__window_5.js}"></script>
-    <script th:src="@{/chat_websocket/js/click/ClickBtnDeleteAdminPanelStart.js}"></script>
     <script th:src="@{/chat_websocket/js/AdminPanelInnerHtml/InnerHtmlAdminPanel.js}"></script>
-    <script th:src="@{/chat_websocket/js/click/ClickBtnAddUser.js}"></script>
-    <script th:src="@{/chat_websocket/js/click/ClickOnClose__window_4.js}"></script>
     <script th:src="@{/chat_websocket/js/ToolsAdmin/EditDescChat.js}"></script>
     <script th:src="@{/chat_websocket/js/ToolsAdmin/BtnDeleteChat.js}"></script>
     <script th:src="@{/chat_websocket/js/ToolsAdmin/BtnAdminNameChat.js}"></script>
@@ -231,6 +251,5 @@
     <script th:src="@{/chat_websocket/js/User/Status/Offline.js}"></script>
     <script th:src="@{/chat_websocket/js/User/Status/Online.js}"></script>
     <script th:src="@{/chat_websocket/js/LoadingContent/LoadingContent.js}"></script>
-    <script th:src="@{/chat_websocket/js/User/Status/visibilitychange.js}"></script>
 </body>
 </html>

@@ -1,30 +1,3 @@
-function WaitAnswerFromAddFile () {
-    document.querySelector('.list_chat').innerHTML+=`
-                        <div class="MessageMainImageDesc">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0px; background: url(&quot;/AvatarImage/georgii_2/22ab8814-6fef-4507-aedf-d8c8c0ed95f7&quot;) center center / 40px no-repeat;"><p>georgii_2</p></div>
-                            
-                            <div class="ImageBorderImageDesc">
-                                <div class="ItemUsername">georgii_2</div>
-
-                                <div class="ImageChat_1">Перезагрузите страницу для просмотра изображения</div>
-                            
-                                <div class="TextImage"></div>
-                            
-                                <div class="tools_message">
-                                    <div class="delete_message_image"></div>
-                                </div>
-                                
-                                <div class="IdMessage">120</div>
-                                
-                                <div class="BlockTicketTimeStamp">                        
-                                    <div title="01.06.2023 18:49:0" class="TimeStampShort">18:49</div>
-                                    <div class="TickAsRead"></div>
-                                </div>
-                            </div>
-                        </div>
-                `
-}
-
 document.querySelector('.BtnSendFile').addEventListener('click', () => {
     let file = document.querySelector('.file')
 
@@ -116,8 +89,7 @@ document.querySelector('.BtnSendFile').addEventListener('click', () => {
                 let request = new XMLHttpRequest();
                 request.open("POST", "/upload");
                 request.send(formData);
-                // window.location.reload()
-                WaitAnswerFromAddFile()
+                window.location.reload()
             }
 
             else {
@@ -142,8 +114,7 @@ document.querySelector('.BtnSendFile').addEventListener('click', () => {
                 let request = new XMLHttpRequest();
                 request.open("POST", "/upload");
                 request.send(formData);
-                // window.location.reload()
-                WaitAnswerFromAddFile()
+                window.location.reload()
             }
         }
 

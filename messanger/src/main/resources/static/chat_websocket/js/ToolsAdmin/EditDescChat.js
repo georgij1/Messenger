@@ -1,13 +1,18 @@
 class EditDescChat {
     EditDescChatBtnClick () {
         document.querySelector('.BtnEditDescChat').addEventListener('click', () => {
+            document.querySelector('.FlexGroup').classList.add('none')
+            document.querySelector('.ListMessage').classList.add('none')
             console.log(document.querySelector('.BtnEditDescChat'))
             document.querySelector('.window_change_desc_chat').classList.add('flex')
+            document.querySelector('.text_in_edit').classList.add('block')
+            document.querySelector('.height').classList.add('none')
+            document.querySelector('.body_chat').classList.add('none')
 
             document.querySelector('.window_change_desc_chat').innerHTML+=`
-                <div class="close_edit_name_chat"></div>
+                <div class="close_edit_name_chat edit_chat_name_left"></div>
                 
-                <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.BorderDescriptionChat').textContent}">
+                <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.DescChatItem').textContent}">
                 
                 <div class="tools_edit_name_chat">
                     <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
@@ -16,10 +21,7 @@ class EditDescChat {
 
             for (let CloseEditNameChat of document.querySelectorAll('.close_edit_name_chat')) {
                 CloseEditNameChat.addEventListener('click', () => {
-                    document.querySelector('.window_change_desc_chat').removeChild(document.querySelector('.close_edit_name_chat'))
-                    document.querySelector('.window_change_desc_chat').removeChild(document.querySelector('.InputChangeName'))
-                    document.querySelector('.window_change_desc_chat').removeChild(document.querySelector('.tools_edit_name_chat'))
-                    document.querySelector('.window_change_desc_chat').classList.remove('flex')
+                    window.location.reload()
                 })
             }
 
@@ -54,6 +56,9 @@ class EditDescChat {
                         }, 1000)
 
                         document.querySelector('.BorderDescriptionChat').textContent=`${formData.NewNameDescChat}`
+                    })
+                    .then(() => {
+                        window.location.reload()
                     })
             })
         })

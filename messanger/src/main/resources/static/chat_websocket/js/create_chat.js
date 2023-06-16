@@ -3,8 +3,8 @@ let window_create_chat = document.querySelector('.window_create_chat');
 let body_new = document.querySelector('.body')
 let body_1 = document.querySelector('.body_1')
 let close_window = document.querySelector('.close_window')
-let user_chat = []
-let ImageUser = []
+let list_users = document.querySelector('.list_users')
+let users = [];
 
 btn_create_chat.addEventListener('click', () => {
     window_create_chat.classList.toggle('visible')
@@ -22,10 +22,6 @@ close_window.addEventListener('click', () => {
     body_new.classList.toggle('body')
     body_new.classList.remove('none')
 })
-
-let list_users = document.querySelector('.list_users')
-
-let users = [];
 
 fetch('/all_users', {
         headers: new Headers({
@@ -56,7 +52,7 @@ fetch('/all_users', {
 
             let user = document.querySelectorAll('.user')
 
-            console.log('PRIVET', user)
+            console.log('user - ', user)
 
             for (let user_itter of user) {
                 user_itter.addEventListener('click', () => {
@@ -120,8 +116,34 @@ create_chat.addEventListener('click', () => {
                 },
                 body: JSON.stringify(formData)
             })
-                .then(() => {console.log(formData)})
-            // .then(() => {window.location.reload()})
+                .then((res) => {
+                    console.log(res.status)
+
+                    if (res.status === 200) {
+                        console.log('ok')
+
+                        document.querySelector('.success_create_chat').classList.add('block')
+
+                        setTimeout(() => {
+                            document.querySelector('.success_create_chat').classList.remove('block')
+                            window.location.reload()
+                        }, 1000)
+                    }
+
+                    else if (res.status === 500) {
+                        console.log('this chat is exist')
+
+                        document.querySelector('.name_chat_exist').classList.add('block')
+
+                        setTimeout(() => {
+                            document.querySelector('.name_chat_exist').classList.remove('block')
+                        }, 1000)
+                    }
+
+                    else {
+                        console.log('we are unknown response')
+                    }
+                })
         }
 
         else {

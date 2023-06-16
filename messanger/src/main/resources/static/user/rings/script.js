@@ -56,6 +56,7 @@ RequestChat.addEventListener('click', () => {
     ContentMessageFromChat.classList.remove('block')
     BtnGetSendAccessOfferCancel.classList.add('block')
     ContentCancelRequestChat.classList.remove('block')
+    document.querySelector('.BtnHeader').classList.add('MarginTopTenPixel')
 
     let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
     if (CloseWindowRequestId.classList.contains("block")) {
@@ -87,6 +88,7 @@ CloseWindowRequest.addEventListener('click', () => {
     burger_menu_1.classList.remove('none')
     ContentCancelRequestChat.classList.remove('block')
     BtnGetSendAccessOfferCancel.classList.remove('block')
+    document.querySelector('.BtnHeader').classList.remove('MarginTopTenPixel')
 })
 
 AllRequest.addEventListener('click', () => {

@@ -129,15 +129,15 @@ for (let list_chat_itter of list_chats) {
         data.forEach(item => {
             for (let list_chats_itter of list_chats) {
                 list_chats_itter.innerHTML += `
-                        <div class="chat">
-                            <div class="id">${item.id}</div>
-                            <div class="image"></div>
-                            <div class="name">${item.name}</div>
-                            <div class="owner">${item.owner}</div>
-                        </div>
-                    `
-                let image_user_1 = document.querySelectorAll('.image');
-                for (let image_user_new of image_user_1) {
+                    <div class="chat">
+                        <div class="id">${item.id}</div>
+                        <div class="image"></div>
+                        <div class="name">${item.name}</div>
+                        <div class="owner">${item.owner}</div>
+                    </div>
+                `
+
+                for (let image_user_new of document.querySelectorAll('.image')) {
                     image_user_new.style.background = `url(${item.image_chat})` + 'center no-repeat'
                     image_user_new.style.backgroundSize = `80%`
                     image_user_new.style.borderRadius = `50px`
@@ -146,116 +146,14 @@ for (let list_chat_itter of list_chats) {
                 }
             }
 
-            let chat = document.querySelectorAll('.chat')
-
-            for (let chat_itter of chat) {
+            for (let chat_itter of document.querySelectorAll('.chat')) {
                 chat_itter.addEventListener('click', (event) => {
-                    console.log(event.currentTarget.children[0].textContent)
-                    console.log(event.currentTarget.children[2].textContent)
-
-                    let UsernameNew = document.querySelector('.username').textContent
-                    console.log(UsernameNew)
-                    let ChatName = event.currentTarget.children[2].textContent
-                    let AdminChat = event.currentTarget.children[3].textContent
-                    console.log(AdminChat)
                     console.log(event.currentTarget)
-
-                    const formData = {
-                        "NameChat": event.currentTarget.children[2].textContent,
-                        "username": UsernameNew
-                    }
-
-                    let IDChat = event.currentTarget.children[0].textContent
-                    console.log(IDChat)
-
-                    fetch(`/Access`, {
-                        headers: new Headers({
-                            'Content-Type': 'application/json'
-                        }),
-                        mode: "cors",
-                        method: 'POST',
-                        body: JSON.stringify(formData)
-                    })
-                        .then(response => response.json())
-                        .then(data => (data.forEach(item => {
-                            console.log(item.status)
-                            let PermissionDenied = document.querySelector('.PermissionDenied')
-                            let list_chats = document.querySelector('.list_chats')
-                            let CloseWindowPermissionDenied = document.querySelector('.CloseWindowPermissionDenied')
-                            let flex_content = document.querySelector('.flex-content')
-                            let content_all_chat = document.querySelector('.content_all_chat')
-                            let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
-                            let BtnSendAccess = document.querySelector('.BtnSendAccess')
-                            document.querySelector('.burger_menu').classList.add('none')
-
-                            if (item.status === "success") {
-                                console.log("success")
-                                console.log(event.currentTarget)
-                                // console.log(event.currentTarget.querySelector('.name'))
-                                console.log(event.target)
-                                console.log(event.target.querySelector('.name'))
-                                console.log(event.target.children[0])
-
-                                if (event.currentTarget === null) {
-                                    console.log('this method not working')
-                                    window.open(`/chat/${IDChat}/${document.querySelector('.username').textContent}/${event.target.textContent}#BottomPage`, '_self')
-                                }
-
-                                else {
-                                    window.open(`/chat/${IDChat}/${document.querySelector('.username').textContent}/${event.target.querySelector('.name').textContent}#BottomPage`, '_self')
-                                }
-
-                                PermissionDenied.classList.remove('visible')
-                                list_chats.classList.remove('none')
-                                flex_content.classList.remove('none')
-                                content_all_chat.classList.remove('none')
-                                buttons_nav_chats.classList.remove('none')
-                            }
-
-                            else {
-                                PermissionDenied.classList.add('visible')
-                                list_chats.classList.add('none')
-                                CloseWindowPermissionDenied.classList.add('visible')
-                                flex_content.classList.add('none')
-                                content_all_chat.classList.add('none')
-                                content_all_chat.classList.remove('visible')
-                                buttons_nav_chats.classList.add('none')
-                            }
-
-                            CloseWindowPermissionDenied.addEventListener('click', () => {
-                                window.location.reload()
-                            })
-
-                            let ListAccess = document.querySelector('.ListAccess')
-
-                            BtnSendAccess.addEventListener('click', () => {
-                                console.log(ChatName)
-                                ListAccess.innerHTML=`
-                                    <div class="AccessToSent">Вы отправили за прос на вступление в чат ${ChatName}</div>
-                                `
-
-                                const formDataSendAccess = {
-                                    "UsernameSentOfferAccess": UsernameNew,
-                                    "chat_name": ChatName,
-                                    "UsernameOwnerChat": AdminChat
-                                }
-
-                                fetch('/UserPostAccessChat', {
-                                    headers: new Headers({
-                                        'Content-Type': 'application/json'
-                                    }),
-                                    mode: "cors",
-                                    method: 'POST',
-                                    body: JSON.stringify(formDataSendAccess)
-                                })
-                                    .then(res => console.log(res))
-                            })
-                        })))
+                    window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
                 })
             }
 
-            let btn_create_chat = document.querySelector('.btn_create_chat')
-            btn_create_chat.addEventListener('click', () => {
+            document.querySelector('.btn_create_chat').addEventListener('click', () => {
                 let body_1_new_1 = document.querySelector('.body_1')
                 body_1_new_1.classList.remove('none')
                 let header = document.querySelector('.header')
@@ -272,14 +170,16 @@ document.querySelector('.btn_search').addEventListener('click', () => {
     i++
     console.log("i - ", i)
 
-    fetch(`find/by/NameChat/${document.querySelector('.username').textContent}/${document.querySelector('.InputSearch').value}`, {
-        headers: new Headers({
-            'Content-Type': 'application/json'
-        }),
-        mode: "cors"
-    })
-        .then((res) => res.json())
-        .then(data => data.forEach(item => {
+    if (document.querySelector('.InputSearch').value.length > 0) {
+        document.querySelector('.InputSearch').classList.remove('value_null')
+        fetch(`find/by/NameChat/${document.querySelector('.username').textContent}/${document.querySelector('.InputSearch').value}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            mode: "cors"
+        })
+            .then((res) => res.json())
+            .then(data => data.forEach(item => {
                 console.log(item)
 
                 if (item.exists === false) {
@@ -329,6 +229,11 @@ document.querySelector('.btn_search').addEventListener('click', () => {
                     })
                 }
             }))
+    }
+
+    else {
+        document.querySelector('.InputSearch').classList.add('value_null')
+    }
 })
 
 let CountPaginationOffset = 0
@@ -1263,4 +1168,8 @@ document.querySelector('.clear_history').addEventListener('click', () => {
         .then(data => data.forEach(item => {
             console.log(item)
         }))
+})
+
+document.querySelector('.close_window_new').addEventListener('click', () => {
+    window.location.reload()
 })

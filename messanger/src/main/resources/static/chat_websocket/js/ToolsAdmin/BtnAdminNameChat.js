@@ -3,12 +3,20 @@ class BtnAdminEditNameChat {
         document.querySelector('.BtnEditNameChat').addEventListener('click', () => {
             console.log(document.querySelector('.BtnEditNameChat'))
 
+            document.querySelector('.ListMessage').classList.add('none')
+
+            document.querySelector('.FlexGroup').classList.add('none')
+
+            document.querySelector('.text_in_edit').classList.add('block')
+
+            document.querySelector('.height').classList.add('none')
+
             document.querySelector('.window_change_chat_name').classList.add('flex')
 
             document.querySelector('.window_change_chat_name').innerHTML+=`
-                    <div class="close_edit_name_chat"></div>
+                    <div class="close_edit_name_chat edit_chat_name_left"></div>
                     
-                    <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.BorderNameChat').textContent}">
+                    <input type="text" class="InputChangeName" placeholder="Введите новое название чата" value="${document.querySelector('.NameChatItem').textContent}">
                     
                     <div class="tools_edit_name_chat">
                         <input type="button" class="InputBtnSaveChangeNameChat" value="Сохранить">                
@@ -17,10 +25,7 @@ class BtnAdminEditNameChat {
 
             for (let CloseEditNameChat of document.querySelectorAll('.close_edit_name_chat')) {
                 CloseEditNameChat.addEventListener('click', () => {
-                    document.querySelector('.window_change_chat_name').removeChild(document.querySelector('.close_edit_name_chat'))
-                    document.querySelector('.window_change_chat_name').removeChild(document.querySelector('.InputChangeName'))
-                    document.querySelector('.window_change_chat_name').removeChild(document.querySelector('.tools_edit_name_chat'))
-                    document.querySelector('.window_change_chat_name').classList.remove('flex')
+                    window.location.reload()
                 })
             }
 
@@ -98,6 +103,9 @@ class BtnAdminEditNameChat {
                         }, 1000)
 
                         document.querySelector('.BorderNameChat').textContent=`${formData.NewNameChat}`
+                    })
+                    .then(() => {
+                        window.open('/websocket_chat', '_self')
                     })
             })
         })
