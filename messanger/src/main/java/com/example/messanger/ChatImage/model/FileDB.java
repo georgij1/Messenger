@@ -31,8 +31,8 @@ public class FileDB {
 
     public String text;
 
-    public FileDB(String name, String type, byte[] data, String timeStampShort, String timeStampLong, String getChatID, Integer getChatSender, String PlaceHolderImage) {
-        this.image_name = name;
+    public FileDB(String image_name, String type, byte[] data, String timeStampShort, String timeStampLong, String getChatID, Integer getChatSender, String PlaceHolderImage) {
+        this.image_name = image_name;
         this.type = type;
         this.data = data;
         this.time_stamp_short = timeStampShort;
