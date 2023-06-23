@@ -423,11 +423,13 @@ document.querySelector('.a_i').addEventListener('click', () => {
                 if (document.querySelector('.chat') !== null && document.querySelector('.a_i_chats_no_sort') === null) {
                     for (let chat_itter of document.querySelectorAll('.chat')) {
                         document.querySelector('.list_chats').removeChild(chat_itter)
-
-                        chat_itter.addEventListener('click', (event) => {
-                            window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
-                        })
                     }
+                }
+
+                for (let chat_itter of document.querySelectorAll('.chat')) {
+                    chat_itter.addEventListener('click', (event) => {
+                        window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
+                    })
                 }
             }))
 
