@@ -1,32 +1,5 @@
 let arrowBottom = document.querySelector('#arrowBottom')
 
-window.onscroll = onScroll
-
-let scroll = 0;
-
-function onScroll() {
-    let top = window.pageYOffset;
-
-    arrowBottom.hidden = true
-
-    if (scroll > top) {
-        arrowBottom.hidden = true
-        btn_down_1.classList.remove('none')
-    }
-
-    else if (scroll < top) {
-        arrowBottom.hidden = false
-        btn_down_1.classList.remove('none')
-    }
-
-    if (document.body.clientHeight === Math.round(pageYOffset + 714)) {
-        arrowBottom.hidden = true
-        console.log('1')
-    }
-
-    scroll = top;
-}
-
 arrowBottom.hidden = true
 
 window.onload = () => {
@@ -48,11 +21,6 @@ window.onload = () => {
         window_load.classList.add('block')
     }
 }
-
-btn_down_1.addEventListener('click', () => {
-    btn_down_1.classList.add('none')
-    scrollTo(pageXOffset, document.documentElement.scrollHeight);
-})
 
 arrowBottom.addEventListener('click', () => {
     arrowBottom.hidden = true

@@ -27,7 +27,7 @@ import java.util.Objects;
 public class LoginConroller {
     public UserRepo userRepository;
 
-    //  онтроллер дл€ отображени€ страницы auth/login.html в браузере
+    // controller for visible pages auth/login.html in browser
     @GetMapping("login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         var cookies = request.getCookies();
@@ -59,7 +59,7 @@ public class LoginConroller {
         return "auth/login";
     }
 
-    //  онтроллер дл€ авторизации - дл€ добавлени€ jwt tokens
+    // Controller for auth - for add jwt tokens
     @PostMapping("login")
     public String login(LoginForm form, Model model, RegistrationForm registrationForm, HttpServletResponse response, HttpServletRequest request) {
         var cookies = request.getCookies();
@@ -69,6 +69,11 @@ public class LoginConroller {
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 System.out.println("form_login is null" + "or is " + form.getLogin());
+                return "/auth/ErrorsPage/error_login";
+            }
+
+            else if (Objects.equals(form.getPassword(), "")) {
+                return "/auth/ErrorsPage/password_not_correct";
             }
 
             else {

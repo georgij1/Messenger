@@ -20,8 +20,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     private final List<DeleteMessage> messages = new ArrayList<>();
 
     @Override
-    public void handleTextMessage(@NotNull WebSocketSession session, TextMessage message)
-            throws IOException, java.io.IOException {
+    public void handleTextMessage(@NotNull WebSocketSession session, TextMessage message) throws IOException, java.io.IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         DeleteMessage messageObj = objectMapper.readValue(message.getPayload(), DeleteMessage.class);
         messages.add(messageObj);

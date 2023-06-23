@@ -5,7 +5,8 @@ create table chat
     desc_chat text default 'Описания нет',
     type text,
     image_chat text default '../image/settings/icon_profile.png',
-    owner text
+    owner text,
+    time_creator text
 );
 
 insert into chat (

@@ -86,7 +86,12 @@ input {
     text-align: center;
     border: 2px solid bisque;
     border-radius: 10px;
-    margin-top: 44px;
+    margin: 0;
+}
+
+.AddFlexJs {
+    flex-direction: column;
+    gap: 20px;
 }
 
 .BtnUpdateImage, .BtnEditUsername {
@@ -113,7 +118,7 @@ input {
     margin-bottom: 20px;
 }
 
-.GroupYorOwn {
+.one_chat {
     margin-top: 44px;
     background: azure;
     box-shadow: 0 0 10px blanchedalmond;
@@ -300,9 +305,15 @@ input {
         align-items: center;
     }
 
-    .GroupYorOwn {
+    .list_my_chats {
         display: grid;
         grid-template-columns: repeat(2,1fr);
+        gap: 30px;
+    }
+
+    .AddFlexJs {
+        flex-direction: revert;
+        gap: 20px;
     }
 
     .image {

@@ -1,4 +1,4 @@
-// Контроллеры для главной страницы
+// Controllers for MainPage
 
 package com.example.messanger;
 

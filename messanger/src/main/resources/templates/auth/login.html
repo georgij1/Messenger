@@ -6,14 +6,17 @@
     <title>Авторизация</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/user/main_page/main_page.css}">
-    <link rel="stylesheet" th:href="@{/login/login.css}">
     <link rel="stylesheet" th:href="@{/registration/registration.css}">
+    <link rel="stylesheet" th:href="@{/login/login.css}">
     <link rel="stylesheet" th:href="@{user/scrollbar_register.css}">
 </head>
 
 <body>
     <div class="header">
         <p>Авторизация</p>
+
+        <div class="status_websocket_ok">Есть доступ к серверу</div>
+        <div class="status_websocket_error">На сервера какая-то ошибка</div>
     </div>
 
     <div class="padding"></div>
@@ -22,24 +25,27 @@
         <div class="border">
             <div class="login_div_flex">
                 <label class="label_input" for="login">Логин</label>
-                <input id="login" placeholder="Введите логин" name="login" class="input_login" required>
+                <input readonly onfocus="this.removeAttribute('readonly');" id="login" placeholder="Введите логин" name="login" class="input_login" required>
             </div>
         </div>
 
         <div class="border">
             <div class="password_div_flex">
                 <label class="label_input" for="password">Пароль</label>
-                <input id="password" placeholder="Введите пароль" name="password" type="password" class="input_password" required>
+                <input id="password" readonly onfocus="this.removeAttribute('readonly');" placeholder="Введите пароль" name="password" type="password" class="input_password" required>
             </div>
         </div>
 
         <input type="submit" value="Авторизоваться" class="registration_user">
     </form>
 
-    <p class="info">Если у вас нет аккаунта <a th:href="registration">зарегистрируйтесь</a></p>
+    <p class="info">Если у вас нет аккаунта <a th:href="registration" class="AuthLink">зарегистрируйтесь</a></p>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
+    <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
+    <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
+    <script th:src="@{/user/WebSocket/WebSocketAuth.js}"></script>
+    <script th:src="@{/user/Detected/devices.js}"></script>
+    <script th:src="@{/user/Detected/content.js}"></script>
+    <script th:src="@{/user/Detected/find.js}"></script>
 </body>
 </html>

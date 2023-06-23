@@ -10,7 +10,9 @@ let FormEditUserName = document.querySelector('.FormEditUserName')
 close_window.addEventListener('click', () => {
     return history.back()
 })
+
 BtnEditUsername.addEventListener('click', () => {
+    document.querySelector('.status1').classList.add('none')
     ImageUser.classList.add('none')
     document.querySelector('.UserName').classList.add('none')
     BtnEditUsername.classList.add('none')
@@ -22,7 +24,9 @@ BtnEditUsername.addEventListener('click', () => {
         FlexItter.classList.remove('flex')
     }
 })
+
 close_window_1.addEventListener('click', () => {
+    document.querySelector('.status1').classList.add('none')
     ImageUser.classList.remove('none')
     document.querySelector('.UserName').classList.remove('none')
     BtnEditUsername.classList.remove('none')
@@ -42,6 +46,7 @@ FormEditUserName.innerHTML=`
     </form>
     <p>Внимание после изменении имени войдите заново</p>
 `
+
 let BtnSaveNewName = document.querySelector('.BtnSaveNewName')
 BtnSaveNewName.addEventListener('click', () => {
     let InputUserName = document.querySelector('.InputUserName')
@@ -57,11 +62,22 @@ BtnSaveNewName.addEventListener('click', () => {
             console.log(item)
             console.log(InputUserName.value)
             let ImageUser = document.querySelector('.ImageUser')
-            ImageUser.innerHTML+=`<img src="${item.image}" alt="">`
+
+            if (item.id_image === '/image/settings/icon_profile.png') {
+                console.log('if is running')
+                ImageUser.innerHTML+=`<img src="${item.id_image}" alt="">`
+            }
+
+            else {
+                console.log('else')
+                ImageUser.innerHTML+=`<img src="/AvatarImage/${document.querySelector('.UserName').textContent}/${item.id_image}" alt="">`
+            }
+
             const FromData = {
                 "NewUsername": InputUserName.value,
                 "OldUserName": document.querySelector('.UserName').textContent
             }
+
             fetch(`/EditPersonsById/${item.id}`, {
                 headers: new Headers({
                     'Content-Type': 'application/json'
@@ -86,7 +102,16 @@ fetch(`/GetIdPerson/${UserName}`, {
     .then(response => response.json())
     .then((data) => (data.forEach((item) => {
         let ImageUser = document.querySelector('.ImageUser')
-        ImageUser.innerHTML+=`<img src="${item.image}" alt="">`
+
+        if (item.id_image === 'DefaultAva') {
+            console.log('if is running')
+            ImageUser.innerHTML+=`<img src="/image/settings/icon_profile.png" alt="">`
+        }
+
+        else {
+            console.log('else')
+            ImageUser.innerHTML+=`<img src="/AvatarImage/${document.querySelector('.UserName').textContent}/${item.id_image}" alt="">`
+        }
     })))
 
 let DeleteAccount_1 = document.querySelectorAll('.DeleteAccount')

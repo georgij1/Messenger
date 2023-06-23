@@ -6,7 +6,7 @@ let header = document.querySelectorAll('.header')
 let body_class = document.querySelectorAll('.body')
 let flex_content = document.querySelectorAll('.flex-content')
 
-fetch('/image_profile',{
+fetch(`/AvatarImage/${document.querySelector('.username').textContent}`,{
     headers: new Headers({
         'Content-Type': 'application/json'
     }),
@@ -14,15 +14,27 @@ fetch('/image_profile',{
 })
     .then(response => response.json())
     .then((data) => (data.forEach((item) => {
-        console.log(item.image)
-        let image_profile = document.querySelectorAll('.image_profile')
-        for (let image_profile_1 of image_profile) {
-            image_profile_1.style.background=`url(${item.image})` + 'no-repeat'
-            image_profile_1.style.backgroundSize=`100%`
-            // image_profile_1.style.height=`100%`
-            image_profile_1.style.width=`34%`
-            image_profile_1.style.borderRadius=`50px`
-            // image_profile_1.innerHTML=`<div style="background: url(${item.image}) no-repeat; background-size: 71px; height: 60px; width: 70px; margin-left: -18px">`
+        if (item.id_image === '/image/settings/icon_profile.png') {
+            console.log('icon for default')
+
+            let image_profile = document.querySelector('.image_profile')
+
+            console.log('1')
+            image_profile.style.background=`url(${item.id_image})` + 'no-repeat'
+            image_profile.style.backgroundSize=`100%`
+            image_profile.style.width=`34%`
+            image_profile.style.borderRadius=`50px`
+        }
+
+        else {
+            console.log('else is running')
+            let image_profile = document.querySelector('.image_profile')
+            console.log('1')
+            console.log(`url(/AvatarImage/${document.querySelector('.username').textContent}/${item.id_image})`)
+            image_profile.style.background=`url(/AvatarImage/${document.querySelector('.username').textContent}/${item.id_image})` + 'no-repeat'
+            image_profile.style.backgroundSize=`100%`
+            image_profile.style.width=`34%`
+            image_profile.style.borderRadius=`50px`
         }
     })));
 
@@ -32,12 +44,9 @@ btn_up.addEventListener('click', () => {
     delete_account.classList.toggle('block')
 })
 
-let hello = document.querySelector('.hello')
 let flex = document.querySelector('.flex')
-let buttons_nav_chats = document.querySelector('.buttons_nav_chats')
+let buttons_nav_chats = document.querySelector('.content')
 let h1 = document.querySelectorAll('h1')
-
-console.log(hello)
 
 for (let min_size_windo of min_size_window) {
     min_size_windo.addEventListener('click', () => {
@@ -46,6 +55,7 @@ for (let min_size_windo of min_size_window) {
                 H1Itter.classList.remove('h1HeaderOpened')
             }
             buttons_nav_chats.classList.remove('ButtonsNavChatsHeaderOpened')
+            document.querySelector('.window_find_chat').classList.remove('window_find_chat_header_open')
             min_size_windo.classList.toggle('none')
             head.classList.toggle('visible')
             for (let body of body_class) {
@@ -79,6 +89,7 @@ for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
         for (let head of header) {
             buttons_nav_chats.classList.add('ButtonsNavChatsHeaderOpened')
+            document.querySelector('.window_find_chat').classList.add('window_find_chat_header_open')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
             for (let H1Itter of h1) {

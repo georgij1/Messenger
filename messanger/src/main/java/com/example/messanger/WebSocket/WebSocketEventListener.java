@@ -23,6 +23,7 @@ public class WebSocketEventListener {
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         System.out.println("Received a new web socket connection");
         System.out.println("event connect - " + event.getMessage());
+        System.out.println("event connect - " + event);
     }
 
     @EventListener
@@ -34,11 +35,21 @@ public class WebSocketEventListener {
         System.out.println("event disconnect - " + event);
 
         if (username != null) {
-            System.out.println("User Disconnected: " + username);
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            if (username.equals("Имя")) {
+                System.out.println("User Disconnected: " + username);
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setType(ChatMessage.MessageType.LEAVE);
+                chatMessage.setSender("ExampleUserWebsocket");
+                messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            }
+
+            else {
+                System.out.println("User Disconnected: " + username);
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setType(ChatMessage.MessageType.LEAVE);
+                chatMessage.setSender(username);
+                messagingTemplate.convertAndSend("/topic/public", chatMessage);
+            }
         }
     }
 }

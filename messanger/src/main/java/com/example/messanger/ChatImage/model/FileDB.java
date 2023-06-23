@@ -12,7 +12,7 @@ import lombok.*;
 public class FileDB {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
-    public String id_image;
+    public String id_image_message;
 
     private String image_name;
 

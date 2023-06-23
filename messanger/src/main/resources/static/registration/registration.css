@@ -8,6 +8,69 @@
     background: rgba(42, 139, 242, 1.25);
 }
 
+.GeneratePasswordContent h2 {
+    text-align: center;
+    padding: 10px 0;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    display: block;
+    margin: 20px auto;
+    width: 300px;
+}
+
+.FlexLengthPassword {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    box-shadow: 0 0 10px beige;
+}
+
+.LabelResult, .label_length {
+    cursor: pointer;
+    padding: 10px;
+    background: aliceblue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    margin: 10px 10px 10px 10px;
+}
+
+.LabelResult:hover, .label_length:hover {
+    box-shadow: none;
+}
+
+.ResultInput {
+    cursor: pointer;
+    margin: 22px auto 10px;
+    display: block;
+}
+
+.ResultInput:hover {
+    box-shadow: 0 0 10px bisque;
+}
+
+.copy-result {
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 100px;
+    background: antiquewhite;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.copy-result:hover {
+    box-shadow: none;
+}
+
 .header p {
     height: 55px;
     font-weight: 800;
@@ -30,15 +93,38 @@
     padding-top: 100px;
 }
 
-.border {
+.border, .result-container, .input-group{
     width: 300px;
     height: max-content;
     background: rgba(42, 139, 242, 0.25);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    margin: auto;
-    margin-bottom: 20px;
+    margin: auto auto 20px;
     padding-bottom: 30px;
+}
+
+.result-container, .input-group, .generate-btn {
+    display: none;
+}
+
+.BtnShowGenerator, .BtnCloseGenerator {
+    padding: 10px;
+    background: aliceblue;
+    width: 276.8px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    cursor: pointer;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.BtnCloseGenerator {
+    display: none;
+}
+
+.BtnShowGenerator:hover, .BtnCloseGenerator:hover {
+    box-shadow: none;
 }
 
 .label_input {
@@ -68,6 +154,20 @@ input, .send_icon_profile {
     text-transform: capitalize;
     color: #000000;
     padding-left: 15px;
+    cursor: pointer;
+}
+
+.InputNumbers, .InputSymbols {
+    width: 15vW;
+    height: 15vW;
+}
+
+input[type="checkbox"] {
+    border: 2px solid;
+}
+
+input:checked {
+    border-radius: 10px;
 }
 
 input::placeholder, input::-ms-value {
@@ -102,6 +202,12 @@ input::placeholder, input::-ms-value {
 
 .info_auth {
     text-align: center;
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 276.8px;
+    margin: auto auto 20px;
 }
 
 .input_password, .login, .password, .repeat_password, .input_login {
@@ -123,19 +229,350 @@ input {
 .icon_profile {
     display: flex;
     flex-direction: column;
-    margin: auto;
     text-align: center;
     gap: 15px;
-    margin-top: 20px;
+    margin: 20px auto auto;
 }
 
 .warning {
     text-align: center;
 }
 
+input, output {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+}
+
+output {
+    background: #ff4500;
+    padding: 5px 16px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+input[type="number"] {
+    width: 40px;
+    padding: 4px 5px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 200px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6) linear-gradient(#ff4500, #ff4500) no-repeat;
+    background-size: 70% 100%;
+    margin: 40px 15px 25px 10px;
+    border: 2px solid bisque;
+    box-shadow: 0 0 10px beige;
+    cursor: e-resize;
+}
+
+input[type="range"]:hover {
+    box-shadow: none;
+}
+
+.SymbolText {
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px beige;
+    cursor: pointer;
+}
+
+.WindowCopiedSuccess {
+    display: none;
+}
+
+.SymbolText:hover {
+    box-shadow: none;
+}
+
+.FlexSymbol {
+    display: flex;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.generate-btn {
+    cursor: pointer;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    box-shadow: 0 0 10px bisque;
+    width: 300px;
+}
+
+.generate-btn:hover {
+    box-shadow: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff4500;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff4500;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-ms-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff4500;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #ff0200;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #ff0200;
+}
+
+input[type="range"]::-ms-thumb:hover {
+    background: #ff0200;
+}
+
+input[type=range]::-webkit-slider-runnable-track  {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+input[type=range]::-moz-range-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+input[type="range"]::-ms-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+.ToggleLabel {
+    margin: 2em;
+}
+
+.Toggle, .ToggleNumbers {
+    display: none;
+}
+
+.Toggle+.ToggleLabel,
+.Toggle+.ToggleLabel::before,
+.Toggle+.ToggleLabel::after {
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.ToggleNumbers+.ToggleLabel,
+.ToggleNumbers+.ToggleLabel::before,
+.ToggleNumbers+.ToggleLabel::after {
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.Toggle+.ToggleLabel, .ToggleNumbers+.ToggleLabel {
+    display: inline-block;
+    position: relative;
+    width: 130px;
+    height: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.Toggle+.ToggleLabel::before, .ToggleNumbers+.ToggleLabel::before {
+    display: block;
+    content: attr(data-off-label);
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+.Toggle+.ToggleLabel::after, .ToggleNumbers+.ToggleLabel::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.Toggle:checked+.ToggleLabel::before, .ToggleNumbers:checked+.ToggleLabel::before {
+    content: attr(data-on-label);
+    left: 14px;
+    right: auto;
+    color: #fff;
+}
+
+.Toggle:checked+.ToggleLabel::after {
+    left: 55px;
+    background-color: #f7f7f7;
+}
+
+.GeneratePasswordLink {
+    padding: 10px;
+    background: antiquewhite;
+    margin-top: 10px;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: 2px solid underline blue;
+    color: blue;
+    cursor: pointer;
+}
+
+.GeneratePasswordLink:hover {
+    text-decoration: none;
+}
+
+.ToggleNumbers:checked+.ToggleLabel::after {
+      left: 60px;
+      background-color: #f7f7f7;
+}
+
+.Toggle+.ToggleLabel, .ToggleNumbers+.ToggleLabel {
+    background-color: #ccc;
+    width: 212px;
+}
+
+.Toggle+.ToggleLabel::before {
+    color: #999;
+}
+
+.Toggle:checked+.ToggleLabel, .ToggleNumbers:checked+.ToggleLabel {
+    background-color: #3498db;
+    width: 200px;
+}
+
+.Toggle:checked+.ToggleLabel::before,
+.ToggleNumbers:checked+.ToggleLabel::before {
+    color: #fff;
+}
+
+.send_icon_profile:hover {
+    box-shadow: 0 0 10px bisque;
+}
+
+.WindowCopiedSuccess {
+    padding: 10px;
+    background: aliceblue;
+    box-shadow: 0 0 10px bisque;
+    border: 2px solid bisque;
+    border-radius: 10px;
+}
+
+.AuthLink {
+    text-decoration: 2px solid underline blue;
+    color: blue;
+}
+
+.AuthLink:hover {
+    text-decoration: none;
+}
+
+.OR {
+    padding: 10px;
+    background: antiquewhite;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 276.8px;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    background: url("../image/settings/icon_profile.png") no-repeat;
+    background-size: 210px;
+    border: 2px solid bisque;
+    box-shadow: 0 0 10px bisque;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+.BorderImage {
+    padding-top: 5px;
+}
+
+.username {
+    text-align: center;
+    padding: 10px;
+    background: aliceblue;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 200px;
+    margin: auto;
+    box-shadow: 0 0 10px bisque;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    background: #17ec13;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+    top: -30px;
+    left: 244px;
+    display: none;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
 @media (min-width: 700px) {
-    .border {
+     .border, .result-container, .input-group {
         width: 700px;
+    }
+
+    .BorderImage {
+        display: flex;
+        justify-content: center;
+    }
+
+    .image {
+        margin: 20px auto auto 70px;
     }
 
     input, .send_icon_profile {
@@ -145,11 +582,56 @@ input {
     .header p {
         font-size: 30px;
     }
+
+    input[type="range"] {
+        width: 625px;
+    }
+
+    .GeneratePasswordContent h2 {
+        width: 696.8px;
+    }
+
+    .generate-btn {
+        width: 700px;
+    }
+
+    .ToggleNumbers:checked+.ToggleLabel::after {
+        left: 55px;
+        background-color: #f7f7f7;
+    }
+
+    .Toggle:checked+.ToggleLabel, .ToggleNumbers:checked+.ToggleLabel {
+        background-color: #3498db;
+        width: 105px;
+    }
+
+    .info_auth {
+        width: 676.8px;
+    }
+
+    .BtnShowGenerator, .BtnCloseGenerator {
+        width: 680px;
+    }
+
+    .status {
+        top: -9px;
+        left: 263px;
+    }
+
+    .Toggle+.ToggleLabel, .ToggleNumbers+.ToggleLabel {
+        background-color: #ccc;
+        width: 108px;
+    }
 }
 
 @media (min-width: 1024px) {
-    .border {
+    .border, .result-container, .input-group {
         width: 1000px;
+    }
+
+    input[type="range"] {
+        width: 744px;
+        margin: 36px 25px;
     }
 
     input {
@@ -162,5 +644,24 @@ input {
 
     .header p {
         font-size: 20px;
+    }
+
+    .GeneratePasswordContent h2 {
+        width: 1000px;
+    }
+
+    .BtnShowGenerator, .BtnCloseGenerator {
+        margin: 20px auto;
+        width: 979.8px;
+    }
+
+    .info_auth {
+        width: 979.8px;
+        margin: 20px auto 20px;
+    }
+
+    .status {
+        left: 266px;
+        top: -10px;
     }
 }

@@ -17,8 +17,16 @@ public class AccountPage {
     JdbcTemplate jdbcTemplate;
     @GetMapping("AccountPage/{UserName}")
     @AuthorizedUser
-    public String calendar(HttpServletRequest request, Model model, @PathVariable String UserName) {
-        model.addAttribute("UserNameAccount", UserName);
-        return "UserAccount/index";
+    public String AccountPage_str(HttpServletRequest request, Model model, @PathVariable String UserName) {
+        var isExistAccount = jdbcTemplate.queryForObject("select exists(select * from users where username=?)", Boolean.class, UserName);
+
+        if (Boolean.TRUE.equals(isExistAccount)) {
+            model.addAttribute("UserNameAccount", UserName);
+            return "UserAccount/index";
+        }
+
+        else {
+            return "UserAccountChat/NotValidAccount";
+        }
     }
 }

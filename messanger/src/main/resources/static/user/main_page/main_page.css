@@ -90,6 +90,7 @@ input {
     padding: 10px;
     height: max-content;
     color: blue;
+    margin: auto auto 20px;
 }
 
 .grid {

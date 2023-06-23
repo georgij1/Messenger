@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Чат</title>
     <link rel="icon" th:href="@{image/main_page/icon_chats.png}">
+    <link rel="stylesheet" th:href="@{/chat_websocket/css/main.css}" />
     <link rel="stylesheet" th:href="@{user/main_page.css}">
     <link rel="stylesheet" th:href="@{user/main_page/main_page.css}">
-    <link rel="stylesheet" th:href="@{/chat_websocket/css/main.css}" />
 </head>
 
 <body>
@@ -34,10 +34,10 @@
                 <div class="name_link chat_link">Чаты</div>
             </div>
 
-            <a href="/rings" class="link withOutSlash">
-                <div class="icon_rings"></div>
-                <div class="name_link">Уведомления</div>
-            </a>
+<!--            <a href="/rings" class="link withOutSlash">-->
+<!--                <div class="icon_rings"></div>-->
+<!--                <div class="name_link">Уведомления</div>-->
+<!--            </a>-->
         </div>
 
         <form class="delete_account" method="get" action="/logout">
@@ -48,38 +48,40 @@
     <div class="body body_js">
         <div class="burger_menu"></div>
         <div class="content">
-            <div class="flex-content">
-                <div class="label_page">Чаты</div>
-                <div class="btn_create_chat">
-                    <div class="image_plus"></div>
-                    <div class="text_create_chat">Создать новый чат</div>
-                </div>
+            <div class="btn_create_chat">
+                <div class="image_plus"></div>
             </div>
 
             <div class="ErrorConnect">Соединение...</div>
 
-            <div class="buttons_nav_chats">
-                <div class="btn_nav_chat all_chat">Все чаты</div>
-                <div class="btn_nav_chat all_my_chat">Мои чаты</div>
+            <div class="window_find_chat">
+                <label for="InputSearchChat" class="title_window">Поиск</label>
+
+                <div class="form_search">
+                    <input id="InputSearchChat" class="InputSearch" type="search" placeholder="Введите название чата">
+                    <div class="btn_search"></div>
+                </div>
+
+                <div class="exists_query"></div>
+
+                <div class="visible_more">Показать ещё</div>
+
+                <div class="clear_history">Отчистить историю</div>
+
+                <div class="list_found_chat"></div>
+            </div>
+
+            <div class="filter_div">
+                <div class="filter_name a_i">А-Я</div>
+                <div class="filter_name cancel_sort_a_i">Отменить сортировку</div>
+                <div class="filter_name i_a">Я-А</div>
+                <div class="filter_name cancel_sort_i_a">Отменить сортировку</div>
+                <div class="filter_name time_sort">Время</div>
+                <div class="filter_name cancel_time_sort">Отменить сортировку</div>
             </div>
 
             <div class="content_all_chat visible">
-                <h1>Все чаты</h1>
                 <div class="list_chats"></div>
-            </div>
-
-            <div class="content_all_my_chat">
-                <h1>Мои чаты</h1>
-                <div class="list_my_chats"></div>
-
-                <div class="window_edit_name_chat">
-                    <h2>Изменение имени чата</h2>
-                    <div class="input_change_name_chat"></div>
-                    <div class="tools_edit_message">
-                        <div class="btn_cancel_change_name_chat">Отмена</div>
-                        <input type="button" value="Сохранить" class="btn_save_change_name">
-                    </div>
-                </div>
             </div>
 
             <div class="PermissionDenied">
@@ -92,18 +94,18 @@
         </div>
     </div>
 
-    <div class="body_1">
+    <div class="body_1 body_window_create_chat_div">
         <div class="close_window close_window_new"></div>
 
         <div class="window_create_chat">
             <div class="flex-group">
                 <label class="label_create_chat" for="name_chat">Имя чата</label>
-                <input type="text" placeholder="Придумайте название чата" class="name_chat name_chat_div" id="name_chat" required>
+                <textarea placeholder="Придумайте название чата" class="name_chat name_chat_div" id="name_chat" required></textarea>
             </div>
 
             <div class="flex-group">
                 <label class="label_create_chat" for="desc_chat">Описание чата</label>
-                <input type="text" placeholder="Придумайте описание чата" class="name_chat desc_chat_1" id="desc_chat" required>
+                <textarea placeholder="Придумайте описание чата" class="name_chat desc_chat_1" id="desc_chat" required></textarea>
             </div>
 
             <div class="flex-group">
@@ -113,10 +115,14 @@
 
             <input type="submit" class="create_chat" value="Создать чат">
         </div>
+
+        <div class="name_chat_exist">Имя такое уже существует</div>
+
+        <div class="success_create_chat">Чат успешно создан</div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
+    <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
     <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
     <script th:src="@{/chat_websocket/js/get_image_profile.js}"></script>
     <script th:src="@{chat_websocket/js/HomePage/script.js}"></script>

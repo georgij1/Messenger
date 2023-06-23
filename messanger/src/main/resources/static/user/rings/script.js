@@ -41,8 +41,6 @@ fetch('/rings/AllRequestAccessChat', {
                     <div class="Info">${item.chat_name}</div>
                     <div class="Info">${item.usernametosent}</div>
                 </div>
-                
-                <div class="BtnDeleteRequest">Удалить запрос</div>
             `
     }))
 
@@ -58,6 +56,7 @@ RequestChat.addEventListener('click', () => {
     ContentMessageFromChat.classList.remove('block')
     BtnGetSendAccessOfferCancel.classList.add('block')
     ContentCancelRequestChat.classList.remove('block')
+    document.querySelector('.BtnHeader').classList.add('MarginTopTenPixel')
 
     let CloseWindowRequestId = document.querySelector('#CloseWindowRequest')
     if (CloseWindowRequestId.classList.contains("block")) {
@@ -89,6 +88,7 @@ CloseWindowRequest.addEventListener('click', () => {
     burger_menu_1.classList.remove('none')
     ContentCancelRequestChat.classList.remove('block')
     BtnGetSendAccessOfferCancel.classList.remove('block')
+    document.querySelector('.BtnHeader').classList.remove('MarginTopTenPixel')
 })
 
 AllRequest.addEventListener('click', () => {
@@ -230,7 +230,6 @@ fetch('/rings/RequestAccessChatNotChecked', {
                                 body: JSON.stringify(FormDataTrueAccess)
                             })
                                 .then(() => console.log('run'))
-                                // .then(() => window.location.reload())
                         })
                     }
                 })

@@ -17,6 +17,7 @@ h1 {
     width: 100%;
     overflow-x: scroll;
     padding-bottom: 15px;
+    margin-top: 70px;
 }
 
 .RequestChat, .MessageMessanger, .EventCalendar {
@@ -38,9 +39,9 @@ h1 {
     height: 50px;
     background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
     background-size: 50px;
-    box-shadow: 0 0 10px burlywood;
+    box-shadow: 0 0 10px bisque;
     border-radius: 10px;
-    border: 3px solid bisque;
+    border: 2px solid bisque;
     cursor: pointer;
     margin-bottom: 30px;
 }
@@ -147,6 +148,10 @@ h1 {
     font-size: 21px;
 }
 
+.MarginTopTenPixel {
+    margin-top: 10px;
+}
+
 .IdRequest {
     display: none;
 }
@@ -185,6 +190,7 @@ h1 {
         display: flex;
         margin-left: 300px;
         width: 59%;
+        margin-top: 10px;
     }
 
     .ContentAllRequestChat h1, .ContentSentRequestChat h1, .ContentCheckRequestChat h1, .BtnGetSendAccessOfferCheck h1, .ContentCancelRequestChat h1, .ContentMessageFromChat h1, .ContentEventMessage h1 {
@@ -197,5 +203,9 @@ h1 {
     .body_1, .body {
         margin-left: 333px;
         width: 61vW;
+    }
+
+    .BtnHeader {
+        margin-top: 10px;
     }
 }

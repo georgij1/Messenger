@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 public class AddUserChat {
     @JsonProperty("name")
-    public ArrayList<String> name;
+    public String name;
     @JsonProperty("image_user")
-    public ArrayList<String> image_user;
+    public String image_user;
     @JsonProperty("chat_name")
-    public ArrayList<String> chat_name;
+    public String chat_name;
 }
