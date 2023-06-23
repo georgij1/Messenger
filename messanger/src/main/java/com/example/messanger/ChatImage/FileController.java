@@ -68,7 +68,7 @@ public class FileController {
         FileDB fileDB = storageService.getFile(IdImage);
         System.out.println(fileDB.getType());
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; image/gif; filename=\"" + fileDB.getImage_name() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png; image/jpeg; image/gif; filename=\"" + fileDB + "\"")
                 .body(fileDB.getData());
     }
 
