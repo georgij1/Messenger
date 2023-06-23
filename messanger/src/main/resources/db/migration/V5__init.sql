@@ -6,7 +6,8 @@ create table if not exists send_access_to_chat_post
     usernametosent text,
     access boolean,
     order_status boolean default true,
-    cancel boolean default false
+    cancel boolean default false,
+    info_about_user text
 );
 
 insert into send_access_to_chat_post (
