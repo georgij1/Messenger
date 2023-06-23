@@ -1,4 +1,4 @@
-create table users_chat
+create table if not exists users_chat
 (
     id serial primary key,
     name text references users (username),

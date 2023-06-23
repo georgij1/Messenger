@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Такого пользователя в чате нет</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" th:href="@{/image/main_page/icon_chats.png}">
+    <link rel="stylesheet" th:href="@{/user/main_page.css}">
+    <link rel="stylesheet" th:href="@{/user/main_page/main_page.css}">
+    <link rel="stylesheet" th:href="@{/chat_websocket/css/not_valid_chat_url.css}" />
+</head>
+
+<body>
+  <div class="NotValidUrl">Такого пользователя в чате нет</div>
+  <div class="invite_chat">Вступить в чат</div>
+
+  <div class="see_info_admin">
+      <div th:text="${id_chat}" class="IdChat"></div>
+      <div th:text="${who_username}" class="who_invite"></div>
+      запрос на вступление в
+      <div th:text="${chat_name}" class="ChatName"></div>
+  </div>
+
+  <div class="owner_chat" th:text="${owner_chat}"></div>
+
+  <div class="see_info_admin1">
+      <div class="info_admin_div">
+          <label for="info_admin" class="label_info_admin">Информация для админа</label>
+          <input id="info_admin" class="input_info_admin" placeholder="Введите причину почему вы хотите вступить в чат или другую информацию для Админа...">
+      </div>
+
+      <div class="btn_send_access">Запросить доступ</div>
+  </div>
+
+  <div class="request_invite_success_sent">Запрос отправлен</div>
+  <div class="error_invite_success_sent">Запрос уже отправлен</div>
+  <div class="error_be">Ошибка</div>
+
+  <script th:src="@{/chat_websocket/css/userIsNotExist.js}"></script>
+</body>
+</html>

@@ -86,9 +86,21 @@ public class ChatController {
                 return "chat_websocket/OpeningChat";
             }
 
-            else {
+            else if (Boolean.FALSE.equals(ChatIdGetDB)) {
                 System.out.println("else run no boolean if");
                 return "chat_websocket/not_valid_chat_url";
+            }
+
+            else if (Boolean.FALSE.equals(isAdminNameExists)) {
+                model.addAttribute("id_chat", id);
+                model.addAttribute("who_username", Username);
+                model.addAttribute("chat_name", ChatName);
+                model.addAttribute("owner_chat", jdbcTemplate.queryForMap("select * from chat where id=?", id).get("owner"));
+                return "chat_websocket/userIsNotExist";
+            }
+
+            else {
+                return "chat_websocket/error_be";
             }
         }
 

@@ -4,9 +4,11 @@ package com.example.messanger.Controllers;
 
 import com.example.messanger.aop.JWT_AUTH.AuthorizedUser;
 import com.example.messanger.auth.forms.Rings.AllRequestAccessChatForm;
+import com.example.messanger.auth.forms.Rings.DeleteRequest;
 import com.example.messanger.auth.forms.Rings.RequestAccessChatNotCheckedForm;
 import com.example.messanger.auth.forms.Rings.SetRequestAccessChatStatusForm;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,34 @@ public class RingsController {
     public List<Map<String, Object>> AllRequestAccessChat(@RequestBody AllRequestAccessChatForm allRequestAccessChatForm) {
         System.out.println(allRequestAccessChatForm.getUsername_from_sent());
         return jdbcTemplate.queryForList("select * from public.send_access_to_chat_post where usernametosent=?", allRequestAccessChatForm.getUsername_from_sent());
+    }
+
+    @DeleteMapping("/request/delete/chat")
+    @CrossOrigin("*")
+    @ResponseBody
+    public HttpServletResponse DeleteRequestChat(
+            @RequestBody DeleteRequest deleteRequest,
+            HttpServletResponse response
+    ) {
+        var isNoteExist = jdbcTemplate.queryForObject("select exists(select * from send_access_to_chat_post where usernamefromsent=? and chat_name=?)",
+                Boolean.class,
+                deleteRequest.getUsername_from_sent(),
+                deleteRequest.getChat_name()
+        );
+
+        if (Boolean.TRUE.equals(isNoteExist)) {
+            jdbcTemplate.update("delete from send_access_to_chat_post where chat_name=? and usernamefromsent=?",
+                    deleteRequest.getChat_name(),
+                    deleteRequest.getUsername_from_sent()
+            );
+            response.setStatus(200);
+        }
+
+        else {
+            response.setStatus(404);
+        }
+
+        return response;
     }
 
     @PostMapping("/rings/SentRequestAccessChat")

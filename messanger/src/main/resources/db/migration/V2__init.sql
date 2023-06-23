@@ -1,4 +1,4 @@
-create table comand_dev
+create table if not exists comand_dev
 (
     id serial primary key,
     name text default 'Имя не задано',

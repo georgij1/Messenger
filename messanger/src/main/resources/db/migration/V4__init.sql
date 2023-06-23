@@ -1,4 +1,4 @@
-create table mycontacts
+create table if not exists mycontacts
 (
     id serial primary key,
     username text unique,

@@ -1,4 +1,4 @@
-create table send_access_to_chat_post
+create table if not exists send_access_to_chat_post
 (
     id serial primary key,
     usernamefromsent text,

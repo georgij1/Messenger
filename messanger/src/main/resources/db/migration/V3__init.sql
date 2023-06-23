@@ -1,4 +1,4 @@
-create table message
+create table if not exists message
 (
     id_message serial primary key,
     text text,

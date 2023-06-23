@@ -1,4 +1,4 @@
-create table chat
+create table if not exists chat
 (
     id serial primary key,
     name text unique,

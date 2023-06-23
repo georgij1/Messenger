@@ -115,7 +115,6 @@ fetch('/rings/SentRequestAccessChat', {
 })
     .then(res => res.json())
     .then(data => data.forEach(item => {
-        // console.log(item)
         let ListSentRequest = document.querySelector('.ListSentRequest')
         ListSentRequest.innerHTML+=`
                 <div class="RequestAccess">
@@ -125,8 +124,6 @@ fetch('/rings/SentRequestAccessChat', {
                     <div class="Info">${item.chat_name}</div>
                     <div class="Info">${item.usernametosent}</div>
                 </div>
-                
-                <div class="BtnDeleteRequest">Удалить запрос</div>
             `
     }))
 
@@ -182,9 +179,10 @@ fetch('/rings/RequestAccessChatNotChecked', {
                     for (let BtnSuccessRequestItter of BtnSuccessRequest) {
                         BtnSuccessRequestItter.classList.add('none')
                     }
+
                     let BtnSuccessRequest1 = document.querySelectorAll('.BtnSuccessRequest1')
-                    // let UsernameNew = document.querySelector('.username').textContent
                     let UsernameNew = item.usernamefromsent
+
                     for (let BtnSuccessRequest1Itter of BtnSuccessRequest1) {
                         BtnSuccessRequest1Itter.addEventListener('click', () => {
                             console.log('true')
@@ -208,10 +206,11 @@ fetch('/rings/RequestAccessChatNotChecked', {
                                 body: JSON.stringify(FormDataTrueAccess)
                             })
                                 .then(() => console.log('run'))
-                                // .then(() => window.location.reload())
                         })
                     }
+
                     let BtnDeleteRequest = document.querySelectorAll('.BtnDeleteRequest')
+
                     for (let BtnDeleteRequestItter of BtnDeleteRequest) {
                         BtnDeleteRequestItter.addEventListener('click', () => {
                             console.log('false')
