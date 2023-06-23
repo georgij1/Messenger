@@ -1964,10 +1964,6 @@ li {
     width: 37vW;
 }
 
-.invite_chat {
-    display: none;
-}
-
 .edit_chat_name_item, .edit_desc_chat_item {
     width: 23px;
     height: 23px;

@@ -113,6 +113,10 @@
     display: none;
 }
 
+.invite_chat {
+    display: none;
+}
+
 .error_be {
     display: none;
     position: fixed;
