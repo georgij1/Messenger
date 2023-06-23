@@ -27,7 +27,6 @@ document.querySelector('.IconOpenList').addEventListener('click', () => {
     document.querySelector('.ListMessage').classList.toggle('flex')
     document.querySelector('body').classList.toggle('no_scroll')
     document.querySelector('.list_chat').classList.toggle('OverflowScroll')
-    document.querySelector('.PermissionDenied').classList.remove('visible')
     document.querySelector('.list_chat').classList.remove('none')
     document.querySelector('.name_chat_min_window').classList.toggle('block')
     document.querySelector('.desc_chat_min_window').classList.toggle('block')
