@@ -486,7 +486,7 @@ document.querySelector('.cancel_sort_a_i').addEventListener('click', () => {
 
                         for (let chat_itter of chat) {
                             chat_itter.addEventListener('click', (event) => {
-                                window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.chat_name').textContent}`, '_self')
+                                window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
                             })
                         }
 
