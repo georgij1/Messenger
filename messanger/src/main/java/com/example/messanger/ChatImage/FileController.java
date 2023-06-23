@@ -20,9 +20,8 @@ public class FileController {
     private FileStorageService storageService;
     public JdbcTemplate jdbcTemplate;
 
-    // Контроллер для загрузки фотографии
-    // размер изображения ограничен до 3 mb
-    // Поэтому нет проблем с загрузкой изображения в db
+    // controller for load image
+    // size image before 3 mb
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, FileDB formsGetTimeStamp) {
         System.out.println(file);
@@ -40,7 +39,7 @@ public class FileController {
         }
     }
 
-    // Контроллер для получения списка всех файлов
+    // controller for get list all files
     @GetMapping("/files/{IdChat}")
     @ResponseBody
     @CrossOrigin("*")
@@ -62,7 +61,7 @@ public class FileController {
         return jdbcTemplate.queryForList("select count(*) from message where data!=0 and chat_id=?", IdChat);
     }
 
-    // Получения изображения по id
+    // get image by id
     @GetMapping("/files/{IdChat}/{IdImage}")
     public ResponseEntity<byte[]> getDataImageByIdChat(@PathVariable String IdChat, @PathVariable String IdImage) {
         FileDB fileDB = storageService.getFile(IdImage);
