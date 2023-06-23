@@ -551,6 +551,12 @@ document.querySelector('.i_a').addEventListener('click', () => {
                     </div>
                 `
 
+                for (let chat_itter of document.querySelectorAll('.chat')) {
+                    chat_itter.addEventListener('click', (event) => {
+                        window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
+                    })
+                }
+
                 document.querySelector('.i_a').classList.add('none')
                 document.querySelector('.cancel_sort_i_a').classList.add('block')
 
@@ -615,9 +621,9 @@ document.querySelector('.cancel_sort_i_a').addEventListener('click', () => {
 
                         let chat = document.querySelectorAll('.chat')
 
-                        for (let chat_itter of chat) {
+                        for (let chat_itter of document.querySelectorAll('.chat')) {
                             chat_itter.addEventListener('click', (event) => {
-                                window.open(`/chat/${event.currentTarget.querySelector('.chat_id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.chat_name').textContent}`, '_self')
+                                window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
                             })
                         }
 
@@ -679,6 +685,12 @@ document.querySelector('.time_sort').addEventListener('click', () => {
                     </div>
                 `
 
+                for (let chat_itter of document.querySelectorAll('.chat')) {
+                    chat_itter.addEventListener('click', (event) => {
+                        window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
+                    })
+                }
+
                 for (let image of document.querySelectorAll('.image')) {
                     image.style.background = `url(${item.image_chat})` + 'center no-repeat'
                     image.style.backgroundSize = `80%`
@@ -737,9 +749,9 @@ document.querySelector('.cancel_time_sort').addEventListener('click', () => {
 
                         let chat = document.querySelectorAll('.chat')
 
-                        for (let chat_itter of chat) {
+                        for (let chat_itter of document.querySelectorAll('.chat')) {
                             chat_itter.addEventListener('click', (event) => {
-                                window.open(`/chat/${event.currentTarget.querySelector('.chat_id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.chat_name').textContent}`, '_self')
+                                window.open(`/chat/${event.currentTarget.querySelector('.id').textContent}/${document.querySelector('.username').textContent}/${event.currentTarget.querySelector('.name').textContent}`, '_self')
                             })
                         }
 
