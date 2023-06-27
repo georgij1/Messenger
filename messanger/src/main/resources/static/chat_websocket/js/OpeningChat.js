@@ -625,9 +625,15 @@ fetch(`/chats/${IdChat.textContent}`, {
 
             for (let ImageBorderItter of document.querySelectorAll('.ImageBorderImageDesc')) {
                 ImageBorderItter.addEventListener('click', (event) => {
-                    event.currentTarget.children[3].classList.toggle('flex')
-                    ImageBorderItter.classList.toggle('ImageBorderClick')
-                    console.log(event.currentTarget)
+                    if (event.currentTarget.querySelector('.ItemUsername').textContent === document.querySelector('.username').textContent) {
+                        event.currentTarget.children[3].classList.toggle('flex')
+                        ImageBorderItter.classList.toggle('ImageBorderClick')
+                        console.log(event.currentTarget)
+                    }
+
+                    else {
+                        console.log('вы не владелец сообщения')
+                    }
                 })
 
                 let visibleImageMessage = (target) => {
