@@ -10,19 +10,7 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
     .then(response => response.json())
     .then((data) => {
         console.log(data.length)
-
-        let list_my_chats = document.querySelector('.list_my_chats')
-
-        if (data.length === 0) {
-            list_my_chats.innerHTML=`
-                <p class="PBlockNoChats">Чатов нет</p>
-                
-                <a href="/websocket_chat" class="BtnAddEventChats">Вступить в чат</a>                
-            `
-        }
-
-        else {
-            data.forEach((item) => {
+        data.forEach((item) => {
                 console.log(item)
                 list_my_chats.innerHTML+=`
                         <div class="one_chat">
@@ -142,5 +130,4 @@ fetch(`/MyChats/${document.querySelector('.UserName').textContent}`, {
                     })
                 }
             })
-        }
     })
