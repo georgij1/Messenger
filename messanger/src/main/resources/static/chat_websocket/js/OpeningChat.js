@@ -297,11 +297,11 @@ fetch(`/chats/${IdChat.textContent}`, {
                             <div class="id">${item.id_message}</div>
                             <div class="text" title="Скопировать текст">${item.text}</div>
     
-                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
-    
                             <div class="tools_message">
                                 <div class="share_message"></div>
                             </div>
+                            
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                         </div>
                     </div>
                 `
