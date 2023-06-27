@@ -1018,19 +1018,21 @@ fetch(`/chats/${IdChat.textContent}`, {
                 })
             }
 
-            for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
                 if (item.id_image === 'DefaultAva') {
-                    console.log('if is running')
-                    ImageProfileMessageItter.style.background=`url(/image/settings/icon_profile.png)` + 'no-repeat center'
-                    ImageProfileMessageItter.style.backgroundSize='40px'
+                    for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
+                        console.log('if is running')
+                        ImageProfileMessageItter.style.background = `url(/image/settings/icon_profile.png)` + 'no-repeat center'
+                        ImageProfileMessageItter.style.backgroundSize = '40px'
+                    }
                 }
 
                 else {
                     console.log('else')
-                    ImageProfileMessageItter.style.background=`url(/AvatarImage/${document.querySelector('.ItemUsername').textContent}/${item.id_image})` + 'no-repeat center'
-                    ImageProfileMessageItter.style.backgroundSize='40px'
+                    for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
+                        ImageProfileMessageItter.style.background = `url(/AvatarImage/${document.querySelector('.ItemUsername').textContent}/${item.id_image})` + 'no-repeat center'
+                        ImageProfileMessageItter.style.backgroundSize = '40px'
+                    }
                 }
-            }
         })))
 
         if (list_chat.clientHeight === 0) {
