@@ -106,7 +106,7 @@ public class CreateChat {
     @CrossOrigin("*")
     @ResponseBody
     public List<Map<String, Object>> MyChats(@PathVariable String owner_chat) {
-        return jdbcTemplate.queryForList("select * from chat join users_chat m on chat.owner = m.name where m.name=? and chat.owner=?", owner_chat, owner_chat);
+        return jdbcTemplate.queryForList("select * from chat join users_chat m on chat.owner = m.name where m.name=? and owner=?", owner_chat, owner_chat);
     }
 
     @PostMapping("/ChatName/{IdChat}")
