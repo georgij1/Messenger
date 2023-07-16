@@ -56,7 +56,7 @@ public class CreateChat {
     public String getDateLastCommit() {
         try {
             // URL удаленного репозитория
-            String remoteRepoUrl = "http://git.students.it-college.ru:8080/git/i21s597/Messanger.git";
+            String remoteRepoUrl = "http://10.3.8.167:8080/git/i21s597/Messanger.git";
 
             // Создание объекта Git
             Git git = Git.init().call();
