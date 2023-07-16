@@ -70,7 +70,7 @@ public class CreateChat {
             remoteConfigs.add(remoteConfig);
 
             // Выполнение операции fetch для получения информации о репозитории
-            FetchResult fetchResult = git.fetch().setRemote("origin/master").call();
+            FetchResult fetchResult = git.fetch().setRemote("origin").call();
 
             // Получение списка доступных веток
             Collection<Ref> branches = fetchResult.getAdvertisedRefs();
