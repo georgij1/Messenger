@@ -65,12 +65,12 @@ public class CreateChat {
             List<RemoteConfig> remoteConfigs = git.remoteList().call();
 
             // Добавление удаленного репозитория
-            RemoteConfig remoteConfig = new RemoteConfig(git.getRepository().getConfig(), "master");
+            RemoteConfig remoteConfig = new RemoteConfig(git.getRepository().getConfig(), "origin");
             remoteConfig.addURI(new URIish(remoteRepoUrl));
             remoteConfigs.add(remoteConfig);
 
             // Выполнение операции fetch для получения информации о репозитории
-            FetchResult fetchResult = git.fetch().setRemote("master").call();
+            FetchResult fetchResult = git.fetch().setRemote("origin").call();
 
             // Получение списка доступных веток
             Collection<Ref> branches = fetchResult.getAdvertisedRefs();
