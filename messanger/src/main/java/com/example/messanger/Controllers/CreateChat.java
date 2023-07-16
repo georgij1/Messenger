@@ -53,6 +53,7 @@ public class CreateChat {
 
     @GetMapping("/last_commit_date")
     @ResponseBody
+    @CrossOrigin("*")
     public String getDateLastCommit() {
         try {
             // URL удаленного репозитория
