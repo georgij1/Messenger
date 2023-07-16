@@ -65,7 +65,7 @@ public class CreateChat {
             List<RemoteConfig> remoteConfigs = git.remoteList().call();
 
             // Добавление удаленного репозитория
-            RemoteConfig remoteConfig = new RemoteConfig(git.getRepository().getConfig(), "origin");
+            RemoteConfig remoteConfig = new RemoteConfig(git.getRepository().getConfig(), "master");
             remoteConfig.addURI(new URIish(remoteRepoUrl));
             remoteConfigs.add(remoteConfig);
 
