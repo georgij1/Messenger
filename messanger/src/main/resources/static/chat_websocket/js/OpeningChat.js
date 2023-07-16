@@ -197,10 +197,10 @@ fetch(`/chats/${IdChat.textContent}`, {
 
             console.log(item)
 
-            if (item.id_image_message === "TextMessage" && item.read === false && item.username === document.querySelector('.username').textContent) {
+            if (item.id_image_message === "TextMessage" && item.read === false && item.id_image === "DefaultAva" && item.username === document.querySelector('.username').textContent) {
                 list_chat.innerHTML += `
                     <div class="MessageMain">
-                        <div class="ImageProfileMessage">
+                        <div class="ImageProfileMessage DefaultAva">
                             <p>${item.username}</p>
                         </div>
                         
@@ -221,15 +221,48 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                                 <div class="TickAsRead"></div>
                             </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     </div>
                 `
             }
 
-            else if (item.id_image_message === "TextMessage" && item.read === false) {
+            else if (item.id_image_message === "TextMessage" && item.id_image !== "DefaultAva" && item.read === false && item.id_image === "DefaultAva" && item.username === document.querySelector('.username').textContent) {
                 list_chat.innerHTML += `
                     <div class="MessageMain">
-                        <div class="ImageProfileMessage">
+                        <div class="ImageProfileMessage NotDefaultAva">
+                            <p>${item.username}</p>
+                        </div>
+                        
+                        <div class="message">
+                        
+                            <div class="ItemUsername">${item.username}</div>
+                            
+                            <div class="id">${item.id_message}</div>
+                            <div class="text" title="Скопировать текст">${item.text}</div>
+    
+                            <div class="tools_message">
+                                <div class="delete_message"></div>
+                                <div class="edit_message"></div>
+                                <div class="share_message"></div>
+                            </div>
+                                                     
+                            <div class="BlockTicketTimeStamp">                        
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                <div class="TickAsRead"></div>
+                            </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    </div>
+                `
+            }
+
+            else if (item.id_image_message === "TextMessage" && item.id_image === "DefaultAva" && item.read === false) {
+                list_chat.innerHTML += `
+                    <div class="MessageMain">
+                        <div class="ImageProfileMessage DefaultAva">
                             <p>${item.username}</p>
                         </div>
                         
@@ -245,15 +278,43 @@ fetch(`/chats/${IdChat.textContent}`, {
                             </div>
                             
                             <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     </div>
                 `
             }
 
-            else if (item.id_image_message === "TextMessage" && item.read === true && item.username === document.querySelector('.username').textContent) {
+            else if (item.id_image_message === "TextMessage" && item.id_image !== "DefaultAva" && item.read === false) {
                 list_chat.innerHTML += `
                     <div class="MessageMain">
-                        <div class="ImageProfileMessage">
+                        <div class="ImageProfileMessage NotDefaultAva">
+                            <p>${item.username}</p>
+                        </div>
+                        
+                        <div class="message">
+                        
+                            <div class="ItemUsername">${item.username}</div>
+                            
+                            <div class="id">${item.id_message}</div>
+                            <div class="text" title="Скопировать текст">${item.text}</div>
+    
+                            <div class="tools_message">
+                                <div class="share_message"></div>
+                            </div>
+                            
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    </div>
+                `
+            }
+
+            else if (item.id_image_message === "TextMessage" && item.id_image === "DefaultAva" && item.read === true && item.username === document.querySelector('.username').textContent) {
+                list_chat.innerHTML += `
+                    <div class="MessageMain">
+                        <div class="ImageProfileMessage DefaultAva">
                             <p>${item.username}</p>
                         </div>
                         
@@ -278,15 +339,52 @@ fetch(`/chats/${IdChat.textContent}`, {
                                     <div class="TickAsRead TickAsReadTwoTicket"></div>                                
                                 </div>
                             </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     </div>
                 `
             }
 
-            else if (item.id_image_message === "TextMessage" && item.read === true) {
+            else if (item.id_image_message === "TextMessage" && item.id_image !== "DefaultAva" && item.read === true && item.username === document.querySelector('.username').textContent) {
                 list_chat.innerHTML += `
                     <div class="MessageMain">
-                        <div class="ImageProfileMessage">
+                        <div class="ImageProfileMessage NotDefaultAva">
+                            <p>${item.username}</p>
+                        </div>
+                        
+                        <div class="message">
+                        
+                            <div class="ItemUsername">${item.username}</div>
+                            
+                            <div class="id">${item.id_message}</div>
+                            <div class="text" title="Скопировать текст">${item.text}</div>
+    
+                            <div class="tools_message">
+                                <div class="delete_message"></div>
+                                <div class="edit_message"></div>
+                                <div class="share_message"></div>
+                            </div>
+                                                     
+                            <div class="BlockTicketTimeStamp">                        
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                
+                                <div class="BlockTwoTickets">
+                                    <div class="TickAsRead"></div>
+                                    <div class="TickAsRead TickAsReadTwoTicket"></div>                                
+                                </div>
+                            </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    </div>
+                `
+            }
+
+            else if (item.id_image_message === "TextMessage" && item.id_image === "DefaultAva" && item.read === true) {
+                list_chat.innerHTML += `
+                    <div class="MessageMain">
+                        <div class="ImageProfileMessage DefaultAva">
                             <p>${item.username}</p>
                         </div>
                         
@@ -302,17 +400,45 @@ fetch(`/chats/${IdChat.textContent}`, {
                             </div>
                             
                             <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     </div>
                 `
             }
 
-            else if (item.text === null && item.read === false && item.username === document.querySelector('.username').textContent) {
+            else if (item.id_image_message === "TextMessage" && item.id_image !== "DefaultAva" && item.read === true) {
+                list_chat.innerHTML += `
+                    <div class="MessageMain">
+                        <div class="ImageProfileMessage NotDefaultAva">
+                            <p>${item.username}</p>
+                        </div>
+                        
+                        <div class="message">
+                        
+                            <div class="ItemUsername">${item.username}</div>
+                            
+                            <div class="id">${item.id_message}</div>
+                            <div class="text" title="Скопировать текст">${item.text}</div>
+    
+                            <div class="tools_message">
+                                <div class="share_message"></div>
+                            </div>
+                            
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    </div>
+                `
+            }
+
+            else if (item.text === null && item.id_image === "DefaultAva" && item.read === false && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text === null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMain">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorder">
                             <div class="ItemUsername">${item.username}</div>
                             <div class="ImageChat_1">
@@ -330,17 +456,49 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                                 <div class="TickAsRead"></div>
                             </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text === null && item.read === false) {
+            else if (item.text === null && item.id_image !== "DefaultAva" && item.read === false && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text === null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMain">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageBorder">
+                            <div class="ItemUsername">${item.username}</div>
+                            <div class="ImageChat_1">
+                                <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                            </div>
+                        
+                            <div class="tools_message">
+                                <div class="delete_message_image"></div>
+                            </div>
+                            
+                            <div class="IdMessage">${item.id_message}</div>
+                            
+                            <div class="BlockTicketTimeStamp">                        
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                <div class="TickAsRead"></div>
+                            </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text === null && item.read === false && item.id_image === "DefaultAva") {
+                console.log('item.text === null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMain">
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             
                             <div class="ImageBorder">
                                 <div class="ItemUsername">${item.username}</div>
@@ -353,17 +511,44 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="IdMessage">${item.id_message}</div>
                                 
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text === null && item.read === true && item.username === document.querySelector('.username').textContent) {
+            else if (item.text === null && item.read === false && item.id_image !== "DefaultAva") {
                 console.log('item.text === null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMain">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            
+                            <div class="ImageBorder">
+                                <div class="ItemUsername">${item.username}</div>
+                                
+                                <div class="ImageChat_1">
+                                    <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                    <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                                </div>
+                            
+                                <div class="IdMessage">${item.id_message}</div>
+                                
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text === null && item.id_image === "DefaultAva"  && item.read === true && item.username === document.querySelector('.username').textContent) {
+                console.log('item.text === null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMain">
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorder">
                                 <div class="ItemUsername">${item.username}</div>
                                 
@@ -385,18 +570,55 @@ fetch(`/chats/${IdChat.textContent}`, {
                                         <div class="TickAsRead"></div>
                                         <div class="TickAsRead TickAsReadTwoTicket"></div>                                
                                     </div>
+                                    
+                                    <div class="id_avatar">${item.id_image}</div>
                                 </div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text === null && item.read === true) {
+            else if (item.text === null && item.id_image !== "DefaultAva"  && item.read === true && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text === null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMain">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageBorder">
+                                <div class="ItemUsername">${item.username}</div>
+                                
+                                <div class="ImageChat_1">
+                                    <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                    <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                                </div>
+                            
+                                <div class="tools_message">
+                                    <div class="delete_message_image"></div>
+                                </div>
+                               
+                                <div class="IdMessage">${item.id_message}</div>
+                                
+                                <div class="BlockTicketTimeStamp">                        
+                                    <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                    
+                                    <div class="BlockTwoTickets">
+                                        <div class="TickAsRead"></div>
+                                        <div class="TickAsRead TickAsReadTwoTicket"></div>                                
+                                    </div>
+                                    
+                                    <div class="id_avatar">${item.id_image}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text === null && item.id_image === "DefaultAva" && item.read === true) {
+                console.log('item.text === null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMain">
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             
                             <div class="ImageBorder">
                                 <div class="ItemUsername">${item.username}</div>
@@ -409,17 +631,44 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="IdMessage">${item.id_message}</div>
                                 
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text != null && item.read === false && item.username === document.querySelector('.username').textContent) {
+            else if (item.text === null && item.id_image !== "DefaultAva" && item.read === true) {
+                console.log('item.text === null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMain">
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            
+                            <div class="ImageBorder">
+                                <div class="ItemUsername">${item.username}</div>
+                                
+                                <div class="ImageChat_1">
+                                    <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                    <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                                </div>
+                               
+                                <div class="IdMessage">${item.id_message}</div>
+                                
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text != null && item.id_image === "DefaultAva"  && item.read === false && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text != null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMainImageDesc">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             
                             <div class="ImageBorderImageDesc">
                                 <div class="ItemUsername">${item.username}</div>
@@ -441,17 +690,53 @@ fetch(`/chats/${IdChat.textContent}`, {
                                     <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
                                     <div class="TickAsRead"></div>
                                 </div>
+                                
+                                <div class="id_avatar">${item.id_image}</div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text != null && item.read === false) {
+            else if (item.text != null && item.id_image !== "DefaultAva"  && item.read === false && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text != null && item.read === false')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMainImageDesc">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            
+                            <div class="ImageBorderImageDesc">
+                                <div class="ItemUsername">${item.username}</div>
+
+                                <div class="ImageChat_1">
+                                    <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                    <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                                </div>
+                            
+                                <div class="TextImage">${item.text}</div>
+                            
+                                <div class="tools_message">
+                                    <div class="delete_message_image"></div>
+                                </div>
+                                
+                                <div class="IdMessage">${item.id_message}</div>
+                                
+                                <div class="BlockTicketTimeStamp">                        
+                                    <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                    <div class="TickAsRead"></div>
+                                </div>
+                                
+                                <div class="id_avatar">${item.id_image}</div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text != null && item.id_image === "DefaultAva"  && item.read === false) {
+                console.log('item.text != null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMainImageDesc">
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorderImageDesc">
                                 <div class="ItemUsername">${item.username}</div>
 
@@ -465,17 +750,45 @@ fetch(`/chats/${IdChat.textContent}`, {
                                 <div class="IdMessage">${item.id_message}</div>
                                 
                                 <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
                             </div>
                         </div>
                     `
             }
 
-            else if (item.text != null && item.read === true && item.username === document.querySelector('.username').textContent) {
+            else if (item.text != null && item.id_image !== "DefaultAva"  && item.read === false) {
+                console.log('item.text != null && item.read === false')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMainImageDesc">
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageBorderImageDesc">
+                                <div class="ItemUsername">${item.username}</div>
+
+                                <div class="ImageChat_1">
+                                    <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                    <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                                </div>
+                            
+                                <div class="TextImage">${item.text}</div>
+                                
+                                <div class="IdMessage">${item.id_message}</div>
+                                
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                            
+                                <div class="id_avatar">${item.id_image}</div>
+                            </div>
+                        </div>
+                    `
+            }
+
+            else if (item.text != null && item.id_image === "DefaultAva"  && item.read === true && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text !== null')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMainImageDesc">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorderImageDesc">
                             <div class="ItemUsername">${item.username}</div>
                             <div class="ImageChat_1">
@@ -499,16 +812,53 @@ fetch(`/chats/${IdChat.textContent}`, {
                                     <div class="TickAsRead TickAsReadTwoTicket"></div>                                
                                 </div>
                             </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     `
             }
 
-            else if (item.text != null && item.read === true) {
+            else if (item.text != null && item.id_image !== "DefaultAva"  && item.read === true && item.username === document.querySelector('.username').textContent) {
                 console.log('item.text !== null')
                 list_chat.innerHTML +=
                     `
                         <div class="MessageMainImageDesc">
-                            <div class="ImageProfileMessage imageProfileMessage__1" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageBorderImageDesc">
+                            <div class="ItemUsername">${item.username}</div>
+                            <div class="ImageChat_1">
+                                <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                            </div>
+                            
+                            <div class="TextImage">${item.text}</div>
+                        
+                            <div class="tools_message">
+                                <div class="delete_message_image"></div>
+                            </div>
+                            
+                            <div class="IdMessage">${item.id_message}</div>
+                            
+                            <div class="BlockTicketTimeStamp">                        
+                                <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                                
+                                <div class="BlockTwoTickets">
+                                    <div class="TickAsRead"></div>
+                                    <div class="TickAsRead TickAsReadTwoTicket"></div>                                
+                                </div>
+                            </div>
+                            
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    `
+            }
+
+            else if (item.text != null && item.id_image === "DefaultAva"  && item.read === true) {
+                console.log('item.text !== null')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMainImageDesc">
+                            <div class="ImageProfileMessage imageProfileMessage__1 DefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
                             <div class="ImageBorderImageDesc">
                             <div class="ItemUsername">${item.username}</div>
                             <div class="ImageChat_1">
@@ -521,8 +871,48 @@ fetch(`/chats/${IdChat.textContent}`, {
                             <div class="IdMessage">${item.id_message}</div>
                             
                             <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
                         </div>
                     `
+            }
+
+            else if (item.text != null && item.id_image !== "DefaultAva"  && item.read === true) {
+                console.log('item.text !== null')
+                list_chat.innerHTML +=
+                    `
+                        <div class="MessageMainImageDesc">
+                            <div class="ImageProfileMessage imageProfileMessage__1 NotDefaultAva" style="padding: 25px; height: 0"><p>${item.username}</p></div>
+                            <div class="ImageBorderImageDesc">
+                            <div class="ItemUsername">${item.username}</div>
+                            <div class="ImageChat_1">
+                                <img class="ImageChat" src="/files/${IdChat.textContent}/${item.id_image_message}" alt="">
+                                <div class="UrlImageChat">/files/${IdChat.textContent}/${item.id_image_message}</div>
+                            </div>
+                            
+                            <div class="TextImage">${item.text}</div>
+                            
+                            <div class="IdMessage">${item.id_message}</div>
+                            
+                            <div title="${item.time_stamp_long}" class="TimeStampShort">${item.time_stamp_short}</div>
+                        
+                            <div class="id_avatar">${item.id_image}</div>
+                        </div>
+                    `
+            }
+
+            for (let MessageMain of document.querySelectorAll('.MessageMain')) {
+                console.log(MessageMain)
+
+                if (MessageMain.querySelector('.message').querySelector('.id_avatar').textContent === "DefaultAva") {
+                    MessageMain.querySelector('.DefaultAva').style.background = `url(/image/settings/icon_profile.png) no-repeat center`
+                    MessageMain.querySelector('.DefaultAva').style.backgroundSize = '40px'
+                }
+
+                else {
+                    MessageMain.querySelector('.NotDefaultAva').style.background = `url(/AvatarImage/${document.querySelector('.ItemUsername').textContent}/${MessageMain.querySelector('.message').querySelector('.id_avatar').textContent}) no-repeat center`
+                    MessageMain.querySelector('.NotDefaultAva').style.backgroundSize = '40px'
+                }
             }
 
             for (let MessageImageItter of document.querySelectorAll('.ImageBorder')) {
@@ -1016,28 +1406,6 @@ fetch(`/chats/${IdChat.textContent}`, {
                 ItemUsernameItter.addEventListener('click', (event) => {
                     window.open(`AccountPage/${event.currentTarget.textContent}`, '_self')
                 })
-            }
-
-            if (item.id_image === "DefaultAva") {
-                for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
-                    console.log('if is running')
-                    ImageProfileMessageItter.style.background = `url(/image/settings/icon_profile.png)` + 'no-repeat center'
-                    ImageProfileMessageItter.style.backgroundSize = '40px'
-                }
-            }
-
-            else {
-                // console.log('else')
-                // for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
-                //     ImageProfileMessageItter.style.background = `url(/AvatarImage/${document.querySelector('.ItemUsername').textContent}/${item.id_image})` + 'no-repeat center'
-                //     ImageProfileMessageItter.style.backgroundSize = '40px'
-                // }
-
-                for (let ImageProfileMessageItter of document.querySelectorAll('.ImageProfileMessage')) {
-                    console.log('if is running')
-                    ImageProfileMessageItter.style.background = `url(/image/settings/icon_profile.png)` + 'no-repeat center'
-                    ImageProfileMessageItter.style.backgroundSize = '40px'
-                }
             }
         })))
 

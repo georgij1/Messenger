@@ -67,7 +67,7 @@ for (let min_size_windo of min_size_window) {
             for (let chat_all of chat) {
                 chat_all.classList.remove('chat_burger_open')
             }
-            BtnHeader_1.classList.remove('None768px')
+            document.querySelector('.list_rings').classList.remove('none')
         }
     })
 }
@@ -77,6 +77,7 @@ let burger_menu = document.querySelectorAll('.burger_menu')
 for (let menu of burger_menu) {
     menu.addEventListener('click', () => {
         for (let head of header) {
+            document.querySelector('.list_rings').classList.add('none')
             head.classList.toggle('visible')
             menu.classList.toggle('none')
             for (let min_size_windows of min_size_window) {
@@ -96,7 +97,6 @@ for (let menu of burger_menu) {
             for (let chat_all of chat) {
                 chat_all.classList.toggle('chat_burger_open')
             }
-            BtnHeader_1.classList.add('None768px')
         }
     })
 }

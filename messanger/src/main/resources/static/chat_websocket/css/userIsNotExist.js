@@ -108,3 +108,7 @@ document.querySelector('.btn_send_access').addEventListener('click', () => {
             })
     }
 })
+
+document.querySelector('.close_usersIsNotExists').addEventListener('click', () => {
+    window.history.go(-1)
+})

@@ -145,3 +145,15 @@ function copy(text) {
     }, 5000)
     return result;
 }
+
+document.querySelector('.login').addEventListener('input', (event) => {
+    console.log(event.currentTarget.value)
+
+    if (event.currentTarget.value.length > 0) {
+        document.querySelector('.username').textContent = event.currentTarget.value
+    }
+
+    else {
+        document.querySelector('.username').textContent = 'Имя'
+    }
+})

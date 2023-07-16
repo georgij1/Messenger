@@ -44,52 +44,15 @@
 
         <form class="delete_account" method="get" action="/logout">
             <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+            <div class="last_committed_date"></div>
         </form>
     </div>
 
     <div class="body">
         <div class="burger_menu"></div>
 
-        <div class="CloseWindowRequest" id="CloseWindowRequest"></div>
-
-        <div class="BtnHeader">
-            <div class="RequestChat">Запросы</div>
-
-            <div class="AllRequest">Все</div>
-            <div class="BtnGetSendAccessOffer">Отправленные</div>
-            <div class="BtnGetSendAccessOfferCheck">Принятые</div>
-            <div class="BtnGetSendAccessOfferCancel">Отменённые</div>
-        </div>
-
-        <div class="ContentAllRequestChat">
-            <h1>Все Запросы на доступ в чат</h1>
-
-            <div class="ListRequest"></div>
-        </div>
-
-        <div class="ContentSentRequestChat">
-            <h1>Отправленные Запросы в чат</h1>
-
-            <div class="ListSentRequest"></div>
-            <div class="ListSentRequestMe"></div>
-        </div>
-
-        <div class="ContentCheckRequestChat">
-            <h1>Принятые Запросы в чат</h1>
-            <div class="ListCheckRequest"></div>
-        </div>
-
-        <div class="ContentMessageFromChat">
-            <h1>Сообщение из чатов</h1>
-        </div>
-
-        <div class="ContentEventMessage">
-            <h1>События из календаря</h1>
-        </div>
-
-        <div class="ContentCancelRequestChat">
-            <h1>Отменённые запросы</h1>
-            <div class="ListCancelRequest"></div>
+        <div class="list_rings">
+            Страница находится в разработке
         </div>
 
         <div class="ErrorConnect">Соединение...</div>
@@ -98,7 +61,6 @@
     <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
     <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
     <script th:src="@{/user/WebSocket/WebSocketPages.js}"></script>
-    <script th:src="@{/user/rings/GetCancelChat.js}"></script>
     <script th:src="@{/user/rings/RingsPage.js}"></script>
     <script th:src="@{/user/rings/script.js}"></script>
 </body>

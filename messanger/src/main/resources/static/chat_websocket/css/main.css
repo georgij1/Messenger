@@ -48,7 +48,7 @@
 
 .image_user_chat_admin {
     width: 100%;
-    height: 60px;
+    height: 72px;
 }
 
 .text_create_chat {
@@ -206,6 +206,10 @@
     border: 2px solid bisque;
     border-radius: 10px;
     box-shadow: 0 0 10px bisque;
+}
+
+.id_avatar {
+    display: none;
 }
 
 .close_window_3 {
@@ -1949,7 +1953,6 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 37vW;
 }
 
 .BorderDescriptionChat {
@@ -1961,7 +1964,6 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 37vW;
 }
 
 .edit_chat_name_item, .edit_desc_chat_item {
@@ -2219,6 +2221,58 @@ li {
     background: #FFF;
 }
 
+.last_committed_date {
+    margin-top: 10px;
+    background: azure;
+    border: 2px solid beige;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.border_lime {
+    border: 2px solid lime;
+}
+
+.NameChatEmpty {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff6d6d;
+    padding: 10px;
+    border: 2px solid #fc0000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff2b2b;
+}
+
+.DescChatEmpty {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff6d6d;
+    padding: 10px;
+    border: 2px solid #fc0000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff2b2b;
+}
+
+.NameDescChatEmpty {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff6d6d;
+    padding: 10px;
+    border: 2px solid #fc0000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff2b2b;
+}
+
+.border_red {
+    border: 2px solid red;
+}
+
 .close_window_4, .close_window_5, .close_window_4_panel {
     width: 50px;
     height: 50px;
@@ -2302,6 +2356,10 @@ li {
     .ListMessage {
         gap: 20px;
         flex-direction: row;
+    }
+
+    .BorderNameChat {
+        width: 37vW;
     }
 
     .image_user_chat_admin {
@@ -2566,8 +2624,9 @@ li {
     }
 
     .red {
-        border: 1px solid red;
-        box-shadow: 0 0 10px red;
+        border: 2px solid red;
+        box-shadow: 0 0 10px #ff4343;
+        outline: none;
     }
 
     .ButtonsNavChatsHeaderOpened {

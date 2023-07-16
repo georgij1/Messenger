@@ -34,14 +34,15 @@
                 <div class="name_link chat_link">Чаты</div>
             </div>
 
-<!--            <a href="/rings" class="link withOutSlash">-->
-<!--                <div class="icon_rings"></div>-->
-<!--                <div class="name_link">Уведомления</div>-->
-<!--            </a>-->
+            <a href="/rings" class="link withOutSlash">
+                <div class="icon_rings"></div>
+                <div class="name_link">Уведомления</div>
+            </a>
         </div>
 
         <form class="delete_account" method="get" action="/logout">
             <input type="submit" class="btn_delete_account" value="Выйти из аккаунта">
+            <div class="last_committed_date"></div>
         </form>
     </div>
 
@@ -111,6 +112,10 @@
         <div class="name_chat_exist">Имя такое уже существует</div>
 
         <div class="success_create_chat">Чат успешно создан</div>
+
+        <div class="NameChatEmpty">Имя чата пустое</div>
+        <div class="DescChatEmpty">Описание чата пустое</div>
+        <div class="NameDescChatEmpty">Имя и Описание чата пустое</div>
     </div>
 
     <script th:src="@{/chat_websocket/js/sockjs.js}"></script>

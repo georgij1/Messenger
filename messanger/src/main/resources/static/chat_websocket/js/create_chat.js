@@ -32,7 +32,7 @@ fetch('/all_users', {
         .then(response => response.json())
         .then((data) => {data.forEach(item => {
             console.log(item)
-            if (item.id_image === 'DefaultAva') {
+            if (item.id_image === 'DefaultAva' && item.username !== document.querySelector('.username').textContent) {
                 list_users.innerHTML+=`
                     <div class="user" id="user">
                         <div class="user_image" style="background: url('/image/settings/icon_profile.png') no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/image/settings/icon_profile.png</p></div>
@@ -41,7 +41,7 @@ fetch('/all_users', {
                 `
             }
 
-            else {
+            else if (item.username !== document.querySelector('.username').textContent) {
                 list_users.innerHTML+=`
                     <div class="user" id="user">
                         <div class="user_image" style="background: url(/AvatarImage/${item.username}/${item.id_image}) no-repeat; background-size: 71px; height: 60px; width: 70px"><p>/AvatarImage/${item.username}/${item.id_image}</p></div>
@@ -146,11 +146,29 @@ create_chat.addEventListener('click', () => {
                 })
         }
 
-        else {
-            console.log('valid is not access')
+        else if (formData.name_chat === '' && formData.desc_chat === '') {
+            setTimeout(() => {
+                document.querySelector('.NameDescChatEmpty').classList.remove('block')
+            }, 1000)
+
+            document.querySelector('.NameDescChatEmpty').classList.add('block')
         }
 
-        console.log(formData)
+        else if (formData.name_chat === '') {
+            setTimeout(() => {
+                document.querySelector('.NameChatEmpty').classList.remove('block')
+            }, 1000)
+
+            document.querySelector('.NameChatEmpty').classList.add('block')
+        }
+
+        else if (formData.desc_chat === '') {
+            setTimeout(() => {
+                document.querySelector('.DescChatEmpty').classList.remove('block')
+            }, 1000)
+
+            document.querySelector('.DescChatEmpty').classList.add('block')
+        }
     }
 
     else {

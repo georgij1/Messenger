@@ -10,6 +10,10 @@ h1 {
     margin: auto;
 }
 
+.list_rings {
+    margin-top: 66px;
+}
+
 .BtnHeader {
     display: flex;
     gap: 30px;

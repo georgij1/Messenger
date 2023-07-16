@@ -43,6 +43,7 @@ dependencies {
 	implementation 'commons-io:commons-io:2.6'
 	developmentOnly "org.springframework.boot:spring-boot-devtools"
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
 }
 
 configurations {

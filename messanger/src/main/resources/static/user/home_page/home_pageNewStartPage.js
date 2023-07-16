@@ -100,3 +100,19 @@ for (let UserNameItter of username2) {
         window.open(`/AccountPage/${event.currentTarget.textContent}`, '_self')
     })
 }
+
+fetch(`/last_commit_date`, {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'GET'
+})
+    .then(res => {
+        res.text().then(data => {
+            console.log(data)
+            document.querySelector('.last_committed_date').innerHTML=`
+                ${data}
+            `
+        })
+    })

@@ -23,6 +23,7 @@
 }
 
 .info_admin_div {
+    display: flex;
     flex-direction: column;
     margin-top: 0;
     margin-bottom: 20px;
@@ -41,6 +42,24 @@
     margin: 10px 0;
     box-shadow: 0 0 10px bisque;
     cursor: pointer;
+    height: 100px;
+    resize: none;
+}
+
+.close_usersIsNotExists {
+    width: 50px;
+    height: 50px;
+    background: url("../../image/main_page/open_min_window.png") no-repeat, #FFF;
+    background-size: 50px;
+    box-shadow: 0 0 10px aquamarine;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid bisque;
+    margin: 10px;
+}
+
+.close_usersIsNotExists:hover {
+    box-shadow: none;
 }
 
 .input_info_admin:hover {
@@ -75,8 +94,11 @@
     display: none;
 }
 
-.see_info_admin, .see_info_admin1 {
+.see_info_admin {
     display: none;
+}
+
+.see_info_admin, .see_info_admin1 {
     padding: 10px;
     background: aliceblue;
     margin: 10px;

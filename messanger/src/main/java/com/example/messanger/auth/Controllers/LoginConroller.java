@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -65,25 +67,33 @@ public class LoginConroller {
         var cookies = request.getCookies();
         String token = null;
 
+        System.out.println(form);
+
         if (cookies == null) {
+            System.out.println("cookies is " + cookies);
             if (Objects.equals(form.getLogin(), "")) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 System.out.println("form_login is null" + "or is " + form.getLogin());
+                System.out.println("Objects.equals(form.getLogin(), \"\")");
                 return "/auth/ErrorsPage/error_login";
             }
 
             else if (Objects.equals(form.getPassword(), "")) {
+                System.out.println("Objects.equals(form.getPassword(), \"\")");
                 return "/auth/ErrorsPage/password_not_correct";
             }
 
             else {
+                System.out.println("else");
                 try {
                     if (token != null) {
                         response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+                        System.out.println("jwt token not null");
                         return "redirect:/main_page";
                     }
 
                     else {
+                        System.out.println("jwt token is null");
                         String secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
 
                         try {
@@ -101,13 +111,27 @@ public class LoginConroller {
                                         JWTVerifier verifier = JWT.require(Algorithm.HMAC512(secret))
                                                 .build();
                                         DecodedJWT decodedJWT = verifier.verify(jwtToken);
-                                        Cookie cookie = new Cookie("auth_token", jwtToken);
-                                        response.addCookie(cookie);
+
+//                                        if (decodedJWT == verifier.verify(jwtToken)) {
+//                                            System.out.println("if decoded jwt");
+                                            Cookie cookie = new Cookie("auth_token", jwtToken);
+                                            response.addCookie(cookie);
+                                            response.setStatus(200);
+//                                        }
+//
+//                                        else {
+//                                            System.out.println("else decoded jwt");
+//                                            response.sendError(404, "Error in verified jwt token");
+//                                        }
                                     }
 
                                     catch (JWTCreationException | org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException ignored) {
                                         System.out.println("catch - JWTCreationException | org.springframework.dao.EmptyResultDataAccessException | org.springframework.dao.DataIntegrityViolationException ignored");
                                     }
+
+//                                    catch (IOException e) {
+//                                        throw new RuntimeException(e);
+//                                    }
 
                                     return "redirect:/main_page";
                                 }
@@ -128,6 +152,8 @@ public class LoginConroller {
             return "/auth/login";
         }
 
-        return "/auth/login";
+        else {
+            return "/auth/login";
+        }
     }
 }

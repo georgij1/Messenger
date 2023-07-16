@@ -6,15 +6,38 @@ import com.example.messanger.auth.forms.chat_form.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.FetchResult;
+import org.eclipse.jgit.transport.RemoteConfig;
+import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.StringUtils;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping
@@ -26,6 +49,145 @@ public class CreateChat {
     @GetMapping("/websocket_chat")
     public String chat(HttpServletRequest request, Model model) {
         return "chat_websocket/index";
+    }
+
+    @GetMapping("/last_commit_date")
+    @ResponseBody
+    public String getDateLastCommit() {
+        try {
+            // URL удаленного репозитория
+            String remoteRepoUrl = "https://github.com/ваш-профиль/ваш-репозиторий.git";
+
+            // Создание объекта Git
+            Git git = Git.init().call();
+
+            // Получение списка удаленных репозиториев
+            List<RemoteConfig> remoteConfigs = git.remoteList().call();
+
+            // Добавление удаленного репозитория
+            RemoteConfig remoteConfig = new RemoteConfig(git.getRepository().getConfig(), "origin");
+            remoteConfig.addURI(new URIish(remoteRepoUrl));
+            remoteConfigs.add(remoteConfig);
+
+            // Выполнение операции fetch для получения информации о репозитории
+            FetchResult fetchResult = git.fetch().setRemote("origin").call();
+
+            // Получение списка доступных веток
+            Collection<Ref> branches = fetchResult.getAdvertisedRefs();
+
+            // Поиск последнего коммита среди всех веток
+            Date lastCommitDate = null;
+            for (Ref branch : branches) {
+                String branchName = branch.getName();
+                if (!StringUtils.isEmptyOrNull(branchName) && branchName.startsWith("refs/heads/")) {
+                    Iterable<RevCommit> commits = git.log().add(branch.getObjectId()).setMaxCount(1).call();
+                    RevCommit lastCommit = commits.iterator().next();
+                    if (lastCommitDate == null || lastCommit.getCommitTime() > lastCommitDate.getTime()) {
+                        lastCommitDate = new Date(lastCommit.getCommitTime() * 1000L);
+                    }
+                }
+            }
+
+            // getting month
+            java.util.Date date= new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH);
+
+            if (month+1 == 1) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Январь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 2) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Февраль yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 3) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Март yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 4) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Апрель yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 5) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Май yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 6) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Июнь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 7) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Июль yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 8) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Август yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 9) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Сентябрь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 10) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Октябрь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 11) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Ноябрь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else if (month+1 == 12) {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd Декабрь yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+
+            else {
+                // Форматирование даты
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy г. HH:mm:ss", new Locale("ru"));
+                String formattedDate = dateFormat.format(lastCommitDate);
+                return "Дата последнего обновления: " + formattedDate;
+            }
+        } catch (IOException | GitAPIException | URISyntaxException e) {
+            e.printStackTrace();
+            return "Ошибка в дате последнего обновления";
+        }
     }
 
     @PostMapping("/create_chat")
@@ -40,7 +202,152 @@ public class CreateChat {
         }
 
         else {
-            jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(), formCreateChat.getTime_creator());
+
+            // getting month
+            java.util.Date date= new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH);
+            System.out.println(month+1);
+
+            if (month+1 == 1) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Январь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 2) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Февраль" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 3) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Март" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 4) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Апрель" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+            }
+
+            else if (month+1 == 5) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Май" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 6) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Июнь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 7) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Июль" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 8) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Август" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 9) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Сентябрь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 10) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Октябрь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 11) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Ноябрь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else if (month+1 == 12) {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Декабрь" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
+
+            else {
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj2 = DateTimeFormatter.ofPattern("dd" + " Месяц не удалось определить" + " yyyy г." + " HH:mm:ss");
+                String LongTimeStamp = myDateObj.format(myFormatObj2);
+                System.out.println(LongTimeStamp);
+
+                jdbcTemplate.update("insert into public.chat(name, desc_chat, type, owner, time_creator) values (?, ?, ?, ?, ?)", formCreateChat.getName_chat(), formCreateChat.getDesc_chat(), formCreateChat.getType(), formCreateChat.getOwner(),
+                        LongTimeStamp
+                );
+            }
 
             for (int cursor = 0; cursor < formCreateChat.getUser_chat().size(); ++cursor) {
                 jdbcTemplate.update(

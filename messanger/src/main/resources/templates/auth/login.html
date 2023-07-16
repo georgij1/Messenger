@@ -15,8 +15,7 @@
     <div class="header">
         <p>Авторизация</p>
 
-        <div class="status_websocket_ok">Есть доступ к серверу</div>
-        <div class="status_websocket_error">На сервера какая-то ошибка</div>
+        <div class="status_websocket_error"></div>
     </div>
 
     <div class="padding"></div>
@@ -43,7 +42,7 @@
 
     <script th:src="@{/chat_websocket/js/sockjs.js}"></script>
     <script th:src="@{/chat_websocket/js/stomp_min.js}"></script>
-    <script th:src="@{/user/WebSocket/WebSocketAuth.js}"></script>
+    <script th:src="@{/user/WebSocket/auth_pages/WebSocketLogin.js}"></script>
     <script th:src="@{/user/Detected/devices.js}"></script>
     <script th:src="@{/user/Detected/content.js}"></script>
     <script th:src="@{/user/Detected/find.js}"></script>

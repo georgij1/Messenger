@@ -70,64 +70,64 @@
             <div class="username">Имя</div>
         </div>
 
+        <div class="GeneratePasswordContent">
+            <h2 id="GeneratePassword">Генератор пароля</h2>
+
+            <div class="BtnShowGenerator">Показать</div>
+
+            <div class="BtnCloseGenerator">Скрыть</div>
+
+            <div class="result-container">
+                <label for="result" class="LabelResult">Результат</label>
+
+                <input type="text" id="result" class="ResultInput">
+
+                <button class="copy-result" id="copy">Скопировать</button>
+            </div>
+            <div class="settings">
+                <div class="input-group">
+                    <label for="length" class="label_length">Длина пароля (8-22)</label>
+
+                    <input type="range" id="length" min='8' max='22' step="1"/>
+
+
+                    <div class="FlexLengthPassword">
+                        <div class="LabelLengthPassword">Длина пароля:</div>
+
+                        <span id="length-result">10</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="numbers" class="label_length">Цифры</label>
+
+                    <div class="FlexSymbol">
+                        <div class="label_number">Цифры в пароле</div>
+
+                        <input type="checkbox" class="ToggleNumbers" id="numbers" checked>
+
+                        <label for="numbers" class="ToggleNumbers ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="symbols" class="label_length">Символы</label>
+
+                    <div class="FlexSymbol">
+                        <div class="label_symbols">Символы в пароле</div>
+
+                        <input type="checkbox" class="Toggle" id="symbols" checked>
+
+                        <label for="symbols" class="Toggle ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="generate">Сгенерировать</button>
+            </div>
+        </div>
+
         <button type="submit" class="registration_user" value="Зарегистрироваться">Зарегистрироваться</button>
     </form>
-
-    <div class="GeneratePasswordContent">
-        <h2 id="GeneratePassword">Генератор пароля</h2>
-
-        <div class="BtnShowGenerator">Показать</div>
-
-        <div class="BtnCloseGenerator">Скрыть</div>
-
-        <div class="result-container">
-            <label for="result" class="LabelResult">Результат</label>
-
-            <input type="text" id="result" class="ResultInput">
-
-            <button class="copy-result" id="copy">Скопировать</button>
-        </div>
-        <div class="settings">
-            <div class="input-group">
-                <label for="length" class="label_length">Длина пароля (8-22)</label>
-
-                <input type="range" id="length" min='8' max='22' step="1"/>
-
-
-                <div class="FlexLengthPassword">
-                    <div class="LabelLengthPassword">Длина пароля:</div>
-
-                    <span id="length-result">10</span>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label for="numbers" class="label_length">Цифры</label>
-
-                <div class="FlexSymbol">
-                    <div class="label_number">Цифры в пароле</div>
-
-                    <input type="checkbox" class="ToggleNumbers" id="numbers" checked>
-
-                    <label for="numbers" class="ToggleNumbers ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label for="symbols" class="label_length">Символы</label>
-
-                <div class="FlexSymbol">
-                    <div class="label_symbols">Символы в пароле</div>
-
-                    <input type="checkbox" class="Toggle" id="symbols" checked>
-
-                    <label for="symbols" class="Toggle ToggleLabel" data-on-label="Вкл" data-off-label="Выкл"></label>
-                </div>
-            </div>
-
-            <button class="generate-btn" id="generate">Сгенерировать</button>
-        </div>
-    </div>
 
     <div class="WindowCopiedSuccess">
         <div class="ContentWindowCopied">

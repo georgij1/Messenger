@@ -791,3 +791,54 @@ document.querySelector('.clear_history').addEventListener('click', () => {
 document.querySelector('.close_window_new').addEventListener('click', () => {
     window.location.reload()
 })
+
+fetch(`/last_commit_date`, {
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    }),
+    mode: "cors",
+    method: 'GET'
+})
+    .then(res => {
+        res.text().then(data => {
+            console.log(data)
+            document.querySelector('.last_committed_date').innerHTML=`
+                ${data}
+            `
+        })
+    })
+
+document.querySelector('.name_chat_div').addEventListener('input', (event) => {
+    console.log(event.currentTarget.value)
+
+    if (event.currentTarget.value === '') {
+        document.querySelector('.name_chat_div').classList.add('border_red')
+    }
+
+    else {
+        fetch(`/check_valid/name_chat/${event.currentTarget.value}`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            mode: "cors",
+            method: 'POST'
+        })
+            .then(res => {
+                console.log(res.status)
+                if (res.status === 200) {
+                    document.querySelector('.name_chat_div').classList.remove('border_red')
+                    document.querySelector('.name_chat_div').classList.add('border_lime')
+                }
+
+                else if (res.status === 400) {
+                    document.querySelector('.name_chat_div').classList.add('border_red')
+                    document.querySelector('.name_chat_div').classList.remove('border_lime')
+                }
+
+                else {
+                    document.querySelector('.name_chat_div').classList.add('border_red')
+                    document.querySelector('.name_chat_div').classList.remove('border_lime')
+                }
+            })
+    }
+})
