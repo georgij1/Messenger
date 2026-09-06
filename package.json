@@ -1,0 +1,25 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "Messanger\r ===============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgij1/Messenger.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/georgij1/Messenger/issues"
+  },
+  "homepage": "https://github.com/georgij1/Messenger#readme",
+  "dependencies": {
+    "axios": "^1.19.0",
+    "dotenv": "^17.4.2"
+  }
+}

@@ -1,0 +1,21 @@
+services:
+  agent:
+    build: .
+    working_dir: /app
+    volumes:
+      - ./src:/app/src:ro                # только чтение исходников
+      - ./pom.xml:/app/pom.xml:ro        # только чтение
+      - ./target:/app/target             # сборка
+      - ./output:/app/output             # сюда агент может писать
+    environment:
+      - YANDEX_API_KEY=${YANDEX_API_KEY}
+      - YANDEX_FOLDER_ID=${YANDEX_FOLDER_ID}
+    stdin_open: true
+    tty: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: false
+    tmpfs:
+      - /tmp
