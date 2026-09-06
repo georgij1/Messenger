@@ -41,3 +41,7 @@ out/
 .idea/compiler.xml
 .idea/dataSources.xml
 .idea/jpa-buddy.xml
+
+### Frontend (React/Vite) ###
+frontend/node_modules/
+frontend/dist/
